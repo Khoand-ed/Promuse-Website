@@ -23,7 +23,7 @@ npm run check:content
 |---|---|
 | `content/text/vi.json` | Toàn bộ chữ tiếng Việt |
 | `content/text/en.json` | Toàn bộ chữ tiếng Anh, cùng các khoá với file tiếng Việt |
-| `content/data/site.json` | Nhịp hiệu ứng, trailer, link mạng xã hội, link cửa hàng, nền tảng, chủ sở hữu bản quyền, email liên hệ, logo |
+| `content/data/site.json` | Nhạc nền, trailer, link mạng xã hội, link cửa hàng, nền tảng, chủ sở hữu bản quyền, email liên hệ, logo |
 | `content/data/hero.json` | Ảnh key visual (máy tính và điện thoại) |
 | `content/data/reward.json` | Ảnh phần quà |
 | `content/data/story.json` | Ảnh phần giới thiệu, số khẩu hiệu chữ lớn |
@@ -84,14 +84,26 @@ Thư viện ảnh của nhân vật làm tương tự: ô ảnh trong `images.ga
 
 Không dùng art, tên hay ảnh chụp lấy từ Arknights hoặc game khác, kể cả ảnh chụp bản game hiện tại (xem `doc/GAME_FACTS.md`, mục 6).
 
-## 6. Sửa dữ liệu
+## 6. Thêm nhạc nền
+
+Nút tròn có nốt nhạc ở góc trên bên trái chỉ hiện khi đã có file nhạc. Khi nhạc phát, nốt nhạc xoay và các nút đập theo phách của bài.
+
+1. Chỉ dùng nhạc của Promuse mà bạn có quyền phát công khai trên web.
+2. Xuất file MP3 (khoảng 128–192 kbps cho nhẹ trang), đặt vào `public/audio/theme.mp3`, hoặc đổi `music.src` cho khớp tên file.
+3. Trong `content/data/site.json`, nhóm `music`:
+   - `bpm`: nhịp của bài, ví dụ `143.958` (lấy từ beatmap trong game nếu bài có trong game);
+   - `firstBeat`: số giây từ đầu file tới phách đầu tiên (`beatPhase` trong beatmap), để nút đập đúng phách;
+   - `volume`: âm lượng từ `0.05` đến `1`, nên khoảng `0.5`.
+4. Chạy `npm run check:content`, rồi `npm run dev`, bấm nút nốt nhạc và xem nút có đập đúng phách không. Lệch thì chỉnh `firstBeat`.
+
+## 7. Sửa dữ liệu
 
 - `null` nghĩa là chưa quyết định. Thay bằng giá trị trong ngoặc kép, ví dụ `"copyrightHolder": "Tên của bạn"`.
 - Link để trống `""` thì mục đó bị ẩn trên trang.
 - Màu viết dạng `"#RRGGBB"`, ví dụ `"#6C4FD8"`.
 - Trailer: chỉ dán ID 11 ký tự (phần sau `v=` trong link YouTube), không dán cả link.
 
-## 7. Xem trước
+## 8. Xem trước
 
 ```bash
 npm run dev
@@ -99,7 +111,7 @@ npm run dev
 
 Rồi mở http://localhost:3000 (tiếng Việt) hoặc http://localhost:3000/en (tiếng Anh). Trang tự cập nhật mỗi khi bạn lưu file.
 
-## 8. Khi kiểm tra báo lỗi
+## 9. Khi kiểm tra báo lỗi
 
 | Thông báo | Nghĩa là | Cách sửa |
 |---|---|---|
@@ -112,6 +124,6 @@ Rồi mở http://localhost:3000 (tiếng Việt) hoặc http://localhost:3000/e
 
 Build trên Vercel cũng dừng lại với các lỗi này, nên trang thật không bao giờ hiện nội dung hỏng.
 
-## 9. Lưu thay đổi
+## 10. Lưu thay đổi
 
 Khi `npm run check:content` không còn lỗi, commit cả các file nội dung đã sửa lẫn `CONTENT_TODO.md`. CI trên GitHub báo lỗi nếu `CONTENT_TODO.md` chưa được cập nhật theo nội dung mới.

@@ -63,9 +63,9 @@ src/app/api/v1/            route handlers: parse, authenticate, call a service, 
 src/app/dev/               development-only helpers; return 404 in production
 src/components/sections/   one component per page section
 src/components/ui/         Modal, Tabs, Slider, Lightbox, LanguageSwitch, MobileMenu, MotionToggle,
-                           BackToTop, SkipLink, Wordmark, ImageSlot, icons
-src/components/motion/     MotionProvider, SmoothScroll, BeatClock, Reveal, SplitHeadline,
-                           ScrollType, Marquee, SlashWipe, Parallax, NoteLanes
+                           MusicButton, BackToTop, SkipLink, Wordmark, ImageSlot, icons
+src/components/motion/     MotionProvider, MusicProvider, SmoothScroll, BeatClock, Opening, CharacterScene, and the
+                           reveals in reveal.tsx (RiseLetters, RiseLines, CoverReveal, Reveal, ...)
 src/content/               zod schemas and loaders for content/ (no copy lives here)
 src/i18n/                  next-intl routing, request config, navigation helpers
 src/lib/                   env, Supabase clients, reward gateway (browser side), motion helpers
@@ -106,8 +106,9 @@ doc/                       specs; QA reports go in doc/qa/
 
 - GSAP code lives only in client components and uses `useGSAP` for automatic cleanup. Register plugins once, in `src/lib/motion/gsap.ts`.
 - Animate only `transform`, `opacity`, `clip-path` and `filter`. Never animate layout properties.
-- Every effect obeys `MotionProvider`. When the system asks for reduced motion, or the visitor turns effects off, there is no smooth scroll, intro, parallax, scrubbed or pinned scene, or moving marquee.
-- Beat-synced effects follow the shared `BeatClock` (120 BPM by default). Never start separate timers for beats.
+- Every effect obeys `MotionProvider`. When the system asks for reduced motion, or the visitor turns effects off, there is no smooth scroll, opening, reveal, pinned scene or beat pulse: everything is shown at once.
+- Motion follows p3re.jp's timings (`doc/SPEC.md`, section 4). Above-the-fold motion waits for the opening (`afterOpening` in `src/lib/motion/opening.ts`).
+- Beat-synced effects follow the shared `BeatClock`, which reads the background music's position; with the music off nothing pulses. Never start separate timers for beats.
 - Call `ScrollTrigger.refresh()` after fonts and above-the-fold images load. Use at most one pinned scene below 768 px.
 
 ## Accessibility

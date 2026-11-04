@@ -33,7 +33,7 @@ Studied on 2026-11-04 and measured on 2026-11-05 at 1440 px and 390 px wide. We 
 - Real text in fonts with Vietnamese support, instead of titles drawn as images.
 - The accessibility and reduced-motion behaviour in section 2.
 
-The earlier proposal, "a song and a slash" (beat-synced pulses, diagonal slash transitions, the two note lanes as guide lines), is set aside. P4 may bring parts of it back as accents if the owner asks.
+The earlier proposal, "a song and a slash" (beat-synced pulses, diagonal slash transitions, the two note lanes as guide lines), is set aside, except one accent the owner kept on 2026-11-05: background music behind a round button in the top left corner, whose note spins while it plays, and pill buttons that pulse on its beats.
 
 ## 4. Decisions
 
