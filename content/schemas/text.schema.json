@@ -58,6 +58,11 @@
           "pattern": "\\S",
           "description": "Nhãn nút đóng menu trên điện thoại."
         },
+        "menu": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Chữ nhỏ dưới ba vạch trên nút menu ở góc phải trên điện thoại."
+        },
         "mainNav": {
           "type": "string",
           "pattern": "\\S",
@@ -106,6 +111,7 @@
         "backToTop",
         "openMenu",
         "closeMenu",
+        "menu",
         "mainNav",
         "language",
         "languageNames",
@@ -192,11 +198,6 @@
           "pattern": "\\S",
           "description": "Dòng trạng thái ở màn đầu tiên, ví dụ \"Sắp ra mắt trên Android\". Không nhắc iOS."
         },
-        "cta": {
-          "type": "string",
-          "pattern": "\\S",
-          "description": "Nút chính ở màn đầu tiên, cuộn tới khối nhận quà."
-        },
         "trailer": {
           "type": "string",
           "pattern": "\\S",
@@ -215,7 +216,6 @@
       },
       "required": [
         "status",
-        "cta",
         "trailer",
         "scroll",
         "visualAlt"
@@ -367,17 +367,17 @@
         "band1": {
           "type": "string",
           "pattern": "\\S",
-          "description": "Khẩu hiệu thứ 1, chữ rất lớn chạy ngang màn hình. Vài chữ."
+          "description": "Khẩu hiệu thứ 1: dòng chữ nhỏ ở giữa trang, sau phần Gameplay. Vài chữ."
         },
         "band2": {
           "type": "string",
           "pattern": "\\S",
-          "description": "Khẩu hiệu thứ 2. Vài chữ."
+          "description": "Khẩu hiệu thứ 2, dòng dưới khẩu hiệu 1. Vài chữ."
         },
         "band3": {
           "type": "string",
           "pattern": "\\S",
-          "description": "Khẩu hiệu thứ 3. Vài chữ."
+          "description": "Khẩu hiệu thứ 3, dòng cuối. Vài chữ."
         },
         "imageAlt": {
           "type": "string",
@@ -410,6 +410,11 @@
           "pattern": "\\S",
           "description": "Hai câu tóm tắt dưới tiêu đề phần Tính năng."
         },
+        "coverAlt": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mô tả ảnh bìa của phần Tính năng."
+        },
         "seeDetails": {
           "type": "string",
           "pattern": "\\S",
@@ -429,12 +434,7 @@
                 "title": {
                   "type": "string",
                   "pattern": "\\S",
-                  "description": "Tên tính năng 1: hiện trên thẻ ở trang chính và trên tab 1 của modal Tính năng. Khoảng 30 ký tự."
-                },
-                "line": {
-                  "type": "string",
-                  "pattern": "\\S",
-                  "description": "Một dòng mô tả dưới tên thẻ tính năng 1 trên trang chính. Khoảng 80 ký tự."
+                  "description": "Tên tính năng 1, hiện trên tab 1 của modal Tính năng. Khoảng 30 ký tự."
                 },
                 "text": {
                   "type": "string",
@@ -454,7 +454,6 @@
               },
               "required": [
                 "title",
-                "line",
                 "text",
                 "image1Alt",
                 "image2Alt"
@@ -467,12 +466,7 @@
                 "title": {
                   "type": "string",
                   "pattern": "\\S",
-                  "description": "Tên tính năng 2: hiện trên thẻ ở trang chính và trên tab 2 của modal Tính năng. Khoảng 30 ký tự."
-                },
-                "line": {
-                  "type": "string",
-                  "pattern": "\\S",
-                  "description": "Một dòng mô tả dưới tên thẻ tính năng 2 trên trang chính. Khoảng 80 ký tự."
+                  "description": "Tên tính năng 2, hiện trên tab 2 của modal Tính năng. Khoảng 30 ký tự."
                 },
                 "text": {
                   "type": "string",
@@ -492,7 +486,6 @@
               },
               "required": [
                 "title",
-                "line",
                 "text",
                 "image1Alt",
                 "image2Alt"
@@ -505,12 +498,7 @@
                 "title": {
                   "type": "string",
                   "pattern": "\\S",
-                  "description": "Tên tính năng 3: hiện trên thẻ ở trang chính và trên tab 3 của modal Tính năng. Khoảng 30 ký tự."
-                },
-                "line": {
-                  "type": "string",
-                  "pattern": "\\S",
-                  "description": "Một dòng mô tả dưới tên thẻ tính năng 3 trên trang chính. Khoảng 80 ký tự."
+                  "description": "Tên tính năng 3, hiện trên tab 3 của modal Tính năng. Khoảng 30 ký tự."
                 },
                 "text": {
                   "type": "string",
@@ -530,7 +518,6 @@
               },
               "required": [
                 "title",
-                "line",
                 "text",
                 "image1Alt",
                 "image2Alt"
@@ -543,12 +530,7 @@
                 "title": {
                   "type": "string",
                   "pattern": "\\S",
-                  "description": "Tên tính năng 4: hiện trên thẻ ở trang chính và trên tab 4 của modal Tính năng. Khoảng 30 ký tự."
-                },
-                "line": {
-                  "type": "string",
-                  "pattern": "\\S",
-                  "description": "Một dòng mô tả dưới tên thẻ tính năng 4 trên trang chính. Khoảng 80 ký tự."
+                  "description": "Tên tính năng 4, hiện trên tab 4 của modal Tính năng. Khoảng 30 ký tự."
                 },
                 "text": {
                   "type": "string",
@@ -568,7 +550,6 @@
               },
               "required": [
                 "title",
-                "line",
                 "text",
                 "image1Alt",
                 "image2Alt"
@@ -588,6 +569,7 @@
       "required": [
         "title",
         "summary",
+        "coverAlt",
         "seeDetails",
         "number",
         "items"
@@ -606,6 +588,11 @@
           "type": "string",
           "pattern": "\\S",
           "description": "Hai câu tóm tắt cách chơi dưới tiêu đề phần Gameplay."
+        },
+        "coverAlt": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mô tả ảnh bìa của phần Gameplay."
         },
         "details": {
           "type": "string",
@@ -784,6 +771,7 @@
       "required": [
         "title",
         "summary",
+        "coverAlt",
         "details",
         "rates",
         "previous",
@@ -799,7 +787,22 @@
         "title": {
           "type": "string",
           "pattern": "\\S",
-          "description": "Tiêu đề phần Nhân vật."
+          "description": "Tiêu đề phần Nhân vật, chữ rất lớn bên trái. Ngắn, một hoặc hai từ."
+        },
+        "line1": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng giới thiệu 1 dưới tiêu đề phần Nhân vật. Khoảng 40 ký tự."
+        },
+        "line2": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng giới thiệu 2. Khoảng 40 ký tự."
+        },
+        "line3": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng giới thiệu 3. Khoảng 40 ký tự."
         },
         "rarity": {
           "type": "string",
@@ -931,6 +934,9 @@
       },
       "required": [
         "title",
+        "line1",
+        "line2",
+        "line3",
         "rarity",
         "changeVisual",
         "previous",

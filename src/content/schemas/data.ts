@@ -69,9 +69,11 @@ export const siteSchema = z.strictObject({
 export const heroSchema = z.strictObject({
   $schema: schemaRef,
   desktop: imageSlot(
-    'Key visual ngang cho máy tính, tối thiểu 1920 × 1080 (nên dùng 2560 × 1440).',
+    'Key visual ngang cho máy tính, tối thiểu 1920 × 1080 (nên dùng 2560 × 1440). Giữ sáng góc trên bên trái (dòng trạng thái) và dải trên cùng bên phải (menu); vùng giữa bên phải để trống cho logo, như bố cục hero của p3re.jp.',
   ),
-  mobile: imageSlot('Key visual dọc cho điện thoại, 1080 × 1920.'),
+  mobile: imageSlot(
+    'Key visual dọc cho điện thoại, 1080 × 1920. Giữ sáng phần trên cùng cho logo và dòng trạng thái.',
+  ),
   layers: z
     .array(imageSlot('Một lớp của key visual (PNG nền trong suốt), cùng khung với bản desktop.'))
     .describe(
@@ -86,18 +88,19 @@ export const rewardSchema = z.strictObject({
 
 export const storySchema = z.strictObject({
   $schema: schemaRef,
-  image: imageSlot('Ảnh của phần giới thiệu thế giới game.'),
+  image: imageSlot('Ảnh của phần giới thiệu thế giới game, 16:9 (ví dụ 1600 × 900).'),
   bands: z
     .int()
     .min(2)
     .max(3)
-    .describe('Số khẩu hiệu chữ lớn hiển thị (2 hoặc 3), lấy từ story.band1 đến story.band3.'),
+    .describe('Số dòng khẩu hiệu hiển thị (2 hoặc 3), lấy từ story.band1 đến story.band3.'),
 });
 
 const featureKey = z.enum(['f1', 'f2', 'f3', 'f4']);
 
 export const featuresSchema = z.strictObject({
   $schema: schemaRef,
+  cover: imageSlot('Ảnh bìa của phần Tính năng trên trang chính, 16:9 (1280 × 720).'),
   items: z
     .array(
       z.strictObject({
@@ -105,7 +108,7 @@ export const featuresSchema = z.strictObject({
         images: z
           .array(imageSlot('Ảnh minh hoạ tính năng, 1280 × 720.'))
           .length(2, 'Mỗi tính năng có đúng 2 ảnh.')
-          .describe('Hai ảnh của tính năng. Thẻ ở trang chính dùng ảnh đầu tiên.'),
+          .describe('Hai ảnh của tính năng, hiện trong tab của modal Tính năng.'),
       }),
     )
     .length(4, 'Phần Tính năng có đúng 4 mục.')
@@ -116,6 +119,7 @@ const gameplayKey = z.enum(['g1', 'g2', 'g3', 'g4']);
 
 export const gameplaySchema = z.strictObject({
   $schema: schemaRef,
+  cover: imageSlot('Ảnh bìa của phần Gameplay trên trang chính, 16:9 (1280 × 720).'),
   tabs: z
     .array(
       z.strictObject({
@@ -179,7 +183,9 @@ export const charactersSchema = z.strictObject({
           .string()
           .regex(/^#[0-9A-Fa-f]{6}$/, 'Màu dạng #RRGGBB, ví dụ #6C4FD8.')
           .nullable()
-          .describe('Màu chủ đạo của nhân vật, dạng #RRGGBB. null nghĩa là chưa chọn.'),
+          .describe(
+            'Màu chủ đạo của nhân vật, dạng #RRGGBB, làm nền phần Nhân vật khi nhân vật này hiện ra. Chọn màu sáng: chữ trên nền là màu navy #1D384A và cần tương phản ít nhất 4,5:1. null nghĩa là chưa chọn (trang tạm dùng bảng màu pastel).',
+          ),
         images: z
           .strictObject({
             card: imageSlot('Ảnh thẻ nhân vật, 600 × 800.'),

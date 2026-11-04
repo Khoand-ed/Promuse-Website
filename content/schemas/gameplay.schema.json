@@ -5,6 +5,41 @@
     "$schema": {
       "type": "string"
     },
+    "cover": {
+      "type": "object",
+      "properties": {
+        "src": {
+          "type": "string",
+          "pattern": "^\\/images\\/[a-z0-9/_-]+\\.(webp|png|jpg|jpeg|svg|avif)$",
+          "description": "Đường dẫn ảnh tính từ thư mục public/, ví dụ /images/hero/hero-desktop.webp. Đặt file đúng chỗ này là ảnh thay cho khung giữ chỗ."
+        },
+        "width": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991,
+          "description": "Chiều rộng ảnh (px). Khung giữ chỗ dùng tỉ lệ rộng/cao này."
+        },
+        "height": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991,
+          "description": "Chiều cao ảnh (px)."
+        },
+        "alt": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*$",
+          "description": "Khoá trong content/text/*.json chứa mô tả ảnh cho người dùng trình đọc màn hình, ví dụ hero.visualAlt."
+        }
+      },
+      "required": [
+        "src",
+        "width",
+        "height",
+        "alt"
+      ],
+      "additionalProperties": false,
+      "description": "Ảnh bìa của phần Gameplay trên trang chính, 16:9 (1280 × 720)."
+    },
     "tabs": {
       "minItems": 4,
       "maxItems": 4,
@@ -125,6 +160,7 @@
     }
   },
   "required": [
+    "cover",
     "tabs",
     "gacha"
   ],

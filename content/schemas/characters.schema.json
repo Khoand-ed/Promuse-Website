@@ -81,7 +81,7 @@
                 "type": "null"
               }
             ],
-            "description": "Màu chủ đạo của nhân vật, dạng #RRGGBB. null nghĩa là chưa chọn."
+            "description": "Màu chủ đạo của nhân vật, dạng #RRGGBB, làm nền phần Nhân vật khi nhân vật này hiện ra. Chọn màu sáng: chữ trên nền là màu navy #1D384A và cần tương phản ít nhất 4,5:1. null nghĩa là chưa chọn (trang tạm dùng bảng màu pastel)."
           },
           "images": {
             "type": "object",

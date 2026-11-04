@@ -1,5 +1,11 @@
 {
   "$schema": "../schemas/features.schema.json",
+  "cover": {
+    "src": "/images/features/cover.webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "features.coverAlt"
+  },
   "items": [
     {
       "key": "f1",

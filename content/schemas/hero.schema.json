@@ -38,7 +38,7 @@
         "alt"
       ],
       "additionalProperties": false,
-      "description": "Key visual ngang cho máy tính, tối thiểu 1920 × 1080 (nên dùng 2560 × 1440)."
+      "description": "Key visual ngang cho máy tính, tối thiểu 1920 × 1080 (nên dùng 2560 × 1440). Giữ sáng góc trên bên trái (dòng trạng thái) và dải trên cùng bên phải (menu); vùng giữa bên phải để trống cho logo, như bố cục hero của p3re.jp."
     },
     "mobile": {
       "type": "object",
@@ -73,7 +73,7 @@
         "alt"
       ],
       "additionalProperties": false,
-      "description": "Key visual dọc cho điện thoại, 1080 × 1920."
+      "description": "Key visual dọc cho điện thoại, 1080 × 1920. Giữ sáng phần trên cùng cho logo và dòng trạng thái."
     },
     "layers": {
       "type": "array",

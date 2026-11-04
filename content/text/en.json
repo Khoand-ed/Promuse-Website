@@ -11,6 +11,7 @@
     "backToTop": "Back to top",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
+    "menu": "Menu",
     "mainNav": "Main navigation",
     "language": "Language",
     "languageNames": {
@@ -35,7 +36,6 @@
   },
   "hero": {
     "status": "Coming soon on Android",
-    "cta": "Claim the pre-registration reward",
     "trailer": "Watch trailer",
     "scroll": "Scroll",
     "visualAlt": "[TODO] Describe the key visual"
@@ -74,33 +74,30 @@
   "features": {
     "title": "Features",
     "summary": "[TODO] Two sentences summarising the main features",
+    "coverAlt": "[TODO] Describe the Features cover image",
     "seeDetails": "See details",
     "number": "FEATURE #{n}",
     "items": {
       "f1": {
         "title": "[TODO] Feature 1 name (topic: two lanes, three kinds of notes)",
-        "line": "[TODO] One line about feature 1",
         "text": "[TODO] 1–2 sentences about feature 1",
         "image1Alt": "[TODO] Describe image 1 of feature 1",
         "image2Alt": "[TODO] Describe image 2 of feature 1"
       },
       "f2": {
         "title": "[TODO] Feature 2 name (topic: each character changes how you play)",
-        "line": "[TODO] One line about feature 2",
         "text": "[TODO] 1–2 sentences about feature 2",
         "image1Alt": "[TODO] Describe image 1 of feature 2",
         "image2Alt": "[TODO] Describe image 2 of feature 2"
       },
       "f3": {
         "title": "[TODO] Feature 3 name (topic: collect and grow your characters)",
-        "line": "[TODO] One line about feature 3",
         "text": "[TODO] 1–2 sentences about feature 3",
         "image1Alt": "[TODO] Describe image 1 of feature 3",
         "image2Alt": "[TODO] Describe image 2 of feature 3"
       },
       "f4": {
         "title": "[TODO] Feature 4 name (topic: always something to play)",
-        "line": "[TODO] One line about feature 4",
         "text": "[TODO] 1–2 sentences about feature 4",
         "image1Alt": "[TODO] Describe image 1 of feature 4",
         "image2Alt": "[TODO] Describe image 2 of feature 4"
@@ -110,6 +107,7 @@
   "gameplay": {
     "title": "Gameplay",
     "summary": "[TODO] Two sentences summarising how the game plays",
+    "coverAlt": "[TODO] Describe the Gameplay cover image",
     "details": "Gameplay details",
     "rates": "Rates: 5★ {fiveStar}% · 4★ {fourStar}% · 3★ {threeStar}%",
     "previous": "Previous image",
@@ -156,6 +154,9 @@
   },
   "characters": {
     "title": "Characters",
+    "line1": "[TODO] Characters line 1, about 40 characters",
+    "line2": "[TODO] Characters line 2, about 40 characters",
+    "line3": "[TODO] Characters line 3, about 40 characters",
     "rarity": "{count} stars",
     "changeVisual": "Change visual",
     "previous": "Previous character",

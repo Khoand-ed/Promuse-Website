@@ -3,7 +3,7 @@
   "image": {
     "src": "/images/story/story.webp",
     "width": 1600,
-    "height": 1000,
+    "height": 900,
     "alt": "story.imageAlt"
   },
   "bands": 3

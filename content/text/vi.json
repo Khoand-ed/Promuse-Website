@@ -11,6 +11,7 @@
     "backToTop": "Lên đầu trang",
     "openMenu": "Mở menu",
     "closeMenu": "Đóng menu",
+    "menu": "Menu",
     "mainNav": "Điều hướng chính",
     "language": "Ngôn ngữ",
     "languageNames": {
@@ -35,7 +36,6 @@
   },
   "hero": {
     "status": "Sắp ra mắt trên Android",
-    "cta": "Nhận quà đăng ký sớm",
     "trailer": "Xem trailer",
     "scroll": "Cuộn",
     "visualAlt": "[TODO] Mô tả ảnh key visual"
@@ -74,33 +74,30 @@
   "features": {
     "title": "Tính năng",
     "summary": "[TODO] Hai câu tóm tắt các tính năng nổi bật",
+    "coverAlt": "[TODO] Mô tả ảnh bìa phần Tính năng",
     "seeDetails": "Xem chi tiết",
     "number": "TÍNH NĂNG #{n}",
     "items": {
       "f1": {
         "title": "[TODO] Tên tính năng 1 (chủ đề: hai làn, ba loại nốt)",
-        "line": "[TODO] Một dòng mô tả tính năng 1",
         "text": "[TODO] 1–2 câu về tính năng 1",
         "image1Alt": "[TODO] Mô tả ảnh 1 của tính năng 1",
         "image2Alt": "[TODO] Mô tả ảnh 2 của tính năng 1"
       },
       "f2": {
         "title": "[TODO] Tên tính năng 2 (chủ đề: mỗi nhân vật đổi cách chơi)",
-        "line": "[TODO] Một dòng mô tả tính năng 2",
         "text": "[TODO] 1–2 câu về tính năng 2",
         "image1Alt": "[TODO] Mô tả ảnh 1 của tính năng 2",
         "image2Alt": "[TODO] Mô tả ảnh 2 của tính năng 2"
       },
       "f3": {
         "title": "[TODO] Tên tính năng 3 (chủ đề: thu thập và nâng cấp nhân vật)",
-        "line": "[TODO] Một dòng mô tả tính năng 3",
         "text": "[TODO] 1–2 câu về tính năng 3",
         "image1Alt": "[TODO] Mô tả ảnh 1 của tính năng 3",
         "image2Alt": "[TODO] Mô tả ảnh 2 của tính năng 3"
       },
       "f4": {
         "title": "[TODO] Tên tính năng 4 (chủ đề: luôn có thứ để chơi)",
-        "line": "[TODO] Một dòng mô tả tính năng 4",
         "text": "[TODO] 1–2 câu về tính năng 4",
         "image1Alt": "[TODO] Mô tả ảnh 1 của tính năng 4",
         "image2Alt": "[TODO] Mô tả ảnh 2 của tính năng 4"
@@ -110,6 +107,7 @@
   "gameplay": {
     "title": "Gameplay",
     "summary": "[TODO] Hai câu tóm tắt cách chơi",
+    "coverAlt": "[TODO] Mô tả ảnh bìa phần Gameplay",
     "details": "Chi tiết gameplay",
     "rates": "Tỉ lệ: 5★ {fiveStar}% · 4★ {fourStar}% · 3★ {threeStar}%",
     "previous": "Ảnh trước",
@@ -156,6 +154,9 @@
   },
   "characters": {
     "title": "Nhân vật",
+    "line1": "[TODO] Dòng giới thiệu nhân vật 1, khoảng 40 ký tự",
+    "line2": "[TODO] Dòng giới thiệu nhân vật 2, khoảng 40 ký tự",
+    "line3": "[TODO] Dòng giới thiệu nhân vật 3, khoảng 40 ký tự",
     "rarity": "{count} sao",
     "changeVisual": "Đổi hình",
     "previous": "Nhân vật trước",

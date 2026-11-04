@@ -3,10 +3,7 @@ import { altGroup, text } from './common.ts';
 
 const feature = (n: number) =>
   z.strictObject({
-    title: text(
-      `Tên tính năng ${n}: hiện trên thẻ ở trang chính và trên tab ${n} của modal Tính năng. Khoảng 30 ký tự.`,
-    ),
-    line: text(`Một dòng mô tả dưới tên thẻ tính năng ${n} trên trang chính. Khoảng 80 ký tự.`),
+    title: text(`Tên tính năng ${n}, hiện trên tab ${n} của modal Tính năng. Khoảng 30 ký tự.`),
     text: text(
       `Một hoặc hai câu giải thích tính năng ${n}, hiện trong tab ${n} của modal. Viết đơn giản, chỉ dùng dữ kiện trong doc/GAME_FACTS.md.`,
     ),
@@ -55,6 +52,7 @@ export const textSchema = z.strictObject({
     backToTop: text('Nhãn nút quay lên đầu trang.'),
     openMenu: text('Nhãn nút mở menu trên điện thoại.'),
     closeMenu: text('Nhãn nút đóng menu trên điện thoại.'),
+    menu: text('Chữ nhỏ dưới ba vạch trên nút menu ở góc phải trên điện thoại.'),
     mainNav: text('Tên vùng điều hướng chính, dành cho trình đọc màn hình.'),
     language: text('Tên nhóm nút chọn ngôn ngữ, dành cho trình đọc màn hình.'),
     languageNames: z.strictObject({
@@ -85,7 +83,6 @@ export const textSchema = z.strictObject({
     status: text(
       'Dòng trạng thái ở màn đầu tiên, ví dụ "Sắp ra mắt trên Android". Không nhắc iOS.',
     ),
-    cta: text('Nút chính ở màn đầu tiên, cuộn tới khối nhận quà.'),
     trailer: text('Nút mở trailer. Nút tự ẩn khi chưa có ID trailer.'),
     scroll: text('Chữ nhỏ gợi ý cuộn xuống.'),
     visualAlt: text('Mô tả ảnh key visual cho người dùng trình đọc màn hình.'),
@@ -122,14 +119,15 @@ export const textSchema = z.strictObject({
     p1: text('Đoạn giới thiệu thứ 1, 2–3 câu. Nói về thế giới và nhân vật, không nói về âm nhạc.'),
     p2: text('Đoạn giới thiệu thứ 2, 2–3 câu.'),
     p3: text('Đoạn giới thiệu thứ 3, 2–3 câu.'),
-    band1: text('Khẩu hiệu thứ 1, chữ rất lớn chạy ngang màn hình. Vài chữ.'),
-    band2: text('Khẩu hiệu thứ 2. Vài chữ.'),
-    band3: text('Khẩu hiệu thứ 3. Vài chữ.'),
+    band1: text('Khẩu hiệu thứ 1: dòng chữ nhỏ ở giữa trang, sau phần Gameplay. Vài chữ.'),
+    band2: text('Khẩu hiệu thứ 2, dòng dưới khẩu hiệu 1. Vài chữ.'),
+    band3: text('Khẩu hiệu thứ 3, dòng cuối. Vài chữ.'),
     imageAlt: text('Mô tả ảnh của phần giới thiệu.'),
   }),
   features: z.strictObject({
     title: text('Tiêu đề phần Tính năng.'),
     summary: text('Hai câu tóm tắt dưới tiêu đề phần Tính năng.'),
+    coverAlt: text('Mô tả ảnh bìa của phần Tính năng.'),
     seeDetails: text('Nút mở modal chi tiết tính năng.'),
     number: text('Nhãn nhỏ trên mỗi tab, ví dụ "TÍNH NĂNG #1". Giữ nguyên {n}.'),
     items: z.strictObject({ f1: feature(1), f2: feature(2), f3: feature(3), f4: feature(4) }),
@@ -137,6 +135,7 @@ export const textSchema = z.strictObject({
   gameplay: z.strictObject({
     title: text('Tiêu đề phần Gameplay.'),
     summary: text('Hai câu tóm tắt cách chơi dưới tiêu đề phần Gameplay.'),
+    coverAlt: text('Mô tả ảnh bìa của phần Gameplay.'),
     details: text('Nút mở modal chi tiết gameplay.'),
     rates: text(
       'Dòng tỉ lệ gacha. Giữ nguyên {fiveStar}, {fourStar}, {threeStar}: các con số lấy từ dữ liệu.',
@@ -154,7 +153,10 @@ export const textSchema = z.strictObject({
     }),
   }),
   characters: z.strictObject({
-    title: text('Tiêu đề phần Nhân vật.'),
+    title: text('Tiêu đề phần Nhân vật, chữ rất lớn bên trái. Ngắn, một hoặc hai từ.'),
+    line1: text('Dòng giới thiệu 1 dưới tiêu đề phần Nhân vật. Khoảng 40 ký tự.'),
+    line2: text('Dòng giới thiệu 2. Khoảng 40 ký tự.'),
+    line3: text('Dòng giới thiệu 3. Khoảng 40 ký tự.'),
     rarity: text('Câu đọc độ hiếm cho trình đọc màn hình, ví dụ "5 sao". Giữ nguyên {count}.'),
     changeVisual: text('Nút đổi giữa hình đứng yên và hình chiến đấu.'),
     previous: text('Nút sang nhân vật trước trong hồ sơ.'),

@@ -1,5 +1,11 @@
 {
   "$schema": "../schemas/gameplay.schema.json",
+  "cover": {
+    "src": "/images/gameplay/cover.webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "gameplay.coverAlt"
+  },
   "tabs": [
     {
       "key": "g1",

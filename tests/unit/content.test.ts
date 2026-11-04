@@ -21,8 +21,8 @@ const readJson = (file: string) => JSON.parse(readFileSync(file, 'utf8')) as Jso
 
 describe('content files', () => {
   it('both locales pass the text schema', () => {
-    expect(loadMessages('vi').hero.cta).toBe('Nhận quà đăng ký sớm');
-    expect(loadMessages('en').hero.cta).toBe('Claim the pre-registration reward');
+    expect(loadMessages('vi').hero.status).toBe('Sắp ra mắt trên Android');
+    expect(loadMessages('en').hero.status).toBe('Coming soon on Android');
   });
 
   it.each(dataFiles.map((entry) => [entry.file, entry]))('%s passes its schema', (_file, entry) => {
