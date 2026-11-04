@@ -1,7 +1,13 @@
 import { runInNewContext } from 'node:vm';
 import { describe, expect, it } from 'vitest';
 import { beatIndex } from '@/components/motion/BeatClock';
-import { INTRO_KEY, MOTION_KEY, motionBootScript, resolveMotion } from '@/lib/motion/preference';
+import {
+  INTRO_KEY,
+  introBootScript,
+  MOTION_KEY,
+  motionBootScript,
+  resolveMotion,
+} from '@/lib/motion/preference';
 
 describe('resolveMotion', () => {
   it('lets the visitor choice win over the system setting', () => {
@@ -37,12 +43,14 @@ describe('motionBootScript', () => {
     const store = (values: Record<string, string>) => ({
       getItem: (key: string) => values[key] ?? null,
     });
-    runInNewContext(motionBootScript, {
+    const globals = {
       document: { documentElement: { dataset } },
       window: { matchMedia: () => ({ matches: reduced }) },
       localStorage: store(stored ? { [MOTION_KEY]: stored } : {}),
       sessionStorage: store(introSeen ? { [INTRO_KEY]: '1' } : {}),
-    });
+    };
+    runInNewContext(motionBootScript, globals);
+    runInNewContext(introBootScript, globals);
     return dataset;
   }
 

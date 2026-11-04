@@ -58,6 +58,21 @@
     overflow: hidden;
   }
 
+  /* So does the opening; if its script never runs, the page unlocks after 6 s anyway. */
+  html[data-intro='play'] {
+    overflow: hidden;
+    animation: unlock-page 0s 6s forwards;
+  }
+
+  /*
+   * Above-the-fold content that animates in after the opening stays hidden from the first paint, so
+   * it never flashes; GSAP takes over its opacity. A 6 s fallback shows it if scripts fail.
+   */
+  html[data-motion='on'] .hero-reveal {
+    opacity: 0;
+    animation: show-anyway 0s 6s forwards;
+  }
+
   body {
     background: #fff;
     color: var(--color-ink);
@@ -277,6 +292,50 @@
     animation-play-state: running;
   }
 
+  /* The opening (doc/SPEC.md, section 5): only shown when the boot script set data-intro. */
+  .opening {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: none;
+    overflow: hidden;
+    background: #fff;
+    color: var(--color-ink);
+  }
+
+  html[data-intro='play'] .opening {
+    display: block;
+    animation: hide-opening 0s 6s forwards;
+  }
+
+  .opening-water {
+    position: absolute;
+    inset: 0;
+    background: #029eeb;
+  }
+
+  .opening-waves {
+    position: absolute;
+    bottom: calc(100% - 1px);
+    left: 0;
+    width: 100%;
+    height: 160px;
+  }
+
+  .opening-waves path {
+    animation: wave-drift linear infinite;
+  }
+
+  .opening-skip {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    min-height: 2.75rem;
+    padding-inline: 1.25rem;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+
   /* The giant outlined word between the story and the characters. */
   .outline-word {
     color: transparent;
@@ -302,12 +361,112 @@
     border: 0;
     background: var(--color-menu);
     color: var(--color-ink);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
   }
 
   .menu-dialog::backdrop {
     background: transparent;
+  }
+
+  /* It fades in and out (0.3 s), and the corner lines turn into a cross, as on p3re.jp. */
+  .menu-dialog {
+    opacity: 0;
+    transition:
+      opacity 0.3s ease-out,
+      overlay 0.3s allow-discrete,
+      display 0.3s allow-discrete;
+  }
+
+  .menu-dialog[open] {
+    opacity: 1;
+  }
+
+  @starting-style {
+    .menu-dialog[open] {
+      opacity: 0;
+    }
+  }
+
+  .menu-cross {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 13px;
+  }
+
+  .menu-cross > span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transition:
+      transform 0.3s ease-out,
+      opacity 0.3s ease-out;
+  }
+
+  .menu-cross > span:nth-child(2) {
+    top: 6px;
+  }
+
+  .menu-cross > span:nth-child(3) {
+    top: 12px;
+  }
+
+  .menu-dialog[open] .menu-cross > span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .menu-dialog[open] .menu-cross > span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-dialog[open] .menu-cross > span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* :nth-child(n) matches the rules above in specificity, so this start state wins. */
+  @starting-style {
+    .menu-dialog[open] .menu-cross > span:nth-child(n) {
+      transform: none;
+      opacity: 1;
+    }
+  }
+
+  /* The language list unfolds from the top (0.4 s). */
+  .lang-list {
+    visibility: hidden;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition:
+      opacity 0.4s ease-out,
+      transform 0.4s ease-out,
+      visibility 0s linear 0.4s;
+  }
+
+  .lang-list[data-open] {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  /* Share icons lift on hover. */
+  .share-link {
+    transition: transform 0.3s ease-out;
+  }
+
+  .share-link:hover {
+    transform: translateY(-3px);
+  }
+
+  /* With motion off, menus and lists simply appear. */
+  html[data-motion='off'] :is(.menu-dialog, .menu-cross > span, .lang-list, .share-link) {
+    transition-duration: 0.01ms;
+    transition-delay: 0s;
   }
 
   /* The row of character cards; it scrolls sideways until the pinned scene arrives (P4). */
@@ -346,6 +505,30 @@
   .chara-card:hover .chara-art::after,
   .chara-card:focus-within .chara-art::after {
     opacity: 0;
+  }
+}
+
+@keyframes wave-drift {
+  to {
+    transform: translateX(400px);
+  }
+}
+
+@keyframes unlock-page {
+  to {
+    overflow: visible;
+  }
+}
+
+@keyframes show-anyway {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hide-opening {
+  to {
+    visibility: hidden;
   }
 }
 

@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useId, useRef, useState } from 'react';
 import { navSections } from '@/components/sections/sections';
 import { Link } from '@/i18n/navigation';
-import { CloseIcon } from './icons';
 import { LanguageSwitch } from './LanguageSwitch';
 import { MotionToggle } from './MotionToggle';
 
@@ -76,7 +75,12 @@ export function MobileMenu() {
             className="fixed top-0 right-0 size-22"
           >
             <span aria-hidden="true" className="menu-corner absolute inset-0" />
-            <CloseIcon className="absolute top-4 right-4 size-7 text-white" />
+            {/* The menu button's three lines, turning into a cross as the menu opens. */}
+            <span aria-hidden="true" className="menu-cross text-white">
+              <span />
+              <span />
+              <span />
+            </span>
           </button>
 
           <nav aria-label={t('common.mainNav')}>

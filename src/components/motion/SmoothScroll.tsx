@@ -8,7 +8,8 @@ import { useMotion } from './MotionProvider';
 
 /**
  * Lenis smooth scrolling driven by the GSAP ticker, as on p3re.jp. Off with motion off. It pauses
- * while a dialog is open, and ScrollTrigger is refreshed once fonts and images have loaded.
+ * while a dialog is open or the opening plays, and ScrollTrigger is refreshed once fonts and images
+ * have loaded.
  */
 export function SmoothScroll() {
   const { enabled } = useMotion();
@@ -28,12 +29,18 @@ export function SmoothScroll() {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
-    const syncDialogs = () => {
-      if (document.querySelector('dialog[open]')) lenis.stop();
+    const sync = () => {
+      const held =
+        document.documentElement.dataset.intro === 'play' || document.querySelector('dialog[open]');
+      if (held) lenis.stop();
       else lenis.start();
     };
-    const observer = new MutationObserver(syncDialogs);
-    observer.observe(document.body, { subtree: true, attributeFilter: ['open'] });
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(document.documentElement, {
+      subtree: true,
+      attributeFilter: ['open', 'data-intro'],
+    });
 
     return () => {
       observer.disconnect();

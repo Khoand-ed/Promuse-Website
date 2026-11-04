@@ -8,7 +8,7 @@ test.describe('a Vietnamese browser', () => {
     await expect(page).toHaveURL(/localhost:3000\/$/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'vi');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Promuse');
-    await expect(page.getByText('Sắp ra mắt trên Android')).toBeVisible();
+    await expect(page.getByText('Sắp ra mắt trên Android', { exact: true })).toBeVisible();
   });
 });
 
@@ -19,7 +19,7 @@ test.describe('an English browser', () => {
     await page.goto('/');
     await expect(page).toHaveURL(/\/en$/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(page.getByText('Coming soon on Android')).toBeVisible();
+    await expect(page.getByText('Coming soon on Android', { exact: true })).toBeVisible();
   });
 });
 

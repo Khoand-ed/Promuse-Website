@@ -57,43 +57,56 @@ function render(
   return createElement(as, { ...props, ref }, children);
 }
 
-/** Rises 50 px (or slides in 30 px from the right) and fades in. */
+/** Rises 50 px (or slides in 30 px from the right, or only fades in). */
 export function Reveal({
   as = 'div',
   delay = 0,
   immediate,
   from = 'below',
   duration = 0.6,
+  easing = 'inOut',
   children,
   ...props
-}: RevealProps & { from?: 'below' | 'right' | 'none'; duration?: number }) {
+}: RevealProps & {
+  from?: 'below' | 'right' | 'none';
+  duration?: number;
+  easing?: 'out' | 'inOut';
+}) {
   const ref = useReveal(
     (element) =>
-      gsap.from(element, {
-        y: from === 'below' ? 50 : 0,
-        x: from === 'right' ? 30 : 0,
-        opacity: 0,
-        duration,
-        delay,
-        ease: from === 'below' ? ease.inOut : ease.out,
-      }),
+      // fromTo, so the end state never depends on CSS (.hero-reveal starts at opacity 0).
+      gsap.fromTo(
+        element,
+        { y: from === 'below' ? 50 : 0, x: from === 'right' ? 30 : 0, opacity: 0 },
+        { y: 0, x: 0, opacity: 1, duration, delay, ease: ease[easing] },
+      ),
     immediate,
   );
   return render(as, ref, props, children);
 }
 
-/** Display titles: each letter rises 80 px and fades in, one after another. */
-export function RiseLetters({ as = 'h2', delay = 0, immediate, children, ...props }: RevealProps) {
+/**
+ * Display titles: each letter rises 80 px and fades in, one after another. Headings keep their name
+ * through `aria-label`; for other elements, hide this one and give the text to screen readers apart.
+ */
+export function RiseLetters({
+  as = 'h2',
+  delay = 0,
+  duration = 1,
+  stagger = 0.05,
+  immediate,
+  children,
+  ...props
+}: RevealProps & { duration?: number; stagger?: number }) {
   const ref = useReveal((element) => {
-    const split = SplitText.create(element, { type: 'words,chars', aria: 'auto' });
-    return gsap.from(split.chars, {
-      y: 80,
-      opacity: 0,
-      duration: 1,
-      delay,
-      ease: ease.out,
-      stagger: 0.05,
+    const heading = /^H[1-6]$/.test(element.tagName);
+    const split = SplitText.create(element, {
+      type: 'words,chars',
+      aria: heading ? 'auto' : 'none',
     });
+    // The letters start hidden; the element itself must show (see .hero-reveal).
+    gsap.set(element, { opacity: 1 });
+    return gsap.from(split.chars, { y: 80, opacity: 0, duration, delay, ease: ease.out, stagger });
   }, immediate);
   return render(as, ref, props, children);
 }
@@ -110,6 +123,7 @@ export function RiseLines({
   const ref = useReveal((element) => {
     // Lines keep their words whole, so the text reads normally without extra ARIA.
     const split = SplitText.create(element, { type: 'lines', mask: 'lines', aria: 'none' });
+    gsap.set(element, { opacity: 1 });
     return gsap.from(split.lines, {
       yPercent: 100,
       opacity: 0,
@@ -133,7 +147,7 @@ export function CoverReveal({ as = 'div', delay = 0, immediate, children, ...pro
           { clipPath: 'inset(100% 0% 0% 0%)' },
           { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.5, ease: ease.linear, delay: 0.2 },
         )
-        .from(element, { opacity: 0, duration: 0.5, ease: ease.inOut }, 0),
+        .fromTo(element, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: ease.inOut }, 0),
     immediate,
   );
   return render(as, ref, props, children);
@@ -145,7 +159,7 @@ export function TitleZoom({ as = 'h2', delay = 0, immediate, children, ...props 
     (element) =>
       gsap
         .timeline({ delay })
-        .from(element, { opacity: 0, duration: 0.8, ease: ease.out })
+        .fromTo(element, { opacity: 0 }, { opacity: 1, duration: 0.8, ease: ease.out })
         .from(element, { y: 100, scale: 0.7, duration: 0.825, ease: ease.inOut }, 0.675),
     immediate,
   );

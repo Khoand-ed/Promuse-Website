@@ -1,5 +1,12 @@
 import { getTranslations } from 'next-intl/server';
 import type { ReactNode } from 'react';
+import {
+  CoverReveal,
+  GrowLine,
+  OutlineWord,
+  RiseLetters,
+  RiseLines,
+} from '@/components/motion/reveal';
 import { ImageSlot } from '@/components/ui/ImageSlot';
 import { getFeatures, getGameplay, getStory } from '@/content/data';
 import type { Slot } from '@/content/images';
@@ -16,15 +23,15 @@ interface StoryBlockProps {
 function StoryBlock({ id, title, image, imageSide, children }: StoryBlockProps) {
   return (
     <section id={id} aria-labelledby={`${id}-title`} className="story-block" data-image={imageSide}>
-      <h2
+      <RiseLetters
         id={`${id}-title`}
         className="story-title type-display text-center text-[3.25rem] md:pb-9 md:text-left md:text-[5.85vw] lg:text-[5.25rem]"
       >
         {title}
-      </h2>
-      <div className="story-image">
+      </RiseLetters>
+      <CoverReveal className="story-image">
         <ImageSlot slot={image} sizes="(min-width: 768px) 52vw, 87vw" />
-      </div>
+      </CoverReveal>
       <div className="story-text type-body space-y-7">{children}</div>
     </section>
   );
@@ -44,9 +51,9 @@ export async function Story() {
     <div className="bg-sky overflow-hidden pt-24 md:pt-[12.2rem]">
       <div className="grid gap-24 md:gap-[6.4rem]">
         <StoryBlock id="story" title={t('story.title')} image={story.image} imageSide="right">
-          <p>{t('story.p1')}</p>
-          <p>{t('story.p2')}</p>
-          <p>{t('story.p3')}</p>
+          <RiseLines>{t('story.p1')}</RiseLines>
+          <RiseLines>{t('story.p2')}</RiseLines>
+          <RiseLines>{t('story.p3')}</RiseLines>
         </StoryBlock>
         <StoryBlock
           id="features"
@@ -54,7 +61,7 @@ export async function Story() {
           image={getFeatures().cover}
           imageSide="left"
         >
-          <p>{t('features.summary')}</p>
+          <RiseLines>{t('features.summary')}</RiseLines>
         </StoryBlock>
         <StoryBlock
           id="gameplay"
@@ -62,27 +69,28 @@ export async function Story() {
           image={getGameplay().cover}
           imageSide="right"
         >
-          <p>{t('gameplay.summary')}</p>
+          <RiseLines>{t('gameplay.summary')}</RiseLines>
         </StoryBlock>
       </div>
 
       <div className="mt-24 text-center md:mt-[5.6rem]">
-        <span aria-hidden="true" className="bg-ink mx-auto block h-[50px] w-px" />
-        <p className="mt-5 text-[12px] leading-[24px] tracking-[0.8px]">
+        <GrowLine className="bg-ink mx-auto h-[50px] w-px" />
+        <RiseLines
+          delay={0.5}
+          stagger={0.3}
+          className="mt-5 text-[12px] leading-[24px] tracking-[0.8px]"
+        >
           {bands.map((band) => (
             <span key={band} className="block">
               {t(`story.${band}`)}
             </span>
           ))}
-        </p>
+        </RiseLines>
       </div>
 
-      <p
-        aria-hidden="true"
-        className="outline-word type-display mt-20 text-center text-[21.4vw] leading-[0.74] whitespace-nowrap uppercase md:mt-24"
-      >
+      <OutlineWord className="outline-word type-display mt-20 text-center text-[21.4vw] leading-[0.74] whitespace-nowrap uppercase md:mt-24">
         {t('common.brand')}
-      </p>
+      </OutlineWord>
     </div>
   );
 }
