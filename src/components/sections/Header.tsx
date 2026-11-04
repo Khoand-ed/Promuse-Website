@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { LanguageSwitch } from '@/components/ui/LanguageSwitch';
 import { MobileMenu } from '@/components/ui/MobileMenu';
+import { MotionToggle } from '@/components/ui/MotionToggle';
 import { Link } from '@/i18n/navigation';
 import { navSections } from './sections';
 
@@ -30,6 +31,7 @@ export async function Header() {
         </nav>
         <span aria-hidden="true" className="bg-ink mx-8 h-4 w-px self-center" />
         <LanguageSwitch variant="menu" />
+        <MotionToggle className="ml-6" />
       </div>
       <MobileMenu />
     </header>

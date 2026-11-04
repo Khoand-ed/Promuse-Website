@@ -1,8 +1,8 @@
 import { getImageProps } from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { Wordmark } from '@/components/ui/Wordmark';
-import { getHero } from '@/content/data';
-import { hasFile, type Slot } from '@/content/images';
+import { getHero, getSite } from '@/content/data';
+import { hasFile, hasPublicFile, type Slot } from '@/content/images';
 
 /** The key visual: a portrait crop for phones, a landscape crop from 768 px; blue light until the art exists. */
 async function KeyVisual() {
@@ -29,12 +29,14 @@ async function KeyVisual() {
 
 export async function Hero() {
   const t = await getTranslations();
+  // On phones the music button takes the top left corner, so the wordmark moves down.
+  const music = hasPublicFile(getSite().music.src);
 
   return (
     <section id="top" className="relative isolate h-svh min-h-[34rem] overflow-hidden">
       <KeyVisual />
 
-      <div className="px-[6.7%] pt-9 md:px-[4vw] md:pt-[5.6rem]">
+      <div className={`px-[6.7%] md:px-[4vw] md:pt-[5.6rem] ${music ? 'pt-24' : 'pt-9'}`}>
         <h1 className="text-ink md:absolute md:top-[41%] md:left-[57%] md:text-white">
           <Wordmark
             sizes="(min-width: 768px) 24vw, 40vw"

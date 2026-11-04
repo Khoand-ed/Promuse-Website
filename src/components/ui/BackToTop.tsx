@@ -22,6 +22,7 @@ export function BackToTop() {
     <a
       href="#top"
       aria-label={t('backToTop')}
+      data-beat
       className="pill fixed right-5 bottom-5 z-30 size-14 px-0 text-xl"
     >
       <ArrowUp />

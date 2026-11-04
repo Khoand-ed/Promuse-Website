@@ -6,6 +6,7 @@ import { navSections } from '@/components/sections/sections';
 import { Link } from '@/i18n/navigation';
 import { CloseIcon } from './icons';
 import { LanguageSwitch } from './LanguageSwitch';
+import { MotionToggle } from './MotionToggle';
 
 /** Below 1024 px: the blue corner button and the full-screen menu it opens. */
 export function MobileMenu() {
@@ -97,7 +98,10 @@ export function MobileMenu() {
             </ul>
           </nav>
 
-          <LanguageSwitch variant="list" className="mt-auto pt-10 text-[15px]" />
+          <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-10">
+            <LanguageSwitch variant="list" className="text-[15px]" />
+            <MotionToggle />
+          </div>
         </div>
       </dialog>
     </div>

@@ -8,7 +8,12 @@ export interface Slot {
   alt: string;
 }
 
+/** Whether a file exists under public/, for a path such as /audio/theme.mp3. Checked at build time. */
+export function hasPublicFile(src: string): boolean {
+  return existsSync(path.join(process.cwd(), 'public', src));
+}
+
 /** Whether the owner has put the file for this slot under public/. Checked at build time. */
 export function hasFile(slot: Slot): boolean {
-  return existsSync(path.join(process.cwd(), 'public', slot.src));
+  return hasPublicFile(slot.src);
 }

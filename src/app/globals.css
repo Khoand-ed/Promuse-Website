@@ -236,6 +236,47 @@
     }
   }
 
+  /*
+   * The line under SCROLL. With motion on it drips like p3re.jp's: it grows, then slides down and
+   * fades, once every three beats (BeatClock sets --beat-ms). With motion off it stays still.
+   */
+  .scroll-cue {
+    position: relative;
+    display: block;
+    width: 1px;
+    height: 64px;
+    overflow: hidden;
+  }
+
+  .scroll-cue::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 30px;
+    background: currentColor;
+    transform-origin: top;
+  }
+
+  html[data-motion='on'] .scroll-cue::after {
+    animation: scroll-cue calc(var(--beat-ms, 500ms) * 3) ease-in-out infinite;
+  }
+
+  /*
+   * The note in the music button turns once every eight beats while the music plays and stops
+   * where it is when the music stops. Still with motion off.
+   */
+  .music-note {
+    transform-origin: 50% 50%;
+  }
+
+  html[data-motion='on'] .music-note {
+    animation: spin calc(var(--beat-ms, 500ms) * 8) linear infinite paused;
+  }
+
+  html[data-motion='on'] .music-button[aria-pressed='true'] .music-note {
+    animation-play-state: running;
+  }
+
   /* The giant outlined word between the story and the characters. */
   .outline-word {
     color: transparent;
@@ -304,6 +345,27 @@
 
   .chara-card:hover .chara-art::after,
   .chara-card:focus-within .chara-art::after {
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(0) scaleY(0);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(0) scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(64px) scaleY(0);
     opacity: 0;
   }
 }
