@@ -129,3 +129,67 @@ test.describe('character row with reduced motion', () => {
     await expect(section.locator('.chara-tint[data-on]')).toHaveCount(4);
   });
 });
+
+test.describe('modal', () => {
+  test.use({ locale: 'vi-VN', reducedMotion: 'no-preference' });
+
+  test('opens with its hash, closes with Esc and returns focus', async ({ page }) => {
+    await page.goto('/dev/motion');
+    const opener = page.getByRole('button', { name: 'Mở modal thử' });
+    await opener.focus();
+    await page.keyboard.press('Enter');
+    const modal = page.getByRole('dialog', { name: 'Tính năng' });
+    await expect(modal).toBeVisible();
+    await expect(page).toHaveURL(/#demo-modal$/);
+
+    await page.keyboard.press('Escape');
+    await expect(modal).toBeHidden();
+    await expect(page).not.toHaveURL(/#demo-modal/);
+    await expect(opener).toBeFocused();
+  });
+
+  test('opens from a link and closes with the Back button', async ({ page }) => {
+    await page.goto('/dev/motion#demo-modal');
+    const modal = page.getByRole('dialog', { name: 'Tính năng' });
+    await expect(modal).toBeVisible();
+    await modal.getByRole('button', { name: 'Đóng' }).click();
+    await expect(modal).toBeHidden();
+
+    await page.getByRole('button', { name: 'Mở modal thử' }).click();
+    await expect(modal).toBeVisible();
+    await page.goBack();
+    await expect(modal).toBeHidden();
+  });
+});
+
+test.describe('modal with reduced motion', () => {
+  test.use({ locale: 'vi-VN' });
+
+  test('fades instead of sliding', async ({ page }) => {
+    await page.goto('/dev/motion#demo-modal');
+    const modal = page.getByRole('dialog', { name: 'Tính năng' });
+    await expect(modal).toBeVisible();
+    expect(await modal.evaluate((element) => getComputedStyle(element).transform)).toBe('none');
+  });
+});
+
+test.describe('lightbox', () => {
+  test.use({ locale: 'vi-VN' });
+
+  test('adds the player when it opens and removes it when it closes', async ({ page }) => {
+    await page.route('**/*youtube-nocookie.com/**', (route) => route.abort());
+    await page.goto('/dev/motion');
+    const player = page.locator('iframe[src*="youtube-nocookie.com"]');
+    await expect(player).toHaveCount(0);
+    await page.getByRole('button', { name: 'Xem trailer' }).click();
+    await expect(player).toHaveCount(1);
+    await page.keyboard.press('Escape');
+    await expect(player).toHaveCount(0);
+  });
+
+  test('the trailer strip stays hidden without a trailerId', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('h1')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Xem trailer' })).toHaveCount(0);
+  });
+});

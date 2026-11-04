@@ -5,6 +5,7 @@ import { Characters } from '@/components/sections/Characters';
 import { Hero } from '@/components/sections/Hero';
 import { Reward } from '@/components/sections/Reward';
 import { Story } from '@/components/sections/Story';
+import { Trailer } from '@/components/sections/Trailer';
 import { introBootScript } from '@/lib/motion/preference';
 
 export default async function Home({ params }: PageProps<'/[locale]'>) {
@@ -18,6 +19,7 @@ export default async function Home({ params }: PageProps<'/[locale]'>) {
       <Opening />
       <main id="main" tabIndex={-1} className="outline-none">
         <Hero />
+        <Trailer />
         <Reward />
         <Story />
         <Characters />

@@ -470,6 +470,155 @@
   }
 
   /*
+   * The shared modal (doc/SPEC.md, section 6). A sheet slides up from the bottom and back down
+   * (0.8 s, ease-in-out), as p3re.jp's modals do; content marked data-rise then rises 80 px in turn.
+   * The lightbox fades in over a dark backdrop. With motion off, both simply fade.
+   */
+  .modal {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    color: var(--color-ink);
+    transition:
+      transform 0.8s ease-in-out,
+      opacity 0.3s ease-out,
+      overlay 0.8s allow-discrete,
+      display 0.8s allow-discrete;
+  }
+
+  .modal::backdrop {
+    background: transparent;
+  }
+
+  .modal-sheet {
+    background: var(--color-mist);
+    transform: translateY(100%);
+  }
+
+  .modal-sheet[open] {
+    transform: none;
+  }
+
+  @starting-style {
+    .modal-sheet[open] {
+      transform: translateY(100%);
+    }
+  }
+
+  .modal-lightbox {
+    background: rgb(0 8 32 / 0.92);
+    opacity: 0;
+  }
+
+  .modal-lightbox[open] {
+    opacity: 1;
+  }
+
+  @starting-style {
+    .modal-lightbox[open] {
+      opacity: 0;
+    }
+  }
+
+  .modal[open] [data-rise] {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.5s ease-in-out,
+      transform 0.5s ease-in-out;
+    transition-delay: calc(0.5s + var(--rise, 0) * 0.2s);
+  }
+
+  @starting-style {
+    .modal[open] [data-rise] {
+      opacity: 0;
+      transform: translateY(80px);
+    }
+  }
+
+  html[data-motion='off'] .modal {
+    transform: none;
+    opacity: 0;
+    transition:
+      opacity 0.15s ease-out,
+      overlay 0.15s allow-discrete,
+      display 0.15s allow-discrete;
+  }
+
+  html[data-motion='off'] .modal[open] {
+    opacity: 1;
+  }
+
+  @starting-style {
+    html[data-motion='off'] .modal[open] {
+      opacity: 0;
+    }
+  }
+
+  html[data-motion='off'] .modal[open] [data-rise] {
+    transition: none;
+  }
+
+  .modal-close {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 999px;
+    font-size: 1.5rem;
+  }
+
+  .modal-sheet .modal-close {
+    background: #fff;
+    color: var(--color-ink);
+  }
+
+  .modal-lightbox .modal-close {
+    color: #fff;
+  }
+
+  /* The trailer strip's button: a round play mark and the label; the arrow nudges on hover. */
+  .trailer-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 2.75rem;
+    font-size: 16px;
+    letter-spacing: 0.12em;
+  }
+
+  .trailer-play {
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 999px;
+    background-image: linear-gradient(90deg, var(--color-cta-from), var(--color-cta-to));
+    color: #fff;
+    font-size: 1.25rem;
+  }
+
+  .trailer-play svg {
+    transition: transform 0.3s linear;
+  }
+
+  .trailer-button:hover .trailer-play svg {
+    transform: translateX(4px);
+  }
+
+  /*
    * The character row (doc/SPEC.md, section 4). A plain sideways scroller with motion off; with
    * motion on, CharacterScene pins the section, moves the row and switches the colour layers.
    */

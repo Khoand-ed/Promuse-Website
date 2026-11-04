@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useState, type ReactNode } from 'react';
+import { useState, type CSSProperties, type ReactNode } from 'react';
 import {
   CoverReveal,
   GrowLine,
@@ -14,7 +14,9 @@ import {
 } from '@/components/motion/reveal';
 import { useMotion } from '@/components/motion/MotionProvider';
 import { ArrowRight } from '@/components/ui/icons';
+import { Modal, useHashModal } from '@/components/ui/Modal';
 import { MotionToggle } from '@/components/ui/MotionToggle';
+import { TrailerButton } from '@/components/ui/TrailerButton';
 
 // A development page, so its own labels are plain Vietnamese; the samples come from content/.
 
@@ -41,7 +43,42 @@ function Demo({
   );
 }
 
-export function MotionLab() {
+/** YouTube's own IFrame API sample, used here only until content/data/site.json has a trailerId. */
+const SAMPLE_VIDEO = 'M7lc1UVf-VE';
+
+function ModalDemo() {
+  const t = useTranslations();
+  const { open, show, hide } = useHashModal('demo-modal');
+  const rise = (n: number) => ({ '--rise': n }) as CSSProperties;
+  return (
+    <>
+      <button type="button" data-beat onClick={show} className="pill">
+        Mở modal thử
+        <ArrowRight />
+      </button>
+      <Modal open={open} onClose={hide} labelledBy="demo-modal-title">
+        <div className="mx-auto grid max-w-[44rem] gap-8 px-[6.7%] py-28">
+          <p data-rise style={rise(0)} className="type-label text-[12px] tracking-[0.12em]">
+            {t('features.number', { n: 1 })}
+          </p>
+          <h2 id="demo-modal-title" data-rise style={rise(0)} className="type-display text-[3rem]">
+            {t('features.title')}
+          </h2>
+          <p data-rise style={rise(1)} className="type-body">
+            {t('features.summary')}
+          </p>
+          <div data-rise style={rise(2)} className="image-slot aspect-video">
+            <span>
+              {t('common.imagePlaceholder', { name: 'f1-1.webp', width: 1280, height: 720 })}
+            </span>
+          </div>
+        </div>
+      </Modal>
+    </>
+  );
+}
+
+export function MotionLab({ trailerId }: { trailerId: string }) {
   const t = useTranslations();
   const { enabled } = useMotion();
   const [run, setRun] = useState(0);
@@ -188,6 +225,27 @@ export function MotionLab() {
             <span className="type-label text-[10px]">{t('hero.scroll')}</span>
             <span className="scroll-cue" />
           </div>
+        </Demo>
+
+        <Demo
+          name="Modal"
+          timing="trượt từ dưới lên 0,8 s ease-in-out; nội dung trồi 80 px lần lượt; Esc hoặc nút Back đóng; tắt hiệu ứng thì chỉ hiện mờ"
+          tone="bg-white"
+        >
+          <ModalDemo />
+        </Demo>
+
+        <Demo
+          name="Lightbox (trailer)"
+          timing="hiện mờ 0,3 s; khung YouTube chỉ có khi mở, đóng là video dừng"
+          tone="bg-sky"
+        >
+          <TrailerButton videoId={trailerId || SAMPLE_VIDEO} label={t('hero.trailer')} />
+          <p className="text-[13px]">
+            {trailerId
+              ? 'Đang dùng trailerId trong site.json.'
+              : 'Chưa có trailerId trong site.json, nên dùng video mẫu của YouTube.'}
+          </p>
         </Demo>
       </div>
     </main>

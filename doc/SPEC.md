@@ -98,7 +98,7 @@ When the system asks for reduced motion or the effects toggle is off: no opening
 
 ### Performance rules
 
-Animate `transform`, `opacity`, `clip-path` and `filter` only: background colours cross-fade as stacked layers, and the outline letters appear with `clip-path` instead of drawn strokes. Set `will-change` only while animating. Pause animations that are off screen. Use at most one pinned scene below 768 px. Refresh ScrollTrigger after fonts and above-the-fold images load. Target a steady 60 fps on desktop and smooth scrolling on a real mid-range Android phone.
+Animate `transform`, `opacity`, `clip-path` and `filter` only: background colours cross-fade as stacked layers, and the outline letters appear with `clip-path` instead of drawn strokes. Reveals are prepared only when their element comes within one screen of the viewport, so splitting text never blocks the page while it loads. Set `will-change` only while animating. Pause animations that are off screen. Use at most one pinned scene below 768 px. Refresh ScrollTrigger after fonts and above-the-fold images load. Target a steady 60 fps on desktop and smooth scrolling on a real mid-range Android phone.
 
 ## 5. Sections
 
@@ -178,7 +178,7 @@ Stats and passives come from the game (`GAME_FACTS.md`, section 3). Names are ke
 | Modal | Native `<dialog>` with `showModal()`. Slides up from the bottom (0.8 s, ease-in-out) and back down on close; its content rises 80 px in a short stagger (a fade when motion is off). Locks page scroll and stops Lenis. Opening sets the hash; the browser Back button closes it | Esc closes; focus moves inside and returns to the opener; labelled by its title |
 | Tabs | Switches panels without closing the modal; remembers the last tab per modal (`sessionStorage` key `promuse:tab:<modal>`) | ARIA tabs pattern; ← → Home End |
 | Slider | CSS scroll snap with previous and next buttons, dots and swipe; images load lazily | Labelled buttons; announces "Image 2 of 5" politely |
-| Lightbox | Inserts a `youtube-nocookie.com` iframe only when opened and removes it on close, so playback stops | Built on Modal |
+| Lightbox | Fades in over a dark backdrop (0.3 s), as p3re.jp's trailer player does. Inserts a `youtube-nocookie.com` iframe only when opened and removes it on close, so playback stops; `/#trailer` opens it | Built on Modal |
 | ImageSlot | Renders the image a content slot declares, through `next/image`. When the file is missing, renders a box with the slot's aspect ratio, its name and the size it needs | Real images take their alt text from content; placeholders are hidden from assistive technology |
 
 ## 7. Pre-registration states
