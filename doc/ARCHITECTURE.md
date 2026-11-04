@@ -152,6 +152,7 @@ export interface RewardGateway {
 
 - `src/app/[locale]/page.tsx` and `privacy/page.tsx` render statically for each locale (`generateStaticParams` and `setRequestLocale`). Page code never reads cookies or headers, which keeps it static.
 - Content is read and validated at build time; editing content means a rebuild, which Vercel runs on every push.
+- Cache Components (`cacheComponents`, `partialPrefetching`) stays off, although `create-next-app` turns it on: every page is static and needs no per-request data. Revisit when Next.js makes it the default.
 - Sections are Server Components that receive typed content. Motion wrappers, modals, sliders and the reward widget are client components.
 - Heavy client code (Supabase client, modals, sliders) loads with `next/dynamic` or on first interaction.
 - The reward widget asks the gateway for status after mount; the static HTML shows the signed-out state.
