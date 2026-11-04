@@ -76,14 +76,15 @@ One Supabase project is enough for a portfolio (the Free plan allows two active 
    │  └─ dev/                   motion/ and token/ helpers, 404 in production
    ├─ components/
    │  ├─ sections/              Intro, Header, Hero, Reward, Story (Introduction, Features, Gameplay), Characters, Footer
-   │  ├─ ui/                    Modal, Tabs, Slider, Lightbox, LanguageSwitch, MobileMenu, MotionToggle, BackToTop, SkipLink, Wordmark, ImageSlot
-   │  └─ motion/                MotionProvider, SmoothScroll, BeatClock, Reveal, SplitHeadline,
-   │                            ScrollType, Marquee, SlashWipe, Parallax, NoteLanes
+   │  ├─ ui/                    Modal, Tabs, Slider, Lightbox, LanguageSwitch, MobileMenu, MotionToggle, MusicButton, BackToTop, SkipLink, Wordmark, ImageSlot
+   │  └─ motion/                MotionProvider, MusicProvider, SmoothScroll, BeatClock, Opening, CharacterScene,
+   │                            reveal.tsx (RiseLetters, RiseLines, CoverReveal, Reveal, TitleZoom, ...)
    ├─ content/                  zod schemas and loaders for content/; no copy lives here
    ├─ i18n/                     routing.ts, request.ts, navigation.ts
    ├─ lib/
    │  ├─ env.ts                 zod-validated environment
-   │  ├─ motion/                gsap.ts (plugin registration), helpers
+   │  ├─ motion/                gsap.ts (plugin registration), preference.ts (effects choice and the
+   │  │                         boot script), opening.ts
    │  ├─ supabase/              browser.ts, server.ts, proxy.ts (session refresh)
    │  └─ reward/                RewardGateway interface, supabase and mock gateways
    └─ server/

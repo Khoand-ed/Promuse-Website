@@ -75,6 +75,43 @@
       "additionalProperties": false,
       "description": "Key visual dọc cho điện thoại, 1080 × 1920. Giữ sáng phần trên cùng cho logo và dòng trạng thái."
     },
+    "video": {
+      "type": "object",
+      "properties": {
+        "intro": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": ""
+            },
+            {
+              "type": "string",
+              "pattern": "^\\/videos\\/[a-z0-9/_-]+\\.(mp4|webm)$"
+            }
+          ],
+          "description": "Video mở đầu, chạy một lần trước video lặp (như p3re.jp). MP4, 16:9, không tiếng. Để trống nếu không có."
+        },
+        "loop": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": ""
+            },
+            {
+              "type": "string",
+              "pattern": "^\\/videos\\/[a-z0-9/_-]+\\.(mp4|webm)$"
+            }
+          ],
+          "description": "Video lặp của hero từ 768 px trở lên. MP4, 16:9, không tiếng, nhẹ (nên dưới 8 MB). Để trống thì hero dùng ảnh."
+        }
+      },
+      "required": [
+        "intro",
+        "loop"
+      ],
+      "additionalProperties": false,
+      "description": "Video tuỳ chọn cho hero trên máy tính. Ảnh desktop là ảnh chờ (poster). Tắt hiệu ứng thì chỉ hiện ảnh."
+    },
     "layers": {
       "type": "array",
       "items": {
@@ -118,6 +155,7 @@
   "required": [
     "desktop",
     "mobile",
+    "video",
     "layers"
   ],
   "additionalProperties": false

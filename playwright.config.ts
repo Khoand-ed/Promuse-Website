@@ -8,6 +8,8 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
+    // Tests see the page settled; motion tests turn motion back on.
+    reducedMotion: 'reduce',
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {

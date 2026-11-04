@@ -1,6 +1,11 @@
 {
   "$schema": "../schemas/site.schema.json",
-  "bpm": 120,
+  "music": {
+    "src": "/audio/theme.mp3",
+    "bpm": 120,
+    "firstBeat": 0,
+    "volume": 0.5
+  },
   "trailerId": "",
   "copyrightHolder": null,
   "privacyContactEmail": null,
@@ -21,8 +26,14 @@
     "googlePlay": ""
   },
   "platforms": [
-    { "id": "android", "status": "coming-soon" },
-    { "id": "ios", "status": "planned" }
+    {
+      "id": "android",
+      "status": "coming-soon"
+    },
+    {
+      "id": "ios",
+      "status": "planned"
+    }
   ],
   "shareHashtag": "Promuse"
 }

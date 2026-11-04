@@ -99,9 +99,9 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 
 0. Study p3re.jp's motion (opening, title and image reveals, the pinned character scene and its colour changes, menu and modal transitions, hover states) and revise `SPEC.md` section 4 to follow it. Show me the revised plan before building.
 1. `src/lib/motion/gsap.ts` registers ScrollTrigger, SplitText and `useGSAP`. Add `MotionProvider` (system setting plus the visitor's toggle in `promuse:motion`), `MotionToggle` in the header, `SmoothScroll` (Lenis driven by the GSAP ticker, off when motion is off) and `BeatClock` (`--beat`, `onBeat`, pauses when the tab is hidden).
-2. The motion primitives the revised section 4 lists (today's list: SlashWipe, SplitHeadline, ScrollType, Marquee, Parallax, Reveal, NoteLanes).
+2. The motifs of the revised section 4: RiseLetters, RiseLines, CoverReveal, Reveal, TitleZoom, GrowLine, OutlineWord, SplitLabel, and the beat pulse.
 3. A development-only page, `/dev/motion`, that shows each primitive with motion on and off (404 in production). Show it to me before step 4.
-4. Intro and Hero as in `SPEC.md` section 5, with a poster image that loads first.
+4. Opening and Hero as in `SPEC.md` section 5, with a poster image that loads first and the optional hero video. Then the reveals on every section the page already has (Reward, Introduction, Features, Gameplay, slogans, outline word, footer).
 5. Modal: native `<dialog>` with `showModal()`, Esc, focus return, scroll lock, hash and Back button, and the transition from the revised section 4 (a fade with motion off). Lightbox on top of it (youtube-nocookie iframe added on open, removed on close).
 6. The pinned character scene: the row from P1 moves sideways with the scroll and the background takes each character's colour; with motion off the row stays a plain sideways scroller.
 
@@ -178,9 +178,9 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 
 1. Confirm with the owner the four Features topics and the four Gameplay tabs proposed in `SPEC.md` section 8.
 2. Tabs and Slider components as in `SPEC.md` section 6.
-3. Introduction: image slot, text from `content/`, big-type bands with ScrollType and Marquee.
-4. Features: cards that reveal on the beat; a modal with four tabs; deep link `#features-detail`.
-5. Gameplay: the scroll-driven NoteLanes scene; a modal with four tabs, each with a Slider; the gacha rate line rendered from data; deep link `#gameplay-detail`.
+3. Introduction: final copy and image from `content/` (its motion exists since P4).
+4. Features: the "See details" button and a modal with four tabs; deep link `#features-detail`.
+5. Gameplay: the "Gameplay details" button and a modal with four tabs, each with a Slider; the gacha rate line rendered from data; deep link `#gameplay-detail`.
 
 **Done when**
 
@@ -199,7 +199,7 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 
 1. The four characters in `content/` with the stats and passives from `GAME_FACTS.md`, a theme colour each (`[TODO]` until chosen), and `[TODO]` taglines and profiles.
 2. Cards grouped by rarity, mono to colour on hover and focus, the theme colour on the active card.
-3. Profile modal: Change visual (SlashWipe between the idle and battle visuals), stats, passive, a gallery slider hidden when empty, previous and next plus ← and →, deep link `#char-<slug>`.
+3. Profile modal: Change visual (a 0.3 s cross-fade between the idle and battle visuals, as on p3re.jp), stats, passive, a gallery slider hidden when empty, previous and next plus ← and →, deep link `#char-<slug>`.
 4. Rendering rules for character visuals, agreed with the owner once the art exists. Pixel art gets `unoptimized`, `image-rendering: pixelated` and whole-number scaling at every breakpoint.
 
 **Done when**

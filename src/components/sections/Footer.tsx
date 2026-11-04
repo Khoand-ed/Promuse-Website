@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Fragment } from 'react';
+import { GrowLine, Reveal, SplitLabel } from '@/components/motion/reveal';
 import { FacebookLogo, XLogo } from '@/components/ui/icons';
 import { Wordmark } from '@/components/ui/Wordmark';
 import { getSite, MISSING } from '@/content/data';
@@ -35,30 +36,40 @@ export async function Footer() {
   return (
     <footer className="bg-white px-[6.7%] pt-24 pb-[70px] md:px-[5vw] md:pt-[110px]">
       <div className="grid gap-14 lg:grid-cols-[228px_minmax(0,1fr)_minmax(0,9.5rem)_auto] lg:gap-x-[72px]">
-        <div className="flex items-center justify-center lg:justify-start">
+        <Reveal
+          from="none"
+          duration={1.5}
+          easing="out"
+          className="flex items-center justify-center lg:justify-start"
+        >
           <Wordmark sizes="228px" className="text-[2.4rem]" />
-        </div>
+        </Reveal>
 
         <section aria-labelledby="footer-spec">
-          <h2 id="footer-spec" className={heading}>
+          <SplitLabel id="footer-spec" className={heading}>
             {t('specHeading')}
-          </h2>
-          <dl className="mt-7 grid grid-cols-[minmax(0,8rem)_minmax(0,1fr)] gap-x-4 gap-y-2.5 text-[14px] leading-[21px] lg:grid-cols-[175px_minmax(0,1fr)]">
+          </SplitLabel>
+          <Reveal
+            as="dl"
+            duration={1}
+            easing="out"
+            className="mt-7 grid grid-cols-[minmax(0,8rem)_minmax(0,1fr)] gap-x-4 gap-y-2.5 text-[14px] leading-[21px] lg:grid-cols-[175px_minmax(0,1fr)]"
+          >
             {spec.map((row) => (
               <Fragment key={row}>
                 <dt>{t(`spec.${row}Label`)}</dt>
                 <dd>{t(`spec.${row}Value`)}</dd>
               </Fragment>
             ))}
-          </dl>
+          </Reveal>
         </section>
 
         {social.length > 0 ? (
           <section aria-labelledby="footer-links">
-            <h2 id="footer-links" className={heading}>
+            <SplitLabel id="footer-links" className={heading}>
               {t('linksHeading')}
-            </h2>
-            <ul className="mt-5 text-[14px] leading-[32px]">
+            </SplitLabel>
+            <Reveal as="ul" duration={1} easing="out" className="mt-5 text-[14px] leading-[32px]">
               {social.map((key) => (
                 <li key={key}>
                   <a
@@ -71,15 +82,15 @@ export async function Footer() {
                   </a>
                 </li>
               ))}
-            </ul>
+            </Reveal>
           </section>
         ) : null}
 
         <section aria-labelledby="footer-share" className="lg:col-start-4">
-          <h2 id="footer-share" className={heading}>
+          <SplitLabel id="footer-share" className={heading}>
             {t('shareHeading')}
-          </h2>
-          <ul className="mt-4 -ml-1.5 flex gap-3 text-[32px]">
+          </SplitLabel>
+          <Reveal as="ul" duration={1} easing="out" className="mt-4 -ml-1.5 flex gap-3 text-[32px]">
             {share.map((item) => (
               <li key={item.label}>
                 <a
@@ -87,20 +98,22 @@ export async function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.label}
-                  className="grid size-11 place-items-center transition-opacity hover:opacity-60"
+                  className="share-link grid size-11 place-items-center"
                 >
                   {item.icon}
                 </a>
               </li>
             ))}
-          </ul>
+          </Reveal>
         </section>
       </div>
 
-      <hr className="border-rule mt-14" />
+      <GrowLine axis="x" className="bg-rule mt-14 h-px w-full" />
 
       {/* A Google Play badge replaces this line once there is a store link (P7). */}
-      <p className="mt-12 text-[14px]">{t('store')}</p>
+      <Reveal as="p" duration={1} easing="out" className="mt-12 text-[14px]">
+        {t('store')}
+      </Reveal>
 
       <p className="mt-20 flex flex-wrap justify-center gap-x-4 gap-y-2 text-[12px]">
         <Link href="/privacy" className="underline-offset-4 hover:underline">

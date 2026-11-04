@@ -10,7 +10,7 @@ What the page shows, how it moves and what each state looks like. How it is buil
 - Let the owner change every text, link and image without touching code (section 12).
 - Show production-grade engineering for a portfolio: validated content, a service layer, a versioned API, tests and CI.
 
-Not in v1: news or blog pages, a CMS, an account page, a web mailbox, in-game reward delivery, sending email, background music, Sign in with Apple, iOS store links, and the Unity client.
+Not in v1: news or blog pages, a CMS, an account page, a web mailbox, in-game reward delivery, sending email, Sign in with Apple, iOS store links, and the Unity client.
 
 ## 2. Page map
 
@@ -18,7 +18,7 @@ One page per locale — `/` (Vietnamese) and `/en` (English) — plus a privacy 
 
 | # | Block | Anchor | Contents | Pattern taken from the P3R site |
 |---|---|---|---|---|
-| 0 | Intro | — | Opening before the page, Skip button (P4) | Opening before the page |
+| 0 | Opening | — | Water that drains to show a title and three lines, Skip button (P4) | Loading screen with waves and "Memento Mori" |
 | 1 | Header | — | Links over the hero and a language menu; below 1024 px a corner MENU button and a full-screen menu | Global nav, language menu, mobile MENU triangle |
 | 2 | Hero | `#top` | Key visual, logo, status line, scroll cue; a trailer strip below it when `trailerId` is set (P4) | Key visual, "NOW ON SALE" line, SCROLL cue, PV strip |
 | 3 | Reward | `#reward` | Big title, reward line, reward art, sign-in button, privacy line; first-visit popup (P2) | "BUY NOW!" block and the Expansion Pass overlay |
@@ -39,75 +39,81 @@ Deep links open the matching modal: `#features-detail`, `#gameplay-detail`, `#ch
 
 **Language switch.** "VI ▾" (the current language) opens a list of both language names; the mobile menu lists both. Switching keeps the section in view: the other language opens at the anchor of the section at the top of the screen. The choice is stored in next-intl's `NEXT_LOCALE` cookie, so the proxy does not send the visitor back to the browser's language.
 
-**Effects toggle.** "Effects: on / off" with `aria-pressed`. The default follows the system's reduced-motion setting; the visitor's choice is stored in `localStorage` as `promuse:motion` (`on` or `off`).
+**Effects toggle.** "Effects" with an on/off state and `aria-pressed`, in the header row and the mobile menu. The default follows the system's reduced-motion setting; the visitor's choice is stored in `localStorage` as `promuse:motion` (`on` or `off`).
+
+**Music.** A round button with a music note, fixed in the top left corner on every page, hidden until the owner adds the file (`content/data/site.json`, `music`). The music is off on every visit, because browsers allow sound only after a click; the button starts it with a short fade-in, and it loops until the button stops it with a fade-out. It pauses while the tab is hidden. While it plays, the note spins and the button and the pill buttons pulse on its beats (owner's decision, 2026-11-05); with motion off the music still plays, but nothing spins or pulses. The button has `aria-pressed` and the label "Nhạc nền" / "Music". On phones the hero leaves room for it.
 
 **Also.** A skip link to the main content; a round back-to-top button at the bottom right after one screen of scrolling, since the header does not follow the page; and a scroll margin on the sections so the corner button never covers a title.
 
 ## 4. Motion system
 
-**Decision (2026-11-05).** Motion follows p3re.jp. P4 opens with a study of p3re.jp's motion and rewrites this section with the owner. Until then the motifs and the per-section table below are the earlier proposal; the principles "calm reading" and "opt-out respected", the motion-off rules and the performance rules stay.
+Motion follows p3re.jp, measured on 2026-11-05 (durations and easings below come from its stylesheet and from timing its scripts). Promuse keeps one accent of its own: background music, with buttons that pulse on its beat (owner's decisions, 2026-11-05).
 
-Principles (the reference study behind them is in `DESIGN.md`):
+Principles:
 
-- **Rhythm first.** Decorative motion lands on the beat of one shared clock: 120 BPM (500 ms per beat), set in `content/data/site.json` (`bpm`).
-- **Hack-and-slash identity.** Transitions use diagonal "slash" wipes.
-- **Bold type.** Oversized display words move with the scroll.
+- **Reveal once.** Titles, lines, images and buttons animate in the first time they enter the viewport, then stay still.
 - **Calm reading.** Body text never moves once it has appeared.
-- **Opt-out respected.** With motion off, only short fades remain.
+- **One scene.** The character section is the only scroll-driven scene: it pins and its row of portraits moves sideways.
+- **On the music's beat.** While the background music plays, the enabled pill buttons and the music button pulse on its beats; the scroll cue drips every three beats of its tempo (`content/data/site.json`, `music.bpm`).
+- **Opt-out respected.** With motion off, everything is shown at once.
 
-### BeatClock
-
-One clock on the GSAP ticker. It exposes `onBeat(callback)`, the current beat index, and a CSS variable `--beat` on `<html>` that jumps to 1 on each beat and decays to 0 within about 200 ms. It pauses when the tab is hidden or motion is off.
+Smooth scrolling uses Lenis, as p3re.jp does.
 
 ### Motifs
 
-| Motif | Component | What it does | Used in |
+| Motif | Component | What it does (p3re.jp's timing) | Used in |
 |---|---|---|---|
-| Slash wipe | `SlashWipe` | A diagonal panel sweeps across using `clip-path` | Intro exit, modals, mobile menu, section entrances, visual swap |
-| Two-lane notes | `NoteLanes` | Notes travel along a left and a right lane to a judgment line and burst on the beat. Decoration only: no input, no score | Hero background (subtle), Gameplay (scroll-driven) |
-| Beat pulse | CSS reading `--beat` | Scale 1 → 1.04 and a glow on each beat | CTAs, scroll cue, logo |
-| Big type | `ScrollType` | Outlined display words slide sideways with the scroll (scrubbed) | Section headings, Introduction bands |
-| Split headline | `SplitHeadline` | Characters or lines reveal with a stagger (SplitText) | Section titles, intro lines |
-| Marquee | `Marquee` | Endless band; speed and direction follow scroll velocity | Introduction bands, footer |
-| Parallax | `Parallax` | Layers shift with the pointer (desktop) and the scroll | Hero, character modal |
-| Mono to colour | CSS | Greyscale and dim at rest, full colour on hover or focus | Character and feature cards |
-| Reveal | `Reveal` | Fade and rise once on entering the viewport | Everything else |
+| Rising letters | `RiseLetters` | Each letter of a display title rises 80 px and fades in, one after another (1 s, ease-out) | Section titles, hero status line |
+| Rising lines | `RiseLines` | Each line of a text block slides up out of a mask and fades in (1 s, ease-out); lines of slogans and character lines follow each other at 0.3 s | Paragraphs, slogans, character lines, opening lines |
+| Cover reveal | `CoverReveal` | The image is uncovered from the bottom (0.5 s, linear, after 0.2 s) while it fades in | Story images, reward art |
+| Fade up | `Reveal` | Rises 50 px and fades in (0.6 s, ease-in-out, after 0.3 s); footer lists use 1 s | Buttons, footer lists, store line |
+| Title zoom | `TitleZoom` | The title waits small (70%, 100 px lower), then grows into place (1.5 s, ease-in-out) | Reward title |
+| Growing line | `GrowLine` | A hairline grows to full length (1 s) | Slogan line, footer divider |
+| Outline letters | `OutlineWord` | The giant outlined letters appear one by one (0.5 s each, 0.12 s apart) | "PROMUSE" outline word |
+| Label letters | `SplitLabel` | The letters of a small label slide in (1 s, ease-out) | Footer headings |
+| Beat pulse | `BeatClock` | While the music plays, elements marked `data-beat` scale 1.05 → 1 on each beat while in view | Enabled pill buttons, back-to-top button, music button |
+| Spinning note | CSS | The note in the music button turns once every eight beats while the music plays and stops where it is when the music stops | Music button |
+| Mono to colour | CSS | Grey and tinted at rest, full colour when in focus, hovered or focused (0.5 s) | Character portraits |
+
+### BeatClock
+
+One clock on the GSAP ticker, started once in the layout. It reads the music's playback position, so pulses land on the music's beats (`bpm` and `firstBeat` in `content/data/site.json`). While the music plays and motion is on, each beat pulses the `[data-beat]` elements in view; with the music off nothing pulses. It also sets `--beat-ms` on `<html>`, so CSS loops (the scroll cue, the spinning note) last whole beats.
 
 ### By section
 
 | Block | On enter | While scrolling | On interaction |
 |---|---|---|---|
-| Intro | Lines split in on beats 1–3 | — | Skip by button, key or tap; exits with a slash wipe into the hero |
-| Hero | Logo assembles on the beat; layers rise | Layers parallax; notes drift behind | Pointer parallax on desktop; CTA beat pulse |
-| Reward | Banner slashes in | — | Popup slashes in; the button changes state smoothly |
-| Introduction | Split headline | Big-type bands scrub; marquee follows scroll speed | — |
-| Features | Cards stagger in on the beat | Heading in big type | Modal opens with a slash wipe; tabs cross-fade in 200 ms |
-| Gameplay | Split headline | Notes advance with the scroll and flash at the judgment line | Slider drag and swipe |
-| Characters | Cards rise by rarity group | — | Mono to colour, the character's theme colour and an idle bob on hover; slash swap between idle and battle visuals |
-| Footer | Fade | Marquee | Back to top |
+| Opening | Water covers the screen, then drains with waves on its surface (2.5 s) to show the title and three lines; the layer fades out (0.5 s) | — | Skip by button, key, click or tap |
+| Hero | Status letters rise; the header fades in about 1 s later; a video plays once, then loops, when the owner supplies one | The scroll cue drips every three beats | — |
+| Reward | Title zoom; reward line rises; art uncovered; button fades in after 0.4 s | — | The popup (P2) slides up like a modal |
+| Introduction, Features, Gameplay | Rising letters, cover reveal, rising lines; buttons fade up | — | Modals (P5) slide up |
+| Slogans and outline word | The hairline grows, then the slogans rise one after another; the outline letters appear one by one | — | — |
+| Characters | Title letters rise; the three lines rise 0.3 s apart; portraits slide in from 30 px to the right | Pinned: the row moves sideways with the scroll (about 1 px per 1.07 px scrolled); the portrait nearest the centre turns to full colour and the background fades to its colour (0.5 s); the others take that tint | Hover or focus turns a portrait to colour |
+| Footer | Label letters slide in; lists fade up; the divider grows | — | Share icons lift 3 px on hover |
+| Header, menus | — | — | Language list unfolds (scale and fade, 0.4 s); mobile menu fades in (0.3 s) while its three lines turn into a cross |
 
 ### Motion off
 
-When the system asks for reduced motion or the toggle is off: no intro, native scrolling instead of Lenis, no parallax, big type and marquees stand still, the notes scene shows one static frame, reveals become 150 ms fades, and modals fade instead of wiping.
+When the system asks for reduced motion or the effects toggle is off: no opening, native scrolling instead of Lenis, no reveals (everything is visible at once), no pinned scene (the character row stays a plain sideways scroller, each portrait tinted with its own colour), no beat pulse and a still scroll cue, and modals and menus fade in 150 ms.
 
 ### Performance rules
 
-Animate `transform`, `opacity`, `clip-path` and `filter` only. Set `will-change` only while animating. Pause animations that are off screen. Use at most one pinned scene below 768 px. Target a steady 60 fps on desktop and smooth scrolling on a real mid-range Android phone.
+Animate `transform`, `opacity`, `clip-path` and `filter` only: background colours cross-fade as stacked layers, and the outline letters appear with `clip-path` instead of drawn strokes. Reveals are prepared only when their element comes within one screen of the viewport, so splitting text never blocks the page while it loads. Set `will-change` only while animating. Pause animations that are off screen. Use at most one pinned scene below 768 px. Refresh ScrollTrigger after fonts and above-the-fold images load. Target a steady 60 fps on desktop and smooth scrolling on a real mid-range Android phone.
 
 ## 5. Sections
 
-### 0. Intro
+### 0. Opening
 
-- Full-screen dark overlay. Three lines appear on beats 1, 2 and 3, then a slash wipe reveals the hero. Three seconds at most.
-- A Skip button is always visible; any key, click or tap also skips.
-- Plays once per browser session (`sessionStorage` key `promuse:intro-seen`), never with motion off.
-- The page renders underneath from the start; the hero image still loads with priority.
-- Copy: `intro.line1` to `intro.line3`, `[TODO]`.
+- As on p3re.jp: blue water covers the screen; its surface, with slow layered waves, drains downwards (2.5 s, `cubic-bezier(0.03, 0.1, 0.25, 1.02)`) and uncovers a white panel with the title and three short lines; then the whole layer fades out (0.5 s) into the hero. About 4 s in all.
+- A Skip button is always visible; any key, click or tap also skips. The page underneath cannot be reached by keyboard while the opening plays.
+- Plays once per browser session (`sessionStorage` key `promuse:intro-seen`), never with motion off. A small script in `<head>` decides before the first paint, so the hero never flashes first.
+- The page renders underneath from the start; the hero image still loads first.
+- Copy: `intro.title` (a short line like a motto) and `intro.line1` to `intro.line3`, all `[TODO]`.
 
 ### 2. Hero (`#top`)
 
 - Height `100svh`. Art direction with `getImageProps()` and a `<picture>`: a landscape crop for desktop, a portrait crop for mobile. A poster image shows at once; nothing waits for a video.
-- If layered art exists (background, characters, effects), the layers feed `Parallax`.
+- Optional video, as on p3re.jp (`content/data/hero.json`): from 768 px an opening clip plays once, then a loop takes over; both are muted, and the desktop image is their poster. Without the files, or with motion off, the image stays.
 - Layout as on p3re.jp: the status line in display type at the top left, with the name above it; the logo in white at the middle right (alt text "Promuse"; a text wordmark until the logo exists); "SCROLL" over a short line at the bottom centre. On phones the logo sits at the top left, above the status line.
 - No buttons in the hero (owner's decision, 2026-11-05): the reward block follows right below, and the header links to it.
 - Until the key visual exists, a white-to-blue gradient in p3re.jp's hero colours stands in.
@@ -169,10 +175,10 @@ Stats and passives come from the game (`GAME_FACTS.md`, section 3). Names are ke
 
 | Component | Behaviour | Keyboard and accessibility |
 |---|---|---|
-| Modal | Native `<dialog>` with `showModal()`. Opens with `SlashWipe` (a fade when motion is off). Locks page scroll and stops Lenis. Opening sets the hash; the browser Back button closes it | Esc closes; focus moves inside and returns to the opener; labelled by its title |
+| Modal | Native `<dialog>` with `showModal()`. Slides up from the bottom (0.8 s, ease-in-out) and back down on close; its content rises 80 px in a short stagger (a fade when motion is off). Locks page scroll and stops Lenis. Opening sets the hash; the browser Back button closes it | Esc closes; focus moves inside and returns to the opener; labelled by its title |
 | Tabs | Switches panels without closing the modal; remembers the last tab per modal (`sessionStorage` key `promuse:tab:<modal>`) | ARIA tabs pattern; ← → Home End |
 | Slider | CSS scroll snap with previous and next buttons, dots and swipe; images load lazily | Labelled buttons; announces "Image 2 of 5" politely |
-| Lightbox | Inserts a `youtube-nocookie.com` iframe only when opened and removes it on close, so playback stops | Built on Modal |
+| Lightbox | Fades in over a dark backdrop (0.3 s), as p3re.jp's trailer player does. Inserts a `youtube-nocookie.com` iframe only when opened and removes it on close, so playback stops; `/#trailer` opens it | Built on Modal |
 | ImageSlot | Renders the image a content slot declares, through `next/image`. When the file is missing, renders a box with the slot's aspect ratio, its name and the size it needs | Real images take their alt text from content; placeholders are hidden from assistive technology |
 
 ## 7. Pre-registration states
@@ -214,7 +220,9 @@ Copy keys live under `reward.*` in `content/text/*.json`; `{email}` comes from t
 | `nav.characters` | Nhân vật | Characters |
 | `nav.reward` | Nhận quà | Get reward |
 | `common.menu` | Menu | Menu |
-| `intro.line1` to `intro.line3` | `[TODO]` | `[TODO]` |
+| `intro.title`, `intro.line1` to `intro.line3` | `[TODO]` | `[TODO]` |
+| `common.effects`, `common.effectsOn`, `common.effectsOff` | Hiệu ứng, Bật, Tắt | Effects, On, Off |
+| `common.music` | Nhạc nền | Music |
 | `hero.status` | Sắp ra mắt trên Android | Coming soon on Android |
 | `hero.trailer` | Xem trailer | Watch trailer |
 | `hero.scroll` | Cuộn | Scroll |

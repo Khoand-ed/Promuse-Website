@@ -100,10 +100,11 @@ export function LanguageSwitch({ variant, className = '' }: LanguageSwitchProps)
         {current.toUpperCase()}
         <ChevronDown />
       </button>
+      {/* Unfolds like p3re.jp's list; `visibility` keeps it out of reach while closed. */}
       <ul
         id={listId}
-        hidden={!open}
-        className="absolute top-full right-0 min-w-36 bg-white px-5 py-2 text-[14px] shadow-[0_8px_24px_rgb(29_56_74/0.12)]"
+        data-open={open || undefined}
+        className="lang-list absolute top-full right-0 min-w-36 bg-white px-5 py-2 text-[14px] shadow-[0_8px_24px_rgb(29_56_74/0.12)]"
       >
         {links}
       </ul>

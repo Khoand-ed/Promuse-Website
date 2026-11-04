@@ -12,6 +12,10 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "menu": "Menu",
+    "effects": "Effects",
+    "effectsOn": "On",
+    "effectsOff": "Off",
+    "music": "Music",
     "mainNav": "Main navigation",
     "language": "Language",
     "languageNames": {
@@ -29,6 +33,7 @@
     "reward": "Get reward"
   },
   "intro": {
+    "title": "[TODO] Opening title: a short motto-like line, about 20 characters",
     "line1": "[TODO] Opening line 1 of 3, about 30 characters",
     "line2": "[TODO] Opening line 2 of 3, about 30 characters",
     "line3": "[TODO] Opening line 3 of 3, about 30 characters",

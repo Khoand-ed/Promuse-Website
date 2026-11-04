@@ -4,8 +4,8 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useId, useRef, useState } from 'react';
 import { navSections } from '@/components/sections/sections';
 import { Link } from '@/i18n/navigation';
-import { CloseIcon } from './icons';
 import { LanguageSwitch } from './LanguageSwitch';
+import { MotionToggle } from './MotionToggle';
 
 /** Below 1024 px: the blue corner button and the full-screen menu it opens. */
 export function MobileMenu() {
@@ -75,7 +75,12 @@ export function MobileMenu() {
             className="fixed top-0 right-0 size-22"
           >
             <span aria-hidden="true" className="menu-corner absolute inset-0" />
-            <CloseIcon className="absolute top-4 right-4 size-7 text-white" />
+            {/* The menu button's three lines, turning into a cross as the menu opens. */}
+            <span aria-hidden="true" className="menu-cross text-white">
+              <span />
+              <span />
+              <span />
+            </span>
           </button>
 
           <nav aria-label={t('common.mainNav')}>
@@ -97,7 +102,10 @@ export function MobileMenu() {
             </ul>
           </nav>
 
-          <LanguageSwitch variant="list" className="mt-auto pt-10 text-[15px]" />
+          <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-10">
+            <LanguageSwitch variant="list" className="text-[15px]" />
+            <MotionToggle />
+          </div>
         </div>
       </dialog>
     </div>

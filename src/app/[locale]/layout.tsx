@@ -2,12 +2,20 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { BeatClock } from '@/components/motion/BeatClock';
+import { MotionProvider } from '@/components/motion/MotionProvider';
+import { MusicProvider } from '@/components/motion/MusicProvider';
+import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { Footer } from '@/components/sections/Footer';
 import { Header } from '@/components/sections/Header';
 import { BackToTop } from '@/components/ui/BackToTop';
+import { MusicButton } from '@/components/ui/MusicButton';
 import { SkipLink } from '@/components/ui/SkipLink';
+import { getSite } from '@/content/data';
+import { hasPublicFile } from '@/content/images';
 import { routing } from '@/i18n/routing';
 import { env } from '@/lib/env';
+import { motionBootScript } from '@/lib/motion/preference';
 import { displayFont, labelFont, sansFont } from '../fonts';
 import '../globals.css';
 
@@ -32,6 +40,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
+  const { music } = getSite();
 
   return (
     <html
@@ -39,14 +48,31 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
       // In-page links scroll smoothly; Next.js still jumps instantly between pages.
       data-scroll-behavior="smooth"
       className={`${displayFont.variable} ${sansFont.variable} ${labelFont.variable}`}
+      // The boot script adds data-motion and data-intro before React hydrates.
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: motionBootScript }} />
+      </head>
       <body>
         <NextIntlClientProvider>
-          <SkipLink />
-          <Header />
-          {children}
-          <Footer />
-          <BackToTop />
+          <MotionProvider>
+            <MusicProvider
+              src={hasPublicFile(music.src) ? music.src : null}
+              bpm={music.bpm}
+              firstBeat={music.firstBeat}
+              volume={music.volume}
+            >
+              <SmoothScroll />
+              <BeatClock />
+              <SkipLink />
+              <MusicButton />
+              <Header />
+              {children}
+              <Footer />
+              <BackToTop />
+            </MusicProvider>
+          </MotionProvider>
         </NextIntlClientProvider>
       </body>
     </html>

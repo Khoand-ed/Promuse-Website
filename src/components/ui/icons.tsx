@@ -57,3 +57,22 @@ export function FacebookLogo({ className }: IconProps) {
     </svg>
   );
 }
+
+export function MusicNote({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true">
+      <ellipse
+        cx="9.6"
+        cy="17.4"
+        rx="3.6"
+        ry="2.8"
+        transform="rotate(-20 9.6 17.4)"
+        fill="currentColor"
+      />
+      <path
+        d="M12 3h1.6c.3 2.3 2 3.4 3.6 4.6 1.7 1.3 2 3.4 1.1 5 .1-2-1.7-3-4.7-3.7v8.5H12z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
