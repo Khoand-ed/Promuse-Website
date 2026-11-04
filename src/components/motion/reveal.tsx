@@ -28,19 +28,36 @@ function useReveal<T extends HTMLElement = HTMLElement>(build: Build, immediate 
   const { enabled } = useMotion();
 
   useGSAP(
-    () => {
+    (_context, contextSafe) => {
       const element = ref.current;
-      if (!enabled || !element) return;
-      const animation = build(element).pause();
-      if (immediate) return afterOpening(() => void animation.play());
-      // Plays at once if the page already sits past this point.
-      ScrollTrigger.create({
-        trigger: element,
-        start: revealStart,
-        once: true,
-        animation,
-        toggleActions: 'play none none none',
+      if (!enabled || !element || !contextSafe) return;
+      if (immediate) {
+        const animation = build(element).pause();
+        return afterOpening(() => void animation.play());
+      }
+      // Built only when the element comes within a screen of the viewport: splitting every text and
+      // measuring every trigger at load made one long task on phones. Content already scrolled past
+      // is never hidden.
+      const setup = contextSafe(() => {
+        const animation = build(element).pause();
+        ScrollTrigger.create({
+          trigger: element,
+          start: revealStart,
+          once: true,
+          animation,
+          toggleActions: 'play none none none',
+        });
       });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          observer.disconnect();
+          setup();
+        },
+        { rootMargin: '0px 0px 100% 0px' },
+      );
+      observer.observe(element);
+      return () => observer.disconnect();
     },
     { dependencies: [enabled], revertOnUpdate: true },
   );
