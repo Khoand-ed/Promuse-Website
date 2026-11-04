@@ -1,0 +1,105 @@
+{
+  "$schema": "../schemas/gameplay.schema.json",
+  "tabs": [
+    {
+      "key": "g1",
+      "slides": [
+        {
+          "src": "/images/gameplay/g1-1.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "gameplay.tabs.g1.slides.s1"
+        },
+        {
+          "src": "/images/gameplay/g1-2.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "gameplay.tabs.g1.slides.s2"
+        },
+        {
+          "src": "/images/gameplay/g1-3.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "gameplay.tabs.g1.slides.s3"
+        }
+      ]
+    },
+    {
+      "key": "g2",
+      "slides": [
+        {
+          "src": "/images/gameplay/g2-1.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "gameplay.tabs.g2.slides.s1"
+        },
+        {
+          "src": "/images/gameplay/g2-2.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "gameplay.tabs.g2.slides.s2"
+        },
+        {
+          "src": "/images/gameplay/g2-3.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "gameplay.tabs.g2.slides.s3"
+        }
+      ]
+    },
+    {
+      "key": "g3",
+      "slides": [
+        {
+          "src": "/images/gameplay/g3-1.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "gameplay.tabs.g3.slides.s1"
+        },
+        {
+          "src": "/images/gameplay/g3-2.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "gameplay.tabs.g3.slides.s2"
+        },
+        {
+          "src": "/images/gameplay/g3-3.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "gameplay.tabs.g3.slides.s3"
+        }
+      ]
+    },
+    {
+      "key": "g4",
+      "slides": [
+        {
+          "src": "/images/gameplay/g4-1.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "gameplay.tabs.g4.slides.s1"
+        },
+        {
+          "src": "/images/gameplay/g4-2.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "gameplay.tabs.g4.slides.s2"
+        },
+        {
+          "src": "/images/gameplay/g4-3.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "gameplay.tabs.g4.slides.s3"
+        }
+      ]
+    }
+  ],
+  "gacha": {
+    "tab": "g3",
+    "rates": {
+      "fiveStar": 2,
+      "fourStar": 10,
+      "threeStar": 88
+    }
+  }
+}

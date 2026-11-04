@@ -1,0 +1,16 @@
+{
+  "$schema": "../schemas/hero.schema.json",
+  "desktop": {
+    "src": "/images/hero/hero-desktop.webp",
+    "width": 2560,
+    "height": 1440,
+    "alt": "hero.visualAlt"
+  },
+  "mobile": {
+    "src": "/images/hero/hero-mobile.webp",
+    "width": 1080,
+    "height": 1920,
+    "alt": "hero.visualAlt"
+  },
+  "layers": []
+}
