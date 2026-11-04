@@ -1,14 +1,16 @@
 # Promuse landing page — build phases
 
-Build order and acceptance criteria. Work one phase at a time; each phase ends with a working, deployable site. Pre-registration goes live first (P1–P3); the content-heavy sections follow, because they wait on art and copy.
+Build order and acceptance criteria. Work one phase at a time; each phase ends with a working, deployable site.
+
+**Order:** P0, P1, **P4**, P2, P3, P5, P6, P7. The motion system comes right after the page shell, because the p3re.jp experience is mostly motion (owner's decision, 2026-11-05). Pre-registration follows (P2, P3); production stays in `off` mode until P3. The content-heavy sections come last, because they wait on art and copy. Phases keep their numbers so references stay valid.
 
 | Phase | Result |
 |---|---|
 | P0 | Docs match the owner's decisions; Next.js project, tooling and folders; asset audit |
 | P1 | Both languages, content system, visual identity, full page shell, CI, first Vercel deploy |
-| P2 | Pre-registration UI on the mock gateway, shared Modal, end-to-end tests |
+| P4 | Motion system, shared Modal, intro, hero, trailer lightbox |
+| P2 | Pre-registration UI on the mock gateway, end-to-end tests |
 | P3 | Supabase, database, API v1, real Google sign-in, privacy page: registration live in production |
-| P4 | Motion system, intro, hero, trailer lightbox |
 | P5 | Introduction, Features and Gameplay sections with their modals |
 | P6 | Characters section and profile modal |
 | P7 | SEO, performance, accessibility, cross-device checks, launch decisions, portfolio README |
@@ -73,8 +75,8 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 
 1. next-intl: `src/i18n/routing.ts` (`vi` default, `en`, `localePrefix: 'as-needed'`), `request.ts` (messages from `content/text`) and `navigation.ts`; `src/proxy.ts` with next-intl only (the Supabase step comes in P3); `src/app/[locale]/layout.tsx` with `<html lang>`, `generateStaticParams` and `setRequestLocale`.
 2. Content system (`ARCHITECTURE.md` section 16): zod schemas and loaders in `src/content/`; the full content skeleton in `content/` for every block, modal, character and the privacy page — UI drafts from `SPEC.md` section 8, facts from `GAME_FACTS.md`, `[TODO]` everywhere else; generated JSON Schemas; a working `check:content` that writes `CONTENT_TODO.md`; `doc/CONTENT_GUIDE.md` in Vietnamese.
-3. Identity: a style tile with two directions (palette with AA contrast ratios, Vietnamese-capable fonts for the three type voices, type scale, text wordmark, buttons, cards, the slash motif). Wait for the owner's choice, then add the tokens to `@theme`, load the fonts with `next/font` and record the decision in `DESIGN.md`.
-4. Page shell: skip link; Header (fixed, transparent to solid, active section, full-screen mobile menu, no animation yet); all nine blocks with their anchors, real structure and content; Footer (spec table, share links, links hidden when empty, privacy link, back to top); LanguageSwitch that keeps the hash; `ImageSlot` with labelled placeholders. No dead buttons: a button that opens a modal appears in the phase that builds the modal (P5, P6), the Intro overlay comes with the motion system (P4), and the reward button shows `notOpen`.
+3. Identity: the owner chose to follow p3re.jp closely (2026-11-05) over the style-tile directions. Measure p3re.jp, add its colours to `@theme`, load Vietnamese-capable substitutes for its fonts with `next/font`, and record the decisions in `DESIGN.md` section 4.
+4. Page shell laid out like p3re.jp (`SPEC.md` sections 2, 3 and 5): skip link; Header (links over the hero from 1024 px, the corner MENU button and full-screen menu below that, no animation yet); every block with its anchor, real structure and content; Footer (spec table, share links, links hidden when empty, privacy link) and a back-to-top button; LanguageSwitch that keeps the section in view; `ImageSlot` with labelled placeholders. No dead buttons: a button that opens a modal appears in the phase that builds the modal (P5, P6), the Intro overlay comes with the motion system (P4), and the reward button shows `notOpen`.
 5. The privacy page (`/privacy`, `/en/privacy`) with its structure and `[TODO]` text, so the footer link works from the first deploy; and `noindex` on every page until P7.
 6. `.github/workflows/ci.yml` as in `ARCHITECTURE.md` section 13 (the Playwright step is added in P2).
 7. Walk me through creating the Vercel project `promuse` from this GitHub repo: framework preset, environment variables (`NEXT_PUBLIC_BACKEND_MODE=off` for production and `mock` for previews, `NEXT_PUBLIC_SITE_URL`), production branch `main`.
@@ -83,20 +85,45 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 
 - [ ] `/` (Vietnamese) and `/en` render the full shell, every string and image slot comes from `content/`, and the language switch keeps the current section.
 - [ ] `npm run check:content` validates both locales and writes `CONTENT_TODO.md`, and each entry names the file, the key, what to write and how.
-- [ ] Nav links scroll to their sections, and the fixed header never covers a heading.
+- [ ] Nav links scroll to their sections, and nothing fixed on screen (the corner menu button, the back-to-top button) covers a heading.
 - [ ] "Đặng Ữ Ổ Ặ ợ ừ" renders correctly in every font in use.
 - [ ] CI is green on GitHub and the Vercel production URL works.
 
 **QA focus:** layout at 360, 768 and 1440 px; mobile menu; language switch; keyboard tab order; contrast; Vietnamese diacritics.
 
+## P4 — Motion system, Modal, intro, hero, trailer (runs right after P1)
+
+**Read first:** `SPEC.md` section 4, section 5 (Intro, Hero), section 6 (Modal, Lightbox); `DESIGN.md`; the motion rules in `AGENTS.md`.
+
+**Tasks**
+
+0. Study p3re.jp's motion (opening, title and image reveals, the pinned character scene and its colour changes, menu and modal transitions, hover states) and revise `SPEC.md` section 4 to follow it. Show me the revised plan before building.
+1. `src/lib/motion/gsap.ts` registers ScrollTrigger, SplitText and `useGSAP`. Add `MotionProvider` (system setting plus the visitor's toggle in `promuse:motion`), `MotionToggle` in the header, `SmoothScroll` (Lenis driven by the GSAP ticker, off when motion is off) and `BeatClock` (`--beat`, `onBeat`, pauses when the tab is hidden).
+2. The motion primitives the revised section 4 lists (today's list: SlashWipe, SplitHeadline, ScrollType, Marquee, Parallax, Reveal, NoteLanes).
+3. A development-only page, `/dev/motion`, that shows each primitive with motion on and off (404 in production). Show it to me before step 4.
+4. Intro and Hero as in `SPEC.md` section 5, with a poster image that loads first.
+5. Modal: native `<dialog>` with `showModal()`, Esc, focus return, scroll lock, hash and Back button, and the transition from the revised section 4 (a fade with motion off). Lightbox on top of it (youtube-nocookie iframe added on open, removed on close).
+6. The pinned character scene: the row from P1 moves sideways with the scroll and the background takes each character's colour; with motion off the row stays a plain sideways scroller.
+
+**Done when**
+
+- [ ] The intro plays once per session, skips by button, key or tap, and never plays with motion off.
+- [ ] With motion off, the page scrolls natively, nothing parallaxes, scrubs or slides, and modals fade.
+- [ ] Closing the lightbox stops the video, and the trailer button is hidden when `trailerId` is empty.
+- [ ] The Modal works by keyboard alone: Esc closes it and focus returns to the opener.
+- [ ] The character row pins and moves sideways with motion on (at most one pinned scene below 768 px) and stays a plain sideways scroller with motion off.
+- [ ] A Chrome Performance recording of the first ten seconds shows no long tasks from animation code, and the hero scrolls smoothly on a real mid-range Android phone.
+
+**QA focus:** every way to skip the intro; the effects toggle; hero at three widths; lightbox with the keyboard; a performance trace screenshot.
+
 ## P2 — Pre-registration UI (mock)
 
-**Read first:** `SPEC.md` section 3, section 5 (Reward), section 6 (Modal) and section 7; `ARCHITECTURE.md` section 5 (Browser reward gateway).
+**Read first:** `SPEC.md` section 3, section 5 (Reward), section 6 (Modal) and section 7; `ARCHITECTURE.md` section 5 (Browser reward gateway). The Modal exists since P4.
 
 **Tasks**
 
 1. The `RewardGateway` interface and `MockRewardGateway` with every `?mock=` scenario, plus the `notOpen` state for `off` mode. Production stays `off`; the mock runs locally and on previews.
-2. Modal: native `<dialog>` with `showModal()`, Esc, focus return, scroll lock, hash and Back button. It fades for now; P4 adds the slash wipe.
+2. The reward popup, built on the Modal from P4 and opening with its transition.
 3. The reward widget as a state machine over the gateway (`SPEC.md` section 7), the banner, the popup rules and the sign-out link.
 4. The return flow: `intent=prereg` triggers one registration, scrolls to `#reward`, then is removed from the URL.
 5. Unit tests for the state machine; Playwright tests for every scenario, both locales and the popup rules; add the Playwright step to CI.
@@ -142,27 +169,6 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 - [ ] The privacy page is reachable from the footer and the reward block, and before registration goes live in production its text and contact email are the owner's, not `[TODO]`.
 
 **QA focus:** the full sign-in loop on the Vercel preview with two accounts; cancel at the Google screen; sign out and switch accounts.
-
-## P4 — Motion system, intro, hero, trailer
-
-**Read first:** `SPEC.md` section 4, section 5 (Intro, Hero), section 6 (Modal, Lightbox); `DESIGN.md`; the motion rules in `AGENTS.md`.
-
-**Tasks**
-
-1. `src/lib/motion/gsap.ts` registers ScrollTrigger, SplitText and `useGSAP`. Add `MotionProvider` (system setting plus the visitor's toggle in `promuse:motion`), `MotionToggle` in the header, `SmoothScroll` (Lenis driven by the GSAP ticker, off when motion is off) and `BeatClock` (`--beat`, `onBeat`, pauses when the tab is hidden).
-2. The motion primitives from `SPEC.md` section 4: SlashWipe, SplitHeadline, ScrollType, Marquee, Parallax, Reveal, and a first NoteLanes for the hero background.
-3. A development-only page, `/dev/motion`, that shows each primitive with motion on and off (404 in production). Show it to me before step 4.
-4. Intro and Hero as in `SPEC.md` section 5, with a poster image that loads first.
-5. Lightbox (youtube-nocookie iframe added on open, removed on close), and the slash wipe on the Modal and the reward popup.
-
-**Done when**
-
-- [ ] The intro plays once per session, skips by button, key or tap, and never plays with motion off.
-- [ ] With motion off, the page scrolls natively, nothing parallaxes, scrubs or slides, and modals fade.
-- [ ] Closing the lightbox stops the video, and the trailer button is hidden when `trailerId` is empty.
-- [ ] A Chrome Performance recording of the first ten seconds shows no long tasks from animation code, and the hero scrolls smoothly on a real mid-range Android phone.
-
-**QA focus:** every way to skip the intro; the effects toggle; hero at three widths; lightbox with the keyboard; a performance trace screenshot.
 
 ## P5 — Introduction, Features, Gameplay
 

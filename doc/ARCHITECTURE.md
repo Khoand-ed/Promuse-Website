@@ -73,8 +73,8 @@ One Supabase project is enough for a portfolio (the Free plan allows two active 
    │  ├─ api/v1/preregistration/route.ts
    │  └─ dev/                   motion/ and token/ helpers, 404 in production
    ├─ components/
-   │  ├─ sections/              Intro, Header, Hero, Reward, Story, Features, Gameplay, Characters, Footer
-   │  ├─ ui/                    Button, Modal, Tabs, Slider, Lightbox, LanguageSwitch, MotionToggle, ImageSlot
+   │  ├─ sections/              Intro, Header, Hero, Reward, Story (Introduction, Features, Gameplay), Characters, Footer
+   │  ├─ ui/                    Modal, Tabs, Slider, Lightbox, LanguageSwitch, MobileMenu, MotionToggle, BackToTop, SkipLink, Wordmark, ImageSlot
    │  └─ motion/                MotionProvider, SmoothScroll, BeatClock, Reveal, SplitHeadline,
    │                            ScrollType, Marquee, SlashWipe, Parallax, NoteLanes
    ├─ content/                  zod schemas and loaders for content/; no copy lives here
@@ -332,7 +332,7 @@ content/
 └─ schemas/              generated from the zod schemas; never edited by hand
 ```
 
-- Keys are dotted paths by block (`hero.cta`, `characters.items.nova.tagline`). Characters are keyed by slug, never by position.
+- Keys are dotted paths by block (`hero.status`, `characters.items.nova.tagline`). Characters are keyed by slug, never by position.
 - Every file — text and data — starts with `"$schema"` pointing at its generated schema, so VS Code shows what each field means (in Vietnamese, for the owner) and underlines invalid values. The text loader drops `$schema` before handing the messages to next-intl.
 - An image slot is `{ "src": "/images/…", "width": 1280, "height": 720, "alt": "<text key>" }`. The build checks whether the file exists under `public/`; when it does not, `ImageSlot` renders a labelled placeholder with the same aspect ratio.
 - Markers: `[TODO] <what to write>` for missing text; `[REVIEW]` for drafts and translations waiting for the owner; `null` for a data value not decided yet (a theme colour, the copyright holder). All of them show up in the report, and text markers show on the page, so nothing ships unnoticed.

@@ -6,7 +6,7 @@ Dành cho người sửa chữ, link và ảnh trên website mà không cần đ
 
 Mở file `CONTENT_TODO.md` ở thư mục gốc của dự án. Đó là danh sách mọi thứ còn thiếu. Mỗi dòng ghi:
 
-- **Khoá**: tên của đoạn chữ hoặc ô dữ liệu, ví dụ `hero.cta`;
+- **Khoá**: tên của đoạn chữ hoặc ô dữ liệu, ví dụ `hero.status`;
 - **Hiện ở đâu**: phần nào trên trang;
 - **Cần gì**: nên viết gì, dài khoảng bao nhiêu;
 - **Ở đâu**: file và số dòng cần sửa, ví dụ `content/text/vi.json:31`.
@@ -38,7 +38,7 @@ npm run check:content
 Mỗi dòng trong file chữ có dạng:
 
 ```json
-"cta": "Nhận quà đăng ký sớm",
+"status": "Sắp ra mắt trên Android",
 ```
 
 - Bên trái dấu hai chấm là **khoá**: giữ nguyên.

@@ -4,7 +4,7 @@ What the page shows, how it moves and what each state looks like. How it is buil
 
 ## 1. Goals
 
-- Present Promuse, a 2D mobile rhythm hack-and-slash game with gacha, with a visual experience on the level of the Persona 3 Reload site and an identity of its own.
+- Present Promuse, a 2D mobile rhythm hack-and-slash game with gacha, with a look and feel that follows the Persona 3 Reload site closely — layout, colours, buttons, type and motion — rebuilt with Promuse's own code, art and words (owner's decision, 2026-11-05; `DESIGN.md`, section 4).
 - Let visitors pre-register with Google. The site records the registration; the reward reaches the player through the game's Mailbox once the game supports Google sign-in. That delivery is future work outside this repo.
 - Describe the game as it is today (`GAME_FACTS.md`). Android comes first; the site makes no claim about iOS.
 - Let the owner change every text, link and image without touching code (section 12).
@@ -18,29 +18,34 @@ One page per locale — `/` (Vietnamese) and `/en` (English) — plus a privacy 
 
 | # | Block | Anchor | Contents | Pattern taken from the P3R site |
 |---|---|---|---|---|
-| 0 | Intro | — | Three slogan lines on the beat, Skip button | Opening lines before the page |
-| 1 | Header | — | Logo, nav, VI/EN, effects toggle, "Get reward" | Global nav with a language menu |
-| 2 | Hero | `#top` | Layered key visual, logo, status line, reward CTA, trailer button, scroll cue | Key visual, PV buttons, SCROLL cue |
-| 3 | Reward | `#reward` | Pre-registration banner with Google sign-in; first-visit popup | DLC banner and Expansion Pass overlay |
-| 4 | Introduction | `#story` | World introduction and big-type slogan bands | Introduction, slogan lines and outline word band |
-| 5 | Features | `#features` | Four feature cards; "See details" opens a 4-tab modal | Features modal with four tabs |
-| 6 | Gameplay | `#gameplay` | Two-lane note scene and summary; 4-tab modal with image sliders | Game System modal with sliders |
-| 7 | Characters | `#characters` | Four cards grouped by rarity; profile modal with a visual swap | Character list, per-character colour and profile modal with "Change visual" |
-| 8 | Footer | — | Spec table, share, links, platform, privacy link, copyright, back to top | SPEC / LINKS / SHARE footer |
+| 0 | Intro | — | Opening before the page, Skip button (P4) | Opening before the page |
+| 1 | Header | — | Links over the hero and a language menu; below 1024 px a corner MENU button and a full-screen menu | Global nav, language menu, mobile MENU triangle |
+| 2 | Hero | `#top` | Key visual, logo, status line, scroll cue; a trailer strip below it when `trailerId` is set (P4) | Key visual, "NOW ON SALE" line, SCROLL cue, PV strip |
+| 3 | Reward | `#reward` | Big title, reward line, reward art, sign-in button, privacy line; first-visit popup (P2) | "BUY NOW!" block and the Expansion Pass overlay |
+| 4 | Introduction | `#story` | Title and short paragraphs beside an image | Introduction |
+| 5 | Features | `#features` | Title, summary, cover image; "See details" opens a 4-tab modal (P5) | Features block and modal |
+| 6 | Gameplay | `#gameplay` | Title, summary, cover image; "Gameplay details" opens a 4-tab modal with sliders (P5) | Game System block and modal |
+| — | Slogans | — | Short slogan lines under a hairline, then "PROMUSE" in giant outlined letters | Slogan lines and the giant outline word |
+| 7 | Characters | `#characters` | Big title, three lines, a portrait per character in its colour; profile modal (P6) | S.E.E.S. block, pinned sideways scroll, per-character colour, profile modal |
+| 8 | Footer | — | Logo, spec table, links, share, store line, privacy link, copyright | SPEC / LINKS / SHARE footer |
+
+Backgrounds follow p3re.jp: the Reward block is white; Introduction, Features, Gameplay and the slogans share one pale blue run; Characters is mid blue, or the colour of the character in view once P4 pins the row; the footer is white.
 
 Deep links open the matching modal: `#features-detail`, `#gameplay-detail`, `#char-<slug>` (for example `/en#char-nova`). Closing a modal restores the section's hash.
 
 ## 3. Global UI
 
-**Header.** Fixed. Transparent over the hero, solid after 80 px of scroll. Highlights the section in view. Items: Introduction, Features, Gameplay, Characters, and "Get reward" in the accent colour. Right side: language switch and effects toggle. Below 768 px: logo, "Get reward" and a menu button that opens a full-screen menu with a slash wipe.
+**Header.** As on p3re.jp, and not fixed (owner's decision, 2026-11-05). From 1024 px: a row of links over the top right of the hero — Introduction, Features, Gameplay, Characters, Get reward — then a hairline and the language menu; the row scrolls away with the hero. Below 1024 px: a blue triangle in the top right corner, with three lines and "MENU", stays on screen and opens a full-screen menu (native `<dialog>` on pale blue glass) with the same links and both languages. Esc closes the menu and focus returns to the button; a link closes it and scrolls to its section. The effects toggle joins the header row and the menu in P4.
 
-**Language switch.** VI and EN buttons with `aria-pressed`. Switching keeps the current hash.
+**Language switch.** "VI ▾" (the current language) opens a list of both language names; the mobile menu lists both. Switching keeps the section in view: the other language opens at the anchor of the section at the top of the screen. The choice is stored in next-intl's `NEXT_LOCALE` cookie, so the proxy does not send the visitor back to the browser's language.
 
 **Effects toggle.** "Effects: on / off" with `aria-pressed`. The default follows the system's reduced-motion setting; the visitor's choice is stored in `localStorage` as `promuse:motion` (`on` or `off`).
 
-**Also.** A skip link to the main content, `scroll-margin-top` on sections so the header never covers a heading, and a back-to-top button after one screen of scrolling.
+**Also.** A skip link to the main content; a round back-to-top button at the bottom right after one screen of scrolling, since the header does not follow the page; and a scroll margin on the sections so the corner button never covers a title.
 
 ## 4. Motion system
+
+**Decision (2026-11-05).** Motion follows p3re.jp. P4 opens with a study of p3re.jp's motion and rewrites this section with the owner. Until then the motifs and the per-section table below are the earlier proposal; the principles "calm reading" and "opt-out respected", the motion-off rules and the performance rules stay.
 
 Principles (the reference study behind them is in `DESIGN.md`):
 
@@ -103,10 +108,14 @@ Animate `transform`, `opacity`, `clip-path` and `filter` only. Set `will-change`
 
 - Height `100svh`. Art direction with `getImageProps()` and a `<picture>`: a landscape crop for desktop, a portrait crop for mobile. A poster image shows at once; nothing waits for a video.
 - If layered art exists (background, characters, effects), the layers feed `Parallax`.
-- Content: logo (alt text "Promuse"; a text wordmark until the logo exists), status line, primary CTA (scrolls to `#reward`), "Watch trailer" (opens the lightbox; hidden when `trailerId` is empty), scroll cue.
+- Layout as on p3re.jp: the status line in display type at the top left, with the name above it; the logo in white at the middle right (alt text "Promuse"; a text wordmark until the logo exists); "SCROLL" over a short line at the bottom centre. On phones the logo sits at the top left, above the status line.
+- No buttons in the hero (owner's decision, 2026-11-05): the reward block follows right below, and the header links to it.
+- Until the key visual exists, a white-to-blue gradient in p3re.jp's hero colours stands in.
+- "Watch trailer" sits in a strip below the hero (P4) and is hidden when `trailerId` is empty.
 
 ### 3. Reward (`#reward`)
 
+- Laid out like p3re.jp's "BUY NOW!" block: white, centred, the title in large display type, then the reward line, the art, the large pill button and the privacy line.
 - Banner: reward art, title, one-line reward description (`[TODO]`: the amount and the currency name are not decided), the sign-in button, a privacy line that links to the privacy page and, when signed in, "Not you? Sign out".
 - Popup: appears 1.5 s after the intro ends (or after load when the intro does not play), only on the first visit (`localStorage` key `promuse:reward-popup-dismissed`), never after registration and never while registration is not open (`notOpen`). Its button starts the same sign-in.
 - After returning from Google, the page scrolls to `#reward` and registration runs automatically, once.
@@ -114,26 +123,27 @@ Animate `transform`, `opacity`, `clip-path` and `filter` only. Set `will-change`
 
 ### 4. Introduction (`#story`)
 
-- Two columns (one on mobile): an image and two or three short paragraphs about the world and its characters. Rhythm is how the game plays, not what the world is about, so the text does not talk about music.
-- Below: two or three big-type bands with Promuse slogans.
+- From 768 px the title and two or three short paragraphs sit beside a 16:9 image that bleeds to the right edge of the screen; on phones the title (centred), the image and the text stack. The text is about the world and its characters. Rhythm is how the game plays, not what the world is about, so the text does not talk about music.
+- After Gameplay: a hairline, two or three short slogan lines (the count is `bands` in `content/data/story.json`), then "PROMUSE" in giant outlined letters across the screen.
 - Copy: `story.title`, `story.p1` to `story.p3`, `story.band1` to `story.band3`, all `[TODO]`.
 
 ### 5. Features (`#features`)
 
-- On the page: title, a two-sentence summary, four cards (title, one line, image), "See details".
+- On the page, mirrored (image on the left): title, a two-sentence summary, a cover image, and "See details" (P5).
 - Modal: four tabs. Each tab shows "FEATURE #n", a title, one or two sentences and two images.
 - Topics are proposed in section 8. Every title and sentence is `[TODO]` until the owner writes it.
 
 ### 6. Gameplay (`#gameplay`)
 
-- On the page: the `NoteLanes` scene, title, a two-sentence summary, "Gameplay details".
+- On the page, laid out like Introduction: title, a two-sentence summary, a cover image, and "Gameplay details" (P5).
 - Modal: four tabs, each with a slider of 3–7 images (16:9), a title and a paragraph. The gacha tab shows the rate line, rendered from data (`GAME_FACTS.md`, section 4).
 - Topics are proposed in section 8.
 
 ### 7. Characters (`#characters`)
 
-- Four large cards grouped as 5★ (one), 4★ (two), 3★ (one). Each card shows art, name and stars.
-- Each character has a theme colour (content data, `[TODO]` until chosen), used on the active card and in the profile modal, as p3re.jp does.
+- One row that scrolls sideways, as on p3re.jp: the big title and three short lines (`characters.line1` to `line3`), then a 3:4 portrait per character in data order (5★, 4★, 4★, 3★) with its name and stars. Portraits are grey and tinted with the character's colour until hovered or focused. In P4 the row pins and moves with the scroll while the background takes each character's colour; with motion off it stays a plain sideways scroller.
+- Each character has a theme colour (content data, `[TODO]` until chosen), used on its portrait, as the section background while it is in view, and in the profile modal, as p3re.jp does. Until it is chosen, the portraits take p3re.jp's pastels in order (`DESIGN.md`, section 4).
+- Text on these backgrounds is navy, not white as on p3re.jp, to keep WCAG AA contrast (owner's decision, 2026-11-05).
 - Profile modal: the idle visual on the left with "Change visual", which swaps to the battle visual with a slash wipe. On the right: name, rarity, tagline, profile, passive (name and description), stats, and a gallery slider (hidden when empty). Previous and next buttons, plus ← and →, move between characters.
 - No voice-actor credits or per-character trailers in v1.
 
@@ -148,6 +158,7 @@ Stats and passives come from the game (`GAME_FACTS.md`, section 3). Names are ke
 
 ### 8. Footer
 
+- Laid out like p3re.jp's footer: the logo, the SPEC table, LINKS and SHARE in a row (stacked on phones), a hairline, the store line, then the privacy link and the copyright centred at the bottom.
 - Logo and spec table: Title Promuse · Release Coming soon · Genre Rhythm hack-and-slash, gacha · Players 1 · Platform Android.
 - Social links from `content/data/site.json` (hidden when empty). Share to X and Facebook through intent URLs with `#Promuse`.
 - "Coming soon on Google Play" as text; no store badge until a store link exists.
@@ -202,9 +213,9 @@ Copy keys live under `reward.*` in `content/text/*.json`; `{email}` comes from t
 | `nav.gameplay` | Gameplay | Gameplay |
 | `nav.characters` | Nhân vật | Characters |
 | `nav.reward` | Nhận quà | Get reward |
+| `common.menu` | Menu | Menu |
 | `intro.line1` to `intro.line3` | `[TODO]` | `[TODO]` |
 | `hero.status` | Sắp ra mắt trên Android | Coming soon on Android |
-| `hero.cta` | Nhận quà đăng ký sớm | Claim the pre-registration reward |
 | `hero.trailer` | Xem trailer | Watch trailer |
 | `hero.scroll` | Cuộn | Scroll |
 | `reward.title` | Quà đăng ký sớm | Pre-registration reward |
