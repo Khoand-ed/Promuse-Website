@@ -1,0 +1,11 @@
+# Docs keep their hand-written layout.
+*.md
+doc/
+
+# Generated or third-party output.
+content/schemas/
+package-lock.json
+.next/
+public/
+playwright-report/
+test-results/
