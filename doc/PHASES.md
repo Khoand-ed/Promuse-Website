@@ -74,9 +74,10 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 1. next-intl: `src/i18n/routing.ts` (`vi` default, `en`, `localePrefix: 'as-needed'`), `request.ts` (messages from `content/text`) and `navigation.ts`; `src/proxy.ts` with next-intl only (the Supabase step comes in P3); `src/app/[locale]/layout.tsx` with `<html lang>`, `generateStaticParams` and `setRequestLocale`.
 2. Content system (`ARCHITECTURE.md` section 16): zod schemas and loaders in `src/content/`; the full content skeleton in `content/` for every block, modal, character and the privacy page — UI drafts from `SPEC.md` section 8, facts from `GAME_FACTS.md`, `[TODO]` everywhere else; generated JSON Schemas; a working `check:content` that writes `CONTENT_TODO.md`; `doc/CONTENT_GUIDE.md` in Vietnamese.
 3. Identity: a style tile with two directions (palette with AA contrast ratios, Vietnamese-capable fonts for the three type voices, type scale, text wordmark, buttons, cards, the slash motif). Wait for the owner's choice, then add the tokens to `@theme`, load the fonts with `next/font` and record the decision in `DESIGN.md`.
-4. Page shell: skip link; Header (fixed, transparent to solid, active section, full-screen mobile menu, no animation yet); all nine blocks with their anchors, real structure and content; Footer (spec table, share links, links hidden when empty, privacy link, back to top); LanguageSwitch that keeps the hash; `ImageSlot` with labelled placeholders.
-5. `.github/workflows/ci.yml` as in `ARCHITECTURE.md` section 13 (the Playwright step is added in P2).
-6. Walk me through creating the Vercel project from this GitHub repo: framework preset, environment variables (`NEXT_PUBLIC_BACKEND_MODE=mock`, `NEXT_PUBLIC_SITE_URL`), production branch `main`.
+4. Page shell: skip link; Header (fixed, transparent to solid, active section, full-screen mobile menu, no animation yet); all nine blocks with their anchors, real structure and content; Footer (spec table, share links, links hidden when empty, privacy link, back to top); LanguageSwitch that keeps the hash; `ImageSlot` with labelled placeholders. No dead buttons: a button that opens a modal appears in the phase that builds the modal (P5, P6), the Intro overlay comes with the motion system (P4), and the reward button shows `notOpen`.
+5. The privacy page (`/privacy`, `/en/privacy`) with its structure and `[TODO]` text, so the footer link works from the first deploy; and `noindex` on every page until P7.
+6. `.github/workflows/ci.yml` as in `ARCHITECTURE.md` section 13 (the Playwright step is added in P2).
+7. Walk me through creating the Vercel project `promuse` from this GitHub repo: framework preset, environment variables (`NEXT_PUBLIC_BACKEND_MODE=off` for production and `mock` for previews, `NEXT_PUBLIC_SITE_URL`), production branch `main`.
 
 **Done when**
 
@@ -94,7 +95,7 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 
 **Tasks**
 
-1. The `RewardGateway` interface and `MockRewardGateway` with every `?mock=` scenario.
+1. The `RewardGateway` interface and `MockRewardGateway` with every `?mock=` scenario, plus the `notOpen` state for `off` mode. Production stays `off`; the mock runs locally and on previews.
 2. Modal: native `<dialog>` with `showModal()`, Esc, focus return, scroll lock, hash and Back button. It fades for now; P4 adds the slash wipe.
 3. The reward widget as a state machine over the gateway (`SPEC.md` section 7), the banner, the popup rules and the sign-out link.
 4. The return flow: `intent=prereg` triggers one registration, scrolls to `#reward`, then is removed from the URL.
@@ -102,7 +103,7 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 
 **Done when**
 
-- [ ] Every `?mock=` scenario shows the state `SPEC.md` section 7 describes, in both languages.
+- [ ] Every `?mock=` scenario, and `off` mode, shows the state `SPEC.md` section 7 describes, in both languages.
 - [ ] The popup appears once, never after registration, and its button starts sign-in.
 - [ ] The modal works by keyboard alone: Esc closes it and focus returns to the opener.
 - [ ] Playwright passes locally and in CI.
@@ -118,7 +119,7 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 1. Supabase: create the project in the Singapore region; copy the project URL and the publishable key.
 2. Google Cloud: configure the OAuth consent screen (app name Promuse; scopes `openid`, email and profile; the privacy page as the privacy-policy link) and create an OAuth client of type "Web application". Add the callback URL shown on Supabase's Google provider page as an authorized redirect URI. Publish the consent screen so any Google account can sign in.
 3. Supabase: enable the Google provider with the client ID and secret. Under URL configuration, set the Site URL and add redirect URLs for `http://localhost:3000/**`, the production URL and a wildcard for Vercel previews.
-4. Environment variables in `.env.local` and in Vercel, with `NEXT_PUBLIC_BACKEND_MODE=supabase`.
+4. Environment variables in `.env.local` and in Vercel, with `NEXT_PUBLIC_BACKEND_MODE=supabase` (production switches from `off` to `supabase` here).
 
 **Tasks**
 
@@ -127,7 +128,7 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 7. `requireUser`, the error envelope, zod schemas, the Supabase and in-memory services, and the `/api/v1` routes from `API.md`.
 8. `SupabaseRewardGateway`, chosen by `NEXT_PUBLIC_BACKEND_MODE`.
 9. `/dev/token` (404 in production) to copy the current access token for curl tests.
-10. The privacy page (`SPEC.md` section 13), its text from `content/`.
+10. Finish the privacy page (`SPEC.md` section 13) with the owner's text; its structure exists since P1.
 11. Unit tests for the services and the route handlers.
 
 **Done when**

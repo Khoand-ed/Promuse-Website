@@ -40,7 +40,9 @@ Game .NET backend (future, section 17) ┄┄ server-to-server, not built in v1 
 |---|---|---|---|
 | Local | http://localhost:3000 | `mock` until P3, then `supabase` | The single cloud project |
 | Preview | One Vercel URL per branch | `mock` until P3, then `supabase` | Same project |
-| Production | `https://<project>.vercel.app`, deployed from `main` | `mock` until P3, then `supabase` | Same project |
+| Production | `https://promuse.vercel.app`, deployed from `main` | `off` until P3, then `supabase` | Same project |
+
+`off` keeps the live site honest before P3: the reward widget shows `notOpen` instead of simulating a sign-in. `mock` is for development and previews only.
 
 One Supabase project is enough for a portfolio (the Free plan allows two active projects). Create it in the Singapore region, the closest to Vietnam, and pick the matching Vercel Functions region if the plan offers the choice.
 
@@ -56,7 +58,7 @@ One Supabase project is enough for a portfolio (the Free plan allows two active 
 │  └─ schemas/                  generated JSON Schemas for editor hints; never edited by hand
 ├─ doc/                         SPEC, ARCHITECTURE, API, PHASES, GAME_FACTS, DESIGN, CONTENT_GUIDE; qa/ for QA reports
 ├─ public/images/               web-ready assets at the paths their content slots declare
-├─ scripts/                     check-content, generate-schemas
+├─ scripts/                     check-content.mts: validates content/, regenerates content/schemas/ and CONTENT_TODO.md
 ├─ supabase/migrations/         0001_init.sql, 0002_prereg_campaign.sql, …
 ├─ tests/unit/                  Vitest
 ├─ tests/e2e/                   Playwright (mock mode)
@@ -146,7 +148,7 @@ export interface RewardGateway {
 
 - `SupabaseRewardGateway`: Supabase browser auth plus `fetch` to `/api/v1/preregistration`.
 - `MockRewardGateway`: no network. `?mock=` picks a scenario: `signed-out` (default; sign-in "succeeds" after 800 ms and registration returns `created`), `signed-in`, `registered`, `existing`, `cancelled`, `error`, `closed`.
-- `NEXT_PUBLIC_BACKEND_MODE` chooses the gateway. The reward widget is a state machine over this interface and holds no Supabase code. Swapping the backend later means a new gateway and service implementation, not a new widget.
+- `NEXT_PUBLIC_BACKEND_MODE` chooses the gateway: `off` (no gateway; the widget shows `notOpen`), `mock` or `supabase`. The reward widget is a state machine over this interface and holds no Supabase code. Swapping the backend later means a new gateway and service implementation, not a new widget.
 
 ## 6. Rendering
 
@@ -270,7 +272,7 @@ Never edit a migration that has been applied. Add a new one.
 | Name | Needed in | Example | Notes |
 |---|---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | All | `http://localhost:3000` | Canonical URL for metadata, sitemap and Open Graph |
-| `NEXT_PUBLIC_BACKEND_MODE` | All | `mock` or `supabase` | Chooses the reward gateway |
+| `NEXT_PUBLIC_BACKEND_MODE` | All | `off`, `mock` or `supabase` | Chooses the reward gateway; production uses `off` until P3 |
 | `NEXT_PUBLIC_SUPABASE_URL` | `supabase` mode | `https://<project-ref>.supabase.co` | |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | `supabase` mode | `sb_publishable_…` | Safe in the browser; RLS protects the data |
 
@@ -289,7 +291,7 @@ Never edit a migration that has been applied. Add a new one.
 
 ## 13. CI and deployment
 
-- `.github/workflows/ci.yml` runs on every push and pull request: `npm ci`, `check:content`, lint, typecheck, unit tests, build in mock mode, then Playwright on Chromium (from P2).
+- `.github/workflows/ci.yml` runs on every push and pull request: `npm ci`, `check:content` (failing when the generated `CONTENT_TODO.md` or `content/schemas/` are not committed up to date), lint, typecheck, unit tests, build in mock mode, then Playwright on Chromium (from P2).
 - Each phase lives on its own branch and reaches `main` through a pull request. Vercel's Git integration builds a preview for every branch and deploys `main` to production.
 - Database: apply `supabase/migrations/*.sql` in order with the Supabase CLI (`supabase link`, then `supabase db push`) or paste them into the SQL Editor.
 
@@ -320,19 +322,21 @@ content/
 │  ├─ vi.json            every visible string, grouped by block: common, nav, intro, hero, reward, story,
 │  └─ en.json            features, gameplay, characters, footer, privacy — the same keys in both files
 ├─ data/
-│  ├─ site.json          BPM, trailer id, social and store links, platforms with status, copyright holder
-│  ├─ characters.json    order, id, slug, rarity, stats, passive parameters, theme colour, image slots
+│  ├─ site.json          BPM, trailer id, social and store links, platforms with status, copyright holder, logo slot
+│  ├─ hero.json          key visual slots (desktop, mobile) and optional layers
+│  ├─ reward.json        reward art slot
+│  ├─ story.json         image slot, number of slogan bands
 │  ├─ features.json      cards and tabs: order and image slots
 │  ├─ gameplay.json      tabs: order, slider image slots, gacha rates
-│  └─ story.json         image slot, number of slogan bands
+│  └─ characters.json    order, id, slug, name, rarity, stats, theme colour, image slots
 └─ schemas/              generated from the zod schemas; never edited by hand
 ```
 
-- Keys are dotted paths by block (`hero.cta`, `characters.nova.tagline`). Characters are keyed by slug, never by position.
-- Every data file starts with `"$schema"` pointing at its generated schema, so VS Code shows what each field means and underlines invalid values. Text files are plain key–value JSON for next-intl.
+- Keys are dotted paths by block (`hero.cta`, `characters.items.nova.tagline`). Characters are keyed by slug, never by position.
+- Every file — text and data — starts with `"$schema"` pointing at its generated schema, so VS Code shows what each field means (in Vietnamese, for the owner) and underlines invalid values. The text loader drops `$schema` before handing the messages to next-intl.
 - An image slot is `{ "src": "/images/…", "width": 1280, "height": 720, "alt": "<text key>" }`. The build checks whether the file exists under `public/`; when it does not, `ImageSlot` renders a labelled placeholder with the same aspect ratio.
-- Markers: `[TODO] <what to write, with limits>` for missing content; `[REVIEW]` for drafts and translations waiting for the owner. Both show on the page, so nothing ships unnoticed.
-- `npm run check:content` validates every file against its schema; checks that both locales have the same keys and the same ICU placeholders (`{email}`, `{date}`); lists missing images and file-convention assets (`opengraph-image.png`, `icon.png`); and writes `CONTENT_TODO.md`. Each entry gives the file, the key, the line, what is needed, how to fill it and where it shows on the page. The check fails on invalid content, never on a TODO.
+- Markers: `[TODO] <what to write>` for missing text; `[REVIEW]` for drafts and translations waiting for the owner; `null` for a data value not decided yet (a theme colour, the copyright holder). All of them show up in the report, and text markers show on the page, so nothing ships unnoticed.
+- `npm run check:content` validates every file against its schema; checks that both locales have the same keys and the same ICU placeholders (`{email}`, `{date}`); lists missing images and file-convention assets (`opengraph-image.png`, `icon.png`); regenerates `content/schemas/`; and writes `CONTENT_TODO.md`. Each entry gives the file, the key, the line, what is needed, how to fill it and where it shows on the page. The check fails on invalid content, never on a TODO.
 - `src/content/` holds the zod schemas (the single source for validation and for the JSON Schemas) and the loaders. Components use the loaders only.
 - `doc/CONTENT_GUIDE.md`, in Vietnamese, is the owner's how-to: editing text, replacing images, previewing, running the check.
 

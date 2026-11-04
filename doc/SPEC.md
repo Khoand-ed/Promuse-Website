@@ -108,7 +108,7 @@ Animate `transform`, `opacity`, `clip-path` and `filter` only. Set `will-change`
 ### 3. Reward (`#reward`)
 
 - Banner: reward art, title, one-line reward description (`[TODO]`: the amount and the currency name are not decided), the sign-in button, a privacy line that links to the privacy page and, when signed in, "Not you? Sign out".
-- Popup: appears 1.5 s after the intro ends (or after load when the intro does not play), only on the first visit (`localStorage` key `promuse:reward-popup-dismissed`), never after registration. Its button starts the same sign-in.
+- Popup: appears 1.5 s after the intro ends (or after load when the intro does not play), only on the first visit (`localStorage` key `promuse:reward-popup-dismissed`), never after registration and never while registration is not open (`notOpen`). Its button starts the same sign-in.
 - After returning from Google, the page scrolls to `#reward` and registration runs automatically, once.
 - States are in section 7.
 
@@ -177,6 +177,7 @@ Stats and passives come from the game (`GAME_FACTS.md`, section 3). Names are ke
 | `cancelled` | The visitor closed the Google window | Back to `signedOut` with "Bạn đã huỷ đăng nhập." / "Sign-in was cancelled." | — |
 | `error` | Any failure | Có lỗi, thử lại / Something went wrong, try again | Retry keeps the context |
 | `closed` | Server answered `campaign_closed` | Đã hết thời gian đăng ký sớm / Pre-registration has ended | Disabled |
+| `notOpen` | `NEXT_PUBLIC_BACKEND_MODE` is `off`: registration is not open yet | `[TODO]` in both locales | Disabled; the popup never shows. Production uses it until P3, so the live site never simulates a registration |
 
 Privacy line under the button, linking to the privacy page: "Email chỉ dùng để gắn quà với tài khoản game." / "We only use your email to link the reward to your game account."
 
@@ -236,7 +237,7 @@ Titles and text of every card and tab are `[TODO]`; the content skeleton carries
 - Locales `vi` (default, `/`) and `en` (`/en`) with next-intl and `localePrefix: 'as-needed'`. Keep next-intl's locale detection (browser language, then cookie).
 - Text comes from `content/text/vi.json` and `content/text/en.json`.
 - `<html lang>`, title, description and Open Graph tags follow the locale; add `hreflang` alternates.
-- A missing English key falls back to Vietnamese and logs a warning in development.
+- Both locales must have every key. `check:content` and the build stop with a message naming a missing or misspelled key, so a half-translated page never ships.
 - `npm run check:content` lists keys missing from either locale, mismatched placeholders, and every `[TODO]` and `[REVIEW]`.
 
 ## 10. Performance and SEO targets
@@ -246,6 +247,7 @@ Titles and text of every card and tab are `[TODO]`; the content skeleton carries
 - First-load JavaScript for the page ≤ 250 KB gzipped. Load the Supabase client, modals and sliders lazily.
 - Hero image with `priority`; everything else lazy. Fonts with `display: swap`.
 - Per-locale title and description, Open Graph and Twitter cards, `sitemap.xml`, `robots.txt`, and JSON-LD `VideoGame` data (platform Android).
+- Until launch (P7), every page sends `noindex`, because the site still shows placeholders.
 
 ## 11. Assets
 
