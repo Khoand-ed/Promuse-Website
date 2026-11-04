@@ -39,3 +39,6 @@ export const getStory = load('story', storySchema, story);
 export const getFeatures = load('features', featuresSchema, features);
 export const getGameplay = load('gameplay', gameplaySchema, gameplay);
 export const getCharacters = load('characters', charactersSchema, characters);
+
+/** Shown on the page where a data value is still `null`; CONTENT_TODO.md says how to fill it. */
+export const MISSING = '[TODO]';

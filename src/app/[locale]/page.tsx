@@ -1,18 +1,20 @@
 import type { Locale } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
+import { Characters } from '@/components/sections/Characters';
+import { Hero } from '@/components/sections/Hero';
+import { Reward } from '@/components/sections/Reward';
+import { Story } from '@/components/sections/Story';
 
-// Temporary until the page shell is built on the chosen style tile, later in P1.
 export default async function Home({ params }: PageProps<'/[locale]'>) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
-  const t = await getTranslations();
 
   return (
-    <main className="grid min-h-svh place-items-center text-center">
-      <div className="grid gap-3">
-        <h1 className="text-4xl font-bold tracking-widest">{t('common.brand')}</h1>
-        <p>{t('hero.status')}</p>
-      </div>
+    <main id="main" tabIndex={-1} className="outline-none">
+      <Hero />
+      <Reward />
+      <Story />
+      <Characters />
     </main>
   );
 }
