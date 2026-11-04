@@ -5,11 +5,40 @@
     "$schema": {
       "type": "string"
     },
-    "bpm": {
-      "type": "integer",
-      "minimum": 60,
-      "maximum": 200,
-      "description": "Nhịp chung của các hiệu ứng trên trang (nhịp mỗi phút). Mặc định 120."
+    "music": {
+      "type": "object",
+      "properties": {
+        "src": {
+          "type": "string",
+          "pattern": "^\\/audio\\/[a-z0-9/_-]+\\.(mp3|m4a|ogg)$",
+          "description": "File nhạc nền tính từ thư mục public/, ví dụ /audio/theme.mp3. Chỉ dùng nhạc Promuse có quyền phát công khai. Chưa có file thì nút nhạc bị ẩn."
+        },
+        "bpm": {
+          "type": "number",
+          "minimum": 60,
+          "maximum": 200,
+          "description": "Nhịp của bài (số phách mỗi phút), ví dụ 120 hoặc 143.958. Khi nhạc phát, các nút đập theo nhịp này; vạch SCROLL nhỏ giọt mỗi 3 nhịp."
+        },
+        "firstBeat": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Số giây từ đầu file tới phách đầu tiên, để nút đập đúng phách (trong beatmap của game là beatPhase). 0 nếu bài vào phách ngay."
+        },
+        "volume": {
+          "type": "number",
+          "minimum": 0.05,
+          "maximum": 1,
+          "description": "Âm lượng khi phát, từ 0.05 đến 1. Nên khoảng 0.5."
+        }
+      },
+      "required": [
+        "src",
+        "bpm",
+        "firstBeat",
+        "volume"
+      ],
+      "additionalProperties": false,
+      "description": "Nhạc nền: tắt mỗi lần vào trang, người xem bấm nút tròn ở góc trên bên trái để bật."
     },
     "trailerId": {
       "anyOf": [
@@ -224,7 +253,7 @@
     }
   },
   "required": [
-    "bpm",
+    "music",
     "trailerId",
     "copyrightHolder",
     "privacyContactEmail",

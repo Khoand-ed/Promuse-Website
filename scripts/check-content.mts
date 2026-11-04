@@ -245,6 +245,15 @@ const conventionFiles = [
   },
   { file: 'src/app/icon.png', where: 'Biểu tượng trên tab trình duyệt', need: '512 × 512 px, PNG' },
 ];
+const site = data.get('site')?.parsed as { music?: { src?: string } } | undefined;
+const musicSrc = site?.music?.src;
+if (musicSrc && !existsSync(path.join(root, 'public', musicSrc))) {
+  conventionFiles.push({
+    file: `public${musicSrc}`,
+    where: 'Nhạc nền (nút tròn ở góc trên bên trái chỉ hiện khi có file)',
+    need: 'MP3 nhạc của Promuse, có quyền phát công khai; sửa bpm và firstBeat trong content/data/site.json cho đúng bài',
+  });
+}
 for (const { file, where, need } of conventionFiles) {
   if (!existsSync(path.join(root, file))) {
     entries.push({ kind: 'file', key: path.basename(file), where, need, locations: [file] });

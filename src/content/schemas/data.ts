@@ -5,11 +5,39 @@ const schemaRef = z.string().optional();
 
 export const siteSchema = z.strictObject({
   $schema: schemaRef,
-  bpm: z
-    .int()
-    .min(60)
-    .max(200)
-    .describe('Nhịp chung của các hiệu ứng trên trang (nhịp mỗi phút). Mặc định 120.'),
+  music: z
+    .strictObject({
+      src: z
+        .string()
+        .regex(
+          /^\/audio\/[a-z0-9/_-]+\.(mp3|m4a|ogg)$/,
+          'Đường dẫn phải bắt đầu bằng /audio/, chỉ gồm chữ thường, số, "-", "_", và kết thúc bằng .mp3, .m4a hoặc .ogg.',
+        )
+        .describe(
+          'File nhạc nền tính từ thư mục public/, ví dụ /audio/theme.mp3. Chỉ dùng nhạc Promuse có quyền phát công khai. Chưa có file thì nút nhạc bị ẩn.',
+        ),
+      bpm: z
+        .number()
+        .min(60)
+        .max(200)
+        .describe(
+          'Nhịp của bài (số phách mỗi phút), ví dụ 120 hoặc 143.958. Khi nhạc phát, các nút đập theo nhịp này; vạch SCROLL nhỏ giọt mỗi 3 nhịp.',
+        ),
+      firstBeat: z
+        .number()
+        .min(0)
+        .describe(
+          'Số giây từ đầu file tới phách đầu tiên, để nút đập đúng phách (trong beatmap của game là beatPhase). 0 nếu bài vào phách ngay.',
+        ),
+      volume: z
+        .number()
+        .min(0.05)
+        .max(1)
+        .describe('Âm lượng khi phát, từ 0.05 đến 1. Nên khoảng 0.5.'),
+    })
+    .describe(
+      'Nhạc nền: tắt mỗi lần vào trang, người xem bấm nút tròn ở góc trên bên trái để bật.',
+    ),
   trailerId: z
     .union([
       z.literal(''),

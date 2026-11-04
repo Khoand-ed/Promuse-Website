@@ -53,6 +53,12 @@ export const textSchema = z.strictObject({
     openMenu: text('Nhãn nút mở menu trên điện thoại.'),
     closeMenu: text('Nhãn nút đóng menu trên điện thoại.'),
     menu: text('Chữ nhỏ dưới ba vạch trên nút menu ở góc phải trên điện thoại.'),
+    effects: text('Nhãn nút bật/tắt hiệu ứng chuyển động, ở header và trong menu điện thoại.'),
+    effectsOn: text('Chữ trạng thái khi hiệu ứng đang bật, hiện cạnh nhãn nút.'),
+    effectsOff: text('Chữ trạng thái khi hiệu ứng đang tắt, hiện cạnh nhãn nút.'),
+    music: text(
+      'Tên nút tròn bật/tắt nhạc nền ở góc trên bên trái, cho trình đọc màn hình và khi rê chuột.',
+    ),
     mainNav: text('Tên vùng điều hướng chính, dành cho trình đọc màn hình.'),
     language: text('Tên nhóm nút chọn ngôn ngữ, dành cho trình đọc màn hình.'),
     languageNames: z.strictObject({
@@ -72,9 +78,10 @@ export const textSchema = z.strictObject({
     reward: text('Nút "Nhận quà" nổi bật trên thanh điều hướng.'),
   }),
   intro: z.strictObject({
-    line1: text(
-      'Dòng mở đầu thứ 1 (trong 3 dòng hiện theo nhịp trước khi vào trang). Khoảng 30 ký tự.',
+    title: text(
+      'Tiêu đề lớn của màn mở đầu (lúc mặt nước rút xuống), như "Memento Mori" trên p3re.jp: một câu ngắn kiểu khẩu hiệu, khoảng 20 ký tự.',
     ),
+    line1: text('Dòng nhỏ thứ 1 dưới tiêu đề màn mở đầu. Khoảng 30 ký tự.'),
     line2: text('Dòng mở đầu thứ 2. Khoảng 30 ký tự.'),
     line3: text('Dòng mở đầu thứ 3. Khoảng 30 ký tự.'),
     skip: text('Nhãn nút bỏ qua màn mở đầu.'),
