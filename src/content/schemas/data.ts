@@ -102,12 +102,38 @@ export const heroSchema = z.strictObject({
   mobile: imageSlot(
     'Key visual dọc cho điện thoại, 1080 × 1920. Giữ sáng phần trên cùng cho logo và dòng trạng thái.',
   ),
+  video: z
+    .strictObject({
+      intro: videoPath(
+        'Video mở đầu, chạy một lần trước video lặp (như p3re.jp). MP4, 16:9, không tiếng. Để trống nếu không có.',
+      ),
+      loop: videoPath(
+        'Video lặp của hero từ 768 px trở lên. MP4, 16:9, không tiếng, nhẹ (nên dưới 8 MB). Để trống thì hero dùng ảnh.',
+      ),
+    })
+    .describe(
+      'Video tuỳ chọn cho hero trên máy tính. Ảnh desktop là ảnh chờ (poster). Tắt hiệu ứng thì chỉ hiện ảnh.',
+    ),
   layers: z
     .array(imageSlot('Một lớp của key visual (PNG nền trong suốt), cùng khung với bản desktop.'))
     .describe(
       'Các lớp tách rời của key visual để làm hiệu ứng chiều sâu. Không bắt buộc; để [] nếu không có.',
     ),
 });
+
+function videoPath(description: string) {
+  return z
+    .union([
+      z.literal(''),
+      z
+        .string()
+        .regex(
+          /^\/videos\/[a-z0-9/_-]+\.(mp4|webm)$/,
+          'Đường dẫn phải bắt đầu bằng /videos/, chỉ gồm chữ thường, số, "-", "_", và kết thúc bằng .mp4 hoặc .webm.',
+        ),
+    ])
+    .describe(description);
+}
 
 export const rewardSchema = z.strictObject({
   $schema: schemaRef,

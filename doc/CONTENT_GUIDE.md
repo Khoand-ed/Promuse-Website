@@ -82,6 +82,8 @@ và trong `vi.json` (tương tự trong `en.json`), ở nhóm `gameplay.tabs.g1.
 
 Thư viện ảnh của nhân vật làm tương tự: ô ảnh trong `images.gallery` của nhân vật, khoá mô tả trong `characters.items.<slug>.gallery`.
 
+Video hero (không bắt buộc, giống p3re.jp): đặt file MP4 16:9 không tiếng vào `public/videos/`, rồi ghi đường dẫn vào `content/data/hero.json`, nhóm `video`: `loop` là video lặp, `intro` (nếu có) chạy một lần trước nó. Video chỉ chạy trên màn hình từ 768 px và khi hiệu ứng bật; ảnh desktop là ảnh chờ. Để trống đường dẫn thì hero dùng ảnh.
+
 Không dùng art, tên hay ảnh chụp lấy từ Arknights hoặc game khác, kể cả ảnh chụp bản game hiện tại (xem `doc/GAME_FACTS.md`, mục 6).
 
 ## 6. Thêm nhạc nền

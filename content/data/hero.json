@@ -12,5 +12,9 @@
     "height": 1920,
     "alt": "hero.visualAlt"
   },
+  "video": {
+    "intro": "",
+    "loop": ""
+  },
   "layers": []
 }
