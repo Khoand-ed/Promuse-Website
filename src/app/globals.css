@@ -1,3 +1,318 @@
 @import 'tailwindcss';
 
-/* Design tokens go under @theme in P1, after the owner approves the style tile (doc/DESIGN.md). */
+/* Colours measured on p3re.jp/en (doc/DESIGN.md, section 4). */
+@theme {
+  --color-ink: #1d384a;
+  --color-mist: #e5eef6;
+  --color-sky: #c0d5e8;
+  --color-azure: #5ba4d7;
+  --color-cta-from: #0072b9;
+  --color-cta-to: #002cb8;
+  --color-rule: #dce4ec;
+  --color-menu: rgb(206 228 246 / 0.9);
+
+  --color-hero-1: #0be9f9;
+  --color-hero-2: #0a77d6;
+  --color-hero-3: #0041b9;
+  --color-hero-4: #001dae;
+  --color-hero-5: #0004a8;
+}
+
+/*
+ * Character colours, used in order while a character's themeColor is still null. `static` keeps
+ * them in the CSS although no class names them: the cards pick one by number at render time.
+ */
+@theme static {
+  --color-chara-1: #86edfc;
+  --color-chara-2: #fc93ff;
+  --color-chara-3: #989ffb;
+  --color-chara-4: #d3dada;
+  --color-chara-5: #f68ca8;
+  --color-chara-6: #95f5dc;
+  --color-chara-7: #f2f4f2;
+  --color-chara-8: #faf6a6;
+  --color-chara-9: #faba80;
+  --color-chara-10: #ce8998;
+  --color-chara-11: #93cc96;
+}
+
+@theme inline {
+  --font-display: var(--font-noto-serif-display), 'Noto Serif', Georgia, serif;
+  --font-sans: var(--font-quicksand), system-ui, sans-serif;
+  --font-label: var(--font-lexend-exa), var(--font-quicksand), sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* An open menu or modal keeps the page behind it still. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-cta-from);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Big titles: p3re.jp sets them as high-contrast serif lettering. */
+  .type-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-variation-settings: 'wdth' 87.5;
+    line-height: 1;
+  }
+
+  /* Small wide labels (SCROLL, SPEC, PROFILE). */
+  .type-label {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* Running text: 14 px on 28 px with 0.8 px tracking, as on p3re.jp. */
+  .type-body {
+    font-size: 14px;
+    line-height: 2;
+    letter-spacing: 0.057em;
+  }
+
+  /* The blue pill with an arrow, p3re.jp's only button style. */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    min-height: 3.5rem;
+    padding-inline: 2rem;
+    border-radius: 999px;
+    background-image: linear-gradient(90deg, var(--color-cta-from), var(--color-cta-to));
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: filter 0.2s ease;
+  }
+
+  .pill:hover {
+    filter: brightness(1.15);
+  }
+
+  .pill:disabled,
+  .pill[aria-disabled='true'] {
+    cursor: not-allowed;
+    opacity: 0.6;
+    filter: saturate(0.6);
+  }
+
+  .pill-xl {
+    min-height: 3.75rem;
+    padding-inline: 2.5rem;
+    font-size: clamp(1rem, 1.6vw, 1.75rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 768px) {
+    .pill-xl {
+      min-height: 76px;
+      padding-inline: 4.5rem;
+    }
+  }
+
+  /* Placeholder for an image the owner has not supplied yet. */
+  .image-slot {
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background-color: var(--color-mist);
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent 0 14px,
+      rgb(29 56 74 / 0.08) 14px 15px
+    );
+    color: var(--color-ink);
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  /* The hero before the key visual exists: white on the left, p3re.jp's blues on the right. */
+  .hero-fallback {
+    background:
+      linear-gradient(180deg, #fff 0 34%, rgb(255 255 255 / 0) 52%),
+      linear-gradient(
+        180deg,
+        var(--color-hero-1) 0%,
+        var(--color-hero-2) 30%,
+        var(--color-hero-3) 55%,
+        var(--color-hero-4) 78%,
+        var(--color-hero-5) 100%
+      );
+  }
+
+  @media (min-width: 768px) {
+    .hero-fallback {
+      background:
+        linear-gradient(90deg, #fff 0 26%, rgb(255 255 255 / 0) 44%),
+        linear-gradient(
+          180deg,
+          var(--color-hero-1) 0%,
+          var(--color-hero-2) 30%,
+          var(--color-hero-3) 55%,
+          var(--color-hero-4) 78%,
+          var(--color-hero-5) 100%
+        );
+    }
+  }
+
+  /*
+   * Introduction, Features and Gameplay: title, image, text stacked on phones; from 768 px the
+   * text sits beside an image that bleeds to the screen edge, alternating sides.
+   */
+  .story-block {
+    display: grid;
+    grid-template-areas: 'title' 'image' 'text';
+    row-gap: 2.25rem;
+    padding-inline: 6.7%;
+    /* Room above the title when a nav link lands here, clear of the corner menu button. */
+    scroll-margin-top: 4rem;
+  }
+
+  .story-block > .story-title {
+    grid-area: title;
+  }
+
+  .story-block > .story-image {
+    grid-area: image;
+  }
+
+  .story-block > .story-text {
+    grid-area: text;
+  }
+
+  @media (min-width: 768px) {
+    .story-block {
+      grid-template-columns: 48% 52%;
+      grid-template-rows: 1fr auto auto 1fr;
+      grid-template-areas: '. image' 'title image' 'text image' '. image';
+      row-gap: 0;
+      padding-inline: 0;
+    }
+
+    .story-block[data-image='left'] {
+      grid-template-columns: 52% 48%;
+      grid-template-areas: 'image .' 'image title' 'image text' 'image .';
+    }
+
+    /* vw, not %, so the text lines up with the page edge as on p3re.jp (90 px and 831 px at 1440). */
+    .story-block > .story-title,
+    .story-block > .story-text {
+      padding-inline: 6.25vw 2.5vw;
+    }
+
+    .story-block[data-image='left'] > .story-title,
+    .story-block[data-image='left'] > .story-text {
+      padding-inline: 5.7vw 2vw;
+    }
+
+    .story-block > .story-image {
+      align-self: center;
+    }
+  }
+
+  /* The giant outlined word between the story and the characters. */
+  .outline-word {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgb(29 56 74 / 0.3);
+  }
+
+  /* The blue triangle in the top right corner that opens the mobile menu. */
+  .menu-corner {
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    background-image: linear-gradient(225deg, var(--color-cta-to), var(--color-cta-from));
+  }
+
+  /* The full-screen mobile menu: pale blue glass over the page. */
+  .menu-dialog {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--color-menu);
+    color: var(--color-ink);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  .menu-dialog::backdrop {
+    background: transparent;
+  }
+
+  /* The row of character cards; it scrolls sideways until the pinned scene arrives (P4). */
+  .chara-track {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-ink) transparent;
+  }
+
+  /* Character cards: tinted and grey at rest, full colour on hover or focus. */
+  .chara-art {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chara-art img {
+    filter: grayscale(1);
+    transition: filter 0.4s ease;
+  }
+
+  .chara-art::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--chara-color);
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .chara-card:hover .chara-art img,
+  .chara-card:focus-within .chara-art img {
+    filter: none;
+  }
+
+  .chara-card:hover .chara-art::after,
+  .chara-card:focus-within .chara-art::after {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

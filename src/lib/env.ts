@@ -5,7 +5,8 @@ const SUPABASE_KEYS = ['NEXT_PUBLIC_SUPABASE_URL', 'NEXT_PUBLIC_SUPABASE_PUBLISH
 const envSchema = z
   .object({
     NEXT_PUBLIC_SITE_URL: z.url(),
-    NEXT_PUBLIC_BACKEND_MODE: z.enum(['mock', 'supabase']),
+    // off: registration not open yet (production until P3); mock: development and previews.
+    NEXT_PUBLIC_BACKEND_MODE: z.enum(['off', 'mock', 'supabase']),
     NEXT_PUBLIC_SUPABASE_URL: z.url().optional(),
     NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: z.string().min(1).optional(),
   })

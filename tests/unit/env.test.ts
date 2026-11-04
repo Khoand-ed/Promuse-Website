@@ -18,6 +18,12 @@ describe('parseEnv', () => {
     expect(parseEnv(mock).NEXT_PUBLIC_BACKEND_MODE).toBe('mock');
   });
 
+  it('accepts off mode without Supabase variables', () => {
+    expect(parseEnv({ ...mock, NEXT_PUBLIC_BACKEND_MODE: 'off' }).NEXT_PUBLIC_BACKEND_MODE).toBe(
+      'off',
+    );
+  });
+
   it('treats empty strings as missing', () => {
     const env = parseEnv({ ...mock, NEXT_PUBLIC_SUPABASE_URL: '' });
     expect(env.NEXT_PUBLIC_SUPABASE_URL).toBeUndefined();

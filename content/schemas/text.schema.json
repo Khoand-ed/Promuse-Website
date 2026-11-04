@@ -1,0 +1,1284 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề trang trên tab trình duyệt và trong kết quả tìm kiếm."
+        },
+        "description": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mô tả ngắn của trang cho kết quả tìm kiếm và khi chia sẻ link. Khoảng 120–160 ký tự."
+        }
+      },
+      "required": [
+        "title",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "common": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tên game hiển thị trên trang. Giữ là Promuse."
+        },
+        "logoAlt": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mô tả logo cho người dùng trình đọc màn hình. Giữ là Promuse."
+        },
+        "skipToContent": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Link ẩn cho người dùng bàn phím, hiện ra khi bấm Tab lần đầu."
+        },
+        "backToTop": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn nút quay lên đầu trang."
+        },
+        "openMenu": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn nút mở menu trên điện thoại."
+        },
+        "closeMenu": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn nút đóng menu trên điện thoại."
+        },
+        "menu": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Chữ nhỏ dưới ba vạch trên nút menu ở góc phải trên điện thoại."
+        },
+        "mainNav": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tên vùng điều hướng chính, dành cho trình đọc màn hình."
+        },
+        "language": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tên nhóm nút chọn ngôn ngữ, dành cho trình đọc màn hình."
+        },
+        "languageNames": {
+          "type": "object",
+          "properties": {
+            "vi": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Chữ trên nút chọn tiếng Việt."
+            },
+            "en": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Chữ trên nút chọn tiếng Anh."
+            }
+          },
+          "required": [
+            "vi",
+            "en"
+          ],
+          "additionalProperties": false
+        },
+        "close": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn chung của nút đóng hộp thoại."
+        },
+        "imagePlaceholder": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Chữ trên khung giữ chỗ khi chưa có ảnh. Giữ nguyên {name}, {width} và {height}."
+        }
+      },
+      "required": [
+        "brand",
+        "logoAlt",
+        "skipToContent",
+        "backToTop",
+        "openMenu",
+        "closeMenu",
+        "menu",
+        "mainNav",
+        "language",
+        "languageNames",
+        "close",
+        "imagePlaceholder"
+      ],
+      "additionalProperties": false
+    },
+    "nav": {
+      "type": "object",
+      "properties": {
+        "story": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mục \"Giới thiệu\" trên thanh điều hướng."
+        },
+        "features": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mục \"Tính năng\" trên thanh điều hướng."
+        },
+        "gameplay": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mục \"Gameplay\" trên thanh điều hướng."
+        },
+        "characters": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mục \"Nhân vật\" trên thanh điều hướng."
+        },
+        "reward": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nút \"Nhận quà\" nổi bật trên thanh điều hướng."
+        }
+      },
+      "required": [
+        "story",
+        "features",
+        "gameplay",
+        "characters",
+        "reward"
+      ],
+      "additionalProperties": false
+    },
+    "intro": {
+      "type": "object",
+      "properties": {
+        "line1": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng mở đầu thứ 1 (trong 3 dòng hiện theo nhịp trước khi vào trang). Khoảng 30 ký tự."
+        },
+        "line2": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng mở đầu thứ 2. Khoảng 30 ký tự."
+        },
+        "line3": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng mở đầu thứ 3. Khoảng 30 ký tự."
+        },
+        "skip": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn nút bỏ qua màn mở đầu."
+        }
+      },
+      "required": [
+        "line1",
+        "line2",
+        "line3",
+        "skip"
+      ],
+      "additionalProperties": false
+    },
+    "hero": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng trạng thái ở màn đầu tiên, ví dụ \"Sắp ra mắt trên Android\". Không nhắc iOS."
+        },
+        "trailer": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nút mở trailer. Nút tự ẩn khi chưa có ID trailer."
+        },
+        "scroll": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Chữ nhỏ gợi ý cuộn xuống."
+        },
+        "visualAlt": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mô tả ảnh key visual cho người dùng trình đọc màn hình."
+        }
+      },
+      "required": [
+        "status",
+        "trailer",
+        "scroll",
+        "visualAlt"
+      ],
+      "additionalProperties": false
+    },
+    "reward": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề khối nhận quà đăng ký sớm."
+        },
+        "desc": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Một dòng mô tả phần quà: số lượng và tên tiền tệ. Tên tiền tệ chưa chốt; số lượng phải khớp với chiến dịch trong cơ sở dữ liệu."
+        },
+        "artAlt": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mô tả ảnh phần quà cho người dùng trình đọc màn hình."
+        },
+        "privacy": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng nhỏ dưới nút đăng ký, nói email dùng để làm gì."
+        },
+        "privacyLink": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Chữ của link tới trang quyền riêng tư."
+        },
+        "notYou": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Câu hỏi hiện khi đã đăng nhập, trước link đăng xuất."
+        },
+        "signOut": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn link đăng xuất."
+        },
+        "states": {
+          "type": "object",
+          "properties": {
+            "signedOut": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nút khi chưa đăng nhập."
+            },
+            "redirecting": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nút trong lúc chuyển sang trang đăng nhập Google."
+            },
+            "registering": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nút trong lúc đang ghi nhận đăng ký."
+            },
+            "registered": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Thông báo đăng ký thành công; có thể dùng {email}. Không được hứa nhận quà trong game, vì game chưa có đăng nhập Google."
+            },
+            "alreadyRegistered": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Thông báo khi tài khoản đã đăng ký từ trước. Giữ nguyên {date}."
+            },
+            "signedInNotRegistered": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nút khi đã đăng nhập nhưng chưa đăng ký."
+            },
+            "cancelled": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Thông báo khi người dùng huỷ đăng nhập Google."
+            },
+            "error": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Thông báo khi có lỗi, kèm lời mời thử lại."
+            },
+            "closed": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Thông báo khi chương trình đăng ký sớm đã kết thúc."
+            },
+            "notOpen": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Thông báo khi chưa mở đăng ký (website thật dùng trạng thái này cho tới khi có đăng ký thật)."
+            }
+          },
+          "required": [
+            "signedOut",
+            "redirecting",
+            "registering",
+            "registered",
+            "alreadyRegistered",
+            "signedInNotRegistered",
+            "cancelled",
+            "error",
+            "closed",
+            "notOpen"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "title",
+        "desc",
+        "artAlt",
+        "privacy",
+        "privacyLink",
+        "notYou",
+        "signOut",
+        "states"
+      ],
+      "additionalProperties": false
+    },
+    "story": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề phần giới thiệu thế giới game."
+        },
+        "p1": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Đoạn giới thiệu thứ 1, 2–3 câu. Nói về thế giới và nhân vật, không nói về âm nhạc."
+        },
+        "p2": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Đoạn giới thiệu thứ 2, 2–3 câu."
+        },
+        "p3": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Đoạn giới thiệu thứ 3, 2–3 câu."
+        },
+        "band1": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Khẩu hiệu thứ 1: dòng chữ nhỏ ở giữa trang, sau phần Gameplay. Vài chữ."
+        },
+        "band2": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Khẩu hiệu thứ 2, dòng dưới khẩu hiệu 1. Vài chữ."
+        },
+        "band3": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Khẩu hiệu thứ 3, dòng cuối. Vài chữ."
+        },
+        "imageAlt": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mô tả ảnh của phần giới thiệu."
+        }
+      },
+      "required": [
+        "title",
+        "p1",
+        "p2",
+        "p3",
+        "band1",
+        "band2",
+        "band3",
+        "imageAlt"
+      ],
+      "additionalProperties": false
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề phần Tính năng."
+        },
+        "summary": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Hai câu tóm tắt dưới tiêu đề phần Tính năng."
+        },
+        "coverAlt": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mô tả ảnh bìa của phần Tính năng."
+        },
+        "seeDetails": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nút mở modal chi tiết tính năng."
+        },
+        "number": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn nhỏ trên mỗi tab, ví dụ \"TÍNH NĂNG #1\". Giữ nguyên {n}."
+        },
+        "items": {
+          "type": "object",
+          "properties": {
+            "f1": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Tên tính năng 1, hiện trên tab 1 của modal Tính năng. Khoảng 30 ký tự."
+                },
+                "text": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Một hoặc hai câu giải thích tính năng 1, hiện trong tab 1 của modal. Viết đơn giản, chỉ dùng dữ kiện trong doc/GAME_FACTS.md."
+                },
+                "image1Alt": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Mô tả ảnh thứ nhất của tính năng 1 cho người dùng trình đọc màn hình."
+                },
+                "image2Alt": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Mô tả ảnh thứ hai của tính năng 1 cho người dùng trình đọc màn hình."
+                }
+              },
+              "required": [
+                "title",
+                "text",
+                "image1Alt",
+                "image2Alt"
+              ],
+              "additionalProperties": false
+            },
+            "f2": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Tên tính năng 2, hiện trên tab 2 của modal Tính năng. Khoảng 30 ký tự."
+                },
+                "text": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Một hoặc hai câu giải thích tính năng 2, hiện trong tab 2 của modal. Viết đơn giản, chỉ dùng dữ kiện trong doc/GAME_FACTS.md."
+                },
+                "image1Alt": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Mô tả ảnh thứ nhất của tính năng 2 cho người dùng trình đọc màn hình."
+                },
+                "image2Alt": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Mô tả ảnh thứ hai của tính năng 2 cho người dùng trình đọc màn hình."
+                }
+              },
+              "required": [
+                "title",
+                "text",
+                "image1Alt",
+                "image2Alt"
+              ],
+              "additionalProperties": false
+            },
+            "f3": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Tên tính năng 3, hiện trên tab 3 của modal Tính năng. Khoảng 30 ký tự."
+                },
+                "text": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Một hoặc hai câu giải thích tính năng 3, hiện trong tab 3 của modal. Viết đơn giản, chỉ dùng dữ kiện trong doc/GAME_FACTS.md."
+                },
+                "image1Alt": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Mô tả ảnh thứ nhất của tính năng 3 cho người dùng trình đọc màn hình."
+                },
+                "image2Alt": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Mô tả ảnh thứ hai của tính năng 3 cho người dùng trình đọc màn hình."
+                }
+              },
+              "required": [
+                "title",
+                "text",
+                "image1Alt",
+                "image2Alt"
+              ],
+              "additionalProperties": false
+            },
+            "f4": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Tên tính năng 4, hiện trên tab 4 của modal Tính năng. Khoảng 30 ký tự."
+                },
+                "text": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Một hoặc hai câu giải thích tính năng 4, hiện trong tab 4 của modal. Viết đơn giản, chỉ dùng dữ kiện trong doc/GAME_FACTS.md."
+                },
+                "image1Alt": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Mô tả ảnh thứ nhất của tính năng 4 cho người dùng trình đọc màn hình."
+                },
+                "image2Alt": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Mô tả ảnh thứ hai của tính năng 4 cho người dùng trình đọc màn hình."
+                }
+              },
+              "required": [
+                "title",
+                "text",
+                "image1Alt",
+                "image2Alt"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "f1",
+            "f2",
+            "f3",
+            "f4"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "title",
+        "summary",
+        "coverAlt",
+        "seeDetails",
+        "number",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "gameplay": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề phần Gameplay."
+        },
+        "summary": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Hai câu tóm tắt cách chơi dưới tiêu đề phần Gameplay."
+        },
+        "coverAlt": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Mô tả ảnh bìa của phần Gameplay."
+        },
+        "details": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nút mở modal chi tiết gameplay."
+        },
+        "rates": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng tỉ lệ gacha. Giữ nguyên {fiveStar}, {fourStar}, {threeStar}: các con số lấy từ dữ liệu."
+        },
+        "previous": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn nút ảnh trước trong slider."
+        },
+        "next": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn nút ảnh sau trong slider."
+        },
+        "position": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Câu đọc cho trình đọc màn hình khi chuyển ảnh. Giữ nguyên {current} và {total}."
+        },
+        "tabs": {
+          "type": "object",
+          "properties": {
+            "g1": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Tiêu đề tab 1 trong modal Gameplay. Khoảng 30 ký tự."
+                },
+                "text": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Đoạn giải thích ngắn cho tab 1, viết đơn giản và dễ hiểu, không đi vào chi tiết luật chơi. Chỉ dùng dữ kiện trong doc/GAME_FACTS.md."
+                },
+                "slides": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                  },
+                  "additionalProperties": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "description": "Mô tả từng ảnh trong slider của tab 1. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây."
+                  },
+                  "description": "Mô tả từng ảnh trong slider của tab 1. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây."
+                }
+              },
+              "required": [
+                "title",
+                "text",
+                "slides"
+              ],
+              "additionalProperties": false
+            },
+            "g2": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Tiêu đề tab 2 trong modal Gameplay. Khoảng 30 ký tự."
+                },
+                "text": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Đoạn giải thích ngắn cho tab 2, viết đơn giản và dễ hiểu, không đi vào chi tiết luật chơi. Chỉ dùng dữ kiện trong doc/GAME_FACTS.md."
+                },
+                "slides": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                  },
+                  "additionalProperties": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "description": "Mô tả từng ảnh trong slider của tab 2. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây."
+                  },
+                  "description": "Mô tả từng ảnh trong slider của tab 2. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây."
+                }
+              },
+              "required": [
+                "title",
+                "text",
+                "slides"
+              ],
+              "additionalProperties": false
+            },
+            "g3": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Tiêu đề tab 3 trong modal Gameplay. Khoảng 30 ký tự."
+                },
+                "text": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Đoạn giải thích ngắn cho tab 3, viết đơn giản và dễ hiểu, không đi vào chi tiết luật chơi. Chỉ dùng dữ kiện trong doc/GAME_FACTS.md."
+                },
+                "slides": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                  },
+                  "additionalProperties": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "description": "Mô tả từng ảnh trong slider của tab 3. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây."
+                  },
+                  "description": "Mô tả từng ảnh trong slider của tab 3. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây."
+                }
+              },
+              "required": [
+                "title",
+                "text",
+                "slides"
+              ],
+              "additionalProperties": false
+            },
+            "g4": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Tiêu đề tab 4 trong modal Gameplay. Khoảng 30 ký tự."
+                },
+                "text": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Đoạn giải thích ngắn cho tab 4, viết đơn giản và dễ hiểu, không đi vào chi tiết luật chơi. Chỉ dùng dữ kiện trong doc/GAME_FACTS.md."
+                },
+                "slides": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                  },
+                  "additionalProperties": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "description": "Mô tả từng ảnh trong slider của tab 4. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây."
+                  },
+                  "description": "Mô tả từng ảnh trong slider của tab 4. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây."
+                }
+              },
+              "required": [
+                "title",
+                "text",
+                "slides"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "g1",
+            "g2",
+            "g3",
+            "g4"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "title",
+        "summary",
+        "coverAlt",
+        "details",
+        "rates",
+        "previous",
+        "next",
+        "position",
+        "tabs"
+      ],
+      "additionalProperties": false
+    },
+    "characters": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề phần Nhân vật, chữ rất lớn bên trái. Ngắn, một hoặc hai từ."
+        },
+        "line1": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng giới thiệu 1 dưới tiêu đề phần Nhân vật. Khoảng 40 ký tự."
+        },
+        "line2": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng giới thiệu 2. Khoảng 40 ký tự."
+        },
+        "line3": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng giới thiệu 3. Khoảng 40 ký tự."
+        },
+        "rarity": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Câu đọc độ hiếm cho trình đọc màn hình, ví dụ \"5 sao\". Giữ nguyên {count}."
+        },
+        "changeVisual": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nút đổi giữa hình đứng yên và hình chiến đấu."
+        },
+        "previous": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nút sang nhân vật trước trong hồ sơ."
+        },
+        "next": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nút sang nhân vật sau trong hồ sơ."
+        },
+        "profile": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn mục hồ sơ."
+        },
+        "passive": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn mục passive."
+        },
+        "stats": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn mục chỉ số."
+        },
+        "hp": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tên chỉ số máu."
+        },
+        "scoreBonus": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tên chỉ số thưởng điểm."
+        },
+        "feverBonus": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tên chỉ số thưởng Fever."
+        },
+        "gallery": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn thư viện ảnh của nhân vật."
+        },
+        "items": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "tagline": {
+                "type": "string",
+                "pattern": "\\S",
+                "description": "Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự."
+              },
+              "profile": {
+                "type": "string",
+                "pattern": "\\S",
+                "description": "Đoạn hồ sơ nhân vật, 2–4 câu."
+              },
+              "passiveName": {
+                "type": "string",
+                "pattern": "\\S",
+                "description": "Tên passive đúng như trong game (giữ nguyên tiếng Anh ở cả hai ngôn ngữ)."
+              },
+              "passiveDescription": {
+                "type": "string",
+                "pattern": "\\S",
+                "description": "Mô tả passive. Bản tiếng Anh là nguyên văn trong game; bản tiếng Việt là bản dịch, bỏ chữ [REVIEW] khi bạn đã duyệt."
+              },
+              "cardAlt": {
+                "type": "string",
+                "pattern": "\\S",
+                "description": "Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình."
+              },
+              "idleAlt": {
+                "type": "string",
+                "pattern": "\\S",
+                "description": "Mô tả hình nhân vật ở tư thế đứng yên."
+              },
+              "battleAlt": {
+                "type": "string",
+                "pattern": "\\S",
+                "description": "Mô tả hình nhân vật ở tư thế chiến đấu."
+              },
+              "gallery": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Mô tả từng ảnh trong thư viện ảnh của nhân vật. Mỗi ảnh khai báo trong content/data/characters.json."
+                },
+                "description": "Mô tả từng ảnh trong thư viện ảnh của nhân vật. Mỗi ảnh khai báo trong content/data/characters.json."
+              }
+            },
+            "required": [
+              "tagline",
+              "profile",
+              "passiveName",
+              "passiveDescription",
+              "cardAlt",
+              "idleAlt",
+              "battleAlt",
+              "gallery"
+            ],
+            "additionalProperties": false
+          },
+          "description": "Nội dung riêng của từng nhân vật, theo slug trong content/data/characters.json."
+        }
+      },
+      "required": [
+        "title",
+        "line1",
+        "line2",
+        "line3",
+        "rarity",
+        "changeVisual",
+        "previous",
+        "next",
+        "profile",
+        "passive",
+        "stats",
+        "hp",
+        "scoreBonus",
+        "feverBonus",
+        "gallery",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "footer": {
+      "type": "object",
+      "properties": {
+        "specHeading": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề bảng thông tin game ở cuối trang."
+        },
+        "linksHeading": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề nhóm link mạng xã hội."
+        },
+        "shareHeading": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề nhóm nút chia sẻ."
+        },
+        "spec": {
+          "type": "object",
+          "properties": {
+            "titleLabel": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nhãn dòng tên game."
+            },
+            "titleValue": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Tên game."
+            },
+            "releaseLabel": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nhãn dòng phát hành."
+            },
+            "releaseValue": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Trạng thái phát hành."
+            },
+            "genreLabel": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nhãn dòng thể loại."
+            },
+            "genreValue": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Thể loại game."
+            },
+            "playersLabel": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nhãn dòng số người chơi."
+            },
+            "playersValue": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Số người chơi."
+            },
+            "platformLabel": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nhãn dòng nền tảng."
+            },
+            "platformValue": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nền tảng. Chỉ ghi Android cho tới khi có bản iOS."
+            }
+          },
+          "required": [
+            "titleLabel",
+            "titleValue",
+            "releaseLabel",
+            "releaseValue",
+            "genreLabel",
+            "genreValue",
+            "playersLabel",
+            "playersValue",
+            "platformLabel",
+            "platformValue"
+          ],
+          "additionalProperties": false
+        },
+        "store": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng chữ thay cho nút cửa hàng khi chưa có link Google Play."
+        },
+        "shareX": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn nút chia sẻ lên X."
+        },
+        "shareFacebook": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nhãn nút chia sẻ lên Facebook."
+        },
+        "shareText": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Câu đi kèm link khi chia sẻ lên X."
+        },
+        "social": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nhãn link trang X của Promuse."
+            },
+            "facebook": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nhãn link trang Facebook của Promuse."
+            },
+            "youtube": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nhãn link kênh YouTube của Promuse."
+            },
+            "tiktok": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nhãn link TikTok của Promuse."
+            },
+            "discord": {
+              "type": "string",
+              "pattern": "\\S",
+              "description": "Nhãn link Discord của Promuse."
+            }
+          },
+          "required": [
+            "x",
+            "facebook",
+            "youtube",
+            "tiktok",
+            "discord"
+          ],
+          "additionalProperties": false
+        },
+        "privacy": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Chữ của link tới trang quyền riêng tư."
+        },
+        "copyright": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng bản quyền. Giữ nguyên {holder}: tên lấy từ content/data/site.json."
+        }
+      },
+      "required": [
+        "specHeading",
+        "linksHeading",
+        "shareHeading",
+        "spec",
+        "store",
+        "shareX",
+        "shareFacebook",
+        "shareText",
+        "social",
+        "privacy",
+        "copyright"
+      ],
+      "additionalProperties": false
+    },
+    "privacy": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề trang quyền riêng tư."
+        },
+        "intro": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Đoạn mở đầu: trang này nói về dữ liệu nào và vì sao."
+        },
+        "storedHeading": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề mục dữ liệu được lưu."
+        },
+        "storedEmail": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng: email tài khoản Google. Phải khớp với dữ liệu thật được lưu."
+        },
+        "storedGoogleId": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng: mã tài khoản Google."
+        },
+        "storedLocale": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng: ngôn ngữ dùng trên trang."
+        },
+        "storedCampaign": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng: chương trình đăng ký sớm."
+        },
+        "storedTime": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dòng: thời điểm đăng ký."
+        },
+        "whyHeading": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề mục lý do lưu dữ liệu."
+        },
+        "why": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Lý do lưu dữ liệu."
+        },
+        "processorsHeading": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề mục các dịch vụ xử lý dữ liệu."
+        },
+        "processors": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Các dịch vụ xử lý dữ liệu: Supabase, Vercel, Google."
+        },
+        "retentionHeading": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề mục thời gian lưu."
+        },
+        "retention": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Dữ liệu được giữ trong bao lâu."
+        },
+        "deletionHeading": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề mục yêu cầu xoá dữ liệu."
+        },
+        "deletion": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Cách yêu cầu xoá dữ liệu."
+        },
+        "contactHeading": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề mục liên hệ."
+        },
+        "contact": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Câu mời liên hệ. Giữ nguyên {email}: địa chỉ lấy từ content/data/site.json."
+        }
+      },
+      "required": [
+        "title",
+        "intro",
+        "storedHeading",
+        "storedEmail",
+        "storedGoogleId",
+        "storedLocale",
+        "storedCampaign",
+        "storedTime",
+        "whyHeading",
+        "why",
+        "processorsHeading",
+        "processors",
+        "retentionHeading",
+        "retention",
+        "deletionHeading",
+        "deletion",
+        "contactHeading",
+        "contact"
+      ],
+      "additionalProperties": false
+    },
+    "notFound": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Tiêu đề trang không tìm thấy (404)."
+        },
+        "body": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Một câu giải thích trên trang 404."
+        },
+        "home": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Nút quay về trang chủ trên trang 404."
+        }
+      },
+      "required": [
+        "title",
+        "body",
+        "home"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "meta",
+    "common",
+    "nav",
+    "intro",
+    "hero",
+    "reward",
+    "story",
+    "features",
+    "gameplay",
+    "characters",
+    "footer",
+    "privacy",
+    "notFound"
+  ],
+  "additionalProperties": false
+}

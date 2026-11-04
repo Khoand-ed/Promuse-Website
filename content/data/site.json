@@ -1,0 +1,28 @@
+{
+  "$schema": "../schemas/site.schema.json",
+  "bpm": 120,
+  "trailerId": "",
+  "copyrightHolder": null,
+  "privacyContactEmail": null,
+  "logo": {
+    "src": "/images/brand/logo.svg",
+    "width": 1200,
+    "height": 400,
+    "alt": "common.logoAlt"
+  },
+  "social": {
+    "x": "",
+    "facebook": "",
+    "youtube": "",
+    "tiktok": "",
+    "discord": ""
+  },
+  "stores": {
+    "googlePlay": ""
+  },
+  "platforms": [
+    { "id": "android", "status": "coming-soon" },
+    { "id": "ios", "status": "planned" }
+  ],
+  "shareHashtag": "Promuse"
+}

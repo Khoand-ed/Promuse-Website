@@ -1,0 +1,9 @@
+{
+  "$schema": "../schemas/reward.schema.json",
+  "art": {
+    "src": "/images/reward/reward.webp",
+    "width": 800,
+    "height": 800,
+    "alt": "reward.artAlt"
+  }
+}

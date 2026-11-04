@@ -31,5 +31,6 @@ Requirements: Node.js 24 (see `.nvmrc`) and npm.
 - `doc/PHASES.md`: build order and acceptance criteria
 - `doc/GAME_FACTS.md`: what the site may say about the game
 - `doc/DESIGN.md`: reference study and visual identity
+- `doc/CONTENT_GUIDE.md`: how to edit the text, links and images (in Vietnamese)
 
 The portfolio version of this README is written in P7.

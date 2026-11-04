@@ -1,0 +1,269 @@
+{
+  "$schema": "../schemas/text.schema.json",
+  "meta": {
+    "title": "Promuse",
+    "description": "[TODO] Mô tả ngắn về Promuse cho Google và khi chia sẻ link, 120–160 ký tự"
+  },
+  "common": {
+    "brand": "Promuse",
+    "logoAlt": "Promuse",
+    "skipToContent": "Bỏ qua, tới nội dung chính",
+    "backToTop": "Lên đầu trang",
+    "openMenu": "Mở menu",
+    "closeMenu": "Đóng menu",
+    "menu": "Menu",
+    "mainNav": "Điều hướng chính",
+    "language": "Ngôn ngữ",
+    "languageNames": {
+      "vi": "Tiếng Việt",
+      "en": "English"
+    },
+    "close": "Đóng",
+    "imagePlaceholder": "Chưa có ảnh: {name} · {width} × {height}"
+  },
+  "nav": {
+    "story": "Giới thiệu",
+    "features": "Tính năng",
+    "gameplay": "Gameplay",
+    "characters": "Nhân vật",
+    "reward": "Nhận quà"
+  },
+  "intro": {
+    "line1": "[TODO] Dòng mở đầu 1/3, khoảng 30 ký tự",
+    "line2": "[TODO] Dòng mở đầu 2/3, khoảng 30 ký tự",
+    "line3": "[TODO] Dòng mở đầu 3/3, khoảng 30 ký tự",
+    "skip": "Bỏ qua"
+  },
+  "hero": {
+    "status": "Sắp ra mắt trên Android",
+    "trailer": "Xem trailer",
+    "scroll": "Cuộn",
+    "visualAlt": "[TODO] Mô tả ảnh key visual"
+  },
+  "reward": {
+    "title": "Quà đăng ký sớm",
+    "desc": "[TODO] Phần quà: số lượng và tên tiền tệ (chưa chốt)",
+    "artAlt": "[TODO] Mô tả ảnh phần quà",
+    "privacy": "Email chỉ dùng để gắn quà với tài khoản game.",
+    "privacyLink": "Chính sách quyền riêng tư",
+    "notYou": "Không phải bạn?",
+    "signOut": "Đăng xuất",
+    "states": {
+      "signedOut": "Đăng nhập Google để nhận quà",
+      "redirecting": "Đang chuyển tới Google…",
+      "registering": "Đang ghi nhận…",
+      "registered": "[TODO] Báo đăng ký thành công cho {email}, không hứa nhận quà trong game",
+      "alreadyRegistered": "Bạn đã đăng ký từ {date}",
+      "signedInNotRegistered": "Nhận quà đăng ký sớm",
+      "cancelled": "Bạn đã huỷ đăng nhập.",
+      "error": "Có lỗi, thử lại",
+      "closed": "Đã hết thời gian đăng ký sớm",
+      "notOpen": "[TODO] Báo đăng ký chưa mở"
+    }
+  },
+  "story": {
+    "title": "[TODO] Tiêu đề phần giới thiệu thế giới game",
+    "p1": "[TODO] Đoạn giới thiệu 1, 2–3 câu về thế giới game",
+    "p2": "[TODO] Đoạn giới thiệu 2, 2–3 câu về nhân vật",
+    "p3": "[TODO] Đoạn giới thiệu 3, 2–3 câu",
+    "band1": "[TODO] Khẩu hiệu 1, vài chữ",
+    "band2": "[TODO] Khẩu hiệu 2, vài chữ",
+    "band3": "[TODO] Khẩu hiệu 3, vài chữ",
+    "imageAlt": "[TODO] Mô tả ảnh phần giới thiệu"
+  },
+  "features": {
+    "title": "Tính năng",
+    "summary": "[TODO] Hai câu tóm tắt các tính năng nổi bật",
+    "coverAlt": "[TODO] Mô tả ảnh bìa phần Tính năng",
+    "seeDetails": "Xem chi tiết",
+    "number": "TÍNH NĂNG #{n}",
+    "items": {
+      "f1": {
+        "title": "[TODO] Tên tính năng 1 (chủ đề: hai làn, ba loại nốt)",
+        "text": "[TODO] 1–2 câu về tính năng 1",
+        "image1Alt": "[TODO] Mô tả ảnh 1 của tính năng 1",
+        "image2Alt": "[TODO] Mô tả ảnh 2 của tính năng 1"
+      },
+      "f2": {
+        "title": "[TODO] Tên tính năng 2 (chủ đề: mỗi nhân vật đổi cách chơi)",
+        "text": "[TODO] 1–2 câu về tính năng 2",
+        "image1Alt": "[TODO] Mô tả ảnh 1 của tính năng 2",
+        "image2Alt": "[TODO] Mô tả ảnh 2 của tính năng 2"
+      },
+      "f3": {
+        "title": "[TODO] Tên tính năng 3 (chủ đề: thu thập và nâng cấp nhân vật)",
+        "text": "[TODO] 1–2 câu về tính năng 3",
+        "image1Alt": "[TODO] Mô tả ảnh 1 của tính năng 3",
+        "image2Alt": "[TODO] Mô tả ảnh 2 của tính năng 3"
+      },
+      "f4": {
+        "title": "[TODO] Tên tính năng 4 (chủ đề: luôn có thứ để chơi)",
+        "text": "[TODO] 1–2 câu về tính năng 4",
+        "image1Alt": "[TODO] Mô tả ảnh 1 của tính năng 4",
+        "image2Alt": "[TODO] Mô tả ảnh 2 của tính năng 4"
+      }
+    }
+  },
+  "gameplay": {
+    "title": "Gameplay",
+    "summary": "[TODO] Hai câu tóm tắt cách chơi",
+    "coverAlt": "[TODO] Mô tả ảnh bìa phần Gameplay",
+    "details": "Chi tiết gameplay",
+    "rates": "Tỉ lệ: 5★ {fiveStar}% · 4★ {fourStar}% · 3★ {threeStar}%",
+    "previous": "Ảnh trước",
+    "next": "Ảnh sau",
+    "position": "Ảnh {current}/{total}",
+    "tabs": {
+      "g1": {
+        "title": "[TODO] Tiêu đề tab 1 (chủ đề: chiến đấu theo nhịp)",
+        "text": "[TODO] Giải thích ngắn: hai làn, ba loại nốt, giữ HP tới cuối bài",
+        "slides": {
+          "s1": "[TODO] Mô tả ảnh 1 của tab 1",
+          "s2": "[TODO] Mô tả ảnh 2 của tab 1",
+          "s3": "[TODO] Mô tả ảnh 3 của tab 1"
+        }
+      },
+      "g2": {
+        "title": "[TODO] Tiêu đề tab 2 (chủ đề: combo và Fever)",
+        "text": "[TODO] Giải thích ngắn: combo và Fever",
+        "slides": {
+          "s1": "[TODO] Mô tả ảnh 1 của tab 2",
+          "s2": "[TODO] Mô tả ảnh 2 của tab 2",
+          "s3": "[TODO] Mô tả ảnh 3 của tab 2"
+        }
+      },
+      "g3": {
+        "title": "[TODO] Tiêu đề tab 3 (chủ đề: gacha; tên gacha và tiền tệ chưa chốt)",
+        "text": "[TODO] Giải thích ngắn: nhận nhân vật mới, bảo đảm 5★ sau 30 lượt",
+        "slides": {
+          "s1": "[TODO] Mô tả ảnh 1 của tab 3",
+          "s2": "[TODO] Mô tả ảnh 2 của tab 3",
+          "s3": "[TODO] Mô tả ảnh 3 của tab 3"
+        }
+      },
+      "g4": {
+        "title": "[TODO] Tiêu đề tab 4 (chủ đề: nhiệm vụ và điểm danh)",
+        "text": "[TODO] Giải thích ngắn: nhiệm vụ ngày và tuần, điểm danh tháng",
+        "slides": {
+          "s1": "[TODO] Mô tả ảnh 1 của tab 4",
+          "s2": "[TODO] Mô tả ảnh 2 của tab 4",
+          "s3": "[TODO] Mô tả ảnh 3 của tab 4"
+        }
+      }
+    }
+  },
+  "characters": {
+    "title": "Nhân vật",
+    "line1": "[TODO] Dòng giới thiệu nhân vật 1, khoảng 40 ký tự",
+    "line2": "[TODO] Dòng giới thiệu nhân vật 2, khoảng 40 ký tự",
+    "line3": "[TODO] Dòng giới thiệu nhân vật 3, khoảng 40 ký tự",
+    "rarity": "{count} sao",
+    "changeVisual": "Đổi hình",
+    "previous": "Nhân vật trước",
+    "next": "Nhân vật sau",
+    "profile": "Hồ sơ",
+    "passive": "Passive",
+    "stats": "Chỉ số",
+    "hp": "HP",
+    "scoreBonus": "Điểm",
+    "feverBonus": "Fever",
+    "gallery": "Thư viện ảnh",
+    "items": {
+      "amiya": {
+        "tagline": "[TODO] Một câu giới thiệu AMIYA",
+        "profile": "[TODO] Hồ sơ AMIYA, 2–4 câu",
+        "passiveName": "Field Medic",
+        "passiveDescription": "[REVIEW] Lần Miss đầu tiên trong mỗi lượt chơi không làm mất combo.",
+        "cardAlt": "[TODO] Mô tả ảnh thẻ AMIYA",
+        "idleAlt": "[TODO] Mô tả hình AMIYA đứng yên",
+        "battleAlt": "[TODO] Mô tả hình AMIYA chiến đấu",
+        "gallery": {}
+      },
+      "nova": {
+        "tagline": "[TODO] Một câu giới thiệu NOVA",
+        "profile": "[TODO] Hồ sơ NOVA, 2–4 câu",
+        "passiveName": "Overdrive",
+        "passiveDescription": "[REVIEW] Mỗi lần Great có cơ hội được tính là Perfect.",
+        "cardAlt": "[TODO] Mô tả ảnh thẻ NOVA",
+        "idleAlt": "[TODO] Mô tả hình NOVA đứng yên",
+        "battleAlt": "[TODO] Mô tả hình NOVA chiến đấu",
+        "gallery": {}
+      },
+      "echo": {
+        "tagline": "[TODO] Một câu giới thiệu ECHO",
+        "profile": "[TODO] Hồ sơ ECHO, 2–4 câu",
+        "passiveName": "Resonance",
+        "passiveDescription": "[REVIEW] Combo cao giúp Fever kéo dài hơn.",
+        "cardAlt": "[TODO] Mô tả ảnh thẻ ECHO",
+        "idleAlt": "[TODO] Mô tả hình ECHO đứng yên",
+        "battleAlt": "[TODO] Mô tả hình ECHO chiến đấu",
+        "gallery": {}
+      },
+      "pulse": {
+        "tagline": "[TODO] Một câu giới thiệu PULSE",
+        "profile": "[TODO] Hồ sơ PULSE, 2–4 câu",
+        "passiveName": "Steady Beat",
+        "passiveDescription": "[REVIEW] Hồi một ít HP sau mỗi khoảng thời gian đều đặn.",
+        "cardAlt": "[TODO] Mô tả ảnh thẻ PULSE",
+        "idleAlt": "[TODO] Mô tả hình PULSE đứng yên",
+        "battleAlt": "[TODO] Mô tả hình PULSE chiến đấu",
+        "gallery": {}
+      }
+    }
+  },
+  "footer": {
+    "specHeading": "Thông số",
+    "linksHeading": "Liên kết",
+    "shareHeading": "Chia sẻ",
+    "spec": {
+      "titleLabel": "Tên",
+      "titleValue": "Promuse",
+      "releaseLabel": "Phát hành",
+      "releaseValue": "Sắp ra mắt",
+      "genreLabel": "Thể loại",
+      "genreValue": "Nhịp điệu hack-and-slash, gacha",
+      "playersLabel": "Số người chơi",
+      "playersValue": "1",
+      "platformLabel": "Nền tảng",
+      "platformValue": "Android"
+    },
+    "store": "Sắp ra mắt trên Google Play",
+    "shareX": "Chia sẻ lên X",
+    "shareFacebook": "Chia sẻ lên Facebook",
+    "shareText": "[TODO] Câu chia sẻ ngắn đi kèm link trang",
+    "social": {
+      "x": "Promuse trên X",
+      "facebook": "Promuse trên Facebook",
+      "youtube": "Promuse trên YouTube",
+      "tiktok": "Promuse trên TikTok",
+      "discord": "Discord của Promuse"
+    },
+    "privacy": "Quyền riêng tư",
+    "copyright": "© 2026 Promuse · {holder}"
+  },
+  "privacy": {
+    "title": "Quyền riêng tư",
+    "intro": "[TODO] Đoạn mở đầu: trang này nói về dữ liệu nào và vì sao",
+    "storedHeading": "Dữ liệu được lưu khi bạn đăng ký",
+    "storedEmail": "[REVIEW] Địa chỉ email của tài khoản Google",
+    "storedGoogleId": "[REVIEW] Mã tài khoản Google (không phải mật khẩu)",
+    "storedLocale": "[REVIEW] Ngôn ngữ bạn dùng trên trang",
+    "storedCampaign": "[REVIEW] Chương trình đăng ký sớm bạn tham gia",
+    "storedTime": "[REVIEW] Thời điểm đăng ký",
+    "whyHeading": "Vì sao cần dữ liệu này",
+    "why": "[TODO] Lý do lưu dữ liệu: để sau này gửi quà đăng ký sớm cho đúng tài khoản Google trong game",
+    "processorsHeading": "Dịch vụ xử lý dữ liệu",
+    "processors": "[TODO] Nêu các dịch vụ: Supabase lưu dữ liệu, Vercel chạy website, Google xử lý đăng nhập",
+    "retentionHeading": "Thời gian lưu",
+    "retention": "[TODO] Dữ liệu được giữ trong bao lâu",
+    "deletionHeading": "Yêu cầu xoá dữ liệu",
+    "deletion": "[TODO] Cách yêu cầu xoá dữ liệu",
+    "contactHeading": "Liên hệ",
+    "contact": "[TODO] Câu mời liên hệ, có {email}"
+  },
+  "notFound": {
+    "title": "Không tìm thấy trang",
+    "body": "Đường dẫn này không tồn tại hoặc đã bị đổi.",
+    "home": "Về trang chủ"
+  }
+}

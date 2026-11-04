@@ -14,7 +14,7 @@ Shared by every agent in this repo. Claude Code loads this file through `CLAUDE.
 
 ## Project
 
-Promuse is a 2D mobile rhythm hack-and-slash game with gacha (Unity, Android first, in development). This repo is its landing page, built as a portfolio and graduation-project piece. It aims for the kind of experience the Persona 3 Reload website (https://p3re.jp/en/) gives — structure, presentation, motion — with Promuse's own identity, never that site's assets, code or branding.
+Promuse is a 2D mobile rhythm hack-and-slash game with gacha (Unity, Android first, in development). This repo is its landing page, built as a portfolio and graduation-project piece. Its look follows the Persona 3 Reload website (https://p3re.jp/en/) closely — layout, colours, buttons, type and motion — rebuilt with our own code, and never uses that site's assets, code, text, logos or branding (`doc/DESIGN.md`, section 4).
 
 Visitors sign in with Google to pre-register, and the website records the registration in its own Supabase project. Delivering the reward through the game's Mailbox is future work for the game's .NET backend (`doc/ARCHITECTURE.md`, section 17); this repo does not build it.
 
@@ -62,7 +62,8 @@ src/app/auth/callback/     OAuth code exchange (not localized)
 src/app/api/v1/            route handlers: parse, authenticate, call a service, map errors
 src/app/dev/               development-only helpers; return 404 in production
 src/components/sections/   one component per page section
-src/components/ui/         Button, Modal, Tabs, Slider, Lightbox, LanguageSwitch, MotionToggle, ImageSlot
+src/components/ui/         Modal, Tabs, Slider, Lightbox, LanguageSwitch, MobileMenu, MotionToggle,
+                           BackToTop, SkipLink, Wordmark, ImageSlot, icons
 src/components/motion/     MotionProvider, SmoothScroll, BeatClock, Reveal, SplitHeadline,
                            ScrollType, Marquee, SlashWipe, Parallax, NoteLanes
 src/content/               zod schemas and loaders for content/ (no copy lives here)

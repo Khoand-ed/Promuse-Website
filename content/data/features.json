@@ -1,0 +1,79 @@
+{
+  "$schema": "../schemas/features.schema.json",
+  "cover": {
+    "src": "/images/features/cover.webp",
+    "width": 1280,
+    "height": 720,
+    "alt": "features.coverAlt"
+  },
+  "items": [
+    {
+      "key": "f1",
+      "images": [
+        {
+          "src": "/images/features/f1-1.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "features.items.f1.image1Alt"
+        },
+        {
+          "src": "/images/features/f1-2.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "features.items.f1.image2Alt"
+        }
+      ]
+    },
+    {
+      "key": "f2",
+      "images": [
+        {
+          "src": "/images/features/f2-1.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "features.items.f2.image1Alt"
+        },
+        {
+          "src": "/images/features/f2-2.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "features.items.f2.image2Alt"
+        }
+      ]
+    },
+    {
+      "key": "f3",
+      "images": [
+        {
+          "src": "/images/features/f3-1.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "features.items.f3.image1Alt"
+        },
+        {
+          "src": "/images/features/f3-2.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "features.items.f3.image2Alt"
+        }
+      ]
+    },
+    {
+      "key": "f4",
+      "images": [
+        {
+          "src": "/images/features/f4-1.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "features.items.f4.image1Alt"
+        },
+        {
+          "src": "/images/features/f4-2.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "features.items.f4.image2Alt"
+        }
+      ]
+    }
+  ]
+}

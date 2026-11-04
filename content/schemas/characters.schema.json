@@ -1,0 +1,262 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "items": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "description": "Tên ngắn dùng trong link (#char-<slug>) và làm khoá trong content/text (characters.items.<slug>)."
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Z0-9_]+$",
+            "description": "Mã nhân vật trong game."
+          },
+          "name": {
+            "type": "string",
+            "pattern": "\\S",
+            "description": "Tên hiển thị, giữ đúng như trong game."
+          },
+          "rarity": {
+            "anyOf": [
+              {
+                "type": "number",
+                "const": 3
+              },
+              {
+                "type": "number",
+                "const": 4
+              },
+              {
+                "type": "number",
+                "const": 5
+              }
+            ],
+            "description": "Độ hiếm: 3, 4 hoặc 5 sao."
+          },
+          "stats": {
+            "type": "object",
+            "properties": {
+              "hp": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991,
+                "description": "Máu tối đa."
+              },
+              "scoreBonus": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "description": "Hệ số thưởng điểm, ví dụ 1.2."
+              },
+              "feverBonus": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "description": "Hệ số thưởng Fever, ví dụ 1.2."
+              }
+            },
+            "required": [
+              "hp",
+              "scoreBonus",
+              "feverBonus"
+            ],
+            "additionalProperties": false,
+            "description": "Chỉ số lấy từ doc/GAME_FACTS.md mục 3."
+          },
+          "themeColor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^#[0-9A-Fa-f]{6}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Màu chủ đạo của nhân vật, dạng #RRGGBB, làm nền phần Nhân vật khi nhân vật này hiện ra. Chọn màu sáng: chữ trên nền là màu navy #1D384A và cần tương phản ít nhất 4,5:1. null nghĩa là chưa chọn (trang tạm dùng bảng màu pastel)."
+          },
+          "images": {
+            "type": "object",
+            "properties": {
+              "card": {
+                "type": "object",
+                "properties": {
+                  "src": {
+                    "type": "string",
+                    "pattern": "^\\/images\\/[a-z0-9/_-]+\\.(webp|png|jpg|jpeg|svg|avif)$",
+                    "description": "Đường dẫn ảnh tính từ thư mục public/, ví dụ /images/hero/hero-desktop.webp. Đặt file đúng chỗ này là ảnh thay cho khung giữ chỗ."
+                  },
+                  "width": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991,
+                    "description": "Chiều rộng ảnh (px). Khung giữ chỗ dùng tỉ lệ rộng/cao này."
+                  },
+                  "height": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991,
+                    "description": "Chiều cao ảnh (px)."
+                  },
+                  "alt": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*$",
+                    "description": "Khoá trong content/text/*.json chứa mô tả ảnh cho người dùng trình đọc màn hình, ví dụ hero.visualAlt."
+                  }
+                },
+                "required": [
+                  "src",
+                  "width",
+                  "height",
+                  "alt"
+                ],
+                "additionalProperties": false,
+                "description": "Ảnh thẻ nhân vật, 600 × 800."
+              },
+              "idle": {
+                "type": "object",
+                "properties": {
+                  "src": {
+                    "type": "string",
+                    "pattern": "^\\/images\\/[a-z0-9/_-]+\\.(webp|png|jpg|jpeg|svg|avif)$",
+                    "description": "Đường dẫn ảnh tính từ thư mục public/, ví dụ /images/hero/hero-desktop.webp. Đặt file đúng chỗ này là ảnh thay cho khung giữ chỗ."
+                  },
+                  "width": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991,
+                    "description": "Chiều rộng ảnh (px). Khung giữ chỗ dùng tỉ lệ rộng/cao này."
+                  },
+                  "height": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991,
+                    "description": "Chiều cao ảnh (px)."
+                  },
+                  "alt": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*$",
+                    "description": "Khoá trong content/text/*.json chứa mô tả ảnh cho người dùng trình đọc màn hình, ví dụ hero.visualAlt."
+                  }
+                },
+                "required": [
+                  "src",
+                  "width",
+                  "height",
+                  "alt"
+                ],
+                "additionalProperties": false,
+                "description": "Hình nhân vật đứng yên. Kích thước tạm; chốt khi có art."
+              },
+              "battle": {
+                "type": "object",
+                "properties": {
+                  "src": {
+                    "type": "string",
+                    "pattern": "^\\/images\\/[a-z0-9/_-]+\\.(webp|png|jpg|jpeg|svg|avif)$",
+                    "description": "Đường dẫn ảnh tính từ thư mục public/, ví dụ /images/hero/hero-desktop.webp. Đặt file đúng chỗ này là ảnh thay cho khung giữ chỗ."
+                  },
+                  "width": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991,
+                    "description": "Chiều rộng ảnh (px). Khung giữ chỗ dùng tỉ lệ rộng/cao này."
+                  },
+                  "height": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991,
+                    "description": "Chiều cao ảnh (px)."
+                  },
+                  "alt": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*$",
+                    "description": "Khoá trong content/text/*.json chứa mô tả ảnh cho người dùng trình đọc màn hình, ví dụ hero.visualAlt."
+                  }
+                },
+                "required": [
+                  "src",
+                  "width",
+                  "height",
+                  "alt"
+                ],
+                "additionalProperties": false,
+                "description": "Hình nhân vật chiến đấu. Kích thước tạm; chốt khi có art."
+              },
+              "gallery": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string",
+                      "pattern": "^\\/images\\/[a-z0-9/_-]+\\.(webp|png|jpg|jpeg|svg|avif)$",
+                      "description": "Đường dẫn ảnh tính từ thư mục public/, ví dụ /images/hero/hero-desktop.webp. Đặt file đúng chỗ này là ảnh thay cho khung giữ chỗ."
+                    },
+                    "width": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 9007199254740991,
+                      "description": "Chiều rộng ảnh (px). Khung giữ chỗ dùng tỉ lệ rộng/cao này."
+                    },
+                    "height": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 9007199254740991,
+                      "description": "Chiều cao ảnh (px)."
+                    },
+                    "alt": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*$",
+                      "description": "Khoá trong content/text/*.json chứa mô tả ảnh cho người dùng trình đọc màn hình, ví dụ hero.visualAlt."
+                    }
+                  },
+                  "required": [
+                    "src",
+                    "width",
+                    "height",
+                    "alt"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Ảnh trong thư viện ảnh của nhân vật."
+                },
+                "description": "Thư viện ảnh trong hồ sơ nhân vật. Để [] thì thư viện bị ẩn."
+              }
+            },
+            "required": [
+              "card",
+              "idle",
+              "battle",
+              "gallery"
+            ],
+            "additionalProperties": false,
+            "description": "Ảnh của nhân vật."
+          }
+        },
+        "required": [
+          "slug",
+          "id",
+          "name",
+          "rarity",
+          "stats",
+          "themeColor",
+          "images"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Các nhân vật, theo thứ tự hiển thị."
+    }
+  },
+  "required": [
+    "items"
+  ],
+  "additionalProperties": false
+}

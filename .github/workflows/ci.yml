@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      NEXT_PUBLIC_BACKEND_MODE: mock
+      NEXT_TELEMETRY_DISABLED: 1
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Content check
+        run: npm run check:content
+      - name: Generated content files are committed
+        run: git diff --exit-code -- CONTENT_TODO.md content/schemas
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build

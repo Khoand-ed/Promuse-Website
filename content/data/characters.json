@@ -1,0 +1,121 @@
+{
+  "$schema": "../schemas/characters.schema.json",
+  "items": [
+    {
+      "slug": "amiya",
+      "id": "AMIYA",
+      "name": "AMIYA",
+      "rarity": 5,
+      "stats": { "hp": 300, "scoreBonus": 1.2, "feverBonus": 1.2 },
+      "themeColor": null,
+      "images": {
+        "card": {
+          "src": "/images/characters/amiya/card.webp",
+          "width": 600,
+          "height": 800,
+          "alt": "characters.items.amiya.cardAlt"
+        },
+        "idle": {
+          "src": "/images/characters/amiya/idle.png",
+          "width": 600,
+          "height": 800,
+          "alt": "characters.items.amiya.idleAlt"
+        },
+        "battle": {
+          "src": "/images/characters/amiya/battle.png",
+          "width": 600,
+          "height": 800,
+          "alt": "characters.items.amiya.battleAlt"
+        },
+        "gallery": []
+      }
+    },
+    {
+      "slug": "nova",
+      "id": "NOVA",
+      "name": "NOVA",
+      "rarity": 4,
+      "stats": { "hp": 275, "scoreBonus": 1.1, "feverBonus": 1.1 },
+      "themeColor": null,
+      "images": {
+        "card": {
+          "src": "/images/characters/nova/card.webp",
+          "width": 600,
+          "height": 800,
+          "alt": "characters.items.nova.cardAlt"
+        },
+        "idle": {
+          "src": "/images/characters/nova/idle.png",
+          "width": 600,
+          "height": 800,
+          "alt": "characters.items.nova.idleAlt"
+        },
+        "battle": {
+          "src": "/images/characters/nova/battle.png",
+          "width": 600,
+          "height": 800,
+          "alt": "characters.items.nova.battleAlt"
+        },
+        "gallery": []
+      }
+    },
+    {
+      "slug": "echo",
+      "id": "ECHO",
+      "name": "ECHO",
+      "rarity": 4,
+      "stats": { "hp": 275, "scoreBonus": 1.1, "feverBonus": 1.1 },
+      "themeColor": null,
+      "images": {
+        "card": {
+          "src": "/images/characters/echo/card.webp",
+          "width": 600,
+          "height": 800,
+          "alt": "characters.items.echo.cardAlt"
+        },
+        "idle": {
+          "src": "/images/characters/echo/idle.png",
+          "width": 600,
+          "height": 800,
+          "alt": "characters.items.echo.idleAlt"
+        },
+        "battle": {
+          "src": "/images/characters/echo/battle.png",
+          "width": 600,
+          "height": 800,
+          "alt": "characters.items.echo.battleAlt"
+        },
+        "gallery": []
+      }
+    },
+    {
+      "slug": "pulse",
+      "id": "PULSE",
+      "name": "PULSE",
+      "rarity": 3,
+      "stats": { "hp": 250, "scoreBonus": 1.0, "feverBonus": 1.0 },
+      "themeColor": null,
+      "images": {
+        "card": {
+          "src": "/images/characters/pulse/card.webp",
+          "width": 600,
+          "height": 800,
+          "alt": "characters.items.pulse.cardAlt"
+        },
+        "idle": {
+          "src": "/images/characters/pulse/idle.png",
+          "width": 600,
+          "height": 800,
+          "alt": "characters.items.pulse.idleAlt"
+        },
+        "battle": {
+          "src": "/images/characters/pulse/battle.png",
+          "width": 600,
+          "height": 800,
+          "alt": "characters.items.pulse.battleAlt"
+        },
+        "gallery": []
+      }
+    }
+  ]
+}

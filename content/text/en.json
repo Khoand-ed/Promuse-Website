@@ -1,0 +1,269 @@
+{
+  "$schema": "../schemas/text.schema.json",
+  "meta": {
+    "title": "Promuse",
+    "description": "[TODO] Short description of Promuse for Google and link previews, 120–160 characters"
+  },
+  "common": {
+    "brand": "Promuse",
+    "logoAlt": "Promuse",
+    "skipToContent": "Skip to main content",
+    "backToTop": "Back to top",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menu": "Menu",
+    "mainNav": "Main navigation",
+    "language": "Language",
+    "languageNames": {
+      "vi": "Tiếng Việt",
+      "en": "English"
+    },
+    "close": "Close",
+    "imagePlaceholder": "Image missing: {name} · {width} × {height}"
+  },
+  "nav": {
+    "story": "Introduction",
+    "features": "Features",
+    "gameplay": "Gameplay",
+    "characters": "Characters",
+    "reward": "Get reward"
+  },
+  "intro": {
+    "line1": "[TODO] Opening line 1 of 3, about 30 characters",
+    "line2": "[TODO] Opening line 2 of 3, about 30 characters",
+    "line3": "[TODO] Opening line 3 of 3, about 30 characters",
+    "skip": "Skip"
+  },
+  "hero": {
+    "status": "Coming soon on Android",
+    "trailer": "Watch trailer",
+    "scroll": "Scroll",
+    "visualAlt": "[TODO] Describe the key visual"
+  },
+  "reward": {
+    "title": "Pre-registration reward",
+    "desc": "[TODO] The reward: amount and currency name (not decided yet)",
+    "artAlt": "[TODO] Describe the reward image",
+    "privacy": "We only use your email to link the reward to your game account.",
+    "privacyLink": "Privacy policy",
+    "notYou": "Not you?",
+    "signOut": "Sign out",
+    "states": {
+      "signedOut": "Sign in with Google to claim",
+      "redirecting": "Redirecting to Google…",
+      "registering": "Registering…",
+      "registered": "[TODO] Confirm the registration for {email}, without promising an in-game reward",
+      "alreadyRegistered": "You pre-registered on {date}",
+      "signedInNotRegistered": "Claim the pre-registration reward",
+      "cancelled": "Sign-in was cancelled.",
+      "error": "Something went wrong, try again",
+      "closed": "Pre-registration has ended",
+      "notOpen": "[TODO] Say that registration is not open yet"
+    }
+  },
+  "story": {
+    "title": "[TODO] Title of the world introduction",
+    "p1": "[TODO] Introduction paragraph 1, 2–3 sentences about the world",
+    "p2": "[TODO] Introduction paragraph 2, 2–3 sentences about the characters",
+    "p3": "[TODO] Introduction paragraph 3, 2–3 sentences",
+    "band1": "[TODO] Slogan 1, a few words",
+    "band2": "[TODO] Slogan 2, a few words",
+    "band3": "[TODO] Slogan 3, a few words",
+    "imageAlt": "[TODO] Describe the introduction image"
+  },
+  "features": {
+    "title": "Features",
+    "summary": "[TODO] Two sentences summarising the main features",
+    "coverAlt": "[TODO] Describe the Features cover image",
+    "seeDetails": "See details",
+    "number": "FEATURE #{n}",
+    "items": {
+      "f1": {
+        "title": "[TODO] Feature 1 name (topic: two lanes, three kinds of notes)",
+        "text": "[TODO] 1–2 sentences about feature 1",
+        "image1Alt": "[TODO] Describe image 1 of feature 1",
+        "image2Alt": "[TODO] Describe image 2 of feature 1"
+      },
+      "f2": {
+        "title": "[TODO] Feature 2 name (topic: each character changes how you play)",
+        "text": "[TODO] 1–2 sentences about feature 2",
+        "image1Alt": "[TODO] Describe image 1 of feature 2",
+        "image2Alt": "[TODO] Describe image 2 of feature 2"
+      },
+      "f3": {
+        "title": "[TODO] Feature 3 name (topic: collect and grow your characters)",
+        "text": "[TODO] 1–2 sentences about feature 3",
+        "image1Alt": "[TODO] Describe image 1 of feature 3",
+        "image2Alt": "[TODO] Describe image 2 of feature 3"
+      },
+      "f4": {
+        "title": "[TODO] Feature 4 name (topic: always something to play)",
+        "text": "[TODO] 1–2 sentences about feature 4",
+        "image1Alt": "[TODO] Describe image 1 of feature 4",
+        "image2Alt": "[TODO] Describe image 2 of feature 4"
+      }
+    }
+  },
+  "gameplay": {
+    "title": "Gameplay",
+    "summary": "[TODO] Two sentences summarising how the game plays",
+    "coverAlt": "[TODO] Describe the Gameplay cover image",
+    "details": "Gameplay details",
+    "rates": "Rates: 5★ {fiveStar}% · 4★ {fourStar}% · 3★ {threeStar}%",
+    "previous": "Previous image",
+    "next": "Next image",
+    "position": "Image {current} of {total}",
+    "tabs": {
+      "g1": {
+        "title": "[TODO] Tab 1 title (topic: rhythm combat)",
+        "text": "[TODO] Short explanation: two lanes, three kinds of notes, keep your HP to the end of the song",
+        "slides": {
+          "s1": "[TODO] Describe image 1 of tab 1",
+          "s2": "[TODO] Describe image 2 of tab 1",
+          "s3": "[TODO] Describe image 3 of tab 1"
+        }
+      },
+      "g2": {
+        "title": "[TODO] Tab 2 title (topic: combo and Fever)",
+        "text": "[TODO] Short explanation: combo and Fever",
+        "slides": {
+          "s1": "[TODO] Describe image 1 of tab 2",
+          "s2": "[TODO] Describe image 2 of tab 2",
+          "s3": "[TODO] Describe image 3 of tab 2"
+        }
+      },
+      "g3": {
+        "title": "[TODO] Tab 3 title (topic: gacha; the gacha and currency names are not decided)",
+        "text": "[TODO] Short explanation: new characters, a guaranteed 5★ after 30 pulls",
+        "slides": {
+          "s1": "[TODO] Describe image 1 of tab 3",
+          "s2": "[TODO] Describe image 2 of tab 3",
+          "s3": "[TODO] Describe image 3 of tab 3"
+        }
+      },
+      "g4": {
+        "title": "[TODO] Tab 4 title (topic: missions and sign-in)",
+        "text": "[TODO] Short explanation: daily and weekly missions, monthly sign-in",
+        "slides": {
+          "s1": "[TODO] Describe image 1 of tab 4",
+          "s2": "[TODO] Describe image 2 of tab 4",
+          "s3": "[TODO] Describe image 3 of tab 4"
+        }
+      }
+    }
+  },
+  "characters": {
+    "title": "Characters",
+    "line1": "[TODO] Characters line 1, about 40 characters",
+    "line2": "[TODO] Characters line 2, about 40 characters",
+    "line3": "[TODO] Characters line 3, about 40 characters",
+    "rarity": "{count} stars",
+    "changeVisual": "Change visual",
+    "previous": "Previous character",
+    "next": "Next character",
+    "profile": "Profile",
+    "passive": "Passive",
+    "stats": "Stats",
+    "hp": "HP",
+    "scoreBonus": "Score",
+    "feverBonus": "Fever",
+    "gallery": "Gallery",
+    "items": {
+      "amiya": {
+        "tagline": "[TODO] One line introducing AMIYA",
+        "profile": "[TODO] AMIYA's profile, 2–4 sentences",
+        "passiveName": "Field Medic",
+        "passiveDescription": "The first Miss of a run does not break the combo.",
+        "cardAlt": "[TODO] Describe AMIYA's card art",
+        "idleAlt": "[TODO] Describe AMIYA standing",
+        "battleAlt": "[TODO] Describe AMIYA in battle",
+        "gallery": {}
+      },
+      "nova": {
+        "tagline": "[TODO] One line introducing NOVA",
+        "profile": "[TODO] NOVA's profile, 2–4 sentences",
+        "passiveName": "Overdrive",
+        "passiveDescription": "A Great has a chance to be counted as a Perfect.",
+        "cardAlt": "[TODO] Describe NOVA's card art",
+        "idleAlt": "[TODO] Describe NOVA standing",
+        "battleAlt": "[TODO] Describe NOVA in battle",
+        "gallery": {}
+      },
+      "echo": {
+        "tagline": "[TODO] One line introducing ECHO",
+        "profile": "[TODO] ECHO's profile, 2–4 sentences",
+        "passiveName": "Resonance",
+        "passiveDescription": "A high combo extends how long Fever lasts.",
+        "cardAlt": "[TODO] Describe ECHO's card art",
+        "idleAlt": "[TODO] Describe ECHO standing",
+        "battleAlt": "[TODO] Describe ECHO in battle",
+        "gallery": {}
+      },
+      "pulse": {
+        "tagline": "[TODO] One line introducing PULSE",
+        "profile": "[TODO] PULSE's profile, 2–4 sentences",
+        "passiveName": "Steady Beat",
+        "passiveDescription": "Recovers a little HP at a steady interval.",
+        "cardAlt": "[TODO] Describe PULSE's card art",
+        "idleAlt": "[TODO] Describe PULSE standing",
+        "battleAlt": "[TODO] Describe PULSE in battle",
+        "gallery": {}
+      }
+    }
+  },
+  "footer": {
+    "specHeading": "Spec",
+    "linksHeading": "Links",
+    "shareHeading": "Share",
+    "spec": {
+      "titleLabel": "Title",
+      "titleValue": "Promuse",
+      "releaseLabel": "Release",
+      "releaseValue": "Coming soon",
+      "genreLabel": "Genre",
+      "genreValue": "Rhythm hack-and-slash, gacha",
+      "playersLabel": "Players",
+      "playersValue": "1",
+      "platformLabel": "Platform",
+      "platformValue": "Android"
+    },
+    "store": "Coming soon on Google Play",
+    "shareX": "Share on X",
+    "shareFacebook": "Share on Facebook",
+    "shareText": "[TODO] A short line to share with the link",
+    "social": {
+      "x": "Promuse on X",
+      "facebook": "Promuse on Facebook",
+      "youtube": "Promuse on YouTube",
+      "tiktok": "Promuse on TikTok",
+      "discord": "Promuse Discord"
+    },
+    "privacy": "Privacy",
+    "copyright": "© 2026 Promuse · {holder}"
+  },
+  "privacy": {
+    "title": "Privacy",
+    "intro": "[TODO] Opening paragraph: what data this page covers and why",
+    "storedHeading": "What we store when you register",
+    "storedEmail": "[REVIEW] The email address of your Google account",
+    "storedGoogleId": "[REVIEW] Your Google account id (not your password)",
+    "storedLocale": "[REVIEW] The language you use on the site",
+    "storedCampaign": "[REVIEW] The pre-registration campaign you joined",
+    "storedTime": "[REVIEW] When you registered",
+    "whyHeading": "Why we need it",
+    "why": "[TODO] Why the data is stored: to give the pre-registration reward to the same Google account in the game later",
+    "processorsHeading": "Services that process it",
+    "processors": "[TODO] Name the services: Supabase stores the data, Vercel runs the site, Google handles sign-in",
+    "retentionHeading": "How long we keep it",
+    "retention": "[TODO] How long the data is kept",
+    "deletionHeading": "Asking for deletion",
+    "deletion": "[TODO] How to ask for your data to be deleted",
+    "contactHeading": "Contact",
+    "contact": "[TODO] An invitation to get in touch, with {email}"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This link does not exist or has changed.",
+    "home": "Back to home"
+  }
+}
