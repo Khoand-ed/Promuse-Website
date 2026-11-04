@@ -93,3 +93,39 @@ test.describe('music', () => {
     expect(await playState()).toBe('paused');
   });
 });
+
+test.describe('character scene', () => {
+  test.use({
+    locale: 'vi-VN',
+    reducedMotion: 'no-preference',
+    viewport: { width: 1440, height: 900 },
+  });
+
+  test('pins the row and colours the card in focus', async ({ page }) => {
+    await page.goto('/');
+    await page.keyboard.press('Escape');
+    await expect(page.locator('.opening')).toBeHidden();
+    const section = page.locator('#characters');
+    await expect(section).toHaveAttribute('data-scene', 'on');
+
+    await section.scrollIntoViewIfNeeded();
+    await page.mouse.move(720, 450);
+    for (let i = 0; i < 12; i++) await page.mouse.wheel(0, 150);
+    await expect(page.locator('#characters .chara-card[data-active]')).toHaveCount(1);
+    await expect(page.locator('#characters [data-layer][data-on]')).toHaveCount(1);
+    const box = await section.boundingBox();
+    expect(Math.abs(box?.y ?? 99)).toBeLessThan(1);
+  });
+});
+
+test.describe('character row with reduced motion', () => {
+  test.use({ locale: 'vi-VN' });
+
+  test('stays a plain row with each card in its own colour', async ({ page }) => {
+    await page.goto('/');
+    const section = page.locator('#characters');
+    await expect(section).not.toHaveAttribute('data-scene', 'on');
+    await expect(section.locator('[data-layer][data-on]')).toHaveCount(0);
+    await expect(section.locator('.chara-tint[data-on]')).toHaveCount(4);
+  });
+});

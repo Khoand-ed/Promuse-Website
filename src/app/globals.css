@@ -469,13 +469,38 @@
     transition-delay: 0s;
   }
 
-  /* The row of character cards; it scrolls sideways until the pinned scene arrives (P4). */
+  /*
+   * The character row (doc/SPEC.md, section 4). A plain sideways scroller with motion off; with
+   * motion on, CharacterScene pins the section, moves the row and switches the colour layers.
+   */
   .chara-track {
     scrollbar-width: thin;
     scrollbar-color: var(--color-ink) transparent;
   }
 
-  /* Character cards: tinted and grey at rest, full colour on hover or focus. */
+  /* Colours change by fading stacked layers (0.5 s), never by animating a background colour. */
+  .chara-layer,
+  .chara-tint {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+  }
+
+  .chara-layer[data-on] {
+    opacity: 1;
+  }
+
+  .chara-tint {
+    mix-blend-mode: multiply;
+  }
+
+  .chara-tint[data-on] {
+    opacity: 0.55;
+  }
+
+  /* Portraits: grey and tinted at rest, full colour when in focus, hovered or focused. */
   .chara-art {
     position: relative;
     overflow: hidden;
@@ -483,28 +508,23 @@
 
   .chara-art img {
     filter: grayscale(1);
-    transition: filter 0.4s ease;
+    transition: filter 0.5s ease-out;
   }
 
-  .chara-art::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--chara-color);
-    mix-blend-mode: multiply;
-    opacity: 0.55;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-  }
-
+  .chara-card[data-active] .chara-art img,
   .chara-card:hover .chara-art img,
   .chara-card:focus-within .chara-art img {
     filter: none;
   }
 
-  .chara-card:hover .chara-art::after,
-  .chara-card:focus-within .chara-art::after {
+  .chara-card[data-active] .chara-tint,
+  .chara-card:hover .chara-tint,
+  .chara-card:focus-within .chara-tint {
     opacity: 0;
+  }
+
+  html[data-motion='off'] :is(.chara-layer, .chara-tint, .chara-art img) {
+    transition-duration: 0.01ms;
   }
 }
 
