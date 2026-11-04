@@ -40,7 +40,9 @@ Game .NET backend (future, section 17) ┄┄ server-to-server, not built in v1 
 |---|---|---|---|
 | Local | http://localhost:3000 | `mock` until P3, then `supabase` | The single cloud project |
 | Preview | One Vercel URL per branch | `mock` until P3, then `supabase` | Same project |
-| Production | `https://promuse.vercel.app`, deployed from `main` | `off` until P3, then `supabase` | Same project |
+| Production | `https://promuserhythm.vercel.app`, deployed from `main` | `off` until P3, then `supabase` | Same project |
+
+`promuse.vercel.app` belongs to an unrelated site, so production uses `promuserhythm.vercel.app`; `NEXT_PUBLIC_SITE_URL` holds that address for Production and Preview.
 
 `off` keeps the live site honest before P3: the reward widget shows `notOpen` instead of simulating a sign-in. `mock` is for development and previews only.
 
