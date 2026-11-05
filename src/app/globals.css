@@ -135,18 +135,22 @@
     filter: saturate(0.6);
   }
 
+  /* Narrow screens get tighter letters and padding, so long labels keep to two lines. */
   .pill-xl {
     min-height: 3.75rem;
-    padding-inline: 2.5rem;
-    font-size: clamp(1rem, 1.6vw, 1.75rem);
-    letter-spacing: 0.18em;
+    padding-inline: 1.5rem;
+    font-size: 0.9375rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+    text-wrap: balance;
   }
 
   @media (min-width: 768px) {
     .pill-xl {
       min-height: 76px;
       padding-inline: 4.5rem;
+      font-size: clamp(1rem, 1.6vw, 1.75rem);
+      letter-spacing: 0.18em;
     }
   }
 
@@ -528,6 +532,60 @@
     }
   }
 
+  .modal-card {
+    padding: 1rem;
+    background: rgb(0 8 32 / 0.6);
+    opacity: 0;
+    transition:
+      opacity 0.8s ease-in-out,
+      overlay 0.8s allow-discrete,
+      display 0.8s allow-discrete;
+  }
+
+  .modal-card[open] {
+    display: grid;
+    place-items: center;
+    opacity: 1;
+  }
+
+  @starting-style {
+    .modal-card[open] {
+      opacity: 0;
+    }
+  }
+
+  .modal-card-body {
+    position: relative;
+    width: min(100%, 68rem);
+  }
+
+  .modal-card .modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: var(--color-ink);
+  }
+
+  .modal:focus-visible {
+    outline: none;
+  }
+
+  /* The first-visit popup's card: the reward art beside the title, the line and the button. */
+  .reward-card {
+    display: grid;
+    width: 100%;
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
+    background: #fff;
+  }
+
+  @media (min-width: 768px) {
+    .reward-card {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+    }
+  }
+
   .modal[open] [data-rise] {
     opacity: 1;
     transform: none;
@@ -578,6 +636,18 @@
     height: 3.5rem;
     border-radius: 999px;
     font-size: 1.5rem;
+  }
+
+  /* Google's mark sits on a white disc inside the pill, as its sign-in branding asks. */
+  .google-mark {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: #fff;
+    font-size: 1.1rem;
   }
 
   .modal-sheet .modal-close {

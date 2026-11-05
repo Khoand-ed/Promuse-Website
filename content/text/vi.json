@@ -54,7 +54,7 @@
     "notYou": "Không phải bạn?",
     "signOut": "Đăng xuất",
     "states": {
-      "signedOut": "Đăng nhập Google để nhận quà",
+      "signedOut": "Đăng nhập bằng Google để nhận quà",
       "redirecting": "Đang chuyển tới Google…",
       "registering": "Đang ghi nhận…",
       "registered": "[TODO] Báo đăng ký thành công cho {email}, không hứa nhận quà trong game",
