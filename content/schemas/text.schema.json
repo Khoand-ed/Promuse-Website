@@ -263,7 +263,7 @@
         "desc": {
           "type": "string",
           "pattern": "\\S",
-          "description": "Một dòng mô tả phần quà: số lượng và tên tiền tệ. Tên tiền tệ chưa chốt; số lượng phải khớp với chiến dịch trong cơ sở dữ liệu."
+          "description": "Một dòng mô tả phần quà: 1800 và tên tiền tệ. Tên tiền tệ chưa chốt. Số lượng phải khớp với chiến dịch trong cơ sở dữ liệu (supabase/migrations/0002_prereg_campaign.sql)."
         },
         "artAlt": {
           "type": "string",

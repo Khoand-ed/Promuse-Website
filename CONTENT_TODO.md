@@ -2,9 +2,9 @@
 
 File này do `npm run check:content` tự sinh. Đừng sửa tay: sửa nội dung trong `content/` rồi chạy lại lệnh. Hướng dẫn đầy đủ ở `doc/CONTENT_GUIDE.md`.
 
-Tổng cộng 145 mục (chữ cần viết: 88, chữ cần bạn duyệt: 9, dữ liệu chưa quyết định: 6, ảnh còn thiếu: 39, file đặc biệt còn thiếu: 3).
+Tổng cộng 144 mục (chữ cần viết: 81, chữ cần bạn duyệt: 16, dữ liệu chưa quyết định: 5, ảnh còn thiếu: 39, file đặc biệt còn thiếu: 3).
 
-## Chữ cần viết (88)
+## Chữ cần viết (81)
 
 Cách sửa: Mở file ở cột "Ở đâu", tới đúng dòng, thay cả đoạn `[TODO] …` bằng nội dung thật. Sửa ở cả hai file (tiếng Việt và tiếng Anh), giữ nguyên dấu ngoặc kép và các biến trong `{…}`.
 
@@ -16,9 +16,8 @@ Cách sửa: Mở file ở cột "Ở đâu", tới đúng dòng, thay cả đo�
 | `intro.line2` | Màn mở đầu | Dòng mở đầu thứ 2. Khoảng 30 ký tự. | `content/text/vi.json:38`<br>`content/text/en.json:38` |
 | `intro.line3` | Màn mở đầu | Dòng mở đầu thứ 3. Khoảng 30 ký tự. | `content/text/vi.json:39`<br>`content/text/en.json:39` |
 | `hero.visualAlt` | Hero (màn đầu tiên) | Mô tả ảnh key visual cho người dùng trình đọc màn hình. | `content/text/vi.json:46`<br>`content/text/en.json:46` |
-| `reward.desc` | Khối nhận quà | Một dòng mô tả phần quà: số lượng và tên tiền tệ. Tên tiền tệ chưa chốt; số lượng phải khớp với chiến dịch trong cơ sở dữ liệu. | `content/text/vi.json:50`<br>`content/text/en.json:50` |
+| `reward.desc` | Khối nhận quà | Một dòng mô tả phần quà: 1800 và tên tiền tệ. Tên tiền tệ chưa chốt. Số lượng phải khớp với chiến dịch trong cơ sở dữ liệu (supabase/migrations/0002_prereg_campaign.sql). | `content/text/vi.json:50`<br>`content/text/en.json:50` |
 | `reward.artAlt` | Khối nhận quà | Mô tả ảnh phần quà cho người dùng trình đọc màn hình. | `content/text/vi.json:51`<br>`content/text/en.json:51` |
-| `reward.states.registered` | Khối nhận quà | Thông báo đăng ký thành công; có thể dùng {email}. Không được hứa nhận quà trong game, vì game chưa có đăng nhập Google. | `content/text/vi.json:60`<br>`content/text/en.json:60` |
 | `reward.states.notOpen` | Khối nhận quà | Thông báo khi chưa mở đăng ký (website thật dùng trạng thái này cho tới khi có đăng ký thật). | `content/text/vi.json:66`<br>`content/text/en.json:66` |
 | `story.title` | Giới thiệu | Tiêu đề phần giới thiệu thế giới game. | `content/text/vi.json:70`<br>`content/text/en.json:70` |
 | `story.p1` | Giới thiệu | Đoạn giới thiệu thứ 1, 2–3 câu. Nói về thế giới và nhân vật, không nói về âm nhạc. | `content/text/vi.json:71`<br>`content/text/en.json:71` |
@@ -92,30 +91,31 @@ Cách sửa: Mở file ở cột "Ở đâu", tới đúng dòng, thay cả đo�
 | `characters.items.pulse.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:213`<br>`content/text/en.json:213` |
 | `characters.items.pulse.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:214`<br>`content/text/en.json:214` |
 | `footer.shareText` | Footer | Câu đi kèm link khi chia sẻ lên X. | `content/text/vi.json:238`<br>`content/text/en.json:238` |
-| `privacy.intro` | Trang quyền riêng tư | Đoạn mở đầu: trang này nói về dữ liệu nào và vì sao. | `content/text/vi.json:251`<br>`content/text/en.json:251` |
-| `privacy.why` | Trang quyền riêng tư | Lý do lưu dữ liệu. | `content/text/vi.json:259`<br>`content/text/en.json:259` |
-| `privacy.processors` | Trang quyền riêng tư | Các dịch vụ xử lý dữ liệu: Supabase, Vercel, Google. | `content/text/vi.json:261`<br>`content/text/en.json:261` |
-| `privacy.retention` | Trang quyền riêng tư | Dữ liệu được giữ trong bao lâu. | `content/text/vi.json:263`<br>`content/text/en.json:263` |
-| `privacy.deletion` | Trang quyền riêng tư | Cách yêu cầu xoá dữ liệu. | `content/text/vi.json:265`<br>`content/text/en.json:265` |
-| `privacy.contact` | Trang quyền riêng tư | Câu mời liên hệ. Giữ nguyên {email}: địa chỉ lấy từ content/data/site.json. | `content/text/vi.json:267`<br>`content/text/en.json:267` |
 
-## Chữ cần bạn duyệt (9)
+## Chữ cần bạn duyệt (16)
 
 Cách sửa: Đọc bản nháp hoặc bản dịch. Nếu đúng, chỉ xoá chữ `[REVIEW] ` ở đầu; nếu chưa đúng, sửa lại rồi xoá dấu.
 
 | Khoá | Hiện ở đâu | Nội dung | Ở đâu |
 |---|---|---|---|
+| `reward.states.registered` | Khối nhận quà | [REVIEW] Đăng ký thành công cho {email}. | `content/text/vi.json:60`<br>`content/text/en.json:60` |
 | `characters.items.amiya.passiveDescription` | Nhân vật | [REVIEW] Lần Miss đầu tiên trong mỗi lượt chơi không làm mất combo. | `content/text/vi.json:181` |
 | `characters.items.nova.passiveDescription` | Nhân vật | [REVIEW] Mỗi lần Great có cơ hội được tính là Perfect. | `content/text/vi.json:191` |
 | `characters.items.echo.passiveDescription` | Nhân vật | [REVIEW] Combo cao giúp Fever kéo dài hơn. | `content/text/vi.json:201` |
 | `characters.items.pulse.passiveDescription` | Nhân vật | [REVIEW] Hồi một ít HP sau mỗi khoảng thời gian đều đặn. | `content/text/vi.json:211` |
+| `privacy.intro` | Trang quyền riêng tư | [REVIEW] Trang này cho biết website Promuse lưu những dữ liệu nào khi bạn đăng ký sớm bằng tài khoản Google, lưu để làm gì, lưu trong bao lâu và cách yêu cầu xoá. Bạn chỉ cần đăng nhập khi muốn nhận quà; xem trang thì không cần tài khoản. | `content/text/vi.json:251`<br>`content/text/en.json:251` |
 | `privacy.storedEmail` | Trang quyền riêng tư | [REVIEW] Địa chỉ email của tài khoản Google | `content/text/vi.json:253`<br>`content/text/en.json:253` |
 | `privacy.storedGoogleId` | Trang quyền riêng tư | [REVIEW] Mã tài khoản Google (không phải mật khẩu) | `content/text/vi.json:254`<br>`content/text/en.json:254` |
 | `privacy.storedLocale` | Trang quyền riêng tư | [REVIEW] Ngôn ngữ bạn dùng trên trang | `content/text/vi.json:255`<br>`content/text/en.json:255` |
 | `privacy.storedCampaign` | Trang quyền riêng tư | [REVIEW] Chương trình đăng ký sớm bạn tham gia | `content/text/vi.json:256`<br>`content/text/en.json:256` |
 | `privacy.storedTime` | Trang quyền riêng tư | [REVIEW] Thời điểm đăng ký | `content/text/vi.json:257`<br>`content/text/en.json:257` |
+| `privacy.why` | Trang quyền riêng tư | [REVIEW] Để sau này gửi quà đăng ký sớm cho đúng tài khoản trong game được liên kết với cùng tài khoản Google đó. Dữ liệu chỉ được dùng cho việc này. | `content/text/vi.json:259`<br>`content/text/en.json:259` |
+| `privacy.processors` | Trang quyền riêng tư | [REVIEW] Supabase lưu tài khoản đăng nhập và lượt đăng ký của bạn trên máy chủ ở Singapore. Tài khoản đăng nhập gồm email, tên và ảnh đại diện Google của bạn cùng thời điểm đăng nhập. Vercel vận hành website. Google xử lý việc đăng nhập và chỉ cho website biết email, tên, ảnh đại diện và mã tài khoản của bạn, không bao giờ cho biết mật khẩu. | `content/text/vi.json:261`<br>`content/text/en.json:261` |
+| `privacy.retention` | Trang quyền riêng tư | [REVIEW] Dữ liệu được giữ cho tới khi quà đăng ký sớm đã được gửi vào game cho tài khoản của bạn, hoặc cho tới khi dự án dừng lại; sau đó dữ liệu bị xoá. Bạn có thể yêu cầu xoá sớm hơn bất cứ lúc nào. | `content/text/vi.json:263`<br>`content/text/en.json:263` |
+| `privacy.deletion` | Trang quyền riêng tư | [REVIEW] Gửi email tới địa chỉ ở mục Liên hệ, từ chính địa chỉ Gmail bạn đã dùng để đăng ký, và ghi rõ bạn muốn xoá dữ liệu. Chúng tôi sẽ xoá tài khoản đăng nhập và lượt đăng ký của bạn rồi trả lời để xác nhận. Sau khi xoá, bạn sẽ không nhận được quà đăng ký sớm nữa. | `content/text/vi.json:265`<br>`content/text/en.json:265` |
+| `privacy.contact` | Trang quyền riêng tư | [REVIEW] Nếu có câu hỏi về dữ liệu của bạn, hãy gửi email tới {email}. | `content/text/vi.json:267`<br>`content/text/en.json:267` |
 
-## Dữ liệu chưa quyết định (6)
+## Dữ liệu chưa quyết định (5)
 
 Cách sửa: Mở file, thay `null` bằng giá trị thật trong dấu ngoặc kép, ví dụ `"#6C4FD8"`. Rê chuột lên tên trường trong VS Code để xem mô tả.
 
@@ -126,7 +126,6 @@ Cách sửa: Mở file, thay `null` bằng giá trị thật trong dấu ngoặc
 | `characters.items[echo].themeColor` | Nhân vật | Màu chủ đạo của nhân vật, dạng #RRGGBB, làm nền phần Nhân vật khi nhân vật này hiện ra. Chọn màu sáng: chữ trên nền là màu navy #1D384A và cần tương phản ít nhất 4,5:1. null nghĩa là chưa chọn (trang tạm dùng bảng màu pastel). | `content/data/characters.json:68` |
 | `characters.items[pulse].themeColor` | Nhân vật | Màu chủ đạo của nhân vật, dạng #RRGGBB, làm nền phần Nhân vật khi nhân vật này hiện ra. Chọn màu sáng: chữ trên nền là màu navy #1D384A và cần tương phản ít nhất 4,5:1. null nghĩa là chưa chọn (trang tạm dùng bảng màu pastel). | `content/data/characters.json:97` |
 | `site.copyrightHolder` | Toàn trang (header, footer, chia sẻ) | Tên chủ sở hữu bản quyền ở dòng cuối trang. null nghĩa là chưa quyết định. | `content/data/site.json:10` |
-| `site.privacyContactEmail` | Toàn trang (header, footer, chia sẻ) | Email nhận câu hỏi và yêu cầu xoá dữ liệu, hiện trên trang quyền riêng tư. null nghĩa là chưa có. | `content/data/site.json:11` |
 
 ## Ảnh còn thiếu (39)
 
