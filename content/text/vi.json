@@ -258,7 +258,7 @@
     "whyHeading": "Vì sao cần dữ liệu này",
     "why": "[REVIEW] Để sau này gửi quà đăng ký sớm cho đúng tài khoản trong game được liên kết với cùng tài khoản Google đó. Dữ liệu chỉ được dùng cho việc này.",
     "processorsHeading": "Dịch vụ xử lý dữ liệu",
-    "processors": "[REVIEW] Supabase lưu tài khoản đăng nhập và lượt đăng ký của bạn trên máy chủ ở Singapore. Tài khoản đăng nhập gồm email, tên và ảnh đại diện Google của bạn cùng thời điểm đăng nhập. Vercel vận hành website. Google xử lý việc đăng nhập và chỉ cho website biết email, tên, ảnh đại diện và mã tài khoản của bạn, không bao giờ cho biết mật khẩu.",
+    "processors": "[REVIEW] Supabase lưu tài khoản đăng nhập và lượt đăng ký của bạn trên máy chủ ở Tokyo, Nhật Bản. Tài khoản đăng nhập gồm email, tên và ảnh đại diện Google của bạn cùng thời điểm đăng nhập. Vercel vận hành website. Google xử lý việc đăng nhập và chỉ cho website biết email, tên, ảnh đại diện và mã tài khoản của bạn, không bao giờ cho biết mật khẩu.",
     "retentionHeading": "Thời gian lưu",
     "retention": "[REVIEW] Dữ liệu được giữ cho tới khi quà đăng ký sớm đã được gửi vào game cho tài khoản của bạn, hoặc cho tới khi dự án dừng lại; sau đó dữ liệu bị xoá. Bạn có thể yêu cầu xoá sớm hơn bất cứ lúc nào.",
     "deletionHeading": "Yêu cầu xoá dữ liệu",

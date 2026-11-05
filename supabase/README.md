@@ -1,6 +1,6 @@
 # Database
 
-The website's Supabase project (Singapore). The schema is in `doc/ARCHITECTURE.md`, section 9.
+The website's Supabase project, in Tokyo (`ap-northeast-1`). The schema is in `doc/ARCHITECTURE.md`, section 9.
 
 ## Applying a migration
 

@@ -258,7 +258,7 @@
     "whyHeading": "Why we need it",
     "why": "[REVIEW] So that the pre-registration reward can later go to the game account linked to the same Google account. The data is used for nothing else.",
     "processorsHeading": "Services that process it",
-    "processors": "[REVIEW] Supabase stores your sign-in account and your registration on servers in Singapore. The sign-in account holds the email address, name and profile picture of your Google account, and when you signed in. Vercel runs the website. Google handles the sign-in and only tells the website your email address, name, profile picture and account id, never your password.",
+    "processors": "[REVIEW] Supabase stores your sign-in account and your registration on servers in Tokyo, Japan. The sign-in account holds the email address, name and profile picture of your Google account, and when you signed in. Vercel runs the website. Google handles the sign-in and only tells the website your email address, name, profile picture and account id, never your password.",
     "retentionHeading": "How long we keep it",
     "retention": "[REVIEW] We keep the data until the pre-registration reward has been delivered to your game account, or until the project stops; then it is deleted. You can ask for earlier deletion at any time.",
     "deletionHeading": "Asking for deletion",

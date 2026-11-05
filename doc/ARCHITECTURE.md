@@ -46,7 +46,7 @@ Game .NET backend (future, section 17) ┄┄ server-to-server, not built in v1 
 
 `off` keeps the live site honest before P3: the reward widget shows `notOpen` instead of simulating a sign-in. `mock` is for development and previews only. During P3, local and preview switch to `supabase` first; production follows once the privacy page carries the owner's final text (owner's decision, 2026-11-05).
 
-One Supabase project is enough for a portfolio (the Free plan allows two active projects). Create it in the Singapore region, the closest to Vietnam, and pick the matching Vercel Functions region if the plan offers the choice.
+One Supabase project is enough for a portfolio (the Free plan allows two active projects). It was created on 2026-11-05 in Tokyo (`ap-northeast-1`). Singapore, the closest region to Vietnam, was the plan, but a project cannot change region, and Tokyo adds only tens of milliseconds per request, so it stays. Vercel Functions run in the same place, Tokyo (`hnd1`), so the API sits next to the database.
 
 ## 4. Directory structure
 
