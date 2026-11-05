@@ -7,6 +7,7 @@ The HTTP contract of the Promuse website's backend. Its only client today is the
 - Base URL: `https://<project>.vercel.app/api/v1` (locally `http://localhost:3000/api/v1`).
 - JSON in and out, UTF-8. Timestamps are ISO 8601 in UTC.
 - Endpoints that need a user send `Cache-Control: no-store`.
+- Every response carries `X-Request-Id`; quote it when reporting a problem. The server log line for a failure carries the same id.
 - Authentication:
   - Web: the Supabase session cookie, same origin.
   - Tests and other first-party clients: `Authorization: Bearer <access token>` from the same Supabase project.
