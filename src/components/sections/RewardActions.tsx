@@ -21,6 +21,7 @@ import {
   AUTH_PARAM,
   INTENT_PARAM,
   INTENT_PREREG,
+  PROVIDER_ERROR_PARAMS,
 } from '@/lib/reward/types';
 
 /** localStorage: set once the first-visit popup has been closed or used (doc/SPEC.md, section 5). */
@@ -47,10 +48,14 @@ function dismissPopup() {
 function readReturn() {
   if (typeof window === 'undefined') return { intent: false, cancelled: false, failed: false };
   const params = new URLSearchParams(window.location.search);
+  const fromSupabase = params.has('error_code') || params.has('error_description');
+  const providerError = fromSupabase ? (params.get('error') ?? 'unknown') : null;
   return {
     intent: params.get(INTENT_PARAM) === INTENT_PREREG,
-    cancelled: params.get(AUTH_PARAM) === AUTH_CANCELLED,
-    failed: params.get(AUTH_PARAM) === AUTH_ERROR,
+    cancelled: params.get(AUTH_PARAM) === AUTH_CANCELLED || providerError === 'access_denied',
+    failed:
+      params.get(AUTH_PARAM) === AUTH_ERROR ||
+      (providerError !== null && providerError !== 'access_denied'),
   };
 }
 
@@ -186,34 +191,44 @@ export function RewardActions({ mode, popupArt }: RewardActionsProps) {
   // Read the status once, then finish a trip to Google: register once, or report the cancellation.
   useEffect(() => {
     if (mode === 'off') return;
-    const backend = createRewardGateway(mode);
-    gateway.current = backend;
-    if (!backend) return;
     const back = returned.intent || returned.cancelled || returned.failed;
     if (back) {
       const url = new URL(window.location.href);
-      url.searchParams.delete(INTENT_PARAM);
-      url.searchParams.delete(AUTH_PARAM);
+      for (const name of [INTENT_PARAM, AUTH_PARAM, ...PROVIDER_ERROR_PARAMS]) {
+        url.searchParams.delete(name);
+      }
       window.history.replaceState(window.history.state, '', url.pathname + url.search + url.hash);
     }
     let live = true;
-    backend.getStatus().then(
-      async (status) => {
+    createRewardGateway(mode)
+      .then(async (backend) => {
+        if (!live || !backend) return;
+        gateway.current = backend;
+        const status = await backend.getStatus();
         if (!live) return;
         dispatch({ type: 'status', status, cancelled: returned.cancelled });
         // The sign-in itself failed on the way back: offer a retry that reads the status again.
         if (returned.failed) dispatch({ type: 'statusFailed' });
         if (back) document.getElementById('reward')?.scrollIntoView({ block: 'center' });
         if (returned.intent && status.kind === 'signedIn' && !status.registered) await register();
-      },
-      () => {
+      })
+      .catch(() => {
         if (live) dispatch({ type: 'statusFailed' });
-      },
-    );
+      });
     return () => {
       live = false;
     };
   }, [mode, returned, register]);
+
+  // Back from Google without signing in: a page restored from the back/forward cache would still say
+  // "Redirecting to Google…" with the button disabled, so read the status again.
+  useEffect(() => {
+    const onShow = (event: PageTransitionEvent) => {
+      if (event.persisted && current.current.kind === 'redirecting') void loadStatus();
+    };
+    window.addEventListener('pageshow', onShow);
+    return () => window.removeEventListener('pageshow', onShow);
+  }, [loadStatus]);
 
   // The first-visit popup: 1.5 s after the opening (or the load), once, and only while it can help.
   const statusKnown = state.kind !== 'loading';
@@ -247,8 +262,13 @@ export function RewardActions({ mode, popupArt }: RewardActionsProps) {
   }, []);
 
   const signOut = useCallback(async () => {
-    await gateway.current?.signOut();
-    dispatch({ type: 'signedOut' });
+    try {
+      await gateway.current?.signOut();
+      dispatch({ type: 'signedOut' });
+    } catch {
+      // The retry reads the status again.
+      dispatch({ type: 'statusFailed' });
+    }
   }, []);
 
   const retry = state.kind === 'error' && state.email ? register : loadStatus;

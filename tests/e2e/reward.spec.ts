@@ -73,6 +73,24 @@ for (const { locale, path, browser } of locales) {
       await expect(reward(page).getByText(EMAIL)).toBeVisible();
     });
 
+    test('a sign-in Supabase could not finish ends in error, then a clean URL', async ({ page }) => {
+      const failure = 'error=invalid_request&error_code=bad_oauth_state&error_description=expired';
+      await page.goto(`${path}?mock=signed-out&${failure}`);
+      await expect(action(page, states.error)).toBeEnabled();
+      await expect(page).not.toHaveURL(/error/);
+      await expect(reward(page)).toBeInViewport();
+      await action(page, states.error).click();
+      await expect(action(page, states.signedOut)).toBeEnabled();
+    });
+
+    test('a sign-in cancelled at Google but sent to the home page shows the notice', async ({
+      page,
+    }) => {
+      await page.goto(`${path}?mock=signed-out&error=access_denied&error_code=access_denied`);
+      await expect(reward(page).getByText(states.cancelled)).toBeVisible();
+      await expect(page).not.toHaveURL(/error/);
+    });
+
     test('closed: the button ends disabled', async ({ page }) => {
       await page.goto(`${path}?mock=closed`);
       await action(page, states.signedInNotRegistered).click();

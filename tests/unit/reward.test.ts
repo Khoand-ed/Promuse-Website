@@ -97,8 +97,8 @@ describe('first-visit popup rule', () => {
 });
 
 describe('gateway choice', () => {
-  it('has no gateway in off mode', () => {
-    expect(createRewardGateway('off')).toBeNull();
+  it('has no gateway in off mode', async () => {
+    expect(await createRewardGateway('off')).toBeNull();
   });
 });
 
