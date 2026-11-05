@@ -143,6 +143,17 @@ test.describe('first-visit popup', () => {
     await expect(popup).toBeHidden();
   });
 
+  test('stays away after the banner button was used, even after cancelling', async ({ page }) => {
+    const states = copy.vi.reward.states;
+    await page.goto('/?mock=cancelled');
+    await page.locator('#reward').getByRole('button', { name: states.signedOut }).click();
+    await expect(page.locator('#reward').getByText(states.cancelled)).toBeVisible({
+      timeout: 10_000,
+    });
+    await page.waitForTimeout(2500);
+    await expect(page.getByRole('dialog', { name: title })).toBeHidden();
+  });
+
   test('never shows after registration', async ({ page }) => {
     await page.goto('/?mock=registered');
     await page.waitForTimeout(3000);

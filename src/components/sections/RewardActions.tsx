@@ -252,8 +252,9 @@ export function RewardActions({ mode, popupArt }: RewardActionsProps) {
   }, []);
 
   const retry = state.kind === 'error' && state.email ? register : loadStatus;
-  const handlers: Handlers = { signIn, register, retry };
-  const fromPopup: Handlers = {
+  // Using the button, in the banner or the popup, settles the popup: it never comes back to invite
+  // someone who already started, for example after cancelling at Google.
+  const handlers: Handlers = {
     signIn: () => {
       dismissPopup();
       void signIn();
@@ -313,7 +314,7 @@ export function RewardActions({ mode, popupArt }: RewardActionsProps) {
               {t('desc')}
             </p>
             <div data-rise style={rise(2)}>
-              <RewardControl state={state} handlers={fromPopup} compact />
+              <RewardControl state={state} handlers={handlers} compact />
             </div>
           </div>
         </div>
