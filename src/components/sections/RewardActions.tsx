@@ -197,7 +197,12 @@ export function RewardActions({ mode, popupArt }: RewardActionsProps) {
       for (const name of [INTENT_PARAM, AUTH_PARAM, ...PROVIDER_ERROR_PARAMS]) {
         url.searchParams.delete(name);
       }
-      window.history.replaceState(window.history.state, '', url.pathname + url.search + url.hash);
+      // Next.js adopts a URL changed with `replaceState(null, …)`, but only once its router has
+      // mounted and wrapped the History API, which happens after this effect. A router it never told
+      // would put the parameters back on its next refresh, so wait a tick.
+      window.setTimeout(() =>
+        window.history.replaceState(null, '', url.pathname + url.search + url.hash),
+      );
     }
     let live = true;
     createRewardGateway(mode)
