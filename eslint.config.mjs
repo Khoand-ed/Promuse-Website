@@ -15,6 +15,8 @@ const eslintConfig = defineConfig([
     // Playwright output:
     'playwright-report/**',
     'test-results/**',
+    // Claude Code settings and the worktrees of its background sessions:
+    '.claude/**',
   ]),
 ]);
 
