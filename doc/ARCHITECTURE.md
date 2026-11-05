@@ -185,7 +185,8 @@ export interface RewardGateway {
 2. Google returns to Supabase, which redirects to `/auth/callback?code=…&next=…`.
 3. `src/app/auth/callback/route.ts`: `error=access_denied` (the visitor backed out at Google) redirects to `next` with `auth=cancelled`. Any other `error`, a missing code or a failed `exchangeCodeForSession(code)` redirects to `next` with `auth=error`, and logs the error key only. Otherwise the session cookie is set and the visitor goes to `next`. Both failures drop `intent`. Only a path that stays on the same origin is accepted as `next`; anything else becomes `/`. The redirect is `Cache-Control: no-store`.
    - Supabase skips the callback when it cannot read its own OAuth state, which expires a few minutes after the visitor leaves for Google (`error_code=bad_oauth_state`). It then sends the visitor to the Site URL (production) with `error`, `error_code` and `error_description`, and the reward widget reads those as it reads `auth=` (`doc/SPEC.md`, section 5).
-4. The page loads. The widget sees a session and `intent=prereg`, scrolls to `#reward`, calls `POST /api/v1/preregistration`, shows the result, then removes `intent` from the URL with `history.replaceState`.
+4. The page loads. The widget sees a session and `intent=prereg`, scrolls to `#reward`, calls `POST /api/v1/preregistration`, shows the result, then removes `intent` from the URL with `history.replaceState(null, …)` one tick after mounting. Next.js adopts that URL only once its router has wrapped the History API, and only when the state passed is not its own; otherwise its next refresh puts the parameters back.
+5. A visitor who backs out never reaches the callback when Google's Cancel leads to Google's own sign-in page, or when they use Back. The widget sets `sessionStorage` `promuse:sign-in-pending` before leaving. A page that loads (or comes back from the back/forward cache) with that key and no return parameters shows `cancelled`, and clears the key.
 
 ### Session handling
 
@@ -311,7 +312,7 @@ Never edit a migration that has been applied. Add a new one.
 ## 12. Testing
 
 - Unit (Vitest): content schemas and loaders against valid and broken samples; the `check:content` rules (locale parity, placeholder parity, image slots); services against the in-memory implementations, and the Supabase services against a fake client; route handlers against fake services (status codes and envelopes); `requireUser`; the OAuth callback's redirects and its `next` check; `SupabaseRewardGateway` against a fake client and `fetch`; zod schemas; the reward widget's state machine against `MockRewardGateway`.
-- End-to-end (Playwright, `NEXT_PUBLIC_BACKEND_MODE=mock`): Playwright starts its own dev server in mock mode, whatever `.env.local` says, so stop `npm run dev` first (Next.js allows one dev server per folder). Both locales load; modals work by keyboard; deep links; every `?mock=` scenario; motion off via `page.emulateMedia({ reducedMotion: 'reduce' })`.
+- End-to-end (Playwright, `NEXT_PUBLIC_BACKEND_MODE=mock`): Playwright starts its own dev server in mock mode, whatever `.env.local` says, so stop `npm run dev` first (Next.js allows one dev server per folder); `E2E_PORT` moves it off port 3000 when another worktree's server holds it. Both locales load; modals work by keyboard; deep links; every `?mock=` scenario; motion off via `page.emulateMedia({ reducedMotion: 'reduce' })`.
 - Manual (P3): two real Google accounts, plus `curl` against the API with an access token from `/dev/token`.
 
 ## 13. CI and deployment

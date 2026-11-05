@@ -44,19 +44,43 @@ function dismissPopup() {
   }
 }
 
-/** What the URL says about a trip to Google that just ended. */
+/**
+ * sessionStorage: set while the visitor is away at Google. Coming back without an answer from it
+ * (Back, or Google's own Cancel, which can lead to its sign-in page instead of back here) is a
+ * cancelled sign-in.
+ */
+const SIGN_IN_PENDING_KEY = 'promuse:sign-in-pending';
+
+function setSignInPending(pending: boolean) {
+  try {
+    if (pending) sessionStorage.setItem(SIGN_IN_PENDING_KEY, '1');
+    else sessionStorage.removeItem(SIGN_IN_PENDING_KEY);
+  } catch {
+    // Without storage, coming back simply shows the sign-in button again.
+  }
+}
+
+function signInPending(): boolean {
+  try {
+    return sessionStorage.getItem(SIGN_IN_PENDING_KEY) !== null;
+  } catch {
+    return false;
+  }
+}
+
+/** What the URL, or the visitor's way back, says about a trip to Google that just ended. */
 function readReturn() {
   if (typeof window === 'undefined') return { intent: false, cancelled: false, failed: false };
   const params = new URLSearchParams(window.location.search);
   const fromSupabase = params.has('error_code') || params.has('error_description');
   const providerError = fromSupabase ? (params.get('error') ?? 'unknown') : null;
-  return {
-    intent: params.get(INTENT_PARAM) === INTENT_PREREG,
-    cancelled: params.get(AUTH_PARAM) === AUTH_CANCELLED || providerError === 'access_denied',
-    failed:
-      params.get(AUTH_PARAM) === AUTH_ERROR ||
-      (providerError !== null && providerError !== 'access_denied'),
-  };
+  const intent = params.get(INTENT_PARAM) === INTENT_PREREG;
+  const cancelled = params.get(AUTH_PARAM) === AUTH_CANCELLED || providerError === 'access_denied';
+  const failed =
+    params.get(AUTH_PARAM) === AUTH_ERROR ||
+    (providerError !== null && providerError !== 'access_denied');
+  const abandoned = !intent && !cancelled && !failed && signInPending();
+  return { intent, cancelled: cancelled || abandoned, failed };
 }
 
 interface Handlers {
@@ -177,20 +201,22 @@ export function RewardActions({ mode, popupArt }: RewardActionsProps) {
     }
   }, [locale]);
 
-  const loadStatus = useCallback(async () => {
+  const readStatus = useCallback(async (cancelled: boolean) => {
     const backend = gateway.current;
     if (!backend) return;
     dispatch({ type: 'reload' });
     try {
-      dispatch({ type: 'status', status: await backend.getStatus() });
+      dispatch({ type: 'status', status: await backend.getStatus(), cancelled });
     } catch {
       dispatch({ type: 'statusFailed' });
     }
   }, []);
+  const loadStatus = useCallback(() => readStatus(false), [readStatus]);
 
   // Read the status once, then finish a trip to Google: register once, or report the cancellation.
   useEffect(() => {
     if (mode === 'off') return;
+    setSignInPending(false);
     const back = returned.intent || returned.cancelled || returned.failed;
     if (back) {
       const url = new URL(window.location.href);
@@ -225,15 +251,17 @@ export function RewardActions({ mode, popupArt }: RewardActionsProps) {
     };
   }, [mode, returned, register]);
 
-  // Back from Google without signing in: a page restored from the back/forward cache would still say
-  // "Redirecting to Google…" with the button disabled, so read the status again.
+  // Back from Google without signing in, to a page the browser kept in its back/forward cache: it
+  // would still say "Redirecting to Google…", so read the status again and report the cancellation.
   useEffect(() => {
     const onShow = (event: PageTransitionEvent) => {
-      if (event.persisted && current.current.kind === 'redirecting') void loadStatus();
+      if (!event.persisted || current.current.kind !== 'redirecting') return;
+      setSignInPending(false);
+      void readStatus(true);
     };
     window.addEventListener('pageshow', onShow);
     return () => window.removeEventListener('pageshow', onShow);
-  }, [loadStatus]);
+  }, [readStatus]);
 
   // The first-visit popup: 1.5 s after the opening (or the load), once, and only while it can help.
   const statusKnown = state.kind !== 'loading';
@@ -260,8 +288,10 @@ export function RewardActions({ mode, popupArt }: RewardActionsProps) {
     url.searchParams.set(INTENT_PARAM, INTENT_PREREG);
     url.hash = 'reward';
     try {
+      setSignInPending(true);
       await backend.signIn(url.pathname + url.search + url.hash);
     } catch {
+      setSignInPending(false);
       dispatch({ type: 'statusFailed' });
     }
   }, []);

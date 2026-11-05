@@ -194,7 +194,7 @@ Stats and passives come from the game (`GAME_FACTS.md`, section 3). Names are ke
 | `registered` | Server answered `created` | `[TODO]` in both locales; may use `{email}` | Popup never shows again. Must not promise in-game delivery the game cannot do yet: it has no Google sign-in today |
 | `alreadyRegistered` | Server answered `existing` | Bạn đã đăng ký từ {date} / You pre-registered on {date} | Popup never shows again |
 | `signedInNotRegistered` | Session, but no registration | Nhận quà đăng ký sớm / Claim the pre-registration reward | One click, no new sign-in |
-| `cancelled` | The visitor closed the Google window | Back to `signedOut` with "Bạn đã huỷ đăng nhập." / "Sign-in was cancelled." | — |
+| `cancelled` | The visitor backed out at Google: Google answered `access_denied`, or the visitor came back without finishing (Back; Google's Cancel can lead to its own sign-in page instead of the site) | Back to `signedOut` with "Bạn đã huỷ đăng nhập." / "Sign-in was cancelled." | `sessionStorage` key `promuse:sign-in-pending` is set while the visitor is away and cleared on the way back |
 | `error` | Any failure | Có lỗi, thử lại / Something went wrong, try again | Retry keeps the context |
 | `closed` | Server answered `campaign_closed` | Đã hết thời gian đăng ký sớm / Pre-registration has ended | Disabled |
 | `notOpen` | `NEXT_PUBLIC_BACKEND_MODE` is `off`: registration is not open yet | `[TODO]` in both locales | Disabled; the popup never shows. Production uses it until P3, so the live site never simulates a registration |

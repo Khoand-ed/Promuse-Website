@@ -73,6 +73,18 @@ for (const { locale, path, browser } of locales) {
       await expect(reward(page).getByText(EMAIL)).toBeVisible();
     });
 
+    test('coming back from Google without finishing reads as cancelled, once', async ({ page }) => {
+      await page.goto(`${path}?mock=signed-out`);
+      await expect(action(page, states.signedOut)).toBeEnabled();
+      // What the widget leaves behind while the visitor is away at Google.
+      await page.evaluate(() => sessionStorage.setItem('promuse:sign-in-pending', '1'));
+      await page.reload();
+      await expect(reward(page).getByText(states.cancelled)).toBeVisible();
+      await page.reload();
+      await expect(action(page, states.signedOut)).toBeEnabled();
+      await expect(reward(page).getByText(states.cancelled)).toHaveCount(0);
+    });
+
     test('the cleaned URL survives a router refresh', async ({ page }) => {
       await page.goto(`${path}?mock=cancelled&auth=cancelled#reward`);
       await expect(reward(page).getByText(states.cancelled)).toBeVisible();
