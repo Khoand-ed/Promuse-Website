@@ -29,3 +29,8 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      - name: Install the Playwright browser
+        run: npx playwright install --with-deps chromium
+      # Starts the dev server itself, in mock mode (the job's NEXT_PUBLIC_BACKEND_MODE).
+      - name: End-to-end tests
+        run: npm run e2e

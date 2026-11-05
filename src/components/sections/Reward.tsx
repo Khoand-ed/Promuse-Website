@@ -1,13 +1,15 @@
 import { getTranslations } from 'next-intl/server';
 import { CoverReveal, Reveal, RiseLines, TitleZoom } from '@/components/motion/reveal';
-import { ArrowRight } from '@/components/ui/icons';
 import { ImageSlot } from '@/components/ui/ImageSlot';
 import { getReward } from '@/content/data';
 import { Link } from '@/i18n/navigation';
+import { env } from '@/lib/env';
+import { RewardActions } from './RewardActions';
 
 /**
- * Laid out and animated like p3re.jp's "BUY NOW!" block. Registration is not open yet, so the
- * button shows the `notOpen` state; the sign-in flow replaces it in P2.
+ * Laid out and animated like p3re.jp's "BUY NOW!" block. RewardActions holds the sign-in and
+ * registration states and the first-visit popup; with NEXT_PUBLIC_BACKEND_MODE=off (production
+ * until P3) it shows `notOpen`.
  */
 export async function Reward() {
   const t = await getTranslations('reward');
@@ -32,10 +34,10 @@ export async function Reward() {
         <ImageSlot slot={reward.art} sizes="(min-width: 768px) 288px, 64vw" />
       </CoverReveal>
       <Reveal from="none" delay={0.4} duration={1} easing="out" className="mt-12">
-        <button type="button" disabled className="pill pill-xl">
-          {t('states.notOpen')}
-          <ArrowRight />
-        </button>
+        <RewardActions
+          mode={env.NEXT_PUBLIC_BACKEND_MODE}
+          popupArt={<ImageSlot slot={reward.art} sizes="(min-width: 768px) 34rem, 90vw" />}
+        />
       </Reveal>
       <Reveal
         from="none"

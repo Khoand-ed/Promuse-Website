@@ -59,8 +59,11 @@ interface ModalProps {
   labelledBy?: string;
   /** A name when the modal shows no title of its own. */
   label?: string;
-  /** `sheet` slides up like p3re.jp's modals; `lightbox` fades in over a dark backdrop. */
-  variant?: 'sheet' | 'lightbox';
+  /**
+   * `sheet` slides up like p3re.jp's modals; `lightbox` fades in over a dark backdrop; `card` fades
+   * in a centred card over the dimmed page, like p3re.jp's promotion popup (a click beside it closes).
+   */
+  variant?: 'sheet' | 'lightbox' | 'card';
   children: ReactNode;
 }
 
@@ -88,6 +91,9 @@ export function Modal({
       opener.current =
         document.activeElement instanceof HTMLElement ? document.activeElement : null;
       element.showModal();
+      // A modal that opened on its own (the reward popup) takes focus itself, so screen readers
+      // land on it without a focus ring jumping onto the close button.
+      if (!opener.current || opener.current === document.body) element.focus();
     } else if (!open && element.open) {
       element.close();
     }
@@ -104,24 +110,43 @@ export function Modal({
     return () => element.removeEventListener('close', closed);
   }, [onClose]);
 
+  const close = (
+    <button
+      type="button"
+      aria-label={t('close')}
+      onClick={() => dialog.current?.close()}
+      className="modal-close"
+    >
+      <CloseIcon />
+    </button>
+  );
+
   return (
     <dialog
       ref={dialog}
+      tabIndex={-1}
       aria-labelledby={labelledBy}
       aria-label={label}
       // Lets wheel and touch scroll the modal itself while Lenis holds the page.
       data-lenis-prevent
       className={`modal modal-${variant}`}
+      onClick={(event) => {
+        // In a card, the dialog itself is the dimmed area around the card.
+        if (variant === 'card' && event.target === event.currentTarget) dialog.current?.close();
+      }}
     >
-      <button
-        type="button"
-        aria-label={t('close')}
-        onClick={() => dialog.current?.close()}
-        className="modal-close"
-      >
-        <CloseIcon />
-      </button>
-      {children}
+      {variant === 'card' ? (
+        // The close button sits in the card's corner, as on p3re.jp.
+        <div className="modal-card-body">
+          {close}
+          {children}
+        </div>
+      ) : (
+        <>
+          {close}
+          {children}
+        </>
+      )}
     </dialog>
   );
 }

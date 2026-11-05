@@ -150,7 +150,19 @@ export interface RewardGateway {
 ```
 
 - `SupabaseRewardGateway`: Supabase browser auth plus `fetch` to `/api/v1/preregistration`.
-- `MockRewardGateway`: no network. `?mock=` picks a scenario: `signed-out` (default; sign-in "succeeds" after 800 ms and registration returns `created`), `signed-in`, `registered`, `existing`, `cancelled`, `error`, `closed`.
+- `MockRewardGateway` (`src/lib/reward/mock.ts`): no network, for development and previews. `?mock=` picks a scenario; the scenario and a fake account (`nguoi.choi@example.com`) live in `sessionStorage` (`promuse:mock`), so they survive the fake trip to Google, which waits 800 ms and reloads the page at the return path, as the real one would. A `?mock=` value that differs from the saved one starts over.
+
+  | `?mock=` | Starts | The button leads to |
+  |---|---|---|
+  | `signed-out` (default) | signed out | sign-in, then `created` → `registered` |
+  | `signed-in` | signed in, not registered | `created` → `registered` |
+  | `registered` | signed in, registered on 2026-11-01 | — (`alreadyRegistered`) |
+  | `existing` | signed out | sign-in, then `existing` → `alreadyRegistered` |
+  | `cancelled` | signed out | back with `auth=cancelled` → `signedOut` with the notice |
+  | `error` | signed in | a failure → `error`, every retry fails again |
+  | `closed` | signed in | `campaign_closed` → `closed` |
+
+- The reward widget is `src/components/sections/RewardActions.tsx` over the pure state machine in `src/lib/reward/machine.ts` (`reduce`, `popupAllowed`), so the rules are unit-tested without a browser.
 - `NEXT_PUBLIC_BACKEND_MODE` chooses the gateway: `off` (no gateway; the widget shows `notOpen`), `mock` or `supabase`. The reward widget is a state machine over this interface and holds no Supabase code. Swapping the backend later means a new gateway and service implementation, not a new widget.
 
 ## 6. Rendering
@@ -160,7 +172,7 @@ export interface RewardGateway {
 - Cache Components (`cacheComponents`, `partialPrefetching`) stays off, although `create-next-app` turns it on: every page is static and needs no per-request data. Revisit when Next.js makes it the default.
 - Sections are Server Components that receive typed content. Motion wrappers, modals, sliders and the reward widget are client components.
 - Heavy client code (Supabase client, modals, sliders) loads with `next/dynamic` or on first interaction.
-- The reward widget asks the gateway for status after mount; the static HTML shows the signed-out state.
+- The reward widget asks the gateway for status after mount; the static HTML shows the sign-in button disabled until then, or `notOpen` in `off` mode.
 
 ## 7. Authentication
 
@@ -294,7 +306,7 @@ Never edit a migration that has been applied. Add a new one.
 
 ## 13. CI and deployment
 
-- `.github/workflows/ci.yml` runs on every push and pull request: `npm ci`, `check:content` (failing when the generated `CONTENT_TODO.md` or `content/schemas/` are not committed up to date), lint, typecheck, unit tests, build in mock mode, then Playwright on Chromium (from P2).
+- `.github/workflows/ci.yml` runs on every push and pull request: `npm ci`, `check:content` (failing when the generated `CONTENT_TODO.md` or `content/schemas/` are not committed up to date), lint, typecheck, unit tests, build in mock mode, then Playwright on Chromium against the dev server in mock mode (since P2).
 - Each phase lives on its own branch and reaches `main` through a pull request. Vercel's Git integration builds a preview for every branch and deploys `main` to production.
 - Database: apply `supabase/migrations/*.sql` in order with the Supabase CLI (`supabase link`, then `supabase db push`) or paste them into the SQL Editor.
 
