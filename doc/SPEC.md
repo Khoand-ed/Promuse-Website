@@ -123,8 +123,11 @@ Animate `transform`, `opacity`, `clip-path` and `filter` only: background colour
 
 - Laid out like p3re.jp's "BUY NOW!" block: white, centred, the title in large display type, then the reward line, the art, the large pill button and the privacy line.
 - Banner: reward art, title, one-line reward description (`[TODO]`: the amount and the currency name are not decided), the sign-in button, a privacy line that links to the privacy page and, when signed in, "Not you? Sign out".
-- Popup: appears 1.5 s after the intro ends (or after load when the intro does not play), only on the first visit (`localStorage` key `promuse:reward-popup-dismissed`), never after registration and never while registration is not open (`notOpen`). Its button starts the same sign-in.
-- After returning from Google, the page scrolls to `#reward` and registration runs automatically, once.
+- Popup (owner's decision, 2026-11-05): a card in the middle of the dimmed page, like p3re.jp's promotion popup: the reward art on one side; the title, the reward line and the same button as the banner on the other; a close button in the card's corner. It fades in (0.8 s), and Esc, the close button or a click beside the card closes it.
+- The popup appears 1.5 s after the opening ends (or after the status is known when the opening does not play), only on the first visit (`localStorage` key `promuse:reward-popup-dismissed`, set when it closes or its button is used), never after registration and never while registration is not open (`notOpen`) or closed. Its button starts the same sign-in, or the registration when already signed in.
+- The sign-in button carries Google's "G" mark on a white disc and says "Đăng nhập bằng Google…" / "Sign in with Google…", as Google's sign-in branding guidelines ask (owner's decision, 2026-11-05).
+- Signed in, the banner shows the account's email with "Không phải bạn? Đăng xuất" / "Not you? Sign out".
+- The trip to Google comes back to the same page with `?intent=prereg#reward`: the page scrolls to `#reward` and registration runs automatically, once. `?auth=cancelled` shows "Bạn đã huỷ đăng nhập." under the sign-in button; `?auth=error` (a failed code exchange, P3) shows the error state. Both parameters are removed from the URL once read.
 - States are in section 7.
 
 ### 4. Introduction (`#story`)
@@ -175,7 +178,7 @@ Stats and passives come from the game (`GAME_FACTS.md`, section 3). Names are ke
 
 | Component | Behaviour | Keyboard and accessibility |
 |---|---|---|
-| Modal | Native `<dialog>` with `showModal()`. Slides up from the bottom (0.8 s, ease-in-out) and back down on close; its content rises 80 px in a short stagger (a fade when motion is off). Locks page scroll and stops Lenis. Opening sets the hash; the browser Back button closes it | Esc closes; focus moves inside and returns to the opener; labelled by its title |
+| Modal | Native `<dialog>` with `showModal()`. Three looks: `sheet` slides up from the bottom (0.8 s, ease-in-out) and back down on close; `lightbox` and `card` (the reward popup) fade in over a dark backdrop. In a sheet its content rises 80 px in a short stagger (a fade when motion is off). Locks page scroll and stops Lenis. Opening sets the hash; the browser Back button closes it | Esc closes; focus moves inside and returns to the opener; labelled by its title |
 | Tabs | Switches panels without closing the modal; remembers the last tab per modal (`sessionStorage` key `promuse:tab:<modal>`) | ARIA tabs pattern; ← → Home End |
 | Slider | CSS scroll snap with previous and next buttons, dots and swipe; images load lazily | Labelled buttons; announces "Image 2 of 5" politely |
 | Lightbox | Fades in over a dark backdrop (0.3 s), as p3re.jp's trailer player does. Inserts a `youtube-nocookie.com` iframe only when opened and removes it on close, so playback stops; `/#trailer` opens it | Built on Modal |
@@ -185,7 +188,7 @@ Stats and passives come from the game (`GAME_FACTS.md`, section 3). Names are ke
 
 | State | When | Button (vi / en) | Notes |
 |---|---|---|---|
-| `signedOut` | No session | Đăng nhập Google để nhận quà / Sign in with Google to claim | Default |
+| `signedOut` | No session | Đăng nhập bằng Google để nhận quà / Sign in with Google to claim | Default; Google's "G" mark in the pill |
 | `redirecting` | After the click, before leaving | Đang chuyển tới Google… / Redirecting to Google… | Disabled |
 | `registering` | Back from Google, request in flight | Đang ghi nhận… / Registering… | Disabled |
 | `registered` | Server answered `created` | `[TODO]` in both locales; may use `{email}` | Popup never shows again. Must not promise in-game delivery the game cannot do yet: it has no Google sign-in today |
