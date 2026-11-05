@@ -15,7 +15,10 @@ export default defineConfig({
   webServer: {
     command: 'npm run dev',
     url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
+    // The tests need mock mode whatever .env.local says, so Playwright always starts its own server.
+    // Next.js allows one dev server per folder: stop `npm run dev` before `npm run e2e`.
+    env: { NEXT_PUBLIC_BACKEND_MODE: 'mock' },
+    reuseExistingServer: false,
     timeout: 120_000,
   },
 });
