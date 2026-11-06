@@ -142,7 +142,7 @@ Animate `transform`, `opacity`, `clip-path` and `filter` only: background colour
 - Modal, as p3re.jp's Features modal: a full white sheet over a pale wave.
   - The four tabs run down the left with short labels (`features.items.<key>.tab`); on phones they form a row at the top.
   - Each tab shows "FEATURE #n", the title, a hairline, one or two sentences and two 16:9 images.
-  - From 1024 px a "Scroll" cue sits at the foot, and a wheel turn moves to the next or previous tab while the panel fits on screen; otherwise the sheet scrolls.
+  - From 1024 px a "Scroll" cue sits at the foot, and the wheel reads through the modal. It scrolls a panel taller than the window first; a new wheel turn at the panel's end moves to the next tab (at its start, to the previous one) and starts it at the top.
 - Topics: section 8, confirmed by the owner on 2026-11-06. The copy is a `[REVIEW]` draft taken from `GAME_FACTS.md`.
 
 ### 6. Gameplay (`#gameplay`)
@@ -185,7 +185,7 @@ Stats and passives come from the game (`GAME_FACTS.md`, section 3). Names are ke
 | Component | Behaviour | Keyboard and accessibility |
 |---|---|---|
 | Modal | Native `<dialog>` with `showModal()`. Three looks: `sheet` slides up from the bottom (0.8 s, ease-in-out) and back down on close; `lightbox` and `card` (the reward popup) fade in over a dark backdrop. In a sheet its content rises 80 px in a short stagger (a fade when motion is off). Locks page scroll and stops Lenis. Opening sets the hash; the browser Back button closes it | Esc closes; focus moves inside and returns to the opener; labelled by its title |
-| Tabs | Down the left from 1024 px, a scrolling row on phones (the chosen tab kept in view). Switches panels without closing the modal; every panel stays in the page, hidden until chosen, and rises in when it appears. Remembers the last tab per modal (`sessionStorage` key `promuse:tab:<modal>`). Optionally the wheel steps through the tabs from 1024 px while the panel fits | ARIA tabs pattern; ← → ↑ ↓ Home End |
+| Tabs | Down the left from 1024 px, a scrolling row on phones (the chosen tab kept in view). Switches panels without closing the modal; every panel stays in the page, hidden until chosen, and rises in when it appears. Remembers the last tab per modal (`sessionStorage` key `promuse:tab:<modal>`). Optionally, from 1024 px, the wheel scrolls a long panel and then, with a new turn at its end or start, steps to the next or previous tab, one step per gesture | ARIA tabs pattern; ← → ↑ ↓ Home End |
 | Slider | CSS scroll snap with swipe, previous and next buttons (44 px) and square dots as on p3re.jp (10 px, 16 px apart); ← and → when the track has focus; images load lazily | Labelled buttons; announces "Image 2 of 5" politely; each slide is labelled with its position |
 | Lightbox | Fades in over a dark backdrop (0.3 s), as p3re.jp's trailer player does. Inserts a `youtube-nocookie.com` iframe only when opened and removes it on close, so playback stops; `/#trailer` opens it | Built on Modal |
 | ImageSlot | Renders the image a content slot declares, through `next/image`. When the file is missing, renders a box with the slot's aspect ratio, its name and the size it needs | Real images take their alt text from content; placeholders are hidden from assistive technology |

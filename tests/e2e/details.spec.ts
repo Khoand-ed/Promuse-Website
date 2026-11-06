@@ -159,3 +159,30 @@ test.describe('gameplay modal by keyboard', () => {
     await expect(button).toBeFocused();
   });
 });
+
+test.describe('a features panel taller than the window', () => {
+  // A 1920 × 1080 screen at 125% with the browser not full-screen.
+  test.use({ locale: 'vi-VN', viewport: { width: 1522, height: 780 } });
+
+  test('the wheel reads to the end of the panel, then moves to the next tab', async ({ page }) => {
+    await page.goto('/#features-detail');
+    const dialog = page.getByRole('dialog', { name: vi.features.title });
+    await expect(dialog).toBeVisible();
+    const tabs = dialog.getByRole('tab');
+    const scrollTop = () => dialog.evaluate((el) => el.scrollTop);
+    const room = await dialog.evaluate((el) => el.scrollHeight - el.clientHeight);
+    expect(room).toBeGreaterThan(0);
+
+    await page.mouse.move(761, 400);
+    // One long turn reads down to the end of the panel and stays on the first tab.
+    await page.mouse.wheel(0, room + 200);
+    await expect.poll(scrollTop).toBeGreaterThanOrEqual(room - 2);
+    await expect(tabs.nth(0)).toHaveAttribute('aria-selected', 'true');
+
+    // After a pause, a new turn at the end moves on and starts the next panel at its top.
+    await page.waitForTimeout(400);
+    await page.mouse.wheel(0, 200);
+    await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true');
+    await expect.poll(scrollTop).toBe(0);
+  });
+});

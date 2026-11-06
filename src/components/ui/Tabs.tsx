@@ -16,16 +16,18 @@ interface TabsProps {
   label: string;
   items: TabItem[];
   /**
-   * From 1024 px, a wheel turn over a panel that fits on screen moves to the next or previous tab,
-   * as p3re.jp's detail modals do.
+   * From 1024 px the wheel reads through the tabs, as on p3re.jp's detail modals: it scrolls a long
+   * panel, and a new wheel turn at its end moves to the next tab (at its start, to the previous one).
    */
   wheel?: boolean;
   className?: string;
 }
 
 const storageKey = (id: string) => `promuse:tab:${id}`;
-/** How long one wheel gesture keeps the tab still, so a trackpad fling moves a single step. */
+/** How long a tab change keeps the next one waiting, so a trackpad fling moves a single step. */
 const WHEEL_REST_MS = 900;
+/** A pause this long between wheel events ends one gesture and starts the next. */
+const WHEEL_GESTURE_GAP_MS = 250;
 
 /**
  * The ARIA tabs pattern (doc/SPEC.md, section 6): ← → ↑ ↓ move between tabs, Home and End jump to
@@ -40,6 +42,7 @@ export function Tabs({ id, label, items, wheel = false, className = '' }: TabsPr
   const root = useRef<HTMLDivElement>(null);
   const tablist = useRef<HTMLDivElement>(null);
   const resting = useRef(0);
+  const gesture = useRef({ last: 0, fromEdge: false });
 
   // The last tab seen this visit; read after mount, so the server and first render agree.
   useEffect(() => {
@@ -98,22 +101,35 @@ export function Tabs({ id, label, items, wheel = false, className = '' }: TabsPr
     move();
   };
 
-  // The wheel steps through the tabs only where the panel fits, so long panels still scroll.
+  // The wheel scrolls a long panel first; a new wheel turn at its end (or start) steps to the next
+  // (or previous) tab, so the whole modal can be read by scrolling, as on p3re.jp.
   useEffect(() => {
     const element = root.current;
     if (!wheel || !element) return;
     const desktop = window.matchMedia('(min-width: 64rem)');
+    const scroller = element.closest('dialog') ?? document.documentElement;
+    const atEdge = (down: boolean) =>
+      down
+        ? scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 2
+        : scroller.scrollTop <= 1;
     const onWheel = (event: WheelEvent) => {
-      const scroller = element.closest('dialog') ?? document.documentElement;
-      if (!desktop.matches || scroller.scrollHeight > scroller.clientHeight + 1) return;
-      if (Math.abs(event.deltaY) < 20) return;
-      event.preventDefault();
+      if (!desktop.matches || Math.abs(event.deltaY) < 4) return;
       const now = performance.now();
+      const down = event.deltaY > 0;
+      // A pause starts a new gesture; only a gesture that begins at an edge may change the tab, so a
+      // fling that reaches the end of a panel stops there instead of skipping on.
+      if (now - gesture.current.last > WHEEL_GESTURE_GAP_MS)
+        gesture.current.fromEdge = atEdge(down);
+      gesture.current.last = now;
+      if (!gesture.current.fromEdge || !atEdge(down)) return;
+      event.preventDefault();
       if (now < resting.current) return;
-      resting.current = now + WHEEL_REST_MS;
       const index = items.findIndex((item) => item.key === active);
-      const target = index + Math.sign(event.deltaY);
-      if (target >= 0 && target < items.length) choose(items[target]!.key);
+      const target = items[index + (down ? 1 : -1)];
+      if (!target) return;
+      resting.current = now + WHEEL_REST_MS;
+      choose(target.key);
+      scroller.scrollTop = 0;
     };
     element.addEventListener('wheel', onWheel, { passive: false });
     return () => element.removeEventListener('wheel', onWheel);
