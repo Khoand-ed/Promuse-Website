@@ -138,15 +138,21 @@ Animate `transform`, `opacity`, `clip-path` and `filter` only: background colour
 
 ### 5. Features (`#features`)
 
-- On the page, mirrored (image on the left): title, a two-sentence summary, a cover image, and "See details" (P5).
-- Modal: four tabs. Each tab shows "FEATURE #n", a title, one or two sentences and two images.
-- Topics are proposed in section 8. Every title and sentence is `[TODO]` until the owner writes it.
+- On the page, mirrored (image on the left): title, a two-sentence summary, a cover image, and the large pill "See details", which opens `#features-detail`.
+- Modal, as p3re.jp's Features modal: a full white sheet over a pale wave.
+  - The four tabs run down the left with short labels (`features.items.<key>.tab`); on phones they form a row at the top.
+  - Each tab shows "FEATURE #n", the title, a hairline, one or two sentences and two 16:9 images.
+  - From 1024 px a "Scroll" cue sits at the foot, and a wheel turn moves to the next or previous tab while the panel fits on screen; otherwise the sheet scrolls.
+- Topics: section 8, confirmed by the owner on 2026-11-06. The copy is a `[REVIEW]` draft taken from `GAME_FACTS.md`.
 
 ### 6. Gameplay (`#gameplay`)
 
-- On the page, laid out like Introduction: title, a two-sentence summary, a cover image, and "Gameplay details" (P5).
-- Modal: four tabs, each with a slider of 3–7 images (16:9), a title and a paragraph. The gacha tab shows the rate line, rendered from data (`GAME_FACTS.md`, section 4).
-- Topics are proposed in section 8.
+- On the page, laid out like Introduction: title, a two-sentence summary, a cover image, and the large pill "Gameplay details", which opens `#gameplay-detail`.
+- Modal: the same sheet and tabs as Features.
+  - Each tab has a slider of 3–7 images (16:9) beside its title and paragraph; on phones the words come first.
+  - The gacha tab shows the rate line, rendered from data (`GAME_FACTS.md`, section 4).
+  - The owner chose four tabs over p3re.jp's single Game System slider (2026-11-06), so this layout is Promuse's own, built from the Features modal and p3re.jp's slider dots.
+- Topics: section 8, confirmed by the owner on 2026-11-06. The copy is a `[REVIEW]` draft taken from `GAME_FACTS.md`.
 
 ### 7. Characters (`#characters`)
 
@@ -179,8 +185,8 @@ Stats and passives come from the game (`GAME_FACTS.md`, section 3). Names are ke
 | Component | Behaviour | Keyboard and accessibility |
 |---|---|---|
 | Modal | Native `<dialog>` with `showModal()`. Three looks: `sheet` slides up from the bottom (0.8 s, ease-in-out) and back down on close; `lightbox` and `card` (the reward popup) fade in over a dark backdrop. In a sheet its content rises 80 px in a short stagger (a fade when motion is off). Locks page scroll and stops Lenis. Opening sets the hash; the browser Back button closes it | Esc closes; focus moves inside and returns to the opener; labelled by its title |
-| Tabs | Switches panels without closing the modal; remembers the last tab per modal (`sessionStorage` key `promuse:tab:<modal>`) | ARIA tabs pattern; ← → Home End |
-| Slider | CSS scroll snap with previous and next buttons, dots and swipe; images load lazily | Labelled buttons; announces "Image 2 of 5" politely |
+| Tabs | Down the left from 1024 px, a scrolling row on phones (the chosen tab kept in view). Switches panels without closing the modal; every panel stays in the page, hidden until chosen, and rises in when it appears. Remembers the last tab per modal (`sessionStorage` key `promuse:tab:<modal>`). Optionally the wheel steps through the tabs from 1024 px while the panel fits | ARIA tabs pattern; ← → ↑ ↓ Home End |
+| Slider | CSS scroll snap with swipe, previous and next buttons (44 px) and square dots as on p3re.jp (10 px, 16 px apart); ← and → when the track has focus; images load lazily | Labelled buttons; announces "Image 2 of 5" politely; each slide is labelled with its position |
 | Lightbox | Fades in over a dark backdrop (0.3 s), as p3re.jp's trailer player does. Inserts a `youtube-nocookie.com` iframe only when opened and removes it on close, so playback stops; `/#trailer` opens it | Built on Modal |
 | ImageSlot | Renders the image a content slot declares, through `next/image`. When the file is missing, renders a box with the slot's aspect ratio, its name and the size it needs | Real images take their alt text from content; placeholders are hidden from assistive technology |
 
@@ -234,7 +240,7 @@ Copy keys live under `reward.*` in `content/text/*.json`; `{email}` comes from t
 
 `reward.desc` names the amount and the currency; it must match the `prereg-launch` campaign row (`ARCHITECTURE.md`, section 9).
 
-### Features topics (proposed; confirmed at the start of P5)
+### Features topics (confirmed by the owner on 2026-11-06)
 
 | # | Topic | Facts it may use (`GAME_FACTS.md`) |
 |---|---|---|
@@ -243,7 +249,7 @@ Copy keys live under `reward.*` in `content/text/*.json`; `{email}` comes from t
 | 3 | Collect and grow your characters | Sections 4 and 5: the gacha, levelling up and upgrading |
 | 4 | Always something to play | Section 5: events, the story campaign, leaderboards |
 
-### Gameplay tabs (proposed; confirmed at the start of P5)
+### Gameplay tabs (confirmed by the owner on 2026-11-06)
 
 | # | Topic | Facts it may use (`GAME_FACTS.md`) |
 |---|---|---|
