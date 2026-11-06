@@ -66,4 +66,4 @@ Decided on 2026-11-05: the look follows p3re.jp (`SPEC.md`, section 1). The toke
 
 **Buttons.** One style, as on p3re.jp: a pill with the blue gradient, white bold text and an arrow. The large variant is 76 px tall with wide uppercase tracking.
 
-**Layout.** Bleeding images are 52vw wide at 16:9; text columns start 6.25vw from the left edge, or 5.7vw past a left image. On phones titles are centred and images keep a 6.7% margin. Character portraits are 3:4, 37.7vw wide (543 px at most) with 13.9vw between them.
+**Layout.** Bleeding images are 52vw wide at 16:9; text columns start 6.25vw from the left edge, or 5.7vw past a left image. On phones titles are centred and images keep a 6.7% margin. Character portraits are 3:4 and sized by the window's height, as on p3re.jp: 80.5% of it tall (60.4svh wide), 200 px apart, centred in the section. So the card in focus and its name always fit, also in a browser window that is not full-screen (measured on p3re.jp at 780, 864, 900, 1080 and 1366 px tall windows, 2026-11-06).
