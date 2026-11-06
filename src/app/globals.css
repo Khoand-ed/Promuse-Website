@@ -659,6 +659,265 @@
     color: #fff;
   }
 
+  /*
+   * Detail modals (Features, Gameplay), measured on p3re.jp's Features modal at 1440 × 900: a white
+   * sheet over a pale wave, the tabs down the left, the panel from 11vw. On phones the tabs form a
+   * row at the top and the panel scrolls.
+   */
+  .detail {
+    position: relative;
+    isolation: isolate;
+    min-height: 100%;
+    padding: 5.5rem 6.9% 4rem;
+    background: linear-gradient(#fff 0 22rem, var(--color-mist) 22rem);
+  }
+
+  .detail-wave {
+    position: absolute;
+    z-index: -1;
+    top: calc(22rem - 2.9rem);
+    left: 0;
+    width: 100%;
+    height: 3rem;
+    color: var(--color-mist);
+  }
+
+  .detail-scroll {
+    display: none;
+  }
+
+  .tabs-list {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tabs-tab {
+    min-height: 2.75rem;
+    font-size: 0.81rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .tabs-tab[aria-selected='true'] {
+    font-weight: 700;
+  }
+
+  .tabs-panel {
+    margin-top: 1.5rem;
+  }
+
+  .tabs-panel:focus-visible {
+    outline-offset: 0.75rem;
+  }
+
+  /* After the first choice, a panel rises in right away: no modal slide to wait for. */
+  .modal[open] [data-touched] [data-rise] {
+    transition-delay: calc(0.1s + var(--rise, 0) * 0.12s);
+  }
+
+  .feature-head,
+  .gameplay-copy {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+
+  .feature-number {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .feature-title,
+  .gameplay-title {
+    font-size: 3.25rem;
+    line-height: 1.05;
+  }
+
+  .feature-rule {
+    display: none;
+  }
+
+  .feature-text,
+  .gameplay-text {
+    font-size: 1rem;
+    line-height: 2;
+    letter-spacing: 0.04em;
+  }
+
+  .feature-images {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .gameplay-panel {
+    display: grid;
+    gap: 2rem;
+  }
+
+  /* Phones read the words first, then the pictures. */
+  .gameplay-copy {
+    order: -1;
+  }
+
+  .gameplay-rates {
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  @media (min-width: 64rem) {
+    .detail {
+      padding: 20vh 4.4vw 7rem 11vw;
+      background: linear-gradient(#fff 0 67%, var(--color-mist) 67%);
+    }
+
+    .detail-wave {
+      top: calc(67% - 6.9vw);
+      height: 7vw;
+    }
+
+    .detail-scroll {
+      display: block;
+      position: absolute;
+      bottom: 5vh;
+      left: 50%;
+      font-size: 0.625rem;
+      transform: translateX(-50%);
+    }
+
+    .tabs-list {
+      position: absolute;
+      top: 37.5vh;
+      left: 2vw;
+      flex-direction: column;
+      gap: 0;
+      max-width: 8.5vw;
+    }
+
+    .tabs-tab {
+      display: flex;
+      align-items: center;
+      min-height: 3.375rem;
+      text-align: left;
+      white-space: normal;
+    }
+
+    .tabs-panel {
+      margin-top: 0;
+    }
+
+    .feature-head {
+      grid-template-columns: minmax(0, 28vw) 1px minmax(0, 1fr);
+      column-gap: 5vw;
+      align-items: stretch;
+    }
+
+    .feature-heading {
+      display: grid;
+      gap: 1.25rem;
+      align-content: start;
+    }
+
+    .feature-number {
+      font-size: 0.9rem;
+    }
+
+    .feature-title,
+    .gameplay-title {
+      font-size: clamp(3.25rem, 5vw, 5.25rem);
+    }
+
+    .feature-rule {
+      display: block;
+      background: var(--color-ink);
+    }
+
+    .feature-text,
+    .gameplay-text {
+      font-size: 1.17rem;
+      line-height: 2.4;
+      letter-spacing: 0;
+    }
+
+    .feature-images {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.64vw;
+      margin-top: 3rem;
+    }
+
+    .gameplay-panel {
+      grid-template-columns: minmax(0, 46vw) minmax(0, 1fr);
+      column-gap: 3vw;
+      align-items: center;
+    }
+
+    .gameplay-copy {
+      order: 0;
+    }
+  }
+
+  /*
+   * Slider (doc/SPEC.md, section 6): one 16:9 slide at a time on CSS scroll snap, square dots as on
+   * p3re.jp's Game System modal (10 px, 16 px apart, navy), and 44 px arrows either side for touch.
+   */
+  .slider-track {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .slider-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slider-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
+
+  .slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .slider-arrow {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.25rem;
+  }
+
+  .slider-arrow:disabled {
+    opacity: 0.3;
+  }
+
+  .slider-dots {
+    display: flex;
+    gap: 0.375rem;
+  }
+
+  .slider-dot {
+    width: 0.625rem;
+    height: 0.625rem;
+    background: var(--color-ink);
+    opacity: 0.3;
+    transition: opacity 0.3s ease-out;
+  }
+
+  .slider-dot[aria-current='true'] {
+    opacity: 1;
+  }
+
   /* The trailer strip's button: a round play mark and the label; the arrow nudges on hover. */
   .trailer-button {
     display: inline-flex;
