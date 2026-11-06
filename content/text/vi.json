@@ -78,32 +78,36 @@
   },
   "features": {
     "title": "Tính năng",
-    "summary": "[TODO] Hai câu tóm tắt các tính năng nổi bật",
+    "summary": "[REVIEW] Đánh theo điệu nhạc trên hai làn với ba loại nốt, cùng những nhân vật mang khả năng riêng. Thu thập, nâng cấp đội hình và luôn có nhiệm vụ, sự kiện mới để chơi.",
     "coverAlt": "[TODO] Mô tả ảnh bìa phần Tính năng",
     "seeDetails": "Xem chi tiết",
     "number": "TÍNH NĂNG #{n}",
     "items": {
       "f1": {
-        "title": "[TODO] Tên tính năng 1 (chủ đề: hai làn, ba loại nốt)",
-        "text": "[TODO] 1–2 câu về tính năng 1",
+        "tab": "[REVIEW] Hai làn",
+        "title": "[REVIEW] Hai làn, ba loại nốt",
+        "text": "[REVIEW] Nốt nhạc rơi xuống hai làn trái và phải theo điệu nhạc. Chạm, giữ, hoặc chạm cả hai làn cùng lúc.",
         "image1Alt": "[TODO] Mô tả ảnh 1 của tính năng 1",
         "image2Alt": "[TODO] Mô tả ảnh 2 của tính năng 1"
       },
       "f2": {
-        "title": "[TODO] Tên tính năng 2 (chủ đề: mỗi nhân vật đổi cách chơi)",
-        "text": "[TODO] 1–2 câu về tính năng 2",
+        "tab": "[REVIEW] Nhân vật",
+        "title": "[REVIEW] Mỗi nhân vật một cách chơi",
+        "text": "[REVIEW] Mỗi nhân vật có một kỹ năng bị động riêng, như giữ combo sau lần Miss đầu tiên hay hồi HP đều đặn.",
         "image1Alt": "[TODO] Mô tả ảnh 1 của tính năng 2",
         "image2Alt": "[TODO] Mô tả ảnh 2 của tính năng 2"
       },
       "f3": {
-        "title": "[TODO] Tên tính năng 3 (chủ đề: thu thập và nâng cấp nhân vật)",
-        "text": "[TODO] 1–2 câu về tính năng 3",
+        "tab": "[REVIEW] Phát triển",
+        "title": "[REVIEW] Thu thập và nâng cấp",
+        "text": "[REVIEW] Nhận nhân vật mới từ gacha, rồi tăng cấp và nâng cấp để họ mạnh hơn.",
         "image1Alt": "[TODO] Mô tả ảnh 1 của tính năng 3",
         "image2Alt": "[TODO] Mô tả ảnh 2 của tính năng 3"
       },
       "f4": {
-        "title": "[TODO] Tên tính năng 4 (chủ đề: luôn có thứ để chơi)",
-        "text": "[TODO] 1–2 câu về tính năng 4",
+        "tab": "[REVIEW] Hoạt động",
+        "title": "[REVIEW] Luôn có thứ để chơi",
+        "text": "[REVIEW] Nhiệm vụ hằng ngày và hằng tuần, sự kiện giới hạn thời gian, chiến dịch cốt truyện và bảng xếp hạng được máy chủ kiểm tra để luôn công bằng.",
         "image1Alt": "[TODO] Mô tả ảnh 1 của tính năng 4",
         "image2Alt": "[TODO] Mô tả ảnh 2 của tính năng 4"
       }
@@ -111,7 +115,7 @@
   },
   "gameplay": {
     "title": "Gameplay",
-    "summary": "[TODO] Hai câu tóm tắt cách chơi",
+    "summary": "[REVIEW] Đánh trúng nốt theo nhịp để giữ combo, nạp Fever và đi tới cuối bài trước khi hết HP. Ngoài các bài nhạc, bạn thu thập nhân vật mới và làm nhiệm vụ mỗi ngày.",
     "coverAlt": "[TODO] Mô tả ảnh bìa phần Gameplay",
     "details": "Chi tiết gameplay",
     "rates": "Tỉ lệ: 5★ {fiveStar}% · 4★ {fourStar}% · 3★ {threeStar}%",
@@ -120,8 +124,9 @@
     "position": "Ảnh {current}/{total}",
     "tabs": {
       "g1": {
-        "title": "[TODO] Tiêu đề tab 1 (chủ đề: chiến đấu theo nhịp)",
-        "text": "[TODO] Giải thích ngắn: hai làn, ba loại nốt, giữ HP tới cuối bài",
+        "tab": "[REVIEW] Chiến đấu",
+        "title": "[REVIEW] Chiến đấu theo nhịp",
+        "text": "[REVIEW] Nốt rơi xuống hai làn và mỗi lần đánh được chấm Perfect, Great hoặc Hit; nốt bỏ lỡ là Miss. Mỗi lần Miss làm mất HP, nên hãy đi tới cuối bài trước khi hết HP.",
         "slides": {
           "s1": "[TODO] Mô tả ảnh 1 của tab 1",
           "s2": "[TODO] Mô tả ảnh 2 của tab 1",
@@ -129,8 +134,9 @@
         }
       },
       "g2": {
-        "title": "[TODO] Tiêu đề tab 2 (chủ đề: combo và Fever)",
-        "text": "[TODO] Giải thích ngắn: combo và Fever",
+        "tab": "[REVIEW] Combo & Fever",
+        "title": "[REVIEW] Combo và Fever",
+        "text": "[REVIEW] Đánh liên tục không trượt để tăng combo. Những cú đánh tốt nạp đầy thanh Fever; khi đầy, Fever bắt đầu và điểm tăng nhanh hơn.",
         "slides": {
           "s1": "[TODO] Mô tả ảnh 1 của tab 2",
           "s2": "[TODO] Mô tả ảnh 2 của tab 2",
@@ -138,8 +144,9 @@
         }
       },
       "g3": {
-        "title": "[TODO] Tiêu đề tab 3 (chủ đề: gacha; tên gacha và tiền tệ chưa chốt)",
-        "text": "[TODO] Giải thích ngắn: nhận nhân vật mới, bảo đảm 5★ sau 30 lượt",
+        "tab": "[REVIEW] Gacha",
+        "title": "[REVIEW] Nhân vật mới từ gacha",
+        "text": "[REVIEW] Nhân vật mới đến từ gacha. Nếu 30 lượt liên tiếp chưa ra nhân vật 5★, lượt tiếp theo chắc chắn là 5★.",
         "slides": {
           "s1": "[TODO] Mô tả ảnh 1 của tab 3",
           "s2": "[TODO] Mô tả ảnh 2 của tab 3",
@@ -147,8 +154,9 @@
         }
       },
       "g4": {
-        "title": "[TODO] Tiêu đề tab 4 (chủ đề: nhiệm vụ và điểm danh)",
-        "text": "[TODO] Giải thích ngắn: nhiệm vụ ngày và tuần, điểm danh tháng",
+        "tab": "[REVIEW] Nhiệm vụ",
+        "title": "[REVIEW] Nhiệm vụ và điểm danh",
+        "text": "[REVIEW] Hoàn thành nhiệm vụ hằng ngày và hằng tuần, và nhận quà điểm danh mỗi tháng.",
         "slides": {
           "s1": "[TODO] Mô tả ảnh 1 của tab 4",
           "s2": "[TODO] Mô tả ảnh 2 của tab 4",
