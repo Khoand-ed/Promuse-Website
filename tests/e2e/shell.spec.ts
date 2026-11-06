@@ -57,7 +57,7 @@ test.describe('on a phone', () => {
     await page.locator('#gameplay').scrollIntoViewIfNeeded();
     await page.getByRole('button', { name: 'Open menu' }).click();
     await page.getByRole('dialog').getByRole('link', { name: 'Tiếng Việt' }).click();
-    await expect(page).toHaveURL(/localhost:3000\/#gameplay$/);
+    await expect(page).toHaveURL(/localhost:\d+\/#gameplay$/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'vi');
     await expect(page.locator('#gameplay-title')).toBeInViewport();
   });

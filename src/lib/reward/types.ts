@@ -30,3 +30,9 @@ export const AUTH_PARAM = 'auth';
 export const AUTH_CANCELLED = 'cancelled';
 /** Added by the OAuth callback when the code exchange failed (P3). */
 export const AUTH_ERROR = 'error';
+/**
+ * Added by Supabase itself when it cannot finish a sign-in and sends the visitor to the Site URL
+ * instead of the callback, for example once Google's page has stayed open too long
+ * (`error_code=bad_oauth_state`). `error=access_denied` means the visitor backed out.
+ */
+export const PROVIDER_ERROR_PARAMS = ['error', 'error_code', 'error_description'] as const;

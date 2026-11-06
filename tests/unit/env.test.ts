@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseEnv } from '@/lib/env';
+import { parseEnv, supabaseProject } from '@/lib/env';
 
 const mock = {
   NEXT_PUBLIC_SITE_URL: 'http://localhost:3000',
@@ -54,5 +54,18 @@ describe('parseEnv', () => {
     expect(() => parseEnv({ ...mock, NEXT_PUBLIC_SITE_URL: 'promuse' })).toThrow(
       /NEXT_PUBLIC_SITE_URL/,
     );
+  });
+});
+
+describe('supabaseProject', () => {
+  it('gives the URL and the publishable key', () => {
+    expect(supabaseProject(parseEnv(supabase))).toEqual({
+      url: 'https://project-ref.supabase.co',
+      key: 'sb_publishable_test',
+    });
+  });
+
+  it('throws when the project is not configured', () => {
+    expect(() => supabaseProject(parseEnv(mock))).toThrow(/NEXT_PUBLIC_SUPABASE_URL/);
   });
 });

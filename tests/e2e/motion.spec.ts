@@ -118,6 +118,32 @@ test.describe('character scene', () => {
   });
 });
 
+// A 1920×1080 screen at 125% with the browser not full-screen gives a window about 780 px tall.
+test.describe('character scene in a short window', () => {
+  test.use({
+    locale: 'vi-VN',
+    reducedMotion: 'no-preference',
+    viewport: { width: 1522, height: 780 },
+  });
+
+  test('keeps each card and its name inside the pinned window, as on p3re.jp', async ({ page }) => {
+    await page.goto('/');
+    await page.keyboard.press('Escape');
+    const section = page.locator('#characters');
+    await expect(section).toHaveAttribute('data-scene', 'on');
+    const fit = await section.evaluate((el) => {
+      const top = el.getBoundingClientRect().top;
+      const card = el.querySelector('.chara-card');
+      const art = card?.querySelector('.chara-art')?.getBoundingClientRect();
+      const name = card?.querySelector('p')?.getBoundingClientRect();
+      return { height: art?.height ?? 0, nameBottom: (name?.bottom ?? Infinity) - top };
+    });
+    // 80.5% of the window tall, like p3re.jp's portraits.
+    expect(Math.abs(fit.height - 780 * 0.805)).toBeLessThan(2);
+    expect(fit.nameBottom).toBeLessThanOrEqual(780);
+  });
+});
+
 test.describe('character row with reduced motion', () => {
   test.use({ locale: 'vi-VN' });
 

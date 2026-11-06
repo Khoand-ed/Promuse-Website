@@ -97,7 +97,7 @@ export const textSchema = z.strictObject({
   reward: z.strictObject({
     title: text('Tiêu đề khối nhận quà đăng ký sớm.'),
     desc: text(
-      'Một dòng mô tả phần quà: số lượng và tên tiền tệ. Tên tiền tệ chưa chốt; số lượng phải khớp với chiến dịch trong cơ sở dữ liệu.',
+      'Một dòng mô tả phần quà: 1800 và tên tiền tệ. Tên tiền tệ chưa chốt. Số lượng phải khớp với chiến dịch trong cơ sở dữ liệu (supabase/migrations/0002_prereg_campaign.sql).',
     ),
     artAlt: text('Mô tả ảnh phần quà cho người dùng trình đọc màn hình.'),
     privacy: text('Dòng nhỏ dưới nút đăng ký, nói email dùng để làm gì.'),

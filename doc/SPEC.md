@@ -127,7 +127,7 @@ Animate `transform`, `opacity`, `clip-path` and `filter` only: background colour
 - The popup appears 1.5 s after the opening ends (or after the status is known when the opening does not play), only on the first visit (`localStorage` key `promuse:reward-popup-dismissed`, set when it closes or when the reward button, in the banner or the popup, is used, so it never invites someone who already started), never after registration and never while registration is not open (`notOpen`) or closed. Its button starts the same sign-in, or the registration when already signed in.
 - The sign-in button carries Google's "G" mark on a white disc and says "Đăng nhập bằng Google…" / "Sign in with Google…", as Google's sign-in branding guidelines ask (owner's decision, 2026-11-05).
 - Signed in, the banner shows the account's email with "Không phải bạn? Đăng xuất" / "Not you? Sign out".
-- The trip to Google comes back to the same page with `?intent=prereg#reward`: the page scrolls to `#reward` and registration runs automatically, once. `?auth=cancelled` shows "Bạn đã huỷ đăng nhập." under the sign-in button; `?auth=error` (a failed code exchange, P3) shows the error state. Both parameters are removed from the URL once read.
+- The trip to Google comes back to the same page with `?intent=prereg#reward`: the page scrolls to `#reward` and registration runs automatically, once. `?auth=cancelled` shows "Bạn đã huỷ đăng nhập." under the sign-in button; `?auth=error` (a failed code exchange, P3) shows the error state. When Supabase cannot finish a sign-in, for example once Google's page has stayed open for more than a few minutes, it sends the visitor to the Site URL with `error`, `error_code` and `error_description` instead: `error=access_denied` shows the cancelled notice, anything else the error state. All these parameters are removed from the URL once read.
 - States are in section 7.
 
 ### 4. Introduction (`#story`)
@@ -194,7 +194,7 @@ Stats and passives come from the game (`GAME_FACTS.md`, section 3). Names are ke
 | `registered` | Server answered `created` | `[TODO]` in both locales; may use `{email}` | Popup never shows again. Must not promise in-game delivery the game cannot do yet: it has no Google sign-in today |
 | `alreadyRegistered` | Server answered `existing` | Bạn đã đăng ký từ {date} / You pre-registered on {date} | Popup never shows again |
 | `signedInNotRegistered` | Session, but no registration | Nhận quà đăng ký sớm / Claim the pre-registration reward | One click, no new sign-in |
-| `cancelled` | The visitor closed the Google window | Back to `signedOut` with "Bạn đã huỷ đăng nhập." / "Sign-in was cancelled." | — |
+| `cancelled` | The visitor backed out at Google: Google answered `access_denied`, or the visitor came back without finishing (Back; Google's Cancel can lead to its own sign-in page instead of the site) | Back to `signedOut` with "Bạn đã huỷ đăng nhập." / "Sign-in was cancelled." | `sessionStorage` key `promuse:sign-in-pending` is set while the visitor is away and cleared on the way back |
 | `error` | Any failure | Có lỗi, thử lại / Something went wrong, try again | Retry keeps the context |
 | `closed` | Server answered `campaign_closed` | Đã hết thời gian đăng ký sớm / Pre-registration has ended | Disabled |
 | `notOpen` | `NEXT_PUBLIC_BACKEND_MODE` is `off`: registration is not open yet | `[TODO]` in both locales | Disabled; the popup never shows. Production uses it until P3, so the live site never simulates a registration |
@@ -304,5 +304,6 @@ No Arknights art, and no screenshots of the current game build: it shows Arknigh
 
 - Routes `/privacy` and `/en/privacy`, linked from the footer and from the privacy line in the reward block. It is also the privacy-policy link on the Google consent screen.
 - It states what the site stores for a registration — email, Google account id, locale, campaign and time of registration (`ARCHITECTURE.md`, section 9) — why (to give the reward to the same Google account in the game later), which services process it (Supabase, Vercel, Google sign-in), how long it is kept, and how to ask for deletion.
-- The wording, the retention period and the contact email are the owner's: `[TODO]`. The list of stored fields must stay in sync with the data model.
+- The wording is the owner's. Decided on 2026-11-05: the data is kept until the reward has been delivered in the game, or until the project stops, and then deleted, with earlier deletion on request; the contact email is `privacyContactEmail` in `content/data/site.json`. The text is a `[REVIEW]` draft until the owner confirms it. The list of stored fields must stay in sync with the data model.
+- It also says what the sign-in itself keeps: Supabase Auth holds the Google account's email, name and profile picture and the sign-in times, because Google sign-in shares them (scopes `openid`, `email`, `profile`).
 - It must be complete before registration goes live in production (P3).

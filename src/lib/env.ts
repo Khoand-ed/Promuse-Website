@@ -44,3 +44,13 @@ export const env = parseEnv({
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
 });
+
+/** The Supabase project's URL and publishable key. Throws when they are not set. */
+export function supabaseProject(source: Env = env): { url: string; key: string } {
+  const url = source.NEXT_PUBLIC_SUPABASE_URL;
+  const key = source.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  if (!url || !key) {
+    throw new Error(`Supabase is not configured: set ${SUPABASE_KEYS.join(' and ')}.`);
+  }
+  return { url, key };
+}

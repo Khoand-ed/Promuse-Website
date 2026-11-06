@@ -5,7 +5,7 @@ test.describe('a Vietnamese browser', () => {
 
   test('gets Vietnamese at /', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveURL(/localhost:3000\/$/);
+    await expect(page).toHaveURL(/localhost:\d+\/$/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'vi');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Promuse');
     await expect(page.getByText('Sắp ra mắt trên Android', { exact: true })).toBeVisible();

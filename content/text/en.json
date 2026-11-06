@@ -47,7 +47,7 @@
   },
   "reward": {
     "title": "Pre-registration reward",
-    "desc": "[TODO] The reward: amount and currency name (not decided yet)",
+    "desc": "[TODO] The reward: 1800 and the currency name (name not decided yet)",
     "artAlt": "[TODO] Describe the reward image",
     "privacy": "We only use your email to link the reward to your game account.",
     "privacyLink": "Privacy policy",
@@ -57,7 +57,7 @@
       "signedOut": "Sign in with Google to claim",
       "redirecting": "Redirecting to Google…",
       "registering": "Registering…",
-      "registered": "[TODO] Confirm the registration for {email}, without promising an in-game reward",
+      "registered": "[REVIEW] You're pre-registered as {email}.",
       "alreadyRegistered": "You pre-registered on {date}",
       "signedInNotRegistered": "Claim the pre-registration reward",
       "cancelled": "Sign-in was cancelled.",
@@ -248,7 +248,7 @@
   },
   "privacy": {
     "title": "Privacy",
-    "intro": "[TODO] Opening paragraph: what data this page covers and why",
+    "intro": "[REVIEW] This page explains what the Promuse website stores when you pre-register with your Google account, why, for how long, and how to ask for its deletion. You only sign in to claim the reward; browsing the site needs no account.",
     "storedHeading": "What we store when you register",
     "storedEmail": "[REVIEW] The email address of your Google account",
     "storedGoogleId": "[REVIEW] Your Google account id (not your password)",
@@ -256,15 +256,15 @@
     "storedCampaign": "[REVIEW] The pre-registration campaign you joined",
     "storedTime": "[REVIEW] When you registered",
     "whyHeading": "Why we need it",
-    "why": "[TODO] Why the data is stored: to give the pre-registration reward to the same Google account in the game later",
+    "why": "[REVIEW] So that the pre-registration reward can later go to the game account linked to the same Google account. The data is used for nothing else.",
     "processorsHeading": "Services that process it",
-    "processors": "[TODO] Name the services: Supabase stores the data, Vercel runs the site, Google handles sign-in",
+    "processors": "[REVIEW] Supabase stores your sign-in account and your registration on servers in Tokyo, Japan. The sign-in account holds the email address, name and profile picture of your Google account, and when you signed in. Vercel runs the website. Google handles the sign-in and only tells the website your email address, name, profile picture and account id, never your password.",
     "retentionHeading": "How long we keep it",
-    "retention": "[TODO] How long the data is kept",
+    "retention": "[REVIEW] We keep the data until the pre-registration reward has been delivered to your game account, or until the project stops; then it is deleted. You can ask for earlier deletion at any time.",
     "deletionHeading": "Asking for deletion",
-    "deletion": "[TODO] How to ask for your data to be deleted",
+    "deletion": "[REVIEW] Email the address under Contact from the Gmail address you registered with, and say you want your data deleted. We will delete your sign-in account and your registration, then reply to confirm. After that, you can no longer receive the pre-registration reward.",
     "contactHeading": "Contact",
-    "contact": "[TODO] An invitation to get in touch, with {email}"
+    "contact": "[REVIEW] For any question about your data, email {email}."
   },
   "notFound": {
     "title": "Page not found",

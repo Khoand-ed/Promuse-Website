@@ -44,9 +44,9 @@ Game .NET backend (future, section 17) ┄┄ server-to-server, not built in v1 
 
 `promuse.vercel.app` belongs to an unrelated site, so production uses `promuserhythm.vercel.app`; `NEXT_PUBLIC_SITE_URL` holds that address for Production and Preview.
 
-`off` keeps the live site honest before P3: the reward widget shows `notOpen` instead of simulating a sign-in. `mock` is for development and previews only.
+`off` keeps the live site honest before P3: the reward widget shows `notOpen` instead of simulating a sign-in. `mock` is for development and previews only. During P3, local and preview switch to `supabase` first; production follows once the privacy page carries the owner's final text (owner's decision, 2026-11-05).
 
-One Supabase project is enough for a portfolio (the Free plan allows two active projects). Create it in the Singapore region, the closest to Vietnam, and pick the matching Vercel Functions region if the plan offers the choice.
+One Supabase project is enough for a portfolio (the Free plan allows two active projects). It was created on 2026-11-05 in Tokyo (`ap-northeast-1`). Singapore, the closest region to Vietnam, was the plan, but a project cannot change region, and Tokyo adds only tens of milliseconds per request, so it stays. Vercel Functions run in the same place, Tokyo (`hnd1`), so the API sits next to the database.
 
 ## 4. Directory structure
 
@@ -149,7 +149,10 @@ export interface RewardGateway {
 }
 ```
 
-- `SupabaseRewardGateway`: Supabase browser auth plus `fetch` to `/api/v1/preregistration`.
+- `SupabaseRewardGateway` (`src/lib/reward/supabase.ts`): Supabase browser auth plus `fetch` to `/api/v1/preregistration`. `createRewardGateway` loads it with a dynamic import, so supabase-js stays out of the first load.
+  - `getStatus`: `getClaims()` gives the email, or `signedOut` without a session; the API gives the registration. A `401` from the API also means `signedOut`.
+  - `signIn`: `signInWithOAuth` with Google's account chooser (`prompt=select_account`), so "Not you? Sign out" can lead to another account.
+  - `signOut`: this browser only (`scope: 'local'`).
 - `MockRewardGateway` (`src/lib/reward/mock.ts`): no network, for development and previews. `?mock=` picks a scenario; the scenario and a fake account (`nguoi.choi@example.com`) live in `sessionStorage` (`promuse:mock`), so they survive the fake trip to Google, which waits 800 ms and reloads the page at the return path, as the real one would. A `?mock=` value that differs from the saved one starts over.
 
   | `?mock=` | Starts | The button leads to |
@@ -180,8 +183,10 @@ export interface RewardGateway {
 
 1. The widget calls `gateway.signIn('/en?intent=prereg')` (the current locale path), which calls `supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + '/auth/callback?next=' + encodeURIComponent(path) } })`.
 2. Google returns to Supabase, which redirects to `/auth/callback?code=…&next=…`.
-3. `src/app/auth/callback/route.ts`: if the URL has `error` (the visitor cancelled), redirect to `next` with `auth=cancelled`; otherwise call `exchangeCodeForSession(code)` and redirect to `next`, or to `next` with `auth=error` on failure. Only relative `next` values are accepted; anything else becomes `/`.
-4. The page loads. The widget sees a session and `intent=prereg`, scrolls to `#reward`, calls `POST /api/v1/preregistration`, shows the result, then removes `intent` from the URL with `history.replaceState`.
+3. `src/app/auth/callback/route.ts`: `error=access_denied` (the visitor backed out at Google) redirects to `next` with `auth=cancelled`. Any other `error`, a missing code or a failed `exchangeCodeForSession(code)` redirects to `next` with `auth=error`, and logs the error key only. Otherwise the session cookie is set and the visitor goes to `next`. Both failures drop `intent`. Only a path that stays on the same origin is accepted as `next`; anything else becomes `/`. The redirect is `Cache-Control: no-store`.
+   - Supabase skips the callback when it cannot read its own OAuth state, which expires a few minutes after the visitor leaves for Google (`error_code=bad_oauth_state`). It then sends the visitor to the Site URL (production) with `error`, `error_code` and `error_description`, and the reward widget reads those as it reads `auth=` (`doc/SPEC.md`, section 5).
+4. The page loads. The widget sees a session and `intent=prereg`, scrolls to `#reward`, calls `POST /api/v1/preregistration`, shows the result, then removes `intent` from the URL with `history.replaceState(null, …)` one tick after mounting. Next.js adopts that URL only once its router has wrapped the History API, and only when the state passed is not its own; otherwise its next refresh puts the parameters back.
+5. A visitor who backs out never reaches the callback when Google's Cancel leads to Google's own sign-in page, or when they use Back. The widget sets `sessionStorage` `promuse:sign-in-pending` before leaving. A page that loads (or comes back from the back/forward cache) with that key and no return parameters shows `cancelled`, and clears the key.
 
 ### Session handling
 
@@ -241,11 +246,15 @@ create policy "read own preregistrations" on public.preregistrations
   for select to authenticated using (user_id = (select auth.uid()));
 
 -- No insert, update or delete policies: writes go through the function below.
-revoke insert, update, delete on public.campaigns, public.preregistrations
-  from anon, authenticated;
+-- Privileges are explicit, so the result does not depend on the project's default grants
+-- (Supabase is making automatic grants on new tables opt-in).
+revoke all on public.campaigns, public.preregistrations from anon, authenticated;
+grant select on public.preregistrations to authenticated;
 ```
 
 - `rewards[].type` is an internal key, not a display name. The future integration maps it to a game item (section 17).
+- Clients cannot read `campaigns`, so `GET /preregistration` reports the visitor's latest registration, read through RLS. With one campaign this is the registration for it.
+- Postgres returns timestamps as `2026-11-04T08:00:00.123456+00:00`; the Supabase service turns them into `toISOString()` form, as `API.md` asks.
 - The privacy page (`SPEC.md`, section 13) lists exactly the personal fields stored here: `email`, `google_sub`, `locale`, `campaign_key`, `created_at`. Keep the two in sync.
 
 ### Function
@@ -280,6 +289,8 @@ values (
 );
 ```
 
+The amount, 1800, was confirmed by the owner on 2026-11-05.
+
 Never edit a migration that has been applied. Add a new one.
 
 ## 10. Environment variables
@@ -296,19 +307,19 @@ Never edit a migration that has been applied. Add a new one.
 ## 11. Errors and logging
 
 - Every API error uses the envelope in `API.md`.
-- Server logs carry the route, the error code and a request id. Never log tokens, cookies or email addresses.
+- Server logs carry the route, the error code and a request id; every API response returns that id in `X-Request-Id`. A failure is logged with a database error code or an error name, never with its message. Never log tokens, cookies or email addresses.
 
 ## 12. Testing
 
-- Unit (Vitest): content schemas and loaders against valid and broken samples; the `check:content` rules (locale parity, placeholder parity, image slots); services against the in-memory implementations; route handlers against fake services (status codes and envelopes); zod schemas; the reward widget's state machine against `MockRewardGateway`.
-- End-to-end (Playwright, `NEXT_PUBLIC_BACKEND_MODE=mock`): both locales load; modals work by keyboard; deep links; every `?mock=` scenario; motion off via `page.emulateMedia({ reducedMotion: 'reduce' })`.
+- Unit (Vitest): content schemas and loaders against valid and broken samples; the `check:content` rules (locale parity, placeholder parity, image slots); services against the in-memory implementations, and the Supabase services against a fake client; route handlers against fake services (status codes and envelopes); `requireUser`; the OAuth callback's redirects and its `next` check; `SupabaseRewardGateway` against a fake client and `fetch`; zod schemas; the reward widget's state machine against `MockRewardGateway`.
+- End-to-end (Playwright, `NEXT_PUBLIC_BACKEND_MODE=mock`): Playwright starts its own dev server in mock mode, whatever `.env.local` says, so stop `npm run dev` first (Next.js allows one dev server per folder); `E2E_PORT` moves it off port 3000 when another worktree's server holds it. Both locales load; modals work by keyboard; deep links; every `?mock=` scenario; motion off via `page.emulateMedia({ reducedMotion: 'reduce' })`.
 - Manual (P3): two real Google accounts, plus `curl` against the API with an access token from `/dev/token`.
 
 ## 13. CI and deployment
 
 - `.github/workflows/ci.yml` runs on every push and pull request: `npm ci`, `check:content` (failing when the generated `CONTENT_TODO.md` or `content/schemas/` are not committed up to date), lint, typecheck, unit tests, build in mock mode, then Playwright on Chromium against the dev server in mock mode (since P2).
 - Each phase lives on its own branch and reaches `main` through a pull request. Vercel's Git integration builds a preview for every branch and deploys `main` to production.
-- Database: apply `supabase/migrations/*.sql` in order with the Supabase CLI (`supabase link`, then `supabase db push`) or paste them into the SQL Editor.
+- Database: apply `supabase/migrations/*.sql` in order by pasting each file into the dashboard's SQL Editor (owner's decision, 2026-11-05: no Supabase CLI, so no access token on this machine). Record each applied file and its date in `supabase/README.md`. The CLI's `supabase db push` would work too, but it does not know about files applied by hand.
 
 ## 14. Free-plan limits
 

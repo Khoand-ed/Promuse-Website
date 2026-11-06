@@ -73,6 +73,49 @@ for (const { locale, path, browser } of locales) {
       await expect(reward(page).getByText(EMAIL)).toBeVisible();
     });
 
+    test('coming back from Google without finishing reads as cancelled, once', async ({ page }) => {
+      await page.goto(`${path}?mock=signed-out`);
+      await expect(action(page, states.signedOut)).toBeEnabled();
+      // What the widget leaves behind while the visitor is away at Google.
+      await page.evaluate(() => sessionStorage.setItem('promuse:sign-in-pending', '1'));
+      await page.reload();
+      await expect(reward(page).getByText(states.cancelled)).toBeVisible();
+      await page.reload();
+      await expect(action(page, states.signedOut)).toBeEnabled();
+      await expect(reward(page).getByText(states.cancelled)).toHaveCount(0);
+    });
+
+    test('the cleaned URL survives a router refresh', async ({ page }) => {
+      await page.goto(`${path}?mock=cancelled&auth=cancelled#reward`);
+      await expect(reward(page).getByText(states.cancelled)).toBeVisible();
+      await expect(page).not.toHaveURL(/auth=/);
+      const refreshed = page.waitForResponse((response) => response.request().headers().rsc === '1');
+      await page.evaluate(() =>
+        (window as unknown as { next: { router: { refresh(): void } } }).next.router.refresh(),
+      );
+      await refreshed;
+      await page.waitForTimeout(500);
+      await expect(page).not.toHaveURL(/auth=/);
+    });
+
+    test('a sign-in Supabase could not finish ends in error, then a clean URL', async ({ page }) => {
+      const failure = 'error=invalid_request&error_code=bad_oauth_state&error_description=expired';
+      await page.goto(`${path}?mock=signed-out&${failure}`);
+      await expect(action(page, states.error)).toBeEnabled();
+      await expect(page).not.toHaveURL(/error/);
+      await expect(reward(page)).toBeInViewport();
+      await action(page, states.error).click();
+      await expect(action(page, states.signedOut)).toBeEnabled();
+    });
+
+    test('a sign-in cancelled at Google but sent to the home page shows the notice', async ({
+      page,
+    }) => {
+      await page.goto(`${path}?mock=signed-out&error=access_denied&error_code=access_denied`);
+      await expect(reward(page).getByText(states.cancelled)).toBeVisible();
+      await expect(page).not.toHaveURL(/error/);
+    });
+
     test('closed: the button ends disabled', async ({ page }) => {
       await page.goto(`${path}?mock=closed`);
       await action(page, states.signedInNotRegistered).click();

@@ -21,6 +21,7 @@ import {
   AUTH_PARAM,
   INTENT_PARAM,
   INTENT_PREREG,
+  PROVIDER_ERROR_PARAMS,
 } from '@/lib/reward/types';
 
 /** localStorage: set once the first-visit popup has been closed or used (doc/SPEC.md, section 5). */
@@ -43,15 +44,43 @@ function dismissPopup() {
   }
 }
 
-/** What the URL says about a trip to Google that just ended. */
+/**
+ * sessionStorage: set while the visitor is away at Google. Coming back without an answer from it
+ * (Back, or Google's own Cancel, which can lead to its sign-in page instead of back here) is a
+ * cancelled sign-in.
+ */
+const SIGN_IN_PENDING_KEY = 'promuse:sign-in-pending';
+
+function setSignInPending(pending: boolean) {
+  try {
+    if (pending) sessionStorage.setItem(SIGN_IN_PENDING_KEY, '1');
+    else sessionStorage.removeItem(SIGN_IN_PENDING_KEY);
+  } catch {
+    // Without storage, coming back simply shows the sign-in button again.
+  }
+}
+
+function signInPending(): boolean {
+  try {
+    return sessionStorage.getItem(SIGN_IN_PENDING_KEY) !== null;
+  } catch {
+    return false;
+  }
+}
+
+/** What the URL, or the visitor's way back, says about a trip to Google that just ended. */
 function readReturn() {
   if (typeof window === 'undefined') return { intent: false, cancelled: false, failed: false };
   const params = new URLSearchParams(window.location.search);
-  return {
-    intent: params.get(INTENT_PARAM) === INTENT_PREREG,
-    cancelled: params.get(AUTH_PARAM) === AUTH_CANCELLED,
-    failed: params.get(AUTH_PARAM) === AUTH_ERROR,
-  };
+  const fromSupabase = params.has('error_code') || params.has('error_description');
+  const providerError = fromSupabase ? (params.get('error') ?? 'unknown') : null;
+  const intent = params.get(INTENT_PARAM) === INTENT_PREREG;
+  const cancelled = params.get(AUTH_PARAM) === AUTH_CANCELLED || providerError === 'access_denied';
+  const failed =
+    params.get(AUTH_PARAM) === AUTH_ERROR ||
+    (providerError !== null && providerError !== 'access_denied');
+  const abandoned = !intent && !cancelled && !failed && signInPending();
+  return { intent, cancelled: cancelled || abandoned, failed };
 }
 
 interface Handlers {
@@ -172,48 +201,67 @@ export function RewardActions({ mode, popupArt }: RewardActionsProps) {
     }
   }, [locale]);
 
-  const loadStatus = useCallback(async () => {
+  const readStatus = useCallback(async (cancelled: boolean) => {
     const backend = gateway.current;
     if (!backend) return;
     dispatch({ type: 'reload' });
     try {
-      dispatch({ type: 'status', status: await backend.getStatus() });
+      dispatch({ type: 'status', status: await backend.getStatus(), cancelled });
     } catch {
       dispatch({ type: 'statusFailed' });
     }
   }, []);
+  const loadStatus = useCallback(() => readStatus(false), [readStatus]);
 
   // Read the status once, then finish a trip to Google: register once, or report the cancellation.
   useEffect(() => {
     if (mode === 'off') return;
-    const backend = createRewardGateway(mode);
-    gateway.current = backend;
-    if (!backend) return;
+    setSignInPending(false);
     const back = returned.intent || returned.cancelled || returned.failed;
     if (back) {
       const url = new URL(window.location.href);
-      url.searchParams.delete(INTENT_PARAM);
-      url.searchParams.delete(AUTH_PARAM);
-      window.history.replaceState(window.history.state, '', url.pathname + url.search + url.hash);
+      for (const name of [INTENT_PARAM, AUTH_PARAM, ...PROVIDER_ERROR_PARAMS]) {
+        url.searchParams.delete(name);
+      }
+      // Next.js adopts a URL changed with `replaceState(null, …)`, but only once its router has
+      // mounted and wrapped the History API, which happens after this effect. A router it never told
+      // would put the parameters back on its next refresh, so wait a tick.
+      window.setTimeout(() =>
+        window.history.replaceState(null, '', url.pathname + url.search + url.hash),
+      );
     }
     let live = true;
-    backend.getStatus().then(
-      async (status) => {
+    createRewardGateway(mode)
+      .then(async (backend) => {
+        if (!live || !backend) return;
+        gateway.current = backend;
+        const status = await backend.getStatus();
         if (!live) return;
         dispatch({ type: 'status', status, cancelled: returned.cancelled });
         // The sign-in itself failed on the way back: offer a retry that reads the status again.
         if (returned.failed) dispatch({ type: 'statusFailed' });
         if (back) document.getElementById('reward')?.scrollIntoView({ block: 'center' });
         if (returned.intent && status.kind === 'signedIn' && !status.registered) await register();
-      },
-      () => {
+      })
+      .catch(() => {
         if (live) dispatch({ type: 'statusFailed' });
-      },
-    );
+      });
     return () => {
       live = false;
     };
   }, [mode, returned, register]);
+
+  // Back from Google without signing in, to a page the browser kept in its back/forward cache: it
+  // would still say "Redirecting to Google…", so read the status again and report the cancellation.
+  useEffect(() => {
+    const onShow = (event: PageTransitionEvent) => {
+      if (!event.persisted || current.current.kind !== 'redirecting') return;
+      setSignInPending(false);
+      void readStatus(true);
+    };
+    window.addEventListener('pageshow', onShow);
+    return () => window.removeEventListener('pageshow', onShow);
+  }, [readStatus]);
 
   // The first-visit popup: 1.5 s after the opening (or the load), once, and only while it can help.
   const statusKnown = state.kind !== 'loading';
@@ -240,15 +288,22 @@ export function RewardActions({ mode, popupArt }: RewardActionsProps) {
     url.searchParams.set(INTENT_PARAM, INTENT_PREREG);
     url.hash = 'reward';
     try {
+      setSignInPending(true);
       await backend.signIn(url.pathname + url.search + url.hash);
     } catch {
+      setSignInPending(false);
       dispatch({ type: 'statusFailed' });
     }
   }, []);
 
   const signOut = useCallback(async () => {
-    await gateway.current?.signOut();
-    dispatch({ type: 'signedOut' });
+    try {
+      await gateway.current?.signOut();
+      dispatch({ type: 'signedOut' });
+    } catch {
+      // The retry reads the status again.
+      dispatch({ type: 'statusFailed' });
+    }
   }, []);
 
   const retry = state.kind === 'error' && state.email ? register : loadStatus;

@@ -31,7 +31,7 @@ export async function Characters() {
       // screen-reader-only text inside the row instead of widening the page.
       tabIndex={0}
       // data-[scene=on]: CharacterScene has taken over, so the section no longer scrolls itself.
-      className="chara-track bg-azure relative isolate flex snap-x snap-mandatory items-center overflow-x-auto py-20 data-[scene=on]:min-h-svh data-[scene=on]:snap-none data-[scene=on]:overflow-hidden lg:min-h-svh lg:snap-none lg:py-16"
+      className="chara-track bg-azure relative isolate flex snap-x snap-mandatory items-center overflow-x-auto py-20 data-[scene=on]:min-h-svh data-[scene=on]:snap-none data-[scene=on]:overflow-hidden lg:min-h-svh lg:snap-none lg:py-0"
     >
       {items.map((character, index) => (
         <span
@@ -61,14 +61,14 @@ export async function Characters() {
           </RiseLines>
         </div>
 
-        <ul className="flex shrink-0 gap-[8vw] pr-[6.7vw] lg:gap-[13.9vw] lg:pr-[9.3vw]">
+        <ul className="flex shrink-0 gap-[8vw] pr-[6.7vw] lg:gap-[200px] lg:pr-[9.3vw]">
           {items.map((character, index) => (
             <li
               key={character.slug}
-              className="chara-card w-[72vw] shrink-0 snap-center lg:w-[37.7vw] lg:max-w-[543px]"
+              className="chara-card w-[72vw] shrink-0 snap-center lg:w-[60.4svh]"
             >
               <div className="chara-art">
-                <ImageSlot slot={character.images.card} sizes="(min-width: 1024px) 38vw, 72vw" />
+                <ImageSlot slot={character.images.card} sizes="(min-width: 1024px) 45vw, 72vw" />
                 {tints.map((tint) => (
                   <span
                     key={tint.index}

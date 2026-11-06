@@ -143,7 +143,7 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 
 **Manual setup.** Walk me through it one step at a time and wait for my confirmation after each:
 
-1. Supabase: create the project in the Singapore region; copy the project URL and the publishable key.
+1. Supabase: create the project in the Singapore region; copy the project URL and the publishable key. (It ended up in Tokyo, which is fine: `ARCHITECTURE.md`, section 3.)
 2. Google Cloud: configure the OAuth consent screen (app name Promuse; scopes `openid`, email and profile; the privacy page as the privacy-policy link) and create an OAuth client of type "Web application". Add the callback URL shown on Supabase's Google provider page as an authorized redirect URI. Publish the consent screen so any Google account can sign in.
 3. Supabase: enable the Google provider with the client ID and secret. Under URL configuration, set the Site URL and add redirect URLs for `http://localhost:3000/**`, the production URL and a wildcard for Vercel previews.
 4. Environment variables in `.env.local` and in Vercel, with `NEXT_PUBLIC_BACKEND_MODE=supabase` (production switches from `off` to `supabase` here).

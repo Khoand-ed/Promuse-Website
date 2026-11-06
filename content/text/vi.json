@@ -47,7 +47,7 @@
   },
   "reward": {
     "title": "Quà đăng ký sớm",
-    "desc": "[TODO] Phần quà: số lượng và tên tiền tệ (chưa chốt)",
+    "desc": "[TODO] Phần quà: 1800 và tên tiền tệ (tên chưa chốt)",
     "artAlt": "[TODO] Mô tả ảnh phần quà",
     "privacy": "Email chỉ dùng để gắn quà với tài khoản game.",
     "privacyLink": "Chính sách quyền riêng tư",
@@ -57,7 +57,7 @@
       "signedOut": "Đăng nhập bằng Google để nhận quà",
       "redirecting": "Đang chuyển tới Google…",
       "registering": "Đang ghi nhận…",
-      "registered": "[TODO] Báo đăng ký thành công cho {email}, không hứa nhận quà trong game",
+      "registered": "[REVIEW] Đăng ký thành công cho {email}.",
       "alreadyRegistered": "Bạn đã đăng ký từ {date}",
       "signedInNotRegistered": "Nhận quà đăng ký sớm",
       "cancelled": "Bạn đã huỷ đăng nhập.",
@@ -248,7 +248,7 @@
   },
   "privacy": {
     "title": "Quyền riêng tư",
-    "intro": "[TODO] Đoạn mở đầu: trang này nói về dữ liệu nào và vì sao",
+    "intro": "[REVIEW] Trang này cho biết website Promuse lưu những dữ liệu nào khi bạn đăng ký sớm bằng tài khoản Google, lưu để làm gì, lưu trong bao lâu và cách yêu cầu xoá. Bạn chỉ cần đăng nhập khi muốn nhận quà; xem trang thì không cần tài khoản.",
     "storedHeading": "Dữ liệu được lưu khi bạn đăng ký",
     "storedEmail": "[REVIEW] Địa chỉ email của tài khoản Google",
     "storedGoogleId": "[REVIEW] Mã tài khoản Google (không phải mật khẩu)",
@@ -256,15 +256,15 @@
     "storedCampaign": "[REVIEW] Chương trình đăng ký sớm bạn tham gia",
     "storedTime": "[REVIEW] Thời điểm đăng ký",
     "whyHeading": "Vì sao cần dữ liệu này",
-    "why": "[TODO] Lý do lưu dữ liệu: để sau này gửi quà đăng ký sớm cho đúng tài khoản Google trong game",
+    "why": "[REVIEW] Để sau này gửi quà đăng ký sớm cho đúng tài khoản trong game được liên kết với cùng tài khoản Google đó. Dữ liệu chỉ được dùng cho việc này.",
     "processorsHeading": "Dịch vụ xử lý dữ liệu",
-    "processors": "[TODO] Nêu các dịch vụ: Supabase lưu dữ liệu, Vercel chạy website, Google xử lý đăng nhập",
+    "processors": "[REVIEW] Supabase lưu tài khoản đăng nhập và lượt đăng ký của bạn trên máy chủ ở Tokyo, Nhật Bản. Tài khoản đăng nhập gồm email, tên và ảnh đại diện Google của bạn cùng thời điểm đăng nhập. Vercel vận hành website. Google xử lý việc đăng nhập và chỉ cho website biết email, tên, ảnh đại diện và mã tài khoản của bạn, không bao giờ cho biết mật khẩu.",
     "retentionHeading": "Thời gian lưu",
-    "retention": "[TODO] Dữ liệu được giữ trong bao lâu",
+    "retention": "[REVIEW] Dữ liệu được giữ cho tới khi quà đăng ký sớm đã được gửi vào game cho tài khoản của bạn, hoặc cho tới khi dự án dừng lại; sau đó dữ liệu bị xoá. Bạn có thể yêu cầu xoá sớm hơn bất cứ lúc nào.",
     "deletionHeading": "Yêu cầu xoá dữ liệu",
-    "deletion": "[TODO] Cách yêu cầu xoá dữ liệu",
+    "deletion": "[REVIEW] Gửi email tới địa chỉ ở mục Liên hệ, từ chính địa chỉ Gmail bạn đã dùng để đăng ký, và ghi rõ bạn muốn xoá dữ liệu. Chúng tôi sẽ xoá tài khoản đăng nhập và lượt đăng ký của bạn rồi trả lời để xác nhận. Sau khi xoá, bạn sẽ không nhận được quà đăng ký sớm nữa.",
     "contactHeading": "Liên hệ",
-    "contact": "[TODO] Câu mời liên hệ, có {email}"
+    "contact": "[REVIEW] Nếu có câu hỏi về dữ liệu của bạn, hãy gửi email tới {email}."
   },
   "notFound": {
     "title": "Không tìm thấy trang",
