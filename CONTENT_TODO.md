@@ -2,7 +2,7 @@
 
 File này do `npm run check:content` tự sinh. Đừng sửa tay: sửa nội dung trong `content/` rồi chạy lại lệnh. Hướng dẫn đầy đủ ở `doc/CONTENT_GUIDE.md`.
 
-Tổng cộng 144 mục (chữ cần viết: 81, chữ cần bạn duyệt: 16, dữ liệu chưa quyết định: 5, ảnh còn thiếu: 39, file đặc biệt còn thiếu: 3).
+Tổng cộng 132 mục (chữ cần viết: 81, chữ cần bạn duyệt: 4, dữ liệu chưa quyết định: 5, ảnh còn thiếu: 39, file đặc biệt còn thiếu: 3).
 
 ## Chữ cần viết (81)
 
@@ -92,28 +92,16 @@ Cách sửa: Mở file ở cột "Ở đâu", tới đúng dòng, thay cả đo�
 | `characters.items.pulse.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:214`<br>`content/text/en.json:214` |
 | `footer.shareText` | Footer | Câu đi kèm link khi chia sẻ lên X. | `content/text/vi.json:238`<br>`content/text/en.json:238` |
 
-## Chữ cần bạn duyệt (16)
+## Chữ cần bạn duyệt (4)
 
 Cách sửa: Đọc bản nháp hoặc bản dịch. Nếu đúng, chỉ xoá chữ `[REVIEW] ` ở đầu; nếu chưa đúng, sửa lại rồi xoá dấu.
 
 | Khoá | Hiện ở đâu | Nội dung | Ở đâu |
 |---|---|---|---|
-| `reward.states.registered` | Khối nhận quà | [REVIEW] Đăng ký thành công cho {email}. | `content/text/vi.json:60`<br>`content/text/en.json:60` |
 | `characters.items.amiya.passiveDescription` | Nhân vật | [REVIEW] Lần Miss đầu tiên trong mỗi lượt chơi không làm mất combo. | `content/text/vi.json:181` |
 | `characters.items.nova.passiveDescription` | Nhân vật | [REVIEW] Mỗi lần Great có cơ hội được tính là Perfect. | `content/text/vi.json:191` |
 | `characters.items.echo.passiveDescription` | Nhân vật | [REVIEW] Combo cao giúp Fever kéo dài hơn. | `content/text/vi.json:201` |
 | `characters.items.pulse.passiveDescription` | Nhân vật | [REVIEW] Hồi một ít HP sau mỗi khoảng thời gian đều đặn. | `content/text/vi.json:211` |
-| `privacy.intro` | Trang quyền riêng tư | [REVIEW] Trang này cho biết website Promuse lưu những dữ liệu nào khi bạn đăng ký sớm bằng tài khoản Google, lưu để làm gì, lưu trong bao lâu và cách yêu cầu xoá. Bạn chỉ cần đăng nhập khi muốn nhận quà; xem trang thì không cần tài khoản. | `content/text/vi.json:251`<br>`content/text/en.json:251` |
-| `privacy.storedEmail` | Trang quyền riêng tư | [REVIEW] Địa chỉ email của tài khoản Google | `content/text/vi.json:253`<br>`content/text/en.json:253` |
-| `privacy.storedGoogleId` | Trang quyền riêng tư | [REVIEW] Mã tài khoản Google (không phải mật khẩu) | `content/text/vi.json:254`<br>`content/text/en.json:254` |
-| `privacy.storedLocale` | Trang quyền riêng tư | [REVIEW] Ngôn ngữ bạn dùng trên trang | `content/text/vi.json:255`<br>`content/text/en.json:255` |
-| `privacy.storedCampaign` | Trang quyền riêng tư | [REVIEW] Chương trình đăng ký sớm bạn tham gia | `content/text/vi.json:256`<br>`content/text/en.json:256` |
-| `privacy.storedTime` | Trang quyền riêng tư | [REVIEW] Thời điểm đăng ký | `content/text/vi.json:257`<br>`content/text/en.json:257` |
-| `privacy.why` | Trang quyền riêng tư | [REVIEW] Để sau này gửi quà đăng ký sớm cho đúng tài khoản trong game được liên kết với cùng tài khoản Google đó. Dữ liệu chỉ được dùng cho việc này. | `content/text/vi.json:259`<br>`content/text/en.json:259` |
-| `privacy.processors` | Trang quyền riêng tư | [REVIEW] Supabase lưu tài khoản đăng nhập và lượt đăng ký của bạn trên máy chủ ở Tokyo, Nhật Bản. Tài khoản đăng nhập gồm email, tên và ảnh đại diện Google của bạn cùng thời điểm đăng nhập. Vercel vận hành website. Google xử lý việc đăng nhập và chỉ cho website biết email, tên, ảnh đại diện và mã tài khoản của bạn, không bao giờ cho biết mật khẩu. | `content/text/vi.json:261`<br>`content/text/en.json:261` |
-| `privacy.retention` | Trang quyền riêng tư | [REVIEW] Dữ liệu được giữ cho tới khi quà đăng ký sớm đã được gửi vào game cho tài khoản của bạn, hoặc cho tới khi dự án dừng lại; sau đó dữ liệu bị xoá. Bạn có thể yêu cầu xoá sớm hơn bất cứ lúc nào. | `content/text/vi.json:263`<br>`content/text/en.json:263` |
-| `privacy.deletion` | Trang quyền riêng tư | [REVIEW] Gửi email tới địa chỉ ở mục Liên hệ, từ chính địa chỉ Gmail bạn đã dùng để đăng ký, và ghi rõ bạn muốn xoá dữ liệu. Chúng tôi sẽ xoá tài khoản đăng nhập và lượt đăng ký của bạn rồi trả lời để xác nhận. Sau khi xoá, bạn sẽ không nhận được quà đăng ký sớm nữa. | `content/text/vi.json:265`<br>`content/text/en.json:265` |
-| `privacy.contact` | Trang quyền riêng tư | [REVIEW] Nếu có câu hỏi về dữ liệu của bạn, hãy gửi email tới {email}. | `content/text/vi.json:267`<br>`content/text/en.json:267` |
 
 ## Dữ liệu chưa quyết định (5)
 
