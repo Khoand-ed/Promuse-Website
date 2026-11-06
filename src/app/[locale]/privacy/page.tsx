@@ -11,7 +11,10 @@ export async function generateMetadata({
   return { title: t('title') };
 }
 
-/** What the pre-registration stores and why. The text is finished with the real sign-in (P3). */
+/**
+ * What the pre-registration stores and why. A blank line in a text value starts a new paragraph
+ * (`whitespace-pre-line`), so the owner can split long answers in content/text.
+ */
 export default async function Privacy({ params }: PageProps<'/[locale]/privacy'>) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
@@ -30,7 +33,7 @@ export default async function Privacy({ params }: PageProps<'/[locale]/privacy'>
     <main id="main" tabIndex={-1} className="bg-mist px-[6.7%] pt-32 pb-28 outline-none md:pt-44">
       <article className="mx-auto max-w-[44rem]">
         <h1 className="type-display text-center text-[3.25rem] md:text-[5.25rem]">{t('title')}</h1>
-        <p className="type-body mt-12">{t('intro')}</p>
+        <p className="type-body mt-12 whitespace-pre-line">{t('intro')}</p>
 
         <h2 className={subheading}>{t('storedHeading')}</h2>
         <ul className="type-body mt-5 list-disc space-y-1 pl-5">
@@ -44,12 +47,12 @@ export default async function Privacy({ params }: PageProps<'/[locale]/privacy'>
         {sections.map(([heading, body]) => (
           <section key={heading}>
             <h2 className={subheading}>{t(heading)}</h2>
-            <p className="type-body mt-5">{t(body)}</p>
+            <p className="type-body mt-5 whitespace-pre-line">{t(body)}</p>
           </section>
         ))}
 
         <h2 className={subheading}>{t('contactHeading')}</h2>
-        <p className="type-body mt-5">
+        <p className="type-body mt-5 whitespace-pre-line">
           {t('contact', { email: site.privacyContactEmail ?? MISSING })}
         </p>
       </article>
