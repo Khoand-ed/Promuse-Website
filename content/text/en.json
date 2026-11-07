@@ -78,32 +78,36 @@
   },
   "features": {
     "title": "Features",
-    "summary": "[TODO] Two sentences summarising the main features",
+    "summary": "[REVIEW] Play to the music on two lanes with three kinds of notes, alongside characters who each bring an ability of their own. Collect and upgrade your team, with missions and events always waiting.",
     "coverAlt": "[TODO] Describe the Features cover image",
     "seeDetails": "See details",
     "number": "FEATURE #{n}",
     "items": {
       "f1": {
-        "title": "[TODO] Feature 1 name (topic: two lanes, three kinds of notes)",
-        "text": "[TODO] 1–2 sentences about feature 1",
+        "tab": "[REVIEW] Two lanes",
+        "title": "[REVIEW] Two lanes, three kinds of notes",
+        "text": "[REVIEW] Notes come down two lanes, left and right, in time with the music. Tap them, hold them, or hit both lanes at once.",
         "image1Alt": "[TODO] Describe image 1 of feature 1",
         "image2Alt": "[TODO] Describe image 2 of feature 1"
       },
       "f2": {
-        "title": "[TODO] Feature 2 name (topic: each character changes how you play)",
-        "text": "[TODO] 1–2 sentences about feature 2",
+        "tab": "[REVIEW] Characters",
+        "title": "[REVIEW] Every character plays differently",
+        "text": "[REVIEW] Each character has a passive of their own, such as keeping the combo after the first Miss or recovering HP at a steady pace.",
         "image1Alt": "[TODO] Describe image 1 of feature 2",
         "image2Alt": "[TODO] Describe image 2 of feature 2"
       },
       "f3": {
-        "title": "[TODO] Feature 3 name (topic: collect and grow your characters)",
-        "text": "[TODO] 1–2 sentences about feature 3",
+        "tab": "[REVIEW] Growth",
+        "title": "[REVIEW] Collect and upgrade",
+        "text": "[REVIEW] Get new characters from the gacha, then level them up and upgrade them to make them stronger.",
         "image1Alt": "[TODO] Describe image 1 of feature 3",
         "image2Alt": "[TODO] Describe image 2 of feature 3"
       },
       "f4": {
-        "title": "[TODO] Feature 4 name (topic: always something to play)",
-        "text": "[TODO] 1–2 sentences about feature 4",
+        "tab": "[REVIEW] Activities",
+        "title": "[REVIEW] Always something to play",
+        "text": "[REVIEW] Daily and weekly missions, limited-time events, a story campaign, and leaderboards checked by the server so rankings stay fair.",
         "image1Alt": "[TODO] Describe image 1 of feature 4",
         "image2Alt": "[TODO] Describe image 2 of feature 4"
       }
@@ -111,7 +115,7 @@
   },
   "gameplay": {
     "title": "Gameplay",
-    "summary": "[TODO] Two sentences summarising how the game plays",
+    "summary": "[REVIEW] Hit the notes on the beat to keep your combo, fill Fever and reach the end of the song before your HP runs out. Between songs, collect new characters and complete daily missions.",
     "coverAlt": "[TODO] Describe the Gameplay cover image",
     "details": "Gameplay details",
     "rates": "Rates: 5★ {fiveStar}% · 4★ {fourStar}% · 3★ {threeStar}%",
@@ -120,8 +124,9 @@
     "position": "Image {current} of {total}",
     "tabs": {
       "g1": {
-        "title": "[TODO] Tab 1 title (topic: rhythm combat)",
-        "text": "[TODO] Short explanation: two lanes, three kinds of notes, keep your HP to the end of the song",
+        "tab": "[REVIEW] Battle",
+        "title": "[REVIEW] Fight to the rhythm",
+        "text": "[REVIEW] Notes come down two lanes, and each hit is graded Perfect, Great or Hit; a note you miss is a Miss. Misses cost HP, so reach the end of the song before it runs out.",
         "slides": {
           "s1": "[TODO] Describe image 1 of tab 1",
           "s2": "[TODO] Describe image 2 of tab 1",
@@ -129,8 +134,9 @@
         }
       },
       "g2": {
-        "title": "[TODO] Tab 2 title (topic: combo and Fever)",
-        "text": "[TODO] Short explanation: combo and Fever",
+        "tab": "[REVIEW] Combo & Fever",
+        "title": "[REVIEW] Combo and Fever",
+        "text": "[REVIEW] Hit notes without missing to build a combo. Good hits fill the Fever gauge; when it is full, Fever starts and your score climbs faster.",
         "slides": {
           "s1": "[TODO] Describe image 1 of tab 2",
           "s2": "[TODO] Describe image 2 of tab 2",
@@ -138,8 +144,9 @@
         }
       },
       "g3": {
-        "title": "[TODO] Tab 3 title (topic: gacha; the gacha and currency names are not decided)",
-        "text": "[TODO] Short explanation: new characters, a guaranteed 5★ after 30 pulls",
+        "tab": "[REVIEW] Gacha",
+        "title": "[REVIEW] New characters from the gacha",
+        "text": "[REVIEW] New characters come from the gacha. After 30 pulls without a 5★ character, the next pull is guaranteed to be a 5★.",
         "slides": {
           "s1": "[TODO] Describe image 1 of tab 3",
           "s2": "[TODO] Describe image 2 of tab 3",
@@ -147,8 +154,9 @@
         }
       },
       "g4": {
-        "title": "[TODO] Tab 4 title (topic: missions and sign-in)",
-        "text": "[TODO] Short explanation: daily and weekly missions, monthly sign-in",
+        "tab": "[REVIEW] Missions",
+        "title": "[REVIEW] Missions and sign-in rewards",
+        "text": "[REVIEW] Complete daily and weekly missions, and collect monthly sign-in rewards.",
         "slides": {
           "s1": "[TODO] Describe image 1 of tab 4",
           "s2": "[TODO] Describe image 2 of tab 4",

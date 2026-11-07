@@ -2,9 +2,9 @@
 
 File này do `npm run check:content` tự sinh. Đừng sửa tay: sửa nội dung trong `content/` rồi chạy lại lệnh. Hướng dẫn đầy đủ ở `doc/CONTENT_GUIDE.md`.
 
-Tổng cộng 132 mục (chữ cần viết: 81, chữ cần bạn duyệt: 4, dữ liệu chưa quyết định: 5, ảnh còn thiếu: 39, file đặc biệt còn thiếu: 3).
+Tổng cộng 140 mục (chữ cần viết: 63, chữ cần bạn duyệt: 30, dữ liệu chưa quyết định: 5, ảnh còn thiếu: 39, file đặc biệt còn thiếu: 3).
 
-## Chữ cần viết (81)
+## Chữ cần viết (63)
 
 Cách sửa: Mở file ở cột "Ở đâu", tới đúng dòng, thay cả đoạn `[TODO] …` bằng nội dung thật. Sửa ở cả hai file (tiếng Việt và tiếng Anh), giữ nguyên dấu ngoặc kép và các biến trong `{…}`.
 
@@ -27,81 +27,89 @@ Cách sửa: Mở file ở cột "Ở đâu", tới đúng dòng, thay cả đo�
 | `story.band2` | Giới thiệu | Khẩu hiệu thứ 2, dòng dưới khẩu hiệu 1. Vài chữ. | `content/text/vi.json:75`<br>`content/text/en.json:75` |
 | `story.band3` | Giới thiệu | Khẩu hiệu thứ 3, dòng cuối. Vài chữ. | `content/text/vi.json:76`<br>`content/text/en.json:76` |
 | `story.imageAlt` | Giới thiệu | Mô tả ảnh của phần giới thiệu. | `content/text/vi.json:77`<br>`content/text/en.json:77` |
-| `features.summary` | Tính năng | Hai câu tóm tắt dưới tiêu đề phần Tính năng. | `content/text/vi.json:81`<br>`content/text/en.json:81` |
 | `features.coverAlt` | Tính năng | Mô tả ảnh bìa của phần Tính năng. | `content/text/vi.json:82`<br>`content/text/en.json:82` |
-| `features.items.f1.title` | Tính năng | Tên tính năng 1, hiện trên tab 1 của modal Tính năng. Khoảng 30 ký tự. | `content/text/vi.json:87`<br>`content/text/en.json:87` |
-| `features.items.f1.text` | Tính năng | Một hoặc hai câu giải thích tính năng 1, hiện trong tab 1 của modal. Viết đơn giản, chỉ dùng dữ kiện trong doc/GAME_FACTS.md. | `content/text/vi.json:88`<br>`content/text/en.json:88` |
-| `features.items.f1.image1Alt` | Tính năng | Mô tả ảnh thứ nhất của tính năng 1 cho người dùng trình đọc màn hình. | `content/text/vi.json:89`<br>`content/text/en.json:89` |
-| `features.items.f1.image2Alt` | Tính năng | Mô tả ảnh thứ hai của tính năng 1 cho người dùng trình đọc màn hình. | `content/text/vi.json:90`<br>`content/text/en.json:90` |
-| `features.items.f2.title` | Tính năng | Tên tính năng 2, hiện trên tab 2 của modal Tính năng. Khoảng 30 ký tự. | `content/text/vi.json:93`<br>`content/text/en.json:93` |
-| `features.items.f2.text` | Tính năng | Một hoặc hai câu giải thích tính năng 2, hiện trong tab 2 của modal. Viết đơn giản, chỉ dùng dữ kiện trong doc/GAME_FACTS.md. | `content/text/vi.json:94`<br>`content/text/en.json:94` |
-| `features.items.f2.image1Alt` | Tính năng | Mô tả ảnh thứ nhất của tính năng 2 cho người dùng trình đọc màn hình. | `content/text/vi.json:95`<br>`content/text/en.json:95` |
-| `features.items.f2.image2Alt` | Tính năng | Mô tả ảnh thứ hai của tính năng 2 cho người dùng trình đọc màn hình. | `content/text/vi.json:96`<br>`content/text/en.json:96` |
-| `features.items.f3.title` | Tính năng | Tên tính năng 3, hiện trên tab 3 của modal Tính năng. Khoảng 30 ký tự. | `content/text/vi.json:99`<br>`content/text/en.json:99` |
-| `features.items.f3.text` | Tính năng | Một hoặc hai câu giải thích tính năng 3, hiện trong tab 3 của modal. Viết đơn giản, chỉ dùng dữ kiện trong doc/GAME_FACTS.md. | `content/text/vi.json:100`<br>`content/text/en.json:100` |
-| `features.items.f3.image1Alt` | Tính năng | Mô tả ảnh thứ nhất của tính năng 3 cho người dùng trình đọc màn hình. | `content/text/vi.json:101`<br>`content/text/en.json:101` |
-| `features.items.f3.image2Alt` | Tính năng | Mô tả ảnh thứ hai của tính năng 3 cho người dùng trình đọc màn hình. | `content/text/vi.json:102`<br>`content/text/en.json:102` |
-| `features.items.f4.title` | Tính năng | Tên tính năng 4, hiện trên tab 4 của modal Tính năng. Khoảng 30 ký tự. | `content/text/vi.json:105`<br>`content/text/en.json:105` |
-| `features.items.f4.text` | Tính năng | Một hoặc hai câu giải thích tính năng 4, hiện trong tab 4 của modal. Viết đơn giản, chỉ dùng dữ kiện trong doc/GAME_FACTS.md. | `content/text/vi.json:106`<br>`content/text/en.json:106` |
-| `features.items.f4.image1Alt` | Tính năng | Mô tả ảnh thứ nhất của tính năng 4 cho người dùng trình đọc màn hình. | `content/text/vi.json:107`<br>`content/text/en.json:107` |
-| `features.items.f4.image2Alt` | Tính năng | Mô tả ảnh thứ hai của tính năng 4 cho người dùng trình đọc màn hình. | `content/text/vi.json:108`<br>`content/text/en.json:108` |
-| `gameplay.summary` | Gameplay | Hai câu tóm tắt cách chơi dưới tiêu đề phần Gameplay. | `content/text/vi.json:114`<br>`content/text/en.json:114` |
-| `gameplay.coverAlt` | Gameplay | Mô tả ảnh bìa của phần Gameplay. | `content/text/vi.json:115`<br>`content/text/en.json:115` |
-| `gameplay.tabs.g1.title` | Gameplay | Tiêu đề tab 1 trong modal Gameplay. Khoảng 30 ký tự. | `content/text/vi.json:123`<br>`content/text/en.json:123` |
-| `gameplay.tabs.g1.text` | Gameplay | Đoạn giải thích ngắn cho tab 1, viết đơn giản và dễ hiểu, không đi vào chi tiết luật chơi. Chỉ dùng dữ kiện trong doc/GAME_FACTS.md. | `content/text/vi.json:124`<br>`content/text/en.json:124` |
-| `gameplay.tabs.g1.slides.s1` | Gameplay | Mô tả từng ảnh trong slider của tab 1. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:126`<br>`content/text/en.json:126` |
-| `gameplay.tabs.g1.slides.s2` | Gameplay | Mô tả từng ảnh trong slider của tab 1. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:127`<br>`content/text/en.json:127` |
-| `gameplay.tabs.g1.slides.s3` | Gameplay | Mô tả từng ảnh trong slider của tab 1. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:128`<br>`content/text/en.json:128` |
-| `gameplay.tabs.g2.title` | Gameplay | Tiêu đề tab 2 trong modal Gameplay. Khoảng 30 ký tự. | `content/text/vi.json:132`<br>`content/text/en.json:132` |
-| `gameplay.tabs.g2.text` | Gameplay | Đoạn giải thích ngắn cho tab 2, viết đơn giản và dễ hiểu, không đi vào chi tiết luật chơi. Chỉ dùng dữ kiện trong doc/GAME_FACTS.md. | `content/text/vi.json:133`<br>`content/text/en.json:133` |
-| `gameplay.tabs.g2.slides.s1` | Gameplay | Mô tả từng ảnh trong slider của tab 2. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:135`<br>`content/text/en.json:135` |
-| `gameplay.tabs.g2.slides.s2` | Gameplay | Mô tả từng ảnh trong slider của tab 2. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:136`<br>`content/text/en.json:136` |
-| `gameplay.tabs.g2.slides.s3` | Gameplay | Mô tả từng ảnh trong slider của tab 2. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:137`<br>`content/text/en.json:137` |
-| `gameplay.tabs.g3.title` | Gameplay | Tiêu đề tab 3 trong modal Gameplay. Khoảng 30 ký tự. | `content/text/vi.json:141`<br>`content/text/en.json:141` |
-| `gameplay.tabs.g3.text` | Gameplay | Đoạn giải thích ngắn cho tab 3, viết đơn giản và dễ hiểu, không đi vào chi tiết luật chơi. Chỉ dùng dữ kiện trong doc/GAME_FACTS.md. | `content/text/vi.json:142`<br>`content/text/en.json:142` |
-| `gameplay.tabs.g3.slides.s1` | Gameplay | Mô tả từng ảnh trong slider của tab 3. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:144`<br>`content/text/en.json:144` |
-| `gameplay.tabs.g3.slides.s2` | Gameplay | Mô tả từng ảnh trong slider của tab 3. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:145`<br>`content/text/en.json:145` |
-| `gameplay.tabs.g3.slides.s3` | Gameplay | Mô tả từng ảnh trong slider của tab 3. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:146`<br>`content/text/en.json:146` |
-| `gameplay.tabs.g4.title` | Gameplay | Tiêu đề tab 4 trong modal Gameplay. Khoảng 30 ký tự. | `content/text/vi.json:150`<br>`content/text/en.json:150` |
-| `gameplay.tabs.g4.text` | Gameplay | Đoạn giải thích ngắn cho tab 4, viết đơn giản và dễ hiểu, không đi vào chi tiết luật chơi. Chỉ dùng dữ kiện trong doc/GAME_FACTS.md. | `content/text/vi.json:151`<br>`content/text/en.json:151` |
-| `gameplay.tabs.g4.slides.s1` | Gameplay | Mô tả từng ảnh trong slider của tab 4. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:153`<br>`content/text/en.json:153` |
-| `gameplay.tabs.g4.slides.s2` | Gameplay | Mô tả từng ảnh trong slider của tab 4. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:154`<br>`content/text/en.json:154` |
-| `gameplay.tabs.g4.slides.s3` | Gameplay | Mô tả từng ảnh trong slider của tab 4. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:155`<br>`content/text/en.json:155` |
-| `characters.line1` | Nhân vật | Dòng giới thiệu 1 dưới tiêu đề phần Nhân vật. Khoảng 40 ký tự. | `content/text/vi.json:162`<br>`content/text/en.json:162` |
-| `characters.line2` | Nhân vật | Dòng giới thiệu 2. Khoảng 40 ký tự. | `content/text/vi.json:163`<br>`content/text/en.json:163` |
-| `characters.line3` | Nhân vật | Dòng giới thiệu 3. Khoảng 40 ký tự. | `content/text/vi.json:164`<br>`content/text/en.json:164` |
-| `characters.items.amiya.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:178`<br>`content/text/en.json:178` |
-| `characters.items.amiya.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:179`<br>`content/text/en.json:179` |
-| `characters.items.amiya.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:182`<br>`content/text/en.json:182` |
-| `characters.items.amiya.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:183`<br>`content/text/en.json:183` |
-| `characters.items.amiya.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:184`<br>`content/text/en.json:184` |
-| `characters.items.nova.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:188`<br>`content/text/en.json:188` |
-| `characters.items.nova.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:189`<br>`content/text/en.json:189` |
-| `characters.items.nova.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:192`<br>`content/text/en.json:192` |
-| `characters.items.nova.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:193`<br>`content/text/en.json:193` |
-| `characters.items.nova.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:194`<br>`content/text/en.json:194` |
-| `characters.items.echo.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:198`<br>`content/text/en.json:198` |
-| `characters.items.echo.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:199`<br>`content/text/en.json:199` |
-| `characters.items.echo.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:202`<br>`content/text/en.json:202` |
-| `characters.items.echo.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:203`<br>`content/text/en.json:203` |
-| `characters.items.echo.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:204`<br>`content/text/en.json:204` |
-| `characters.items.pulse.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:208`<br>`content/text/en.json:208` |
-| `characters.items.pulse.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:209`<br>`content/text/en.json:209` |
-| `characters.items.pulse.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:212`<br>`content/text/en.json:212` |
-| `characters.items.pulse.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:213`<br>`content/text/en.json:213` |
-| `characters.items.pulse.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:214`<br>`content/text/en.json:214` |
-| `footer.shareText` | Footer | Câu đi kèm link khi chia sẻ lên X. | `content/text/vi.json:238`<br>`content/text/en.json:238` |
+| `features.items.f1.image1Alt` | Tính năng | Mô tả ảnh thứ nhất của tính năng 1 cho người dùng trình đọc màn hình. | `content/text/vi.json:90`<br>`content/text/en.json:90` |
+| `features.items.f1.image2Alt` | Tính năng | Mô tả ảnh thứ hai của tính năng 1 cho người dùng trình đọc màn hình. | `content/text/vi.json:91`<br>`content/text/en.json:91` |
+| `features.items.f2.image1Alt` | Tính năng | Mô tả ảnh thứ nhất của tính năng 2 cho người dùng trình đọc màn hình. | `content/text/vi.json:97`<br>`content/text/en.json:97` |
+| `features.items.f2.image2Alt` | Tính năng | Mô tả ảnh thứ hai của tính năng 2 cho người dùng trình đọc màn hình. | `content/text/vi.json:98`<br>`content/text/en.json:98` |
+| `features.items.f3.image1Alt` | Tính năng | Mô tả ảnh thứ nhất của tính năng 3 cho người dùng trình đọc màn hình. | `content/text/vi.json:104`<br>`content/text/en.json:104` |
+| `features.items.f3.image2Alt` | Tính năng | Mô tả ảnh thứ hai của tính năng 3 cho người dùng trình đọc màn hình. | `content/text/vi.json:105`<br>`content/text/en.json:105` |
+| `features.items.f4.image1Alt` | Tính năng | Mô tả ảnh thứ nhất của tính năng 4 cho người dùng trình đọc màn hình. | `content/text/vi.json:111`<br>`content/text/en.json:111` |
+| `features.items.f4.image2Alt` | Tính năng | Mô tả ảnh thứ hai của tính năng 4 cho người dùng trình đọc màn hình. | `content/text/vi.json:112`<br>`content/text/en.json:112` |
+| `gameplay.coverAlt` | Gameplay | Mô tả ảnh bìa của phần Gameplay. | `content/text/vi.json:119`<br>`content/text/en.json:119` |
+| `gameplay.tabs.g1.slides.s1` | Gameplay | Mô tả từng ảnh trong slider của tab 1. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:131`<br>`content/text/en.json:131` |
+| `gameplay.tabs.g1.slides.s2` | Gameplay | Mô tả từng ảnh trong slider của tab 1. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:132`<br>`content/text/en.json:132` |
+| `gameplay.tabs.g1.slides.s3` | Gameplay | Mô tả từng ảnh trong slider của tab 1. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:133`<br>`content/text/en.json:133` |
+| `gameplay.tabs.g2.slides.s1` | Gameplay | Mô tả từng ảnh trong slider của tab 2. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:141`<br>`content/text/en.json:141` |
+| `gameplay.tabs.g2.slides.s2` | Gameplay | Mô tả từng ảnh trong slider của tab 2. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:142`<br>`content/text/en.json:142` |
+| `gameplay.tabs.g2.slides.s3` | Gameplay | Mô tả từng ảnh trong slider của tab 2. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:143`<br>`content/text/en.json:143` |
+| `gameplay.tabs.g3.slides.s1` | Gameplay | Mô tả từng ảnh trong slider của tab 3. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:151`<br>`content/text/en.json:151` |
+| `gameplay.tabs.g3.slides.s2` | Gameplay | Mô tả từng ảnh trong slider của tab 3. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:152`<br>`content/text/en.json:152` |
+| `gameplay.tabs.g3.slides.s3` | Gameplay | Mô tả từng ảnh trong slider của tab 3. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:153`<br>`content/text/en.json:153` |
+| `gameplay.tabs.g4.slides.s1` | Gameplay | Mô tả từng ảnh trong slider của tab 4. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:161`<br>`content/text/en.json:161` |
+| `gameplay.tabs.g4.slides.s2` | Gameplay | Mô tả từng ảnh trong slider của tab 4. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:162`<br>`content/text/en.json:162` |
+| `gameplay.tabs.g4.slides.s3` | Gameplay | Mô tả từng ảnh trong slider của tab 4. Mỗi ảnh khai báo trong content/data/gameplay.json trỏ tới một khoá ở đây. | `content/text/vi.json:163`<br>`content/text/en.json:163` |
+| `characters.line1` | Nhân vật | Dòng giới thiệu 1 dưới tiêu đề phần Nhân vật. Khoảng 40 ký tự. | `content/text/vi.json:170`<br>`content/text/en.json:170` |
+| `characters.line2` | Nhân vật | Dòng giới thiệu 2. Khoảng 40 ký tự. | `content/text/vi.json:171`<br>`content/text/en.json:171` |
+| `characters.line3` | Nhân vật | Dòng giới thiệu 3. Khoảng 40 ký tự. | `content/text/vi.json:172`<br>`content/text/en.json:172` |
+| `characters.items.amiya.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:186`<br>`content/text/en.json:186` |
+| `characters.items.amiya.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:187`<br>`content/text/en.json:187` |
+| `characters.items.amiya.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:190`<br>`content/text/en.json:190` |
+| `characters.items.amiya.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:191`<br>`content/text/en.json:191` |
+| `characters.items.amiya.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:192`<br>`content/text/en.json:192` |
+| `characters.items.nova.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:196`<br>`content/text/en.json:196` |
+| `characters.items.nova.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:197`<br>`content/text/en.json:197` |
+| `characters.items.nova.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:200`<br>`content/text/en.json:200` |
+| `characters.items.nova.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:201`<br>`content/text/en.json:201` |
+| `characters.items.nova.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:202`<br>`content/text/en.json:202` |
+| `characters.items.echo.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:206`<br>`content/text/en.json:206` |
+| `characters.items.echo.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:207`<br>`content/text/en.json:207` |
+| `characters.items.echo.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:210`<br>`content/text/en.json:210` |
+| `characters.items.echo.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:211`<br>`content/text/en.json:211` |
+| `characters.items.echo.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:212`<br>`content/text/en.json:212` |
+| `characters.items.pulse.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:216`<br>`content/text/en.json:216` |
+| `characters.items.pulse.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:217`<br>`content/text/en.json:217` |
+| `characters.items.pulse.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:220`<br>`content/text/en.json:220` |
+| `characters.items.pulse.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:221`<br>`content/text/en.json:221` |
+| `characters.items.pulse.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:222`<br>`content/text/en.json:222` |
+| `footer.shareText` | Footer | Câu đi kèm link khi chia sẻ lên X. | `content/text/vi.json:246`<br>`content/text/en.json:246` |
 
-## Chữ cần bạn duyệt (4)
+## Chữ cần bạn duyệt (30)
 
 Cách sửa: Đọc bản nháp hoặc bản dịch. Nếu đúng, chỉ xoá chữ `[REVIEW] ` ở đầu; nếu chưa đúng, sửa lại rồi xoá dấu.
 
 | Khoá | Hiện ở đâu | Nội dung | Ở đâu |
 |---|---|---|---|
-| `characters.items.amiya.passiveDescription` | Nhân vật | [REVIEW] Lần Miss đầu tiên trong mỗi lượt chơi không làm mất combo. | `content/text/vi.json:181` |
-| `characters.items.nova.passiveDescription` | Nhân vật | [REVIEW] Mỗi lần Great có cơ hội được tính là Perfect. | `content/text/vi.json:191` |
-| `characters.items.echo.passiveDescription` | Nhân vật | [REVIEW] Combo cao giúp Fever kéo dài hơn. | `content/text/vi.json:201` |
-| `characters.items.pulse.passiveDescription` | Nhân vật | [REVIEW] Hồi một ít HP sau mỗi khoảng thời gian đều đặn. | `content/text/vi.json:211` |
+| `features.summary` | Tính năng | [REVIEW] Đánh theo điệu nhạc trên hai làn với ba loại nốt, cùng những nhân vật mang khả năng riêng. Thu thập, nâng cấp đội hình và luôn có nhiệm vụ, sự kiện mới để chơi. | `content/text/vi.json:81`<br>`content/text/en.json:81` |
+| `features.items.f1.tab` | Tính năng | [REVIEW] Hai làn | `content/text/vi.json:87`<br>`content/text/en.json:87` |
+| `features.items.f1.title` | Tính năng | [REVIEW] Hai làn, ba loại nốt | `content/text/vi.json:88`<br>`content/text/en.json:88` |
+| `features.items.f1.text` | Tính năng | [REVIEW] Nốt nhạc rơi xuống hai làn trái và phải theo điệu nhạc. Chạm, giữ, hoặc chạm cả hai làn cùng lúc. | `content/text/vi.json:89`<br>`content/text/en.json:89` |
+| `features.items.f2.tab` | Tính năng | [REVIEW] Nhân vật | `content/text/vi.json:94`<br>`content/text/en.json:94` |
+| `features.items.f2.title` | Tính năng | [REVIEW] Mỗi nhân vật một cách chơi | `content/text/vi.json:95`<br>`content/text/en.json:95` |
+| `features.items.f2.text` | Tính năng | [REVIEW] Mỗi nhân vật có một kỹ năng bị động riêng, như giữ combo sau lần Miss đầu tiên hay hồi HP đều đặn. | `content/text/vi.json:96`<br>`content/text/en.json:96` |
+| `features.items.f3.tab` | Tính năng | [REVIEW] Phát triển | `content/text/vi.json:101`<br>`content/text/en.json:101` |
+| `features.items.f3.title` | Tính năng | [REVIEW] Thu thập và nâng cấp | `content/text/vi.json:102`<br>`content/text/en.json:102` |
+| `features.items.f3.text` | Tính năng | [REVIEW] Nhận nhân vật mới từ gacha, rồi tăng cấp và nâng cấp để họ mạnh hơn. | `content/text/vi.json:103`<br>`content/text/en.json:103` |
+| `features.items.f4.tab` | Tính năng | [REVIEW] Hoạt động | `content/text/vi.json:108`<br>`content/text/en.json:108` |
+| `features.items.f4.title` | Tính năng | [REVIEW] Luôn có thứ để chơi | `content/text/vi.json:109`<br>`content/text/en.json:109` |
+| `features.items.f4.text` | Tính năng | [REVIEW] Nhiệm vụ hằng ngày và hằng tuần, sự kiện giới hạn thời gian, chiến dịch cốt truyện và bảng xếp hạng được máy chủ kiểm tra để luôn công bằng. | `content/text/vi.json:110`<br>`content/text/en.json:110` |
+| `gameplay.summary` | Gameplay | [REVIEW] Đánh trúng nốt theo nhịp để giữ combo, nạp Fever và đi tới cuối bài trước khi hết HP. Ngoài các bài nhạc, bạn thu thập nhân vật mới và làm nhiệm vụ mỗi ngày. | `content/text/vi.json:118`<br>`content/text/en.json:118` |
+| `gameplay.tabs.g1.tab` | Gameplay | [REVIEW] Chiến đấu | `content/text/vi.json:127`<br>`content/text/en.json:127` |
+| `gameplay.tabs.g1.title` | Gameplay | [REVIEW] Chiến đấu theo nhịp | `content/text/vi.json:128`<br>`content/text/en.json:128` |
+| `gameplay.tabs.g1.text` | Gameplay | [REVIEW] Nốt rơi xuống hai làn và mỗi lần đánh được chấm Perfect, Great hoặc Hit; nốt bỏ lỡ là Miss. Mỗi lần Miss làm mất HP, nên hãy đi tới cuối bài trước khi hết HP. | `content/text/vi.json:129`<br>`content/text/en.json:129` |
+| `gameplay.tabs.g2.tab` | Gameplay | [REVIEW] Combo & Fever | `content/text/vi.json:137`<br>`content/text/en.json:137` |
+| `gameplay.tabs.g2.title` | Gameplay | [REVIEW] Combo và Fever | `content/text/vi.json:138`<br>`content/text/en.json:138` |
+| `gameplay.tabs.g2.text` | Gameplay | [REVIEW] Đánh liên tục không trượt để tăng combo. Những cú đánh tốt nạp đầy thanh Fever; khi đầy, Fever bắt đầu và điểm tăng nhanh hơn. | `content/text/vi.json:139`<br>`content/text/en.json:139` |
+| `gameplay.tabs.g3.tab` | Gameplay | [REVIEW] Gacha | `content/text/vi.json:147`<br>`content/text/en.json:147` |
+| `gameplay.tabs.g3.title` | Gameplay | [REVIEW] Nhân vật mới từ gacha | `content/text/vi.json:148`<br>`content/text/en.json:148` |
+| `gameplay.tabs.g3.text` | Gameplay | [REVIEW] Nhân vật mới đến từ gacha. Nếu 30 lượt liên tiếp chưa ra nhân vật 5★, lượt tiếp theo chắc chắn là 5★. | `content/text/vi.json:149`<br>`content/text/en.json:149` |
+| `gameplay.tabs.g4.tab` | Gameplay | [REVIEW] Nhiệm vụ | `content/text/vi.json:157`<br>`content/text/en.json:157` |
+| `gameplay.tabs.g4.title` | Gameplay | [REVIEW] Nhiệm vụ và điểm danh | `content/text/vi.json:158`<br>`content/text/en.json:158` |
+| `gameplay.tabs.g4.text` | Gameplay | [REVIEW] Hoàn thành nhiệm vụ hằng ngày và hằng tuần, và nhận quà điểm danh mỗi tháng. | `content/text/vi.json:159`<br>`content/text/en.json:159` |
+| `characters.items.amiya.passiveDescription` | Nhân vật | [REVIEW] Lần Miss đầu tiên trong mỗi lượt chơi không làm mất combo. | `content/text/vi.json:189` |
+| `characters.items.nova.passiveDescription` | Nhân vật | [REVIEW] Mỗi lần Great có cơ hội được tính là Perfect. | `content/text/vi.json:199` |
+| `characters.items.echo.passiveDescription` | Nhân vật | [REVIEW] Combo cao giúp Fever kéo dài hơn. | `content/text/vi.json:209` |
+| `characters.items.pulse.passiveDescription` | Nhân vật | [REVIEW] Hồi một ít HP sau mỗi khoảng thời gian đều đặn. | `content/text/vi.json:219` |
 
 ## Dữ liệu chưa quyết định (5)
 

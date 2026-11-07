@@ -64,6 +64,14 @@ Decided on 2026-11-05: the look follows p3re.jp (`SPEC.md`, section 1). The toke
 
 **Type scale** (desktop at 1440 px → phone): section titles 84 px → 52 px; reward title 100 px → 54 px; characters title 11.5vw → 16vw; hero status 45 px → 30 px with the name at 28 px → 16 px above it; body 14/28 px with 0.8 px tracking; slogan lines 12/24 px; nav 19 px semibold; labels 10–16 px uppercase.
 
+**Detail modals** (measured on p3re.jp's Features modal at 1440 × 900):
+- The sheet is white above a pale wave that starts at 67% of the window.
+- The tabs run down the left from 2vw at 37.5% height, each 54 px tall, in 0.81 rem caps; the chosen one is bold.
+- The panel starts 20vh from the top and 11vw from the left: "FEATURE #n" in the label font (0.9 rem, bold), the title in the display font (up to 5.25 rem), a 1 px hairline 5vw either side, then the text at 1.17 rem with a 2.4 line height.
+- Two 16:9 images sit 2.64vw apart below.
+- "Scroll" sits at the foot in the label font (0.625 rem).
+- Gameplay puts its slider (46vw) beside the title and text, with p3re.jp's square dots under it.
+
 **Buttons.** One style, as on p3re.jp: a pill with the blue gradient, white bold text and an arrow. The large variant is 76 px tall with wide uppercase tracking.
 
 **Layout.** Bleeding images are 52vw wide at 16:9; text columns start 6.25vw from the left edge, or 5.7vw past a left image. On phones titles are centred and images keep a 6.7% margin. Character portraits are 3:4 and sized by the window's height, as on p3re.jp: 80.5% of it tall (60.4svh wide), 200 px apart, centred in the section. So the card in focus and its name always fit, also in a browser window that is not full-screen (measured on p3re.jp at 780, 864, 900, 1080 and 1366 px tall windows, 2026-11-06).

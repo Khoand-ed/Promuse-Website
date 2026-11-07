@@ -461,10 +461,15 @@
             "f1": {
               "type": "object",
               "properties": {
+                "tab": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Nhãn ngắn của tính năng 1 trong danh sách tab của modal Tính năng (bên trái trên máy tính, hàng ngang trên điện thoại). Một hoặc hai từ, như \"GRAPHICS\" trên p3re.jp."
+                },
                 "title": {
                   "type": "string",
                   "pattern": "\\S",
-                  "description": "Tên tính năng 1, hiện trên tab 1 của modal Tính năng. Khoảng 30 ký tự."
+                  "description": "Tên tính năng 1, tiêu đề lớn trong tab 1 của modal Tính năng. Khoảng 30 ký tự."
                 },
                 "text": {
                   "type": "string",
@@ -483,6 +488,7 @@
                 }
               },
               "required": [
+                "tab",
                 "title",
                 "text",
                 "image1Alt",
@@ -493,10 +499,15 @@
             "f2": {
               "type": "object",
               "properties": {
+                "tab": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Nhãn ngắn của tính năng 2 trong danh sách tab của modal Tính năng (bên trái trên máy tính, hàng ngang trên điện thoại). Một hoặc hai từ, như \"GRAPHICS\" trên p3re.jp."
+                },
                 "title": {
                   "type": "string",
                   "pattern": "\\S",
-                  "description": "Tên tính năng 2, hiện trên tab 2 của modal Tính năng. Khoảng 30 ký tự."
+                  "description": "Tên tính năng 2, tiêu đề lớn trong tab 2 của modal Tính năng. Khoảng 30 ký tự."
                 },
                 "text": {
                   "type": "string",
@@ -515,6 +526,7 @@
                 }
               },
               "required": [
+                "tab",
                 "title",
                 "text",
                 "image1Alt",
@@ -525,10 +537,15 @@
             "f3": {
               "type": "object",
               "properties": {
+                "tab": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Nhãn ngắn của tính năng 3 trong danh sách tab của modal Tính năng (bên trái trên máy tính, hàng ngang trên điện thoại). Một hoặc hai từ, như \"GRAPHICS\" trên p3re.jp."
+                },
                 "title": {
                   "type": "string",
                   "pattern": "\\S",
-                  "description": "Tên tính năng 3, hiện trên tab 3 của modal Tính năng. Khoảng 30 ký tự."
+                  "description": "Tên tính năng 3, tiêu đề lớn trong tab 3 của modal Tính năng. Khoảng 30 ký tự."
                 },
                 "text": {
                   "type": "string",
@@ -547,6 +564,7 @@
                 }
               },
               "required": [
+                "tab",
                 "title",
                 "text",
                 "image1Alt",
@@ -557,10 +575,15 @@
             "f4": {
               "type": "object",
               "properties": {
+                "tab": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Nhãn ngắn của tính năng 4 trong danh sách tab của modal Tính năng (bên trái trên máy tính, hàng ngang trên điện thoại). Một hoặc hai từ, như \"GRAPHICS\" trên p3re.jp."
+                },
                 "title": {
                   "type": "string",
                   "pattern": "\\S",
-                  "description": "Tên tính năng 4, hiện trên tab 4 của modal Tính năng. Khoảng 30 ký tự."
+                  "description": "Tên tính năng 4, tiêu đề lớn trong tab 4 của modal Tính năng. Khoảng 30 ký tự."
                 },
                 "text": {
                   "type": "string",
@@ -579,6 +602,7 @@
                 }
               },
               "required": [
+                "tab",
                 "title",
                 "text",
                 "image1Alt",
@@ -655,10 +679,15 @@
             "g1": {
               "type": "object",
               "properties": {
+                "tab": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Nhãn ngắn của tab 1 trong danh sách tab của modal Gameplay. Một hoặc hai từ."
+                },
                 "title": {
                   "type": "string",
                   "pattern": "\\S",
-                  "description": "Tiêu đề tab 1 trong modal Gameplay. Khoảng 30 ký tự."
+                  "description": "Tiêu đề lớn trong tab 1 của modal Gameplay. Khoảng 30 ký tự."
                 },
                 "text": {
                   "type": "string",
@@ -680,6 +709,7 @@
                 }
               },
               "required": [
+                "tab",
                 "title",
                 "text",
                 "slides"
@@ -689,10 +719,15 @@
             "g2": {
               "type": "object",
               "properties": {
+                "tab": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Nhãn ngắn của tab 2 trong danh sách tab của modal Gameplay. Một hoặc hai từ."
+                },
                 "title": {
                   "type": "string",
                   "pattern": "\\S",
-                  "description": "Tiêu đề tab 2 trong modal Gameplay. Khoảng 30 ký tự."
+                  "description": "Tiêu đề lớn trong tab 2 của modal Gameplay. Khoảng 30 ký tự."
                 },
                 "text": {
                   "type": "string",
@@ -714,6 +749,7 @@
                 }
               },
               "required": [
+                "tab",
                 "title",
                 "text",
                 "slides"
@@ -723,10 +759,15 @@
             "g3": {
               "type": "object",
               "properties": {
+                "tab": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Nhãn ngắn của tab 3 trong danh sách tab của modal Gameplay. Một hoặc hai từ."
+                },
                 "title": {
                   "type": "string",
                   "pattern": "\\S",
-                  "description": "Tiêu đề tab 3 trong modal Gameplay. Khoảng 30 ký tự."
+                  "description": "Tiêu đề lớn trong tab 3 của modal Gameplay. Khoảng 30 ký tự."
                 },
                 "text": {
                   "type": "string",
@@ -748,6 +789,7 @@
                 }
               },
               "required": [
+                "tab",
                 "title",
                 "text",
                 "slides"
@@ -757,10 +799,15 @@
             "g4": {
               "type": "object",
               "properties": {
+                "tab": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "description": "Nhãn ngắn của tab 4 trong danh sách tab của modal Gameplay. Một hoặc hai từ."
+                },
                 "title": {
                   "type": "string",
                   "pattern": "\\S",
-                  "description": "Tiêu đề tab 4 trong modal Gameplay. Khoảng 30 ký tự."
+                  "description": "Tiêu đề lớn trong tab 4 của modal Gameplay. Khoảng 30 ký tự."
                 },
                 "text": {
                   "type": "string",
@@ -782,6 +829,7 @@
                 }
               },
               "required": [
+                "tab",
                 "title",
                 "text",
                 "slides"

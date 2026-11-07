@@ -3,7 +3,12 @@ import { altGroup, text } from './common.ts';
 
 const feature = (n: number) =>
   z.strictObject({
-    title: text(`Tên tính năng ${n}, hiện trên tab ${n} của modal Tính năng. Khoảng 30 ký tự.`),
+    tab: text(
+      `Nhãn ngắn của tính năng ${n} trong danh sách tab của modal Tính năng (bên trái trên máy tính, hàng ngang trên điện thoại). Một hoặc hai từ, như "GRAPHICS" trên p3re.jp.`,
+    ),
+    title: text(
+      `Tên tính năng ${n}, tiêu đề lớn trong tab ${n} của modal Tính năng. Khoảng 30 ký tự.`,
+    ),
     text: text(
       `Một hoặc hai câu giải thích tính năng ${n}, hiện trong tab ${n} của modal. Viết đơn giản, chỉ dùng dữ kiện trong doc/GAME_FACTS.md.`,
     ),
@@ -13,7 +18,8 @@ const feature = (n: number) =>
 
 const gameplayTab = (n: number) =>
   z.strictObject({
-    title: text(`Tiêu đề tab ${n} trong modal Gameplay. Khoảng 30 ký tự.`),
+    tab: text(`Nhãn ngắn của tab ${n} trong danh sách tab của modal Gameplay. Một hoặc hai từ.`),
+    title: text(`Tiêu đề lớn trong tab ${n} của modal Gameplay. Khoảng 30 ký tự.`),
     text: text(
       `Đoạn giải thích ngắn cho tab ${n}, viết đơn giản và dễ hiểu, không đi vào chi tiết luật chơi. Chỉ dùng dữ kiện trong doc/GAME_FACTS.md.`,
     ),
