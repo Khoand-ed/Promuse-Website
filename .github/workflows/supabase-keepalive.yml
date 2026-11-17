@@ -1,0 +1,32 @@
+name: Supabase keep-alive
+
+# Supabase pauses a Free project after a week without activity, and sign-in on the live site stops
+# working until someone restores it (doc/ARCHITECTURE.md, section 14). Every third day this sends the
+# project one request that reaches the database.
+on:
+  schedule:
+    - cron: '17 3 */3 * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      # Both values are public: they ship in the page. The anonymous role may not read this table, so
+      # the expected answer is 401 (Postgres error 42501), which still means the database was reached.
+      SUPABASE_URL: https://zauohcheqbeezwiqfstz.supabase.co
+      SUPABASE_PUBLISHABLE_KEY: sb_publishable_HqZGB3Iqp08MSSq1TnJUWw_54lz5J4V
+    steps:
+      - name: Reach the database
+        run: |
+          status=$(curl -s -o response.json -w '%{http_code}' \
+            "$SUPABASE_URL/rest/v1/campaigns?select=key&limit=1" \
+            -H "apikey: $SUPABASE_PUBLISHABLE_KEY")
+          echo "Supabase answered $status"
+          if [ "$status" = 401 ] && grep -q '42501' response.json; then exit 0; fi
+          if [ "${status#2}" != "$status" ]; then exit 0; fi
+          echo "::error::Supabase did not answer as expected; the project may be paused. Restore it from the dashboard."
+          exit 1
