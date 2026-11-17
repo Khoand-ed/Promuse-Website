@@ -1,4 +1,24 @@
+import type { Page } from '@playwright/test';
 import { expect, test } from './fixtures';
+
+/**
+ * Refreshes Next.js's router, as Fast Refresh does, and waits until the router writes its own URL
+ * back into the history entry: the moment a URL it never learned about would be lost.
+ */
+function refreshRouter(page: Page) {
+  return page.evaluate(
+    () =>
+      new Promise<void>((resolve) => {
+        const replaceState = history.replaceState;
+        history.replaceState = (...args) => {
+          history.replaceState = replaceState;
+          replaceState.apply(history, args);
+          resolve();
+        };
+        (window as unknown as { next: { router: { refresh(): void } } }).next.router.refresh();
+      }),
+  );
+}
 
 test.describe('effects toggle', () => {
   test.use({ locale: 'vi-VN', reducedMotion: 'reduce' });
@@ -183,6 +203,65 @@ test.describe('modal', () => {
 
     await page.getByRole('button', { name: 'Mở modal thử' }).click();
     await expect(modal).toBeVisible();
+    await page.goBack();
+    await expect(modal).toBeHidden();
+  });
+
+  test('a router refresh keeps its hash while open and leaves it out once closed', async ({
+    page,
+  }) => {
+    await page.goto('/dev/motion');
+    const modal = page.getByRole('dialog', { name: 'Tính năng' });
+    await page.getByRole('button', { name: 'Mở modal thử' }).click();
+    await expect(modal).toBeVisible();
+
+    await refreshRouter(page);
+    await expect(page).toHaveURL(/#demo-modal$/);
+    await expect(modal).toBeVisible();
+
+    await modal.getByRole('button', { name: 'Đóng' }).click();
+    await expect(modal).toBeHidden();
+    await expect(page).not.toHaveURL(/#demo-modal/);
+    await refreshRouter(page);
+    await expect(page).not.toHaveURL(/#demo-modal/);
+    await expect(modal).toBeHidden();
+  });
+
+  test('a router refresh does not bring back the hash of a modal opened from a link', async ({
+    page,
+  }) => {
+    await page.goto('/dev/motion#demo-modal');
+    const modal = page.getByRole('dialog', { name: 'Tính năng' });
+    await expect(modal).toBeVisible();
+    await modal.getByRole('button', { name: 'Đóng' }).click();
+    await expect(modal).toBeHidden();
+
+    await refreshRouter(page);
+    await expect(page).not.toHaveURL(/#demo-modal/);
+
+    // Opened again, it adds its own history entry, so Back closes it instead of leaving the page.
+    await page.getByRole('button', { name: 'Mở modal thử' }).click();
+    await expect(modal).toBeVisible();
+    await page.goBack();
+    await expect(modal).toBeHidden();
+    await expect(page).toHaveURL(/\/dev\/motion$/);
+  });
+
+  test('a router refresh keeps the hash of a modal opened by a same-page link', async ({
+    page,
+  }) => {
+    await page.goto('/dev/motion');
+    // Hydrated: Next.js has put its own state on the history entry.
+    await page.waitForFunction(() => history.state !== null);
+    // What a same-page link to `#demo-modal` does: a fragment navigation the router does not see.
+    await page.evaluate(() => {
+      location.hash = 'demo-modal';
+    });
+    const modal = page.getByRole('dialog', { name: 'Tính năng' });
+    await expect(modal).toBeVisible();
+
+    await refreshRouter(page);
+    await expect(page).toHaveURL(/#demo-modal$/);
     await page.goBack();
     await expect(modal).toBeHidden();
   });

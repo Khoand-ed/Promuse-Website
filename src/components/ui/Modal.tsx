@@ -28,10 +28,21 @@ export function useHashModal(id: string) {
     };
   }, [id]);
 
+  useEffect(() => {
+    // An entry without state is one Next.js's router never saw: a click that reached the History API
+    // before the router wrapped it, right after hydration, or a same-page link to `#id`. React has
+    // run the router's effects by now, so hand it the URL, or its next refresh would drop the hash.
+    if (open && window.history.state === null) {
+      window.history.replaceState(null, '', window.location.href);
+    }
+  }, [open]);
+
   const show = useCallback(() => {
     if (window.location.hash !== `#${id}`) {
-      // Keep Next.js's own history state, so its router treats this as the same page.
-      window.history.pushState(window.history.state, '', `#${id}`);
+      // With `null`, Next.js's router adopts the new URL and copies its own state onto the entry.
+      // Passing that state ourselves would hide the change from it, and its next refresh or Fast
+      // Refresh would write the URL back without the hash.
+      window.history.pushState(null, '', `#${id}`);
       pushed.current = true;
     }
     setOpen(true);
@@ -44,8 +55,9 @@ export function useHashModal(id: string) {
       pushed.current = false;
       window.history.back();
     } else {
+      // `null` again, or the router's next refresh would put the hash back.
       const { pathname, search } = window.location;
-      window.history.replaceState(window.history.state, '', pathname + search);
+      window.history.replaceState(null, '', pathname + search);
     }
   }, [id]);
 
