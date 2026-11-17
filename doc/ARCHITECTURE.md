@@ -325,7 +325,7 @@ Never edit a migration that has been applied. Add a new one.
 
 | Service | Limit that matters | What we do |
 |---|---|---|
-| Supabase Free | Paused after a week of low activity; 500 MB database; 50,000 monthly active users; 2 active projects | Before a demo, open the dashboard and resume the project if it is paused; data is kept |
+| Supabase Free | Paused after a week of low activity; 500 MB database; 50,000 monthly active users; 2 active projects | `.github/workflows/supabase-keepalive.yml` sends one request that reaches the database every third day, so the project is not paused (owner's decision, 2026-11-17, after it was paused once). The run fails when the project does not answer. GitHub stops scheduled workflows after 60 days without repository activity; if the project is paused anyway, restore it from the dashboard, and the data is kept |
 | Vercel Hobby | Personal, non-commercial use only; 5,000 image transformations a month; after hitting a limit, wait 30 days | Fine for a portfolio. Keep few image variants (`images.deviceSizes`, one modern format); sprites are `unoptimized` |
 | Google consent screen | Shows `<project-ref>.supabase.co` without a custom domain | Accept for the demo; a custom domain or Google brand verification later |
 
