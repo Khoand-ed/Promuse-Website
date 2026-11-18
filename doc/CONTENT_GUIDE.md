@@ -80,7 +80,14 @@ và trong `vi.json` (tương tự trong `en.json`), ở nhóm `gameplay.tabs.g1.
 "s4": "Mô tả ảnh thứ tư của tab 1"
 ```
 
-Thư viện ảnh của nhân vật làm tương tự: ô ảnh trong `images.gallery` của nhân vật, khoá mô tả trong `characters.items.<slug>.gallery`.
+Thư viện ảnh của nhân vật làm tương tự: ô ảnh trong `images.gallery` của nhân vật, khoá mô tả trong `characters.items.<slug>.gallery`. Mỗi ảnh 1280 × 720 (16:9), ví dụ `/images/characters/nova/gallery-1.webp`; chú thích "ẢNH #1", "ẢNH #2"… tự đánh số. Để `[]` thì thư viện bị ẩn.
+
+Ảnh và màu của nhân vật, trong `content/data/characters.json`:
+
+- `themeColor`: màu của nhân vật, dạng `"#RRGGBB"`. Màu này tô thẻ nhân vật, nền phần Nhân vật khi thẻ đó ở giữa màn hình, và dải sóng dưới hồ sơ. Chọn màu sáng: chữ đặt trên màu là navy `#1D384A` và cần tương phản ít nhất 4,5:1 (dùng một công cụ kiểm tra tương phản). Để `null` thì trang tạm dùng bảng màu pastel.
+- Ảnh thẻ `card`: 600 × 800 (3:4), WebP.
+- Hình `idle` (đứng yên) và `battle` (chiến đấu): PNG nền trong suốt, hai hình cùng kích thước, để khi bấm "Đổi hình" nhân vật không bị lệch. Ghi `width` và `height` đúng kích thước thật của file.
+- Nếu hình là pixel art: thêm `"pixelated": true` vào ô ảnh và giữ nguyên kích thước gốc (không tự phóng to trước), rộng không quá 256 px. Trang tự phóng to đúng số nguyên lần, nên hình sắc nét ở mọi cỡ màn hình; hình rộng hơn khung hiển thị sẽ bị thu nhỏ và mất nét. Chạy `npm run dev` rồi mở http://localhost:3000/dev/pixel để xem cách trang vẽ pixel art.
 
 Video hero (không bắt buộc, giống p3re.jp): đặt file MP4 16:9 không tiếng vào `public/videos/`, rồi ghi đường dẫn vào `content/data/hero.json`, nhóm `video`: `loop` là video lặp, `intro` (nếu có) chạy một lần trước nó. Video chỉ chạy trên màn hình từ 768 px và khi hiệu ứng bật; ảnh desktop là ảnh chờ. Để trống đường dẫn thì hero dùng ảnh.
 

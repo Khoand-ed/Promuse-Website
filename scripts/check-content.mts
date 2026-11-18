@@ -227,11 +227,13 @@ for (const [name, entry] of data) {
   for (const slot of imageSlots(entry.value)) {
     if (existsSync(path.join(root, 'public', slot.src))) continue;
     const extension = path.extname(slot.src).slice(1).toUpperCase();
+    // The slot's own description says what the picture shows and any rule for its file.
+    const about = descriptionAt(jsonSchemas.get(name) ?? {}, slot.path);
     entries.push({
       kind: 'image',
       key: `${name}.${friendly(entry.value, slot.path)}`,
       where: entry.where,
-      need: `${slot.width} × ${slot.height} px, ${extension}`,
+      need: [`${slot.width} × ${slot.height} px, ${extension}`, about].filter(Boolean).join('. '),
       locations: [`public${slot.src}`],
     });
   }

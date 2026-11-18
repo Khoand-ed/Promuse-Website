@@ -38,6 +38,30 @@ describe('content files', () => {
     expect(getSite().platforms.find((platform) => platform.id === 'ios')?.status).toBe('planned');
   });
 
+  it('keeps the character stats and passives from doc/GAME_FACTS.md, section 3', () => {
+    const stats = Object.fromEntries(getCharacters().items.map((item) => [item.name, item.stats]));
+    expect(stats).toEqual({
+      AMIYA: { hp: 300, scoreBonus: 1.2, feverBonus: 1.2 },
+      NOVA: { hp: 275, scoreBonus: 1.1, feverBonus: 1.1 },
+      ECHO: { hp: 275, scoreBonus: 1.1, feverBonus: 1.1 },
+      PULSE: { hp: 250, scoreBonus: 1, feverBonus: 1 },
+    });
+    const passives = {
+      amiya: ['Field Medic', 'The first Miss of a run does not break the combo.'],
+      nova: ['Overdrive', 'A Great has a chance to be counted as a Perfect.'],
+      echo: ['Resonance', 'A high combo extends how long Fever lasts.'],
+      pulse: ['Steady Beat', 'Recovers a little HP at a steady interval.'],
+    };
+    const en = loadMessages('en').characters.items;
+    const vi = loadMessages('vi').characters.items;
+    for (const [slug, [name, description]] of Object.entries(passives)) {
+      // The game's own English text; the name stays in English in Vietnamese too.
+      expect(en[slug]?.passiveName).toBe(name);
+      expect(en[slug]?.passiveDescription).toBe(description);
+      expect(vi[slug]?.passiveName).toBe(name);
+    }
+  });
+
   it('uses the same ICU placeholders in both locales', () => {
     expect(
       placeholderMismatches(

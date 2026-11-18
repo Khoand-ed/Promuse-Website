@@ -73,16 +73,19 @@ One Supabase project is enough for a portfolio (the Free plan allows two active 
    │  ├─ auth/callback/route.ts
    │  ├─ api/v1/health/route.ts
    │  ├─ api/v1/preregistration/route.ts
-   │  └─ dev/                   motion/ and token/ helpers, 404 in production
+   │  └─ dev/                   motion/, pixel/ and token/ helpers, 404 in production
    ├─ components/
-   │  ├─ sections/              Intro, Header, Hero, Reward, Story (Introduction, Features, Gameplay), Characters, Footer
-   │  ├─ ui/                    Modal, Tabs, Slider, Lightbox, LanguageSwitch, MobileMenu, MotionToggle, MusicButton, BackToTop, SkipLink, Wordmark, ImageSlot
+   │  ├─ sections/              Intro, Header, Hero, Reward, Story (Introduction, Features, Gameplay), Characters
+   │  │                         (with CharacterProfiles, the profile modal), Footer
+   │  ├─ ui/                    Modal, DetailModal, Tabs, Slider, Lightbox, LanguageSwitch, MobileMenu, MotionToggle, MusicButton,
+   │  │                         BackToTop, SkipLink, Wordmark, ImageSlot, PixelFit
    │  └─ motion/                MotionProvider, MusicProvider, SmoothScroll, BeatClock, Opening, CharacterScene,
    │                            reveal.tsx (RiseLetters, RiseLines, CoverReveal, Reveal, TitleZoom, ...)
    ├─ content/                  zod schemas and loaders for content/; no copy lives here
    ├─ i18n/                     routing.ts, request.ts, navigation.ts
    ├─ lib/
    │  ├─ env.ts                 zod-validated environment
+   │  ├─ pixel.ts               whole-number scaling for pixel art
    │  ├─ motion/                gsap.ts (plugin registration), preference.ts (effects choice and the
    │  │                         boot script), opening.ts
    │  ├─ supabase/              browser.ts, server.ts, proxy.ts (session refresh)
@@ -360,7 +363,7 @@ content/
 
 - Keys are dotted paths by block (`hero.status`, `characters.items.nova.tagline`). Characters are keyed by slug, never by position.
 - Every file — text and data — starts with `"$schema"` pointing at its generated schema, so VS Code shows what each field means (in Vietnamese, for the owner) and underlines invalid values. The text loader drops `$schema` before handing the messages to next-intl.
-- An image slot is `{ "src": "/images/…", "width": 1280, "height": 720, "alt": "<text key>" }`. The build checks whether the file exists under `public/`; when it does not, `ImageSlot` renders a labelled placeholder with the same aspect ratio.
+- An image slot is `{ "src": "/images/…", "width": 1280, "height": 720, "alt": "<text key>" }`; a character art slot may add `"pixelated": true` for pixel art. The build checks whether the file exists under `public/`; when it does not, `ImageSlot` renders a labelled placeholder with the same aspect ratio.
 - Markers: `[TODO] <what to write>` for missing text; `[REVIEW]` for drafts and translations waiting for the owner; `null` for a data value not decided yet (a theme colour, the copyright holder). All of them show up in the report, and text markers show on the page, so nothing ships unnoticed.
 - `npm run check:content` validates every file against its schema; checks that both locales have the same keys and the same ICU placeholders (`{email}`, `{date}`); lists missing images and file-convention assets (`opengraph-image.png`, `icon.png`); regenerates `content/schemas/`; and writes `CONTENT_TODO.md`. Each entry gives the file, the key, the line, what is needed, how to fill it and where it shows on the page. The check fails on invalid content, never on a TODO.
 - `src/content/` holds the zod schemas (the single source for validation and for the JSON Schemas) and the loaders. Components use the loaders only.

@@ -6,6 +6,8 @@ export interface Slot {
   width: number;
   height: number;
   alt: string;
+  /** Pixel art: served as it is and drawn at a whole-number scale (doc/SPEC.md, section 11). */
+  pixelated?: boolean;
 }
 
 /** Whether a file exists under public/, for a path such as /audio/theme.mp3. Checked at build time. */

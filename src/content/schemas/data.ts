@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SLUG, imageSlot, optionalUrl } from './common.ts';
+import { SLUG, artSlot, imageSlot, optionalUrl } from './common.ts';
 
 const schemaRef = z.string().optional();
 
@@ -242,11 +242,19 @@ export const charactersSchema = z.strictObject({
           ),
         images: z
           .strictObject({
-            card: imageSlot('Ảnh thẻ nhân vật, 600 × 800.'),
-            idle: imageSlot('Hình nhân vật đứng yên. Kích thước tạm; chốt khi có art.'),
-            battle: imageSlot('Hình nhân vật chiến đấu. Kích thước tạm; chốt khi có art.'),
+            card: artSlot('Ảnh thẻ nhân vật trong hàng Nhân vật, 600 × 800 (3:4), WebP.'),
+            idle: artSlot(
+              'Hình nhân vật đứng yên, bên trái hồ sơ: PNG nền trong suốt, cùng kích thước với hình chiến đấu. Ghi width và height đúng kích thước thật của file (600 × 800 chỉ là kích thước tạm). Pixel art: giữ kích thước gốc và thêm "pixelated": true.',
+            ),
+            battle: artSlot(
+              'Hình nhân vật chiến đấu, hiện khi bấm "Đổi hình": PNG nền trong suốt, cùng kích thước với hình đứng yên. Ghi width và height đúng kích thước thật của file (600 × 800 chỉ là kích thước tạm). Pixel art: giữ kích thước gốc và thêm "pixelated": true.',
+            ),
             gallery: z
-              .array(imageSlot('Ảnh trong thư viện ảnh của nhân vật.'))
+              .array(
+                artSlot(
+                  'Ảnh trong thư viện ảnh của hồ sơ nhân vật, 1280 × 720 (16:9), WebP, ví dụ /images/characters/nova/gallery-1.webp.',
+                ),
+              )
               .describe('Thư viện ảnh trong hồ sơ nhân vật. Để [] thì thư viện bị ẩn.'),
           })
           .describe('Ảnh của nhân vật.'),

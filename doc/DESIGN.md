@@ -21,6 +21,7 @@ Studied on 2026-11-04 and measured on 2026-11-05 at 1440 px and 390 px wide. We 
 ## 2. Where Promuse does better
 
 - Esc closes every modal and focus returns to the opener. On p3re.jp, Esc does nothing and the close buttons have no accessible name.
+- Character profiles open from a link (`#char-<slug>`), close with Esc and Back, and move between characters with previous and next or ← and →; Change visual is a real button. On p3re.jp a profile has only its close button, and Change visual cannot be reached with the keyboard.
 - Titles are real text: translatable, searchable, and set in fonts with Vietnamese support. p3re.jp draws its titles as SVG.
 - The hero shows a poster image at once. On p3re.jp's mobile layout the hero stays blank while the video loads.
 - Text on coloured backgrounds is navy, so it keeps WCAG AA contrast; p3re.jp sets white on pastels.
@@ -52,7 +53,7 @@ Decided on 2026-11-05: the look follows p3re.jp (`SPEC.md`, section 1). The toke
 | `rule` | #DCE4EC | Footer hairline | — |
 | `menu` | rgb(206 228 246 / 0.9) | Mobile menu glass, with a 14 px blur | — |
 | `hero-1` to `hero-5` | #0BE9F9, #0A77D6, #0041B9, #001DAE, #0004A8 | Hero gradient until the key visual exists | — |
-| `chara-1` to `chara-11` | #86EDFC, #FC93FF, #989FFB, #D3DADA, #F68CA8, #95F5DC, #F2F4F2, #FAF6A6, #FABA80, #CE8998, #93CC96 | A character's colour while its `themeColor` is `null`, in order | 4.5:1 or more, except #CE8998 (4.46:1, large text only) |
+| `chara-1` to `chara-11` | #86EDFC, #FC93FF, #989FFB, #D3DADA, #F68CA8, #95F5DC, #F2F4F2, #FAF6A6, #FABA80, #D08B9A, #93CC96 | A character's colour while its `themeColor` is `null`, in order | 4.5:1 or more; `chara-10` is lightened from p3re.jp's #CE8998 (4.46:1), because profile text sits on it |
 
 **Fonts** (all with the `vietnamese` subset, loaded with `next/font`). p3re.jp's fonts have no Vietnamese, so each role takes the closest match that does:
 
@@ -71,6 +72,18 @@ Decided on 2026-11-05: the look follows p3re.jp (`SPEC.md`, section 1). The toke
 - Two 16:9 images sit 2.64vw apart below.
 - "Scroll" sits at the foot in the label font (0.625 rem).
 - Gameplay puts its slider (46vw) beside the title and text, with p3re.jp's square dots under it.
+
+**Profile modal** (measured on p3re.jp at 1440 × 900 and 390 × 844, 2026-11-17):
+- A white sheet. From 1024 px the stage takes the left 38% and stays put while the text scrolls; the text starts at 42% with 100 px above and below, and ends 6.8% from the right edge.
+- The vertical name is set in the display serif at 5.6vw, 7.4% into the stage and 41 px from the top.
+- The visual is centred at 22.4vw and 51% of the window height, up to 28vw wide and 78% of the height tall. p3re.jp's art is an 810 px square with transparent sides.
+- Change visual is a navy plate with a slanted edge, a white two-line label and a two-arrow mark, 61 px tall, 5% above the bottom, bleeding off the left edge; it slides 10% to the right on hover. On phones it sits at the right edge beside the visual.
+- The name is in the body font, bold, 39 px with 2 px tracking; the line under it is 14 px; labels (PROFILE) are 14 px bold in the label font; text is 17 px with a 1.9 line height (16 px on phones).
+- The band is 225 px tall at the foot of the window (the window height minus 975 px in windows 1200 px or taller), under a wave crest 6.5vw tall drawn for Promuse. On phones it starts under the visual.
+- The gallery has two columns 3% apart, with 12 px captions in the label font 7 px above 16:9 pictures.
+- The close button is a thin X 37 px from the top right corner. Previous and next are Promuse's own: two arrows and the count "2 / 4" on a white pill at the bottom right.
+- The focus ring is navy instead of blue on the character row and in the profiles, because the blue ring has under 3:1 contrast on some character colours and on the section's own blue.
+- The entrance timings are in `SPEC.md`, section 4.
 
 **Buttons.** One style, as on p3re.jp: a pill with the blue gradient, white bold text and an arrow. The large variant is 76 px tall with wide uppercase tracking.
 

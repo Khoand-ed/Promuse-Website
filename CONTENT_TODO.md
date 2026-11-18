@@ -52,27 +52,27 @@ Cách sửa: Mở file ở cột "Ở đâu", tới đúng dòng, thay cả đo�
 | `characters.line1` | Nhân vật | Dòng giới thiệu 1 dưới tiêu đề phần Nhân vật. Khoảng 40 ký tự. | `content/text/vi.json:170`<br>`content/text/en.json:170` |
 | `characters.line2` | Nhân vật | Dòng giới thiệu 2. Khoảng 40 ký tự. | `content/text/vi.json:171`<br>`content/text/en.json:171` |
 | `characters.line3` | Nhân vật | Dòng giới thiệu 3. Khoảng 40 ký tự. | `content/text/vi.json:172`<br>`content/text/en.json:172` |
-| `characters.items.amiya.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:186`<br>`content/text/en.json:186` |
-| `characters.items.amiya.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:187`<br>`content/text/en.json:187` |
-| `characters.items.amiya.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:190`<br>`content/text/en.json:190` |
-| `characters.items.amiya.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:191`<br>`content/text/en.json:191` |
-| `characters.items.amiya.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:192`<br>`content/text/en.json:192` |
-| `characters.items.nova.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:196`<br>`content/text/en.json:196` |
-| `characters.items.nova.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:197`<br>`content/text/en.json:197` |
-| `characters.items.nova.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:200`<br>`content/text/en.json:200` |
-| `characters.items.nova.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:201`<br>`content/text/en.json:201` |
-| `characters.items.nova.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:202`<br>`content/text/en.json:202` |
-| `characters.items.echo.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:206`<br>`content/text/en.json:206` |
-| `characters.items.echo.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:207`<br>`content/text/en.json:207` |
-| `characters.items.echo.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:210`<br>`content/text/en.json:210` |
-| `characters.items.echo.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:211`<br>`content/text/en.json:211` |
-| `characters.items.echo.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:212`<br>`content/text/en.json:212` |
-| `characters.items.pulse.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:216`<br>`content/text/en.json:216` |
-| `characters.items.pulse.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:217`<br>`content/text/en.json:217` |
-| `characters.items.pulse.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:220`<br>`content/text/en.json:220` |
-| `characters.items.pulse.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:221`<br>`content/text/en.json:221` |
-| `characters.items.pulse.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:222`<br>`content/text/en.json:222` |
-| `footer.shareText` | Footer | Câu đi kèm link khi chia sẻ lên X. | `content/text/vi.json:246`<br>`content/text/en.json:246` |
+| `characters.items.amiya.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:190`<br>`content/text/en.json:190` |
+| `characters.items.amiya.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:191`<br>`content/text/en.json:191` |
+| `characters.items.amiya.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:194`<br>`content/text/en.json:194` |
+| `characters.items.amiya.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:195`<br>`content/text/en.json:195` |
+| `characters.items.amiya.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:196`<br>`content/text/en.json:196` |
+| `characters.items.nova.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:200`<br>`content/text/en.json:200` |
+| `characters.items.nova.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:201`<br>`content/text/en.json:201` |
+| `characters.items.nova.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:204`<br>`content/text/en.json:204` |
+| `characters.items.nova.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:205`<br>`content/text/en.json:205` |
+| `characters.items.nova.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:206`<br>`content/text/en.json:206` |
+| `characters.items.echo.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:210`<br>`content/text/en.json:210` |
+| `characters.items.echo.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:211`<br>`content/text/en.json:211` |
+| `characters.items.echo.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:214`<br>`content/text/en.json:214` |
+| `characters.items.echo.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:215`<br>`content/text/en.json:215` |
+| `characters.items.echo.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:216`<br>`content/text/en.json:216` |
+| `characters.items.pulse.tagline` | Nhân vật | Một câu giới thiệu ngắn về nhân vật, hiện dưới tên trong hồ sơ. Khoảng 60 ký tự. | `content/text/vi.json:220`<br>`content/text/en.json:220` |
+| `characters.items.pulse.profile` | Nhân vật | Đoạn hồ sơ nhân vật, 2–4 câu. | `content/text/vi.json:221`<br>`content/text/en.json:221` |
+| `characters.items.pulse.cardAlt` | Nhân vật | Mô tả ảnh thẻ nhân vật cho người dùng trình đọc màn hình. | `content/text/vi.json:224`<br>`content/text/en.json:224` |
+| `characters.items.pulse.idleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế đứng yên. | `content/text/vi.json:225`<br>`content/text/en.json:225` |
+| `characters.items.pulse.battleAlt` | Nhân vật | Mô tả hình nhân vật ở tư thế chiến đấu. | `content/text/vi.json:226`<br>`content/text/en.json:226` |
+| `footer.shareText` | Footer | Câu đi kèm link khi chia sẻ lên X. | `content/text/vi.json:250`<br>`content/text/en.json:250` |
 
 ## Chữ cần bạn duyệt (30)
 
@@ -106,10 +106,10 @@ Cách sửa: Đọc bản nháp hoặc bản dịch. Nếu đúng, chỉ xoá ch
 | `gameplay.tabs.g4.tab` | Gameplay | [REVIEW] Nhiệm vụ | `content/text/vi.json:157`<br>`content/text/en.json:157` |
 | `gameplay.tabs.g4.title` | Gameplay | [REVIEW] Nhiệm vụ và điểm danh | `content/text/vi.json:158`<br>`content/text/en.json:158` |
 | `gameplay.tabs.g4.text` | Gameplay | [REVIEW] Hoàn thành nhiệm vụ hằng ngày và hằng tuần, và nhận quà điểm danh mỗi tháng. | `content/text/vi.json:159`<br>`content/text/en.json:159` |
-| `characters.items.amiya.passiveDescription` | Nhân vật | [REVIEW] Lần Miss đầu tiên trong mỗi lượt chơi không làm mất combo. | `content/text/vi.json:189` |
-| `characters.items.nova.passiveDescription` | Nhân vật | [REVIEW] Mỗi lần Great có cơ hội được tính là Perfect. | `content/text/vi.json:199` |
-| `characters.items.echo.passiveDescription` | Nhân vật | [REVIEW] Combo cao giúp Fever kéo dài hơn. | `content/text/vi.json:209` |
-| `characters.items.pulse.passiveDescription` | Nhân vật | [REVIEW] Hồi một ít HP sau mỗi khoảng thời gian đều đặn. | `content/text/vi.json:219` |
+| `characters.items.amiya.passiveDescription` | Nhân vật | [REVIEW] Lần Miss đầu tiên trong mỗi lượt chơi không làm mất combo. | `content/text/vi.json:193` |
+| `characters.items.nova.passiveDescription` | Nhân vật | [REVIEW] Mỗi lần Great có cơ hội được tính là Perfect. | `content/text/vi.json:203` |
+| `characters.items.echo.passiveDescription` | Nhân vật | [REVIEW] Combo cao giúp Fever kéo dài hơn. | `content/text/vi.json:213` |
+| `characters.items.pulse.passiveDescription` | Nhân vật | [REVIEW] Hồi một ít HP sau mỗi khoảng thời gian đều đặn. | `content/text/vi.json:223` |
 
 ## Dữ liệu chưa quyết định (5)
 
@@ -129,45 +129,45 @@ Cách sửa: Xuất ảnh đúng kích thước và định dạng, đặt vào 
 
 | Ô ảnh | Hiện ở đâu | Cần gì | Ở đâu |
 |---|---|---|---|
-| `hero.desktop` | Hero (màn đầu tiên) | 2560 × 1440 px, WEBP | `public/images/hero/hero-desktop.webp` |
-| `hero.mobile` | Hero (màn đầu tiên) | 1080 × 1920 px, WEBP | `public/images/hero/hero-mobile.webp` |
-| `reward.art` | Khối nhận quà | 800 × 800 px, WEBP | `public/images/reward/reward.webp` |
-| `story.image` | Giới thiệu | 1600 × 900 px, WEBP | `public/images/story/story.webp` |
-| `features.cover` | Tính năng | 1280 × 720 px, WEBP | `public/images/features/cover.webp` |
-| `features.items[f1].images[0]` | Tính năng | 1280 × 720 px, WEBP | `public/images/features/f1-1.webp` |
-| `features.items[f1].images[1]` | Tính năng | 1280 × 720 px, WEBP | `public/images/features/f1-2.webp` |
-| `features.items[f2].images[0]` | Tính năng | 1280 × 720 px, WEBP | `public/images/features/f2-1.webp` |
-| `features.items[f2].images[1]` | Tính năng | 1280 × 720 px, WEBP | `public/images/features/f2-2.webp` |
-| `features.items[f3].images[0]` | Tính năng | 1280 × 720 px, WEBP | `public/images/features/f3-1.webp` |
-| `features.items[f3].images[1]` | Tính năng | 1280 × 720 px, WEBP | `public/images/features/f3-2.webp` |
-| `features.items[f4].images[0]` | Tính năng | 1280 × 720 px, WEBP | `public/images/features/f4-1.webp` |
-| `features.items[f4].images[1]` | Tính năng | 1280 × 720 px, WEBP | `public/images/features/f4-2.webp` |
-| `gameplay.cover` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/cover.webp` |
-| `gameplay.tabs[g1].slides[0]` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/g1-1.webp` |
-| `gameplay.tabs[g1].slides[1]` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/g1-2.webp` |
-| `gameplay.tabs[g1].slides[2]` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/g1-3.webp` |
-| `gameplay.tabs[g2].slides[0]` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/g2-1.webp` |
-| `gameplay.tabs[g2].slides[1]` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/g2-2.webp` |
-| `gameplay.tabs[g2].slides[2]` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/g2-3.webp` |
-| `gameplay.tabs[g3].slides[0]` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/g3-1.webp` |
-| `gameplay.tabs[g3].slides[1]` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/g3-2.webp` |
-| `gameplay.tabs[g3].slides[2]` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/g3-3.webp` |
-| `gameplay.tabs[g4].slides[0]` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/g4-1.webp` |
-| `gameplay.tabs[g4].slides[1]` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/g4-2.webp` |
-| `gameplay.tabs[g4].slides[2]` | Gameplay | 1280 × 720 px, WEBP | `public/images/gameplay/g4-3.webp` |
-| `characters.items[amiya].images.card` | Nhân vật | 600 × 800 px, WEBP | `public/images/characters/amiya/card.webp` |
-| `characters.items[amiya].images.idle` | Nhân vật | 600 × 800 px, PNG | `public/images/characters/amiya/idle.png` |
-| `characters.items[amiya].images.battle` | Nhân vật | 600 × 800 px, PNG | `public/images/characters/amiya/battle.png` |
-| `characters.items[nova].images.card` | Nhân vật | 600 × 800 px, WEBP | `public/images/characters/nova/card.webp` |
-| `characters.items[nova].images.idle` | Nhân vật | 600 × 800 px, PNG | `public/images/characters/nova/idle.png` |
-| `characters.items[nova].images.battle` | Nhân vật | 600 × 800 px, PNG | `public/images/characters/nova/battle.png` |
-| `characters.items[echo].images.card` | Nhân vật | 600 × 800 px, WEBP | `public/images/characters/echo/card.webp` |
-| `characters.items[echo].images.idle` | Nhân vật | 600 × 800 px, PNG | `public/images/characters/echo/idle.png` |
-| `characters.items[echo].images.battle` | Nhân vật | 600 × 800 px, PNG | `public/images/characters/echo/battle.png` |
-| `characters.items[pulse].images.card` | Nhân vật | 600 × 800 px, WEBP | `public/images/characters/pulse/card.webp` |
-| `characters.items[pulse].images.idle` | Nhân vật | 600 × 800 px, PNG | `public/images/characters/pulse/idle.png` |
-| `characters.items[pulse].images.battle` | Nhân vật | 600 × 800 px, PNG | `public/images/characters/pulse/battle.png` |
-| `site.logo` | Toàn trang (header, footer, chia sẻ) | 1200 × 400 px, SVG | `public/images/brand/logo.svg` |
+| `hero.desktop` | Hero (màn đầu tiên) | 2560 × 1440 px, WEBP. Key visual ngang cho máy tính, tối thiểu 1920 × 1080 (nên dùng 2560 × 1440). Giữ sáng góc trên bên trái (dòng trạng thái) và dải trên cùng bên phải (menu); vùng giữa bên phải để trống cho logo, như bố cục hero của p3re.jp. | `public/images/hero/hero-desktop.webp` |
+| `hero.mobile` | Hero (màn đầu tiên) | 1080 × 1920 px, WEBP. Key visual dọc cho điện thoại, 1080 × 1920. Giữ sáng phần trên cùng cho logo và dòng trạng thái. | `public/images/hero/hero-mobile.webp` |
+| `reward.art` | Khối nhận quà | 800 × 800 px, WEBP. Ảnh phần quà, 800 × 800. | `public/images/reward/reward.webp` |
+| `story.image` | Giới thiệu | 1600 × 900 px, WEBP. Ảnh của phần giới thiệu thế giới game, 16:9 (ví dụ 1600 × 900). | `public/images/story/story.webp` |
+| `features.cover` | Tính năng | 1280 × 720 px, WEBP. Ảnh bìa của phần Tính năng trên trang chính, 16:9 (1280 × 720). | `public/images/features/cover.webp` |
+| `features.items[f1].images[0]` | Tính năng | 1280 × 720 px, WEBP. Ảnh minh hoạ tính năng, 1280 × 720. | `public/images/features/f1-1.webp` |
+| `features.items[f1].images[1]` | Tính năng | 1280 × 720 px, WEBP. Ảnh minh hoạ tính năng, 1280 × 720. | `public/images/features/f1-2.webp` |
+| `features.items[f2].images[0]` | Tính năng | 1280 × 720 px, WEBP. Ảnh minh hoạ tính năng, 1280 × 720. | `public/images/features/f2-1.webp` |
+| `features.items[f2].images[1]` | Tính năng | 1280 × 720 px, WEBP. Ảnh minh hoạ tính năng, 1280 × 720. | `public/images/features/f2-2.webp` |
+| `features.items[f3].images[0]` | Tính năng | 1280 × 720 px, WEBP. Ảnh minh hoạ tính năng, 1280 × 720. | `public/images/features/f3-1.webp` |
+| `features.items[f3].images[1]` | Tính năng | 1280 × 720 px, WEBP. Ảnh minh hoạ tính năng, 1280 × 720. | `public/images/features/f3-2.webp` |
+| `features.items[f4].images[0]` | Tính năng | 1280 × 720 px, WEBP. Ảnh minh hoạ tính năng, 1280 × 720. | `public/images/features/f4-1.webp` |
+| `features.items[f4].images[1]` | Tính năng | 1280 × 720 px, WEBP. Ảnh minh hoạ tính năng, 1280 × 720. | `public/images/features/f4-2.webp` |
+| `gameplay.cover` | Gameplay | 1280 × 720 px, WEBP. Ảnh bìa của phần Gameplay trên trang chính, 16:9 (1280 × 720). | `public/images/gameplay/cover.webp` |
+| `gameplay.tabs[g1].slides[0]` | Gameplay | 1280 × 720 px, WEBP. Ảnh trong slider của tab, 1280 × 720 (16:9). | `public/images/gameplay/g1-1.webp` |
+| `gameplay.tabs[g1].slides[1]` | Gameplay | 1280 × 720 px, WEBP. Ảnh trong slider của tab, 1280 × 720 (16:9). | `public/images/gameplay/g1-2.webp` |
+| `gameplay.tabs[g1].slides[2]` | Gameplay | 1280 × 720 px, WEBP. Ảnh trong slider của tab, 1280 × 720 (16:9). | `public/images/gameplay/g1-3.webp` |
+| `gameplay.tabs[g2].slides[0]` | Gameplay | 1280 × 720 px, WEBP. Ảnh trong slider của tab, 1280 × 720 (16:9). | `public/images/gameplay/g2-1.webp` |
+| `gameplay.tabs[g2].slides[1]` | Gameplay | 1280 × 720 px, WEBP. Ảnh trong slider của tab, 1280 × 720 (16:9). | `public/images/gameplay/g2-2.webp` |
+| `gameplay.tabs[g2].slides[2]` | Gameplay | 1280 × 720 px, WEBP. Ảnh trong slider của tab, 1280 × 720 (16:9). | `public/images/gameplay/g2-3.webp` |
+| `gameplay.tabs[g3].slides[0]` | Gameplay | 1280 × 720 px, WEBP. Ảnh trong slider của tab, 1280 × 720 (16:9). | `public/images/gameplay/g3-1.webp` |
+| `gameplay.tabs[g3].slides[1]` | Gameplay | 1280 × 720 px, WEBP. Ảnh trong slider của tab, 1280 × 720 (16:9). | `public/images/gameplay/g3-2.webp` |
+| `gameplay.tabs[g3].slides[2]` | Gameplay | 1280 × 720 px, WEBP. Ảnh trong slider của tab, 1280 × 720 (16:9). | `public/images/gameplay/g3-3.webp` |
+| `gameplay.tabs[g4].slides[0]` | Gameplay | 1280 × 720 px, WEBP. Ảnh trong slider của tab, 1280 × 720 (16:9). | `public/images/gameplay/g4-1.webp` |
+| `gameplay.tabs[g4].slides[1]` | Gameplay | 1280 × 720 px, WEBP. Ảnh trong slider của tab, 1280 × 720 (16:9). | `public/images/gameplay/g4-2.webp` |
+| `gameplay.tabs[g4].slides[2]` | Gameplay | 1280 × 720 px, WEBP. Ảnh trong slider của tab, 1280 × 720 (16:9). | `public/images/gameplay/g4-3.webp` |
+| `characters.items[amiya].images.card` | Nhân vật | 600 × 800 px, WEBP. Ảnh thẻ nhân vật trong hàng Nhân vật, 600 × 800 (3:4), WebP. | `public/images/characters/amiya/card.webp` |
+| `characters.items[amiya].images.idle` | Nhân vật | 600 × 800 px, PNG. Hình nhân vật đứng yên, bên trái hồ sơ: PNG nền trong suốt, cùng kích thước với hình chiến đấu. Ghi width và height đúng kích thước thật của file (600 × 800 chỉ là kích thước tạm). Pixel art: giữ kích thước gốc và thêm "pixelated": true. | `public/images/characters/amiya/idle.png` |
+| `characters.items[amiya].images.battle` | Nhân vật | 600 × 800 px, PNG. Hình nhân vật chiến đấu, hiện khi bấm "Đổi hình": PNG nền trong suốt, cùng kích thước với hình đứng yên. Ghi width và height đúng kích thước thật của file (600 × 800 chỉ là kích thước tạm). Pixel art: giữ kích thước gốc và thêm "pixelated": true. | `public/images/characters/amiya/battle.png` |
+| `characters.items[nova].images.card` | Nhân vật | 600 × 800 px, WEBP. Ảnh thẻ nhân vật trong hàng Nhân vật, 600 × 800 (3:4), WebP. | `public/images/characters/nova/card.webp` |
+| `characters.items[nova].images.idle` | Nhân vật | 600 × 800 px, PNG. Hình nhân vật đứng yên, bên trái hồ sơ: PNG nền trong suốt, cùng kích thước với hình chiến đấu. Ghi width và height đúng kích thước thật của file (600 × 800 chỉ là kích thước tạm). Pixel art: giữ kích thước gốc và thêm "pixelated": true. | `public/images/characters/nova/idle.png` |
+| `characters.items[nova].images.battle` | Nhân vật | 600 × 800 px, PNG. Hình nhân vật chiến đấu, hiện khi bấm "Đổi hình": PNG nền trong suốt, cùng kích thước với hình đứng yên. Ghi width và height đúng kích thước thật của file (600 × 800 chỉ là kích thước tạm). Pixel art: giữ kích thước gốc và thêm "pixelated": true. | `public/images/characters/nova/battle.png` |
+| `characters.items[echo].images.card` | Nhân vật | 600 × 800 px, WEBP. Ảnh thẻ nhân vật trong hàng Nhân vật, 600 × 800 (3:4), WebP. | `public/images/characters/echo/card.webp` |
+| `characters.items[echo].images.idle` | Nhân vật | 600 × 800 px, PNG. Hình nhân vật đứng yên, bên trái hồ sơ: PNG nền trong suốt, cùng kích thước với hình chiến đấu. Ghi width và height đúng kích thước thật của file (600 × 800 chỉ là kích thước tạm). Pixel art: giữ kích thước gốc và thêm "pixelated": true. | `public/images/characters/echo/idle.png` |
+| `characters.items[echo].images.battle` | Nhân vật | 600 × 800 px, PNG. Hình nhân vật chiến đấu, hiện khi bấm "Đổi hình": PNG nền trong suốt, cùng kích thước với hình đứng yên. Ghi width và height đúng kích thước thật của file (600 × 800 chỉ là kích thước tạm). Pixel art: giữ kích thước gốc và thêm "pixelated": true. | `public/images/characters/echo/battle.png` |
+| `characters.items[pulse].images.card` | Nhân vật | 600 × 800 px, WEBP. Ảnh thẻ nhân vật trong hàng Nhân vật, 600 × 800 (3:4), WebP. | `public/images/characters/pulse/card.webp` |
+| `characters.items[pulse].images.idle` | Nhân vật | 600 × 800 px, PNG. Hình nhân vật đứng yên, bên trái hồ sơ: PNG nền trong suốt, cùng kích thước với hình chiến đấu. Ghi width và height đúng kích thước thật của file (600 × 800 chỉ là kích thước tạm). Pixel art: giữ kích thước gốc và thêm "pixelated": true. | `public/images/characters/pulse/idle.png` |
+| `characters.items[pulse].images.battle` | Nhân vật | 600 × 800 px, PNG. Hình nhân vật chiến đấu, hiện khi bấm "Đổi hình": PNG nền trong suốt, cùng kích thước với hình đứng yên. Ghi width và height đúng kích thước thật của file (600 × 800 chỉ là kích thước tạm). Pixel art: giữ kích thước gốc và thêm "pixelated": true. | `public/images/characters/pulse/battle.png` |
+| `site.logo` | Toàn trang (header, footer, chia sẻ) | 1200 × 400 px, SVG. Logo. Khi chưa có file, trang dùng logo chữ "PROMUSE". Kích thước ở đây là tạm, sửa theo logo thật. | `public/images/brand/logo.svg` |
 
 ## File đặc biệt còn thiếu (3)
 

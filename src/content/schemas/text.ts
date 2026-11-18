@@ -171,16 +171,30 @@ export const textSchema = z.strictObject({
     line2: text('Dòng giới thiệu 2. Khoảng 40 ký tự.'),
     line3: text('Dòng giới thiệu 3. Khoảng 40 ký tự.'),
     rarity: text('Câu đọc độ hiếm cho trình đọc màn hình, ví dụ "5 sao". Giữ nguyên {count}.'),
-    changeVisual: text('Nút đổi giữa hình đứng yên và hình chiến đấu.'),
-    previous: text('Nút sang nhân vật trước trong hồ sơ.'),
-    next: text('Nút sang nhân vật sau trong hồ sơ.'),
+    changeVisual: text(
+      'Chữ trên nút đổi giữa hình đứng yên và hình chiến đấu, ở góc dưới bên trái hồ sơ nhân vật. Hai hoặc ba từ, như "CHANGE VISUAL" trên p3re.jp.',
+    ),
+    previous: text(
+      'Tên nút sang nhân vật trước trong hồ sơ (nút mũi tên, dành cho trình đọc màn hình).',
+    ),
+    next: text('Tên nút sang nhân vật sau trong hồ sơ (nút mũi tên, dành cho trình đọc màn hình).'),
+    count: text(
+      'Số thứ tự nhân vật giữa hai nút mũi tên trong hồ sơ, ví dụ "2 / 4". Giữ nguyên {current} và {total}.',
+    ),
+    position: text(
+      'Câu cho trình đọc màn hình: vị trí của nhân vật trong hồ sơ, đọc cả khi hồ sơ chuyển sang nhân vật khác. Giữ nguyên {current}, {total} và {name}.',
+    ),
     profile: text('Nhãn mục hồ sơ.'),
     passive: text('Nhãn mục passive.'),
     stats: text('Nhãn mục chỉ số.'),
     hp: text('Tên chỉ số máu.'),
     scoreBonus: text('Tên chỉ số thưởng điểm.'),
     feverBonus: text('Tên chỉ số thưởng Fever.'),
-    gallery: text('Nhãn thư viện ảnh của nhân vật.'),
+    multiplier: text(
+      'Cách viết hệ số thưởng, ví dụ "×1,2". Giữ nguyên {value, number, ::.0}: số lấy từ content/data/characters.json, viết với một chữ số thập phân theo ngôn ngữ.',
+    ),
+    gallery: text('Tên thư viện ảnh của nhân vật, dành cho trình đọc màn hình.'),
+    picture: text('Chú thích nhỏ trên mỗi ảnh trong thư viện ảnh, ví dụ "ẢNH #1". Giữ nguyên {n}.'),
     items: z
       .record(z.string().regex(/^[a-z0-9-]+$/), character)
       .describe('Nội dung riêng của từng nhân vật, theo slug trong content/data/characters.json.'),

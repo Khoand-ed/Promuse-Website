@@ -155,7 +155,7 @@ test.describe('character scene in a short window', () => {
       const top = el.getBoundingClientRect().top;
       const card = el.querySelector('.chara-card');
       const art = card?.querySelector('.chara-art')?.getBoundingClientRect();
-      const name = card?.querySelector('p')?.getBoundingClientRect();
+      const name = card?.querySelector('.chara-name')?.getBoundingClientRect();
       return { height: art?.height ?? 0, nameBottom: (name?.bottom ?? Infinity) - top };
     });
     // 80.5% of the window tall, like p3re.jp's portraits.
