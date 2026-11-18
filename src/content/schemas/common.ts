@@ -18,31 +18,43 @@ export function altGroup(description: string) {
     .describe(description);
 }
 
+const slotShape = {
+  src: z
+    .string()
+    .regex(
+      /^\/images\/[a-z0-9/_-]+\.(webp|png|jpg|jpeg|svg|avif)$/,
+      'Đường dẫn phải bắt đầu bằng /images/, chỉ gồm chữ thường, số, "-", "_", và kết thúc bằng .webp, .png, .jpg, .svg hoặc .avif.',
+    )
+    .describe(
+      'Đường dẫn ảnh tính từ thư mục public/, ví dụ /images/hero/hero-desktop.webp. Đặt file đúng chỗ này là ảnh thay cho khung giữ chỗ.',
+    ),
+  width: z.int().positive().describe('Chiều rộng ảnh (px). Khung giữ chỗ dùng tỉ lệ rộng/cao này.'),
+  height: z.int().positive().describe('Chiều cao ảnh (px).'),
+  alt: z
+    .string()
+    .regex(
+      /^[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*$/,
+      'Phải là một khoá trong content/text, ví dụ hero.visualAlt.',
+    )
+    .describe(
+      'Khoá trong content/text/*.json chứa mô tả ảnh cho người dùng trình đọc màn hình, ví dụ hero.visualAlt.',
+    ),
+};
+
 export function imageSlot(description: string) {
+  return z.strictObject(slotShape).describe(description);
+}
+
+/** A slot for character art, which may be pixel art (doc/SPEC.md, section 11). */
+export function artSlot(description: string) {
   return z
     .strictObject({
-      src: z
-        .string()
-        .regex(
-          /^\/images\/[a-z0-9/_-]+\.(webp|png|jpg|jpeg|svg|avif)$/,
-          'Đường dẫn phải bắt đầu bằng /images/, chỉ gồm chữ thường, số, "-", "_", và kết thúc bằng .webp, .png, .jpg, .svg hoặc .avif.',
-        )
+      ...slotShape,
+      pixelated: z
+        .boolean()
+        .optional()
         .describe(
-          'Đường dẫn ảnh tính từ thư mục public/, ví dụ /images/hero/hero-desktop.webp. Đặt file đúng chỗ này là ảnh thay cho khung giữ chỗ.',
-        ),
-      width: z
-        .int()
-        .positive()
-        .describe('Chiều rộng ảnh (px). Khung giữ chỗ dùng tỉ lệ rộng/cao này.'),
-      height: z.int().positive().describe('Chiều cao ảnh (px).'),
-      alt: z
-        .string()
-        .regex(
-          /^[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*$/,
-          'Phải là một khoá trong content/text, ví dụ hero.visualAlt.',
-        )
-        .describe(
-          'Khoá trong content/text/*.json chứa mô tả ảnh cho người dùng trình đọc màn hình, ví dụ hero.visualAlt.',
+          'Ghi true nếu ảnh là pixel art: trang giữ nguyên từng điểm ảnh và phóng to đúng số nguyên lần (2×, 3×…), nên ảnh sắc nét. Khi đó width và height là kích thước gốc của file, không phóng to trước, và ảnh nên rộng không quá 256 px; ảnh lớn hơn khung hiển thị sẽ bị thu nhỏ và mất nét. Ảnh vẽ thường thì bỏ khoá này.',
         ),
     })
     .describe(description);
