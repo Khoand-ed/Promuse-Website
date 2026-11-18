@@ -890,17 +890,27 @@
         "changeVisual": {
           "type": "string",
           "pattern": "\\S",
-          "description": "Nút đổi giữa hình đứng yên và hình chiến đấu."
+          "description": "Chữ trên nút đổi giữa hình đứng yên và hình chiến đấu, ở góc dưới bên trái hồ sơ nhân vật. Hai hoặc ba từ, như \"CHANGE VISUAL\" trên p3re.jp."
         },
         "previous": {
           "type": "string",
           "pattern": "\\S",
-          "description": "Nút sang nhân vật trước trong hồ sơ."
+          "description": "Tên nút sang nhân vật trước trong hồ sơ (nút mũi tên, dành cho trình đọc màn hình)."
         },
         "next": {
           "type": "string",
           "pattern": "\\S",
-          "description": "Nút sang nhân vật sau trong hồ sơ."
+          "description": "Tên nút sang nhân vật sau trong hồ sơ (nút mũi tên, dành cho trình đọc màn hình)."
+        },
+        "count": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Số thứ tự nhân vật giữa hai nút mũi tên trong hồ sơ, ví dụ \"2 / 4\". Giữ nguyên {current} và {total}."
+        },
+        "position": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Câu cho trình đọc màn hình: vị trí của nhân vật trong hồ sơ, đọc cả khi hồ sơ chuyển sang nhân vật khác. Giữ nguyên {current}, {total} và {name}."
         },
         "profile": {
           "type": "string",
@@ -932,10 +942,20 @@
           "pattern": "\\S",
           "description": "Tên chỉ số thưởng Fever."
         },
+        "multiplier": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Cách viết hệ số thưởng, ví dụ \"×1,2\". Giữ nguyên {value, number, ::.0}: số lấy từ content/data/characters.json, viết với một chữ số thập phân theo ngôn ngữ."
+        },
         "gallery": {
           "type": "string",
           "pattern": "\\S",
-          "description": "Nhãn thư viện ảnh của nhân vật."
+          "description": "Tên thư viện ảnh của nhân vật, dành cho trình đọc màn hình."
+        },
+        "picture": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Chú thích nhỏ trên mỗi ảnh trong thư viện ảnh, ví dụ \"ẢNH #1\". Giữ nguyên {n}."
         },
         "items": {
           "type": "object",
@@ -1019,13 +1039,17 @@
         "changeVisual",
         "previous",
         "next",
+        "count",
+        "position",
         "profile",
         "passive",
         "stats",
         "hp",
         "scoreBonus",
         "feverBonus",
+        "multiplier",
         "gallery",
+        "picture",
         "items"
       ],
       "additionalProperties": false

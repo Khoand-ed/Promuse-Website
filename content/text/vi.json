@@ -174,13 +174,17 @@
     "changeVisual": "Đổi hình",
     "previous": "Nhân vật trước",
     "next": "Nhân vật sau",
+    "count": "{current} / {total}",
+    "position": "Nhân vật {current}/{total}: {name}",
     "profile": "Hồ sơ",
     "passive": "Passive",
     "stats": "Chỉ số",
     "hp": "HP",
     "scoreBonus": "Điểm",
     "feverBonus": "Fever",
+    "multiplier": "×{value, number, ::.0}",
     "gallery": "Thư viện ảnh",
+    "picture": "ẢNH #{n}",
     "items": {
       "amiya": {
         "tagline": "[TODO] Một câu giới thiệu AMIYA",

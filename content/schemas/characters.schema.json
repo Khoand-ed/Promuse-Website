@@ -110,6 +110,10 @@
                     "type": "string",
                     "pattern": "^[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*$",
                     "description": "Khoá trong content/text/*.json chứa mô tả ảnh cho người dùng trình đọc màn hình, ví dụ hero.visualAlt."
+                  },
+                  "pixelated": {
+                    "description": "Ghi true nếu ảnh là pixel art: trang giữ nguyên từng điểm ảnh và phóng to đúng số nguyên lần (2×, 3×…), nên ảnh sắc nét. Khi đó width và height là kích thước gốc của file, không phóng to trước, và ảnh nên rộng không quá 256 px; ảnh lớn hơn khung hiển thị sẽ bị thu nhỏ và mất nét. Ảnh vẽ thường thì bỏ khoá này.",
+                    "type": "boolean"
                   }
                 },
                 "required": [
@@ -119,7 +123,7 @@
                   "alt"
                 ],
                 "additionalProperties": false,
-                "description": "Ảnh thẻ nhân vật, 600 × 800."
+                "description": "Ảnh thẻ nhân vật trong hàng Nhân vật, 600 × 800 (3:4), WebP."
               },
               "idle": {
                 "type": "object",
@@ -145,6 +149,10 @@
                     "type": "string",
                     "pattern": "^[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*$",
                     "description": "Khoá trong content/text/*.json chứa mô tả ảnh cho người dùng trình đọc màn hình, ví dụ hero.visualAlt."
+                  },
+                  "pixelated": {
+                    "description": "Ghi true nếu ảnh là pixel art: trang giữ nguyên từng điểm ảnh và phóng to đúng số nguyên lần (2×, 3×…), nên ảnh sắc nét. Khi đó width và height là kích thước gốc của file, không phóng to trước, và ảnh nên rộng không quá 256 px; ảnh lớn hơn khung hiển thị sẽ bị thu nhỏ và mất nét. Ảnh vẽ thường thì bỏ khoá này.",
+                    "type": "boolean"
                   }
                 },
                 "required": [
@@ -154,7 +162,7 @@
                   "alt"
                 ],
                 "additionalProperties": false,
-                "description": "Hình nhân vật đứng yên. Kích thước tạm; chốt khi có art."
+                "description": "Hình nhân vật đứng yên, bên trái hồ sơ: PNG nền trong suốt, cùng kích thước với hình chiến đấu. Ghi width và height đúng kích thước thật của file (600 × 800 chỉ là kích thước tạm). Pixel art: giữ kích thước gốc và thêm \"pixelated\": true."
               },
               "battle": {
                 "type": "object",
@@ -180,6 +188,10 @@
                     "type": "string",
                     "pattern": "^[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*$",
                     "description": "Khoá trong content/text/*.json chứa mô tả ảnh cho người dùng trình đọc màn hình, ví dụ hero.visualAlt."
+                  },
+                  "pixelated": {
+                    "description": "Ghi true nếu ảnh là pixel art: trang giữ nguyên từng điểm ảnh và phóng to đúng số nguyên lần (2×, 3×…), nên ảnh sắc nét. Khi đó width và height là kích thước gốc của file, không phóng to trước, và ảnh nên rộng không quá 256 px; ảnh lớn hơn khung hiển thị sẽ bị thu nhỏ và mất nét. Ảnh vẽ thường thì bỏ khoá này.",
+                    "type": "boolean"
                   }
                 },
                 "required": [
@@ -189,7 +201,7 @@
                   "alt"
                 ],
                 "additionalProperties": false,
-                "description": "Hình nhân vật chiến đấu. Kích thước tạm; chốt khi có art."
+                "description": "Hình nhân vật chiến đấu, hiện khi bấm \"Đổi hình\": PNG nền trong suốt, cùng kích thước với hình đứng yên. Ghi width và height đúng kích thước thật của file (600 × 800 chỉ là kích thước tạm). Pixel art: giữ kích thước gốc và thêm \"pixelated\": true."
               },
               "gallery": {
                 "type": "array",
@@ -217,6 +229,10 @@
                       "type": "string",
                       "pattern": "^[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*$",
                       "description": "Khoá trong content/text/*.json chứa mô tả ảnh cho người dùng trình đọc màn hình, ví dụ hero.visualAlt."
+                    },
+                    "pixelated": {
+                      "description": "Ghi true nếu ảnh là pixel art: trang giữ nguyên từng điểm ảnh và phóng to đúng số nguyên lần (2×, 3×…), nên ảnh sắc nét. Khi đó width và height là kích thước gốc của file, không phóng to trước, và ảnh nên rộng không quá 256 px; ảnh lớn hơn khung hiển thị sẽ bị thu nhỏ và mất nét. Ảnh vẽ thường thì bỏ khoá này.",
+                      "type": "boolean"
                     }
                   },
                   "required": [
@@ -226,7 +242,7 @@
                     "alt"
                   ],
                   "additionalProperties": false,
-                  "description": "Ảnh trong thư viện ảnh của nhân vật."
+                  "description": "Ảnh trong thư viện ảnh của hồ sơ nhân vật, 1280 × 720 (16:9), WebP, ví dụ /images/characters/nova/gallery-1.webp."
                 },
                 "description": "Thư viện ảnh trong hồ sơ nhân vật. Để [] thì thư viện bị ẩn."
               }

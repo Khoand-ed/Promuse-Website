@@ -174,13 +174,17 @@
     "changeVisual": "Change visual",
     "previous": "Previous character",
     "next": "Next character",
+    "count": "{current} / {total}",
+    "position": "Character {current} of {total}: {name}",
     "profile": "Profile",
     "passive": "Passive",
     "stats": "Stats",
     "hp": "HP",
     "scoreBonus": "Score",
     "feverBonus": "Fever",
+    "multiplier": "×{value, number, ::.0}",
     "gallery": "Gallery",
+    "picture": "PICTURE #{n}",
     "items": {
       "amiya": {
         "tagline": "[TODO] One line introducing AMIYA",
