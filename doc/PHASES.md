@@ -198,16 +198,16 @@ Antigravity browser · widths 360 / 768 / 1440 · motion on and off · keyboard 
 **Tasks**
 
 1. The four characters in `content/` with the stats and passives from `GAME_FACTS.md`, a theme colour each (`[TODO]` until chosen), and `[TODO]` taglines and profiles.
-2. Cards grouped by rarity, mono to colour on hover and focus, the theme colour on the active card.
-3. Profile modal: Change visual (a 0.3 s cross-fade between the idle and battle visuals, as on p3re.jp), stats, passive, a gallery slider hidden when empty, previous and next plus ← and →, deep link `#char-<slug>`.
-4. Rendering rules for character visuals, agreed with the owner once the art exists. Pixel art gets `unoptimized`, `image-rendering: pixelated` and whole-number scaling at every breakpoint.
+2. Cards grouped by rarity, mono to colour on hover and focus, the theme colour on the active card. The owner kept one row ordered from 5★ to 3★ as the grouping (2026-11-17).
+3. Profile modal: Change visual (a 0.3 s cross-fade between the idle and battle visuals, as on p3re.jp), stats, passive, a gallery hidden when empty (a captioned grid as on p3re.jp, the owner's choice of 2026-11-17), previous and next plus ← and →, deep link `#char-<slug>`.
+4. Rendering rules for character visuals, agreed with the owner once the art exists. Pixel art gets `unoptimized`, `image-rendering: pixelated` and whole-number scaling at every breakpoint. No art exists yet (2026-11-17), so P6 supports both kinds: a slot marked `"pixelated": true` is drawn as pixel art, checked at `/dev/pixel` with a test sprite.
 
 **Done when**
 
 - [ ] Character visuals stay crisp at 360, 768 and 1440 px.
 - [ ] Change visual, previous and next work with the mouse and the keyboard.
 - [ ] `/en#char-nova` opens NOVA's profile in English.
-- [ ] Replacing a character image only needs a file at its slot's path.
+- [ ] Replacing a character image only needs a file at its slot's path, plus its real size (and `"pixelated": true` for pixel art) in the slot: no code change.
 
 **QA focus:** image sharpness (zoomed screenshots); keyboard navigation inside the modal; motion off.
 
