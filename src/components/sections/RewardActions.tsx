@@ -264,18 +264,31 @@ export function RewardActions({ mode, popupArt }: RewardActionsProps) {
   }, [readStatus]);
 
   // The first-visit popup: 1.5 s after the opening (or the load), once, and only while it can help.
+  // A modal the visitor opened, or arrived in through a link such as /#char-nova, comes first: the
+  // popup waits until it closes, then another 1.5 s.
   const statusKnown = state.kind !== 'loading';
   useEffect(() => {
     if (!statusKnown || !popupAllowed(current.current, popupDismissed())) return;
     let timer: number | undefined;
-    const stop = afterOpening(() => {
+    const onClose = () => {
+      if (document.querySelector('dialog[open]')) return;
+      document.removeEventListener('close', onClose, true);
+      wait();
+    };
+    const wait = () => {
       timer = window.setTimeout(() => {
-        if (popupAllowed(current.current, popupDismissed())) setPopup(true);
+        if (!popupAllowed(current.current, popupDismissed())) return;
+        // `close` does not bubble, so listen while it travels down to the dialog.
+        if (document.querySelector('dialog[open]'))
+          document.addEventListener('close', onClose, true);
+        else setPopup(true);
       }, POPUP_DELAY_MS);
-    });
+    };
+    const stop = afterOpening(wait);
     return () => {
       stop();
       window.clearTimeout(timer);
+      document.removeEventListener('close', onClose, true);
     };
   }, [statusKnown]);
 

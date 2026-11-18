@@ -32,7 +32,7 @@
   --color-chara-7: #f2f4f2;
   --color-chara-8: #faf6a6;
   --color-chara-9: #faba80;
-  --color-chara-10: #ce8998;
+  --color-chara-10: #d08b9a;
   --color-chara-11: #93cc96;
 }
 
@@ -625,8 +625,16 @@
     transition: none;
   }
 
+  /* Holds the close button at the top of a sheet or lightbox as its content scrolls. */
+  .modal-dock {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    height: 0;
+  }
+
   .modal-close {
-    position: fixed;
+    position: absolute;
     top: 1rem;
     right: 1rem;
     z-index: 1;
@@ -979,7 +987,16 @@
   }
 
   /* Portraits: grey and tinted at rest, full colour when in focus, hovered or focused. */
+  /* The whole card is a button that opens the character's profile. */
+  .chara-open {
+    display: block;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+  }
+
   .chara-art {
+    display: block;
     position: relative;
     overflow: hidden;
   }
@@ -1003,6 +1020,488 @@
 
   html[data-motion='off'] :is(.chara-layer, .chara-tint, .chara-art img) {
     transition-duration: 0.01ms;
+  }
+
+  /*
+   * Character profiles, as p3re.jp's profile modal (measured at 1440 × 900 and 390 × 844,
+   * doc/DESIGN.md, section 4). Phones: one column, the visual over the text and the colour band
+   * under the visual. From 1024 px the stage (vertical name, visual, Change visual) stays on the left
+   * while the text scrolls on the right, over a band at the foot of the window.
+   */
+  .modal-profile {
+    background: #fff;
+  }
+
+  .profile {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  .profile-panel {
+    display: grid;
+    flex: 1;
+    grid-template-rows: auto 1fr;
+  }
+
+  .profile-panel[hidden] {
+    display: none;
+  }
+
+  .profile-stage {
+    position: relative;
+    z-index: 1;
+    grid-row: 1;
+    grid-column: 1;
+    padding: 1.5rem 4vw 0 16vw;
+  }
+
+  /* The name set vertically, in the display serif, as p3re.jp draws it. */
+  .profile-vname {
+    position: absolute;
+    top: 1.5rem;
+    left: 4vw;
+    font-size: min(13vw, 5.5rem);
+    line-height: 1;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+  }
+
+  .profile-vname > span {
+    display: inline-block;
+  }
+
+  /* Change visual cross-fades the idle and battle visuals (0.3 s, ease-in-out), as on p3re.jp. */
+  .profile-visual {
+    display: grid;
+    width: min(100%, 26rem);
+    margin-inline: auto;
+  }
+
+  .profile-pose {
+    grid-area: 1 / 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .profile-pose + .profile-pose,
+  .profile-visual[data-battle] .profile-pose:first-child {
+    opacity: 0;
+  }
+
+  .profile-visual[data-battle] .profile-pose + .profile-pose {
+    opacity: 1;
+  }
+
+  /* p3re.jp's navy plate: at the right edge on phones, bottom left from 1024 px. */
+  .profile-change {
+    position: absolute;
+    right: 0;
+    bottom: 14%;
+    z-index: 2;
+    color: #fff;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .profile-change-plate {
+    display: grid;
+    justify-items: center;
+    gap: 0.3rem;
+    padding: 0.7rem 1.1rem 0.7rem 1.9rem;
+    background: var(--color-ink);
+    clip-path: polygon(1.1rem 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .profile-change-label {
+    max-width: 7em;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: 0.06em;
+    text-align: center;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .profile-change-icon {
+    order: -1;
+    font-size: 1.5rem;
+  }
+
+  /* The band in the character's colour, under its own wave crest. */
+  .profile-band {
+    position: relative;
+    z-index: -1;
+    grid-row: 2;
+    grid-column: 1;
+    margin-top: -12vw;
+    background: currentColor;
+    pointer-events: none;
+  }
+
+  .profile-wave {
+    position: absolute;
+    bottom: calc(100% - 1px);
+    left: 0;
+    width: 100%;
+    height: 12vw;
+  }
+
+  /* The text starts under the visual; only the band reaches up behind its foot. */
+  .profile-info {
+    position: relative;
+    grid-row: 2;
+    grid-column: 1;
+    padding: 1.5rem 6.7vw 8rem;
+  }
+
+  .profile-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+
+  .profile-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.7rem;
+    margin: 1rem 2px 2.5rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .profile-stars {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+  }
+
+  .profile-sections {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .profile-label {
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .profile-text,
+  .profile-passive {
+    margin-top: 0.5625rem;
+    font-size: 1rem;
+    line-height: 1.9;
+    white-space: pre-line;
+  }
+
+  .profile-passive {
+    font-weight: 700;
+  }
+
+  .profile-passive + .profile-text {
+    margin-top: 0.25rem;
+  }
+
+  .profile-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .profile-stats dt {
+    font-size: 0.6875rem;
+    font-weight: 700;
+  }
+
+  .profile-stats dd {
+    margin-top: 0.25rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  /* Pictures in captioned tiles, as p3re.jp's media grid: one column on phones, two from 1024 px. */
+  .profile-gallery {
+    margin-top: 4.7rem;
+  }
+
+  .profile-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .profile-caption {
+    margin-bottom: 0.4375rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  /*
+   * Previous and next: Promuse's own, at the bottom right; ← and → do the same. Sticky in the sheet's
+   * flow rather than fixed, and pulled up by its own height so it takes no room.
+   */
+  .profile-pager {
+    position: sticky;
+    bottom: 1rem;
+    z-index: 2;
+    display: flex;
+    align-self: flex-end;
+    align-items: center;
+    margin: calc(-2.75rem - 1rem) 1rem 1rem 0;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.85);
+    backdrop-filter: blur(8px);
+  }
+
+  /* From 1024 px: the band at the foot of the window, one layer per character. */
+  .profile-foot {
+    display: none;
+  }
+
+  .profile-arrow {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    font-size: 1.25rem;
+  }
+
+  .profile-count {
+    min-width: 3.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  @media (min-width: 64rem) {
+    .profile-panel {
+      grid-template-rows: auto;
+      grid-template-columns: 38% minmax(0, 1fr);
+    }
+
+    .profile-stage {
+      position: sticky;
+      top: 0;
+      height: 100dvh;
+      padding: 0;
+    }
+
+    .profile-vname {
+      top: 2.5625rem;
+      left: 7.4%;
+      font-size: 5.6vw;
+    }
+
+    .profile-visual {
+      position: absolute;
+      top: 51%;
+      left: 59%;
+      width: min(28vw, calc(78dvh * var(--ratio, 0.75)));
+      margin: 0;
+      translate: -50% -50%;
+    }
+
+    .profile-change {
+      right: auto;
+      bottom: 5%;
+      left: -2rem;
+    }
+
+    .profile-change-plate {
+      grid-auto-flow: column;
+      align-items: center;
+      gap: 1.25rem;
+      min-height: 3.8rem;
+      padding: 0.5rem 2.4rem 0.5rem 5.4rem;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 1.3rem) 100%, 0 100%);
+    }
+
+    .profile-change-label {
+      max-width: 6.5em;
+      font-size: 1.35rem;
+      line-height: 1.05;
+      text-align: left;
+    }
+
+    .profile-change-icon {
+      order: 0;
+      font-size: 2.2rem;
+    }
+
+    .profile-change:hover {
+      transform: translateX(10%);
+    }
+
+    .profile-band {
+      display: none;
+    }
+
+    /* Sticky at the bottom of the sheet with no height; its bands rise from it behind the text. */
+    .profile-foot {
+      display: block;
+      position: sticky;
+      bottom: 0;
+      z-index: -1;
+      height: 0;
+    }
+
+    .profile-foot-band {
+      position: absolute;
+      inset: auto 0 0;
+      height: max(225px, calc(100dvh - 975px));
+      background: currentColor;
+    }
+
+    .profile-wave {
+      height: 6.5vw;
+    }
+
+    .profile-info {
+      grid-row: 1;
+      grid-column: 2;
+      margin: 0;
+      padding: 100px 11% 100px 6.5%;
+    }
+
+    .profile-name {
+      font-size: 2.4375rem;
+    }
+
+    .profile-text,
+    .profile-passive {
+      font-size: 1.0625rem;
+    }
+
+    .profile-grid {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 3%;
+    }
+
+    .profile-pager {
+      bottom: 2.3rem;
+      margin: calc(-2.75rem - 2.3rem) 2.3rem 2.3rem 0;
+    }
+
+    .modal-profile .modal-close {
+      top: 2.3rem;
+      right: 2.3rem;
+      background: transparent;
+      font-size: 2.75rem;
+    }
+  }
+
+  /*
+   * The profile's entrance, as on p3re.jp: after the sheet's 0.8 s slide, the band, the close button
+   * and the pager fade in (0.3 s) while the letters of the vertical name slide in one by one (0.5 s,
+   * 40 ms apart); then the visual, the name, the text and the gallery fade in 0.3 s apart (0.5 s
+   * each). Another character's parts follow without waiting for a slide: its band cross-fades
+   * (0.5 s), its letters slide in 40 ms apart and its parts fade in from 0.1 s, 0.12 s apart.
+   * Closing fades everything out (0.3 s) as the sheet slides away.
+   */
+  .modal-profile :is([data-fade], .profile-band, .profile-foot-band, .modal-close) {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .modal-profile[open] [data-fade] {
+    opacity: 1;
+    transition-duration: 0.5s;
+    transition-delay: calc(0.8s + var(--fade, 0) * 0.3s);
+  }
+
+  .modal-profile[open]
+    :is(.profile-band, .profile-foot-band[data-on], .modal-close, .profile-pager) {
+    opacity: 1;
+    transition-duration: 0.3s;
+    transition-delay: 0.8s;
+  }
+
+  .modal-profile .profile-vname > span {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .modal-profile[open] .profile-vname > span {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.5s ease-out,
+      transform 0.5s ease-out;
+    transition-delay: calc(0.8s + var(--i, 0) * 0.04s);
+  }
+
+  @starting-style {
+    .modal-profile[open] :is([data-fade], .profile-band, .profile-foot-band, .modal-close) {
+      opacity: 0;
+    }
+
+    .modal-profile[open] .profile-vname > span {
+      opacity: 0;
+      transform: translateX(-15px);
+    }
+  }
+
+  .modal-profile[open] [data-touched] [data-fade] {
+    transition-delay: calc(0.1s + var(--fade, 0) * 0.12s);
+  }
+
+  .modal-profile[open] [data-touched] :is(.profile-band, .profile-foot-band) {
+    transition-duration: 0.5s;
+    transition-delay: 0s;
+  }
+
+  .modal-profile[open] [data-touched] .profile-vname > span {
+    transition-delay: calc(var(--i, 0) * 0.04s);
+  }
+
+  /* With motion off everything shows at once, and leaves with the dialog's own short fade. */
+  html[data-motion='off']
+    .modal-profile
+    :is(
+      [data-fade],
+      .profile-band,
+      .profile-foot-band[data-on],
+      .modal-close,
+      .profile-vname > span
+    ) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  html[data-motion='off'] .modal-profile :is(.profile-foot-band, .profile-pose, .profile-change) {
+    transition: none;
+  }
+
+  /*
+   * The focus ring turns navy where it can sit on character colours: the default blue has under
+   * 3:1 contrast on some of them and on the section's own blue.
+   */
+  .chara-track:focus-visible,
+  .chara-track :focus-visible,
+  .modal-profile :focus-visible {
+    outline-color: var(--color-ink);
+  }
+
+  /* Pixel art (doc/SPEC.md, section 11): PixelFit sizes it to a whole number of device pixels. */
+  .pixel-fit {
+    display: grid;
+    place-items: center;
+    width: 100%;
+  }
+
+  .pixel-art {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pixelated {
+    image-rendering: pixelated;
   }
 }
 

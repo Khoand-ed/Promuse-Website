@@ -83,7 +83,7 @@ export function CharacterScene({ children, ...props }: CharacterSceneProps) {
       section.dataset.scene = 'on';
       const travel = () => Math.max(0, row.scrollWidth - section.clientWidth);
       const move = gsap.to(row, { x: () => -travel(), ease: 'none' });
-      ScrollTrigger.create({
+      const scene = ScrollTrigger.create({
         trigger: section,
         start: 'top top',
         end: () => `+=${travel() * SCROLL_PER_PIXEL}`,
@@ -99,7 +99,37 @@ export function CharacterScene({ children, ...props }: CharacterSceneProps) {
       ScrollTrigger.create({ trigger: section, start: 'top 70%', once: true, onEnter: enter });
       show(-1);
 
+      // A card reached with Tab may sit off screen in the moving row: scroll the page to where the
+      // row brings it to the centre. The section itself cannot scroll (overflow: clip). Only the
+      // focus a Tab press moves right then counts: focus a closing dialog hands back, or that comes
+      // back with the window, must leave the page where it is.
+      let tabbedAt = -Infinity;
+      const onKey = (event: KeyboardEvent) => {
+        if (event.key === 'Tab') tabbedAt = event.timeStamp;
+      };
+      document.addEventListener('keydown', onKey, true);
+      let frame = 0;
+      const onFocus = (event: FocusEvent) => {
+        const target = event.target;
+        if (event.timeStamp - tabbedAt > 100 || !(target instanceof HTMLElement)) return;
+        const card = target.closest<HTMLElement>('.chara-card');
+        if (!card) return;
+        cancelAnimationFrame(frame);
+        // After the browser's own scroll to the focused element, which this replaces.
+        frame = requestAnimationFrame(() => {
+          const distance = travel();
+          const centre = card.offsetLeft + card.offsetWidth / 2 - section.clientWidth / 2;
+          const progress = distance ? Math.min(1, Math.max(0, centre / distance)) : 0;
+          const top = scene.start + progress * (scene.end - scene.start);
+          window.scrollTo({ top, behavior: 'instant' });
+        });
+      };
+      section.addEventListener('focusin', onFocus);
+
       return () => {
+        document.removeEventListener('keydown', onKey, true);
+        section.removeEventListener('focusin', onFocus);
+        cancelAnimationFrame(frame);
         delete section.dataset.scene;
         // Back to the motion-off look: no active card, each card tinted with its own colour.
         for (const layer of layers) layer.removeAttribute('data-on');

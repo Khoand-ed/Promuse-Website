@@ -100,3 +100,17 @@ export function GoogleG({ className }: IconProps) {
     </svg>
   );
 }
+
+/** Two arrows turning in a circle: the "Change visual" button's mark. */
+export function SwapIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true">
+      <path
+        d="M19.5 9.5A8 8 0 0 0 5.2 7.4M4.5 14.5a8 8 0 0 0 14.3 2.1M5 3.5v4.2h4.2M19 20.5v-4.2h-4.2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
